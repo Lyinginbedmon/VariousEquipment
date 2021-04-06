@@ -1,6 +1,6 @@
 package com.lying.variousequipment.client.model.armor;
 
-import com.lying.variousoddities.client.model.ModelUtils;
+import com.lying.variousequipment.client.model.ModelUtils;
 
 import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.client.renderer.model.ModelRenderer;

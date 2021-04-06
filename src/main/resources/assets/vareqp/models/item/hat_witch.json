@@ -1,0 +1,7 @@
+{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "vareqp:items/hat_witch",
+        "layer1": "vareqp:items/hat_witch_overlay"
+    }
+}

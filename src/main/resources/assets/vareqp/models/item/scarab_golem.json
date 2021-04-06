@@ -1,0 +1,7 @@
+{
+    "parent": "vareqp:item/scarab",
+    "textures":
+    {
+    	"layer0": "vareqp:items/scarab_golem"
+    }
+}

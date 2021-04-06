@@ -1,7 +1,6 @@
 package com.lying.variousequipment.client.renderer;
 
 import com.lying.variousequipment.VariousEquipment;
-import com.lying.variousoddities.config.ConfigVO;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -16,7 +15,7 @@ public class EntityRenderRegistry
 	@SuppressWarnings({ })
 	public static void registerEntityRenderers()
 	{
-		if(ConfigVO.GENERAL.verboseLogs())
+//		if(ConfigVO.GENERAL.verboseLogs())
 			VariousEquipment.log.info("Registering renderers");
 		
 //		registerRenderer(VOEntities.SPELL, new EntitySpellRenderer.RenderFactory());
@@ -27,13 +26,13 @@ public class EntityRenderRegistry
 	{
 		if(renderFactory == null)
 		{
-			if(ConfigVO.GENERAL.verboseLogs())
+//			if(ConfigVO.GENERAL.verboseLogs())
 				VariousEquipment.log.error("  -# Tried to register null renderer for "+entityClass.getRegistryName()+" #");
 		}
 		else
 		{
 			RenderingRegistry.registerEntityRenderingHandler(entityClass, renderFactory);
-			if(ConfigVO.GENERAL.verboseLogs())
+//			if(ConfigVO.GENERAL.verboseLogs())
 				VariousEquipment.log.info("  -Registered "+entityClass.getRegistryName()+" renderer");
 		}
 	}

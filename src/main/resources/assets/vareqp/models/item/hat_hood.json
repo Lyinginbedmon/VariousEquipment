@@ -1,0 +1,17 @@
+{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "vareqp:items/hat_hood_down",
+        "layer1": "vareqp:items/hat_hood_down_overlay"
+    },
+    "overrides":
+    [
+    	{
+    		"predicate":
+    		{
+    			"vareqp:is_up": 1.0
+    		},
+    		"model": "vareqp:item/hat_hood_up"
+    	}
+    ]
+}

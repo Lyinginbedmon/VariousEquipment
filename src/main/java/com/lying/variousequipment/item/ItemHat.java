@@ -5,14 +5,15 @@ import javax.annotation.Nonnull;
 import com.lying.variousequipment.reference.Reference;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
+import net.minecraft.item.DyeableArmorItem;
 import net.minecraft.item.ItemStack;
 
-public class ItemHat extends ArmorItem
+public abstract class ItemHat extends DyeableArmorItem
 {
-	private final String name;
+	protected final String name;
 	
 	public ItemHat(String par1String, ArmorMaterial material, Properties properties)
 	{
@@ -22,8 +23,13 @@ public class ItemHat extends ArmorItem
 	
 	@Nonnull
 	@Override
-	public final String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlotType slot, String type)
+	public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlotType slot, String type)
 	{
 		return Reference.ModInfo.MOD_PREFIX + "textures/models/armor/"+this.name+(type == null ? "" : "_"+type)+".png";
 	}
+	
+    public boolean canRender(String identifier, int index, LivingEntity livingEntity, ItemStack stack)
+    {
+        return true;
+    }
 }

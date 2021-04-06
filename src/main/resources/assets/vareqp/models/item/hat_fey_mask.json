@@ -1,0 +1,7 @@
+{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "vareqp:items/hat_fey_mask",
+        "layer1": "vareqp:items/hat_fey_mask_overlay"
+    }
+}

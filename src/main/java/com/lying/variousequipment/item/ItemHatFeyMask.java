@@ -1,20 +1,26 @@
 package com.lying.variousequipment.item;
 
-import com.lying.variousequipment.client.model.armor.ModelHatWitch;
+import com.lying.variousequipment.client.model.armor.ModelHatMask;
 
 import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ArmorMaterial;
+import net.minecraft.item.DyeColor;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class ItemHatWitch extends ItemHat
+public class ItemHatFeyMask extends ItemHat
 {
-	public ItemHatWitch(Properties properties)
+	public ItemHatFeyMask(Properties properties)
 	{
-		super("hat_witch", ArmorMaterial.LEATHER, properties);
+		super("hat_fey_mask", ArmorMaterial.LEATHER, properties);
+	}
+	
+	public int getColor(ItemStack stack)
+	{
+		return hasColor(stack) ? super.getColor(stack) : DyeColor.WHITE.getColorValue();
 	}
 	
 	@Override
@@ -22,6 +28,6 @@ public class ItemHatWitch extends ItemHat
 	@SuppressWarnings("unchecked")
 	public <M extends BipedModel<?>> M getArmorModel(LivingEntity entity, ItemStack stack, EquipmentSlotType slot, M original)
 	{
-		return (M) new ModelHatWitch(1.0F);
+		return (M) new ModelHatMask(1.0F);
 	}
 }

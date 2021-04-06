@@ -1,6 +1,6 @@
 package com.lying.variousequipment.client.model.armor;
 
-import com.lying.variousoddities.client.model.ModelUtils;
+import com.lying.variousequipment.client.model.ModelUtils;
 
 import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
@@ -13,7 +13,7 @@ public class ModelHatArchfey extends BipedModel<LivingEntity>
 	public ModelHatArchfey(float scale)
 	{
 		super(scale);
-
+		
 		this.bipedHead = ModelUtils.freshRenderer(this);
 		this.bipedHead.setRotationPoint(0F, 0F, 0F);
 		
