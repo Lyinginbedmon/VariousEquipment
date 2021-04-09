@@ -1,0 +1,14 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients":
+    [
+        { "item": "minecraft:spectral_arrow" },
+        { "item": "minecraft:spectral_arrow" },
+        { "item": "vareqp:blindfold" }
+    ],
+    "result": {
+        "item": "vareqp:cosmetic_blindfold",
+        "count": 1
+    },
+    "group": "cosmetic_blindfold"
+}

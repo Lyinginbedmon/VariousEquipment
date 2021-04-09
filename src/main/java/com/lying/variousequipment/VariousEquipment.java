@@ -49,7 +49,6 @@ public class VariousEquipment
     private void doCommonSetup(final FMLCommonSetupEvent event)
     {
     	PacketHandler.init();
-    	
     	MinecraftForge.EVENT_BUS.register(BusServer.class);
     }
     

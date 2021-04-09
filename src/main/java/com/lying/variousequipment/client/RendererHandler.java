@@ -1,6 +1,7 @@
 package com.lying.variousequipment.client;
 
 import com.lying.variousequipment.VariousEquipment;
+import com.lying.variousoddities.config.ConfigVO;
 
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -13,7 +14,7 @@ public class RendererHandler
 	
 	public static void registerTileRenderers(ModelRegistryEvent event)
 	{
-//		if(ConfigVO.GENERAL.verboseLogs())
+		if(ConfigVO.GENERAL.verboseLogs())
 			VariousEquipment.log.info("Registering tile entity renderers");
 		
 		if(!registered)

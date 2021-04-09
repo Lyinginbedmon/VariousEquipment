@@ -1,0 +1,7 @@
+{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "vareqp:items/horns_hartebeest",
+        "layer1": "vareqp:items/horns_head_overlay"
+    }
+}

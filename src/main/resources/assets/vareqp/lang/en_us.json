@@ -8,5 +8,11 @@
 	"item.vareqp.scarab_protection": "Scarab of Protection",
 	"item.vareqp.hat_fey_mask": "Court Fey Mask",
 	"item.vareqp.horns_ram": "Ram Horns",
-	"item.vareqp.horns_deer": "Deer Antlers"
+	"item.vareqp.horns_deer": "Deer Antlers",
+	"item.vareqp.horns_kirin": "Kirin Horns",
+	"item.vareqp.horns_hartebeest": "Hartebeest Horns",
+	"item.vareqp.blindfold": "Blindfold",
+	"item.vareqp.cosmetic_blindfold": "Cosmetic Blindfold",
+	"item.vareqp.gold_ring": "Gold Ring",
+	"item.vareqp.iron_ring": "Iron Ring"
 }

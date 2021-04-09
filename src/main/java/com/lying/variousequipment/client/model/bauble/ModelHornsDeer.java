@@ -14,6 +14,8 @@ public class ModelHornsDeer<T extends LivingEntity> extends EntityModel<T>
 	
 	public ModelHornsDeer()
 	{
+		this.textureHeight = 16;
+		this.textureWidth = 32;
 		this.horns = ModelUtils.freshRenderer(this);
 		this.horns.setRotationPoint(0F, 0F, 0F);
 		

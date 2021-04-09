@@ -14,21 +14,23 @@ public class ModelHornsRam<T extends LivingEntity> extends EntityModel<T>
 	
 	public ModelHornsRam()
 	{
+		this.textureHeight = 16;
+		this.textureWidth = 32;
 		this.horns = ModelUtils.freshRenderer(this);
 		this.horns.setRotationPoint(0F, 0F, 0F);
 		
 		float size = 0.5F;
 		ModelRenderer rightRam1 = ModelUtils.freshRenderer(this);
-		rightRam1.setTextureOffset(0, 8).addBox(-5.5F, -7.5F, -2F, 1, 2, 3, size);
-		rightRam1.setTextureOffset(0, 18).addBox(-5.9F, -5F, 1F, 1, 2, 2, size * 0.5F);
+		rightRam1.setTextureOffset(0, 0).addBox(-5.5F, -7.5F, -2F, 1, 2, 3, size);
+		rightRam1.setTextureOffset(0, 10).addBox(-5.9F, -5F, 1F, 1, 2, 2, size * 0.5F);
 		ModelRenderer rightRam2 = ModelUtils.freshRenderer(this);
-		rightRam2.setTextureOffset(0, 13).addBox(-5.7F, -6F, -4.5F, 1, 2, 3, size * 0.75F);
+		rightRam2.setTextureOffset(0, 5).addBox(-5.7F, -6F, -4.5F, 1, 2, 3, size * 0.75F);
 		rightRam2.rotateAngleX = ModelUtils.toRadians(-45D);
 		ModelRenderer rightRam3 = ModelUtils.freshRenderer(this);
-		rightRam3.setTextureOffset(0, 22).addBox(-6.1F, -1.5F, 1.5F, 1, 1, 2, size * 0.25F);
+		rightRam3.setTextureOffset(8, 0).addBox(-6.1F, -1.5F, 1.5F, 1, 1, 2, size * 0.25F);
 		rightRam3.rotateAngleX = ModelUtils.toRadians(45D);
 		ModelRenderer rightRam4 = ModelUtils.freshRenderer(this);
-		rightRam4.setTextureOffset(0, 25).addBox(-6.3F, -2F, -1.5F, 1, 1, 2, 0F);
+		rightRam4.setTextureOffset(8, 3).addBox(-6.3F, -2F, -1.5F, 1, 1, 2, 0F);
 		rightRam4.rotateAngleX = ModelUtils.toRadians(-7D);
 		
 		ModelRenderer rightRam = ModelUtils.freshRenderer(this);
@@ -41,19 +43,19 @@ public class ModelHornsRam<T extends LivingEntity> extends EntityModel<T>
 		
 		ModelRenderer leftRam1 = ModelUtils.freshRenderer(this);
 		leftRam1.mirror = true;
-		leftRam1.setTextureOffset(0, 8).addBox(4.5F, -7.5F, -2F, 1, 2, 3, size);
-		leftRam1.setTextureOffset(0, 18).addBox(4.7F, -5F, 1F, 1, 2, 2, size * 0.5F);
+		leftRam1.setTextureOffset(0, 0).addBox(4.5F, -7.5F, -2F, 1, 2, 3, size);
+		leftRam1.setTextureOffset(0, 10).addBox(4.7F, -5F, 1F, 1, 2, 2, size * 0.5F);
 		ModelRenderer leftRam2 = ModelUtils.freshRenderer(this);
 		leftRam2.mirror = true;
-		leftRam2.setTextureOffset(0, 13).addBox(4.7F, -6F, -4.5F, 1, 2, 3, size * 0.75F);
+		leftRam2.setTextureOffset(0, 5).addBox(4.7F, -6F, -4.5F, 1, 2, 3, size * 0.75F);
 		leftRam2.rotateAngleX = ModelUtils.toRadians(-45D);
 		ModelRenderer leftRam3 = ModelUtils.freshRenderer(this);
 		leftRam3.mirror = true;
-		leftRam3.setTextureOffset(0, 22).addBox(4.9F, -1.5F, 1.5F, 1, 1, 2, size * 0.25F);
+		leftRam3.setTextureOffset(8, 0).addBox(4.9F, -1.5F, 1.5F, 1, 1, 2, size * 0.25F);
 		leftRam3.rotateAngleX = ModelUtils.toRadians(45D);
 		ModelRenderer leftRam4 = ModelUtils.freshRenderer(this);
 		leftRam4.mirror = true;
-		leftRam4.setTextureOffset(0, 25).addBox(5.1F, -2F, -1.5F, 1, 1, 2, 0F);
+		leftRam4.setTextureOffset(8, 3).addBox(5.1F, -2F, -1.5F, 1, 1, 2, 0F);
 		leftRam4.rotateAngleX = ModelUtils.toRadians(-7D);
 		
 		ModelRenderer leftRam = ModelUtils.freshRenderer(this);

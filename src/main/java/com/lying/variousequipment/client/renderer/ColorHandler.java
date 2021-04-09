@@ -5,6 +5,7 @@ import com.lying.variousequipment.init.VEItems;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.color.ItemColors;
 import net.minecraft.item.DyeableArmorItem;
+import net.minecraft.item.IDyeableArmorItem;
 
 public class ColorHandler
 {
@@ -15,5 +16,9 @@ public class ColorHandler
 		registry.register((stack, val) -> { return val == 0 ? ((DyeableArmorItem)stack.getItem()).getColor(stack) : -1; }, VEItems.HAT_MASK);
 		registry.register((stack, val) -> { return val == 0 ? ((DyeableArmorItem)stack.getItem()).getColor(stack) : -1; }, VEItems.HAT_HOOD);
 		registry.register((stack, val) -> { return val == 0 ? ((DyeableArmorItem)stack.getItem()).getColor(stack) : -1; }, VEItems.HAT_WITCH);
+		registry.register((stack, val) -> { return val == 0 ? ((IDyeableArmorItem)stack.getItem()).getColor(stack) : -1; }, VEItems.HORNS_DEER);
+		registry.register((stack, val) -> { return val == 0 ? ((IDyeableArmorItem)stack.getItem()).getColor(stack) : -1; }, VEItems.HORNS_RAM);
+		registry.register((stack, val) -> { return val == 0 ? ((IDyeableArmorItem)stack.getItem()).getColor(stack) : -1; }, VEItems.HORNS_KIRIN);
+		registry.register((stack, val) -> { return val == 0 ? ((IDyeableArmorItem)stack.getItem()).getColor(stack) : -1; }, VEItems.HORNS_HARTEBEEST);
 	}
 }

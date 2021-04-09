@@ -1,0 +1,16 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        " N ",
+        "N N",
+        " N "
+    ],
+    "key": {
+        "N":{ "tag": "forge:nuggets/iron" }
+    },
+    "result": {
+        "item": "vareqp:iron_ring",
+        "count": 1
+    },
+    "group": "iron_ring"
+}

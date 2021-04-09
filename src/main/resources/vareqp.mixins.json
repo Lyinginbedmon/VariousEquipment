@@ -1,0 +1,9 @@
+{
+	"required": true,
+	"package": "com.lying.variousequipment.mixin",
+	"client":
+	[
+		"WorldRendererMixin",
+		"EntityRendererManagerMixin"
+	]
+}

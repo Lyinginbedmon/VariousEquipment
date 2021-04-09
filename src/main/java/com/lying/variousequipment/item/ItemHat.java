@@ -5,7 +5,6 @@ import javax.annotation.Nonnull;
 import com.lying.variousequipment.reference.Reference;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.DyeableArmorItem;
@@ -27,9 +26,4 @@ public abstract class ItemHat extends DyeableArmorItem
 	{
 		return Reference.ModInfo.MOD_PREFIX + "textures/models/armor/"+this.name+(type == null ? "" : "_"+type)+".png";
 	}
-	
-    public boolean canRender(String identifier, int index, LivingEntity livingEntity, ItemStack stack)
-    {
-        return true;
-    }
 }

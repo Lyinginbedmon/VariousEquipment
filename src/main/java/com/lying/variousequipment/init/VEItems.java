@@ -7,6 +7,7 @@ import com.lying.variousequipment.item.*;
 import com.lying.variousequipment.item.VEItemGroup;
 import com.lying.variousequipment.item.bauble.*;
 import com.lying.variousequipment.reference.Reference;
+import com.lying.variousoddities.item.VOItemGroup;
 
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -32,11 +33,16 @@ public class VEItems
 	public static final Item HORNS_RAM		= register("horns_ram", new ItemHorns.Ram(new Item.Properties().group(VEItemGroup.PROPS)));
 	public static final Item HORNS_DEER		= register("horns_deer", new ItemHorns.Deer(new Item.Properties().group(VEItemGroup.PROPS)));
 	public static final Item HORNS_KIRIN	= register("horns_kirin", new ItemHorns.Kirin(new Item.Properties().group(VEItemGroup.PROPS)));
+	public static final Item HORNS_HARTEBEEST = register("horns_hartebeest", new ItemHorns.Hartebeest(new Item.Properties().group(VEItemGroup.PROPS)));
+	
 	public static final Item HAT_WITCH		= register("hat_witch", new ItemHatWitch(new Item.Properties().group(VEItemGroup.GEAR)));
 	public static final Item HAT_HOOD		= register("hat_hood", new ItemHatHood(new Item.Properties().group(VEItemGroup.GEAR)));
+	public static final Item BLINDFOLD		= register("blindfold", new ItemBlindfold(new Item.Properties().group(VEItemGroup.GEAR)));
+	public static final Item BLINDFOLD_FAKE	= register("cosmetic_blindfold", new ItemBlindfold(new Item.Properties().group(VEItemGroup.GEAR)));
+	public static final Item RING_IRON		= register("iron_ring", new ItemRing("ring_iron", new Item.Properties().group(VEItemGroup.GEAR)));
+	public static final Item RING_GOLD		= register("gold_ring", new ItemRing("ring_gold", new Item.Properties().group(VEItemGroup.GEAR)));
 	
-	// Curios
-	public static final Item SCARAB_GOLEM	= register("scarab_golem", new ItemScarabGolem(new Item.Properties().group(VEItemGroup.GEAR)));
+	public static final Item SCARAB_GOLEM	= register("scarab_golem", new ItemScarabGolem(new Item.Properties().group(VOItemGroup.LOOT)));
 	
 	public static Item register(String nameIn, Item itemIn)
 	{

@@ -1,0 +1,17 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        " S ",
+        "L L",
+        " L "
+    ],
+    "key": {
+        "L":{ "tag": "varodd:carpet" },
+        "S":{ "tag": "forge:string" }
+    },
+    "result": {
+        "item": "vareqp:blindfold",
+        "count": 1
+    },
+    "group": "blindfold"
+}
