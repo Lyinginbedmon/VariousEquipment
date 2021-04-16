@@ -3,25 +3,36 @@ package com.lying.variousequipment.init;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.lying.variousequipment.item.*;
+import com.lying.variousequipment.data.recipes.CoatItemRecipe;
+import com.lying.variousequipment.item.ItemCoating;
+import com.lying.variousequipment.item.ItemCrowbar;
+import com.lying.variousequipment.item.ItemFoodSpoon;
+import com.lying.variousequipment.item.ItemHatArchfey;
+import com.lying.variousequipment.item.ItemHatFeyMask;
+import com.lying.variousequipment.item.ItemHatHood;
+import com.lying.variousequipment.item.ItemHatWitch;
+import com.lying.variousequipment.item.ItemSymbol;
 import com.lying.variousequipment.item.VEItemGroup;
-import com.lying.variousequipment.item.bauble.*;
+import com.lying.variousequipment.item.bauble.ItemBlindfold;
+import com.lying.variousequipment.item.bauble.ItemHorns;
+import com.lying.variousequipment.item.bauble.ItemLuckstone;
+import com.lying.variousequipment.item.bauble.ItemRing;
+import com.lying.variousequipment.item.bauble.ItemScarabGolem;
 import com.lying.variousequipment.reference.Reference;
+import com.lying.variousoddities.init.VOEnchantments;
 import com.lying.variousoddities.item.VOItemGroup;
 
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemModelsProperties;
+import net.minecraft.item.ItemTier;
+import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.registries.IForgeRegistry;
 
-@Mod.EventBusSubscriber(modid = Reference.ModInfo.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
 public class VEItems
 {
 	private static final List<Item> ITEMS = new ArrayList<>();
@@ -41,8 +52,17 @@ public class VEItems
 	public static final Item BLINDFOLD_FAKE	= register("cosmetic_blindfold", new ItemBlindfold(new Item.Properties().group(VEItemGroup.GEAR)));
 	public static final Item RING_IRON		= register("iron_ring", new ItemRing("ring_iron", new Item.Properties().group(VEItemGroup.GEAR)));
 	public static final Item RING_GOLD		= register("gold_ring", new ItemRing("ring_gold", new Item.Properties().group(VEItemGroup.GEAR)));
+	public static final Item CROWBAR		= register("crowbar", new ItemCrowbar(new Item.Properties().group(VEItemGroup.GEAR)));
+	public static final Item SYMBOL_WOOD	= register("wooden_holy_symbol", new ItemSymbol(ItemTier.WOOD, new Item.Properties().group(VEItemGroup.GEAR)));
+	public static final Item SYMBOL_STONE	= register("stone_holy_symbol", new ItemSymbol(ItemTier.STONE, new Item.Properties().group(VEItemGroup.GEAR)));
+	public static final Item SYMBOL_IRON	= register("iron_holy_symbol", new ItemSymbol(ItemTier.IRON, new Item.Properties().group(VEItemGroup.GEAR)));
+	public static final Item SYMBOL_GOLD	= register("golden_holy_symbol", new ItemSymbol(ItemTier.GOLD, new Item.Properties().group(VEItemGroup.GEAR)));
+	public static final Item SYMBOL_DIAMOND	= register("diamond_holy_symbol", new ItemSymbol(ItemTier.DIAMOND, new Item.Properties().group(VEItemGroup.GEAR)));
 	
 	public static final Item SCARAB_GOLEM	= register("scarab_golem", new ItemScarabGolem(new Item.Properties().group(VOItemGroup.LOOT)));
+	public static final Item STONE_LUCK		= register("luckstone", new ItemLuckstone(new Item.Properties().group(VOItemGroup.LOOT)));
+	public static final Item FOOD_SPOON		= register("sustaining_spoon", new ItemFoodSpoon(new Item.Properties().group(VOItemGroup.LOOT)));
+	public static final Item COATING_SILVER	= register("silversheen", new ItemCoating(VOEnchantments.SILVERSHEEN, new Item.Properties().group(VOItemGroup.LOOT)));
 	
 	public static Item register(String nameIn, Item itemIn)
 	{
@@ -51,7 +71,6 @@ public class VEItems
 		return itemIn;
 	}
 	
-    @SubscribeEvent
     public static void onItemsRegistry(final RegistryEvent.Register<Item> itemRegistryEvent)
     {
     	IForgeRegistry<Item> registry = itemRegistryEvent.getRegistry();
@@ -63,5 +82,11 @@ public class VEItems
     public static void registerProperties()
     {
     	ItemModelsProperties.registerProperty(HAT_HOOD, new ResourceLocation(Reference.ModInfo.MOD_ID, "is_up"), (stack, world, entity) -> { return ItemHatHood.getIsUp(stack) ? 1F : 0F; });
+    }
+    
+    public static void onRecipeSerializerRegistry(final RegistryEvent.Register<IRecipeSerializer<?>> event)
+    {
+    	IForgeRegistry<IRecipeSerializer<?>> registry = event.getRegistry();
+    	registry.register(CoatItemRecipe.SERIALIZER.setRegistryName(new ResourceLocation(Reference.ModInfo.MOD_ID, "coat_item")));
     }
 }

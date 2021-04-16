@@ -1,0 +1,15 @@
+{
+    "parent": "item/handheld",
+    "textures":
+    {
+    	"layer0": "vareqp:items/crowbar"
+    },
+    "display":
+    {
+        "thirdperson_righthand": {
+        	"rotation": [ 0, 270, 55 ],
+        	"translation": [ 0, -2, 0 ],
+            "scale": [ 1.25, 1.25, 1.25 ]
+        }
+    }
+}

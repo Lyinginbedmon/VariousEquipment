@@ -16,7 +16,6 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.DyeColor;
 import net.minecraft.item.IDyeableArmorItem;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
@@ -25,9 +24,8 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurio;
 import top.theillusivec4.curios.api.type.capability.ICurio.DropRule;
-import top.theillusivec4.curios.api.type.capability.ICurioItem;
 
-public abstract class ItemHorns extends Item implements ICurioItem, IDyeableArmorItem
+public abstract class ItemHorns extends ItemBauble implements IDyeableArmorItem
 {
 	public ItemHorns(Properties properties)
 	{

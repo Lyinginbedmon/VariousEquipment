@@ -4,6 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.lying.variousequipment.client.renderer.EntityRenderRegistry;
+import com.lying.variousequipment.data.VEDataGenerators;
 import com.lying.variousequipment.init.VEItems;
 import com.lying.variousequipment.network.PacketHandler;
 import com.lying.variousequipment.proxy.ClientProxy;
@@ -13,6 +14,8 @@ import com.lying.variousequipment.reference.Reference;
 import com.lying.variousequipment.utility.bus.BusClient;
 import com.lying.variousequipment.utility.bus.BusServer;
 
+import net.minecraft.item.Item;
+import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -42,6 +45,10 @@ public class VariousEquipment
         bus.addListener(this::doCommonSetup);
         bus.addListener(this::doClientSetup);
         bus.addListener(this::doLoadComplete);
+        bus.addListener(VEDataGenerators::onGatherData);
+        
+        bus.addGenericListener(Item.class, VEItems::onItemsRegistry);
+        bus.addGenericListener(IRecipeSerializer.class, VEItems::onRecipeSerializerRegistry);
         
         MinecraftForge.EVENT_BUS.register(this);
 	}

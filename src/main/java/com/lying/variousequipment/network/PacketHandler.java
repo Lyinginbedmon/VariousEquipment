@@ -30,7 +30,7 @@ public class PacketHandler
 	public static void init()
 	{
 //		int id = 0;
-//		HANDLER.registerMessage(id++, PacketSettlementData.class, PacketSettlementData::encode, PacketSettlementData::decode, PacketSettlementData::handle);
+//		HANDLER.registerMessage(id++, PacketEnchantmentExpire.class, PacketEnchantmentExpire::encode, PacketEnchantmentExpire::decode, PacketEnchantmentExpire::handle);
 	}
 	
 	/**

@@ -1,7 +1,8 @@
-package com.lying.variousequipment.init;
+package com.lying.variousequipment.data;
 
 import javax.annotation.Nullable;
 
+import com.lying.variousequipment.init.VEItems;
 import com.lying.variousequipment.reference.Reference;
 
 import net.minecraft.data.BlockTagsProvider;
@@ -15,7 +16,6 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.GatherDataEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotTypeMessage;
@@ -62,18 +62,8 @@ public class VEItemTags extends ItemTagsProvider
         		})
             InterModComms.sendTo(CuriosApi.MODID, SlotTypeMessage.REGISTER_TYPE, () -> type.getMessageBuilder().build());
         InterModComms.sendTo(CuriosApi.MODID, SlotTypeMessage.REGISTER_TYPE, () -> SlotTypePreset.RING.getMessageBuilder().size(2).build());
+        InterModComms.sendTo(CuriosApi.MODID, SlotTypeMessage.REGISTER_TYPE, () -> SlotTypePreset.CHARM.getMessageBuilder().size(2).build());
     }
-    
-	@SubscribeEvent
-	public static void onGatherDataEvent(GatherDataEvent event)
-	{
-		DataGenerator generator = event.getGenerator();
-		ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
-		if(event.includeServer())
-		{
-			generator.addProvider(new VEItemTags(generator, existingFileHelper));
-		}
-	}
 	
 	private static class VEBlockTags extends BlockTagsProvider
 	{

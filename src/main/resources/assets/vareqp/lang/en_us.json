@@ -5,7 +5,7 @@
 	"item.vareqp.hat_witch": "Magician's Hat",
 	"item.vareqp.hat_archfey": "Crown of the Archfey",
 	"item.vareqp.scarab_golem": "Golembane Scarab",
-	"item.vareqp.scarab_protection": "Scarab of Protection",
+	"item.vareqp.scarab_golem.tooltip": "+50% damage against Constructs",
 	"item.vareqp.hat_fey_mask": "Court Fey Mask",
 	"item.vareqp.horns_ram": "Ram Horns",
 	"item.vareqp.horns_deer": "Deer Antlers",
@@ -14,5 +14,18 @@
 	"item.vareqp.blindfold": "Blindfold",
 	"item.vareqp.cosmetic_blindfold": "Cosmetic Blindfold",
 	"item.vareqp.gold_ring": "Gold Ring",
-	"item.vareqp.iron_ring": "Iron Ring"
+	"item.vareqp.iron_ring": "Iron Ring",
+	"item.vareqp.crowbar": "Crowbar",
+	"item.vareqp.sustaining_spoon": "Sustaining Spoon",
+	"item.vareqp.sustaining_spoon.tooltip": "Produces an endless supply of mildly-nourishing gruel",
+	"item.vareqp.luckstone": "Luckstone",
+	"item.vareqp.luckstone.tooltip": "+1 Luck",
+	"item.vareqp.wooden_holy_symbol": "Wooden Holy Symbol",
+	"item.vareqp.stone_holy_symbol": "Stone Holy Symbol",
+	"item.vareqp.iron_holy_symbol": "Iron Holy Symbol",
+	"item.vareqp.golden_holy_symbol": "Golden Holy Symbol",
+	"item.vareqp.diamond_holy_symbol": "Diamond Holy Symbol",
+	"item.vareqp.silversheen": "Silversheen",
+	
+	"enchantment.vareqp.silversheen": "Silversheen"
 }
