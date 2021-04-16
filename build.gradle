@@ -104,7 +104,7 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
 
             // Specify the modid for data generation, where to output the resulting resource, and where to look for existing resources.
-            args '--mod', 'examplemod', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
+            args '--mod', 'vareqp', '--all', '--existing', '"' + file('src/main/resources/') + '"', '--existing', '"' + file('src/generated/resources/') + '"', '--output', '"' + file('src/generated/resources/') + '"'
             arg "-mixin.config=vareqp.mixins.json"
 		
             mods {
