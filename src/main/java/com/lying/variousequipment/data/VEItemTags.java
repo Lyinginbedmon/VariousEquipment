@@ -36,6 +36,12 @@ public class VEItemTags extends ItemTagsProvider
 		super(dataGenerator, new VEBlockTags(dataGenerator, existingFileHelper), Reference.ModInfo.MOD_ID, existingFileHelper);
 	}
 	
+	@Override
+	public String getName()
+	{
+		return "Various Equipment item tags";
+	}
+	
 	protected void registerTags()
 	{
 		getOrCreateBuilder(HEAD).add(

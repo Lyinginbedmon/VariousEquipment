@@ -16,6 +16,7 @@ public class VEDataGenerators
 		{
 			generator.addProvider(new VEItemTags(generator, existingFileHelper));
 			generator.addProvider(new VERecipeProvider(generator));
+			generator.addProvider(new VELootProvider(generator, existingFileHelper));
 		}
 		if(event.includeClient())
 		{

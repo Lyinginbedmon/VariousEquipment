@@ -1,0 +1,17 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+		" D ",
+		" L ",
+		"D  "
+    ],
+    "key": {
+        "D":{ "tag": "forge:gems/diamond" },
+        "L":{ "tag": "forge:leather" }
+    },
+    "result": {
+        "item": "vareqp:diamond_holy_symbol",
+        "count": 1
+    },
+    "group": "holy_symbol"
+}

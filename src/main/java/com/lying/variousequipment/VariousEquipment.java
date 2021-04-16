@@ -6,6 +6,7 @@ import org.apache.logging.log4j.Logger;
 import com.lying.variousequipment.client.renderer.EntityRenderRegistry;
 import com.lying.variousequipment.data.VEDataGenerators;
 import com.lying.variousequipment.init.VEItems;
+import com.lying.variousequipment.init.VELootTables;
 import com.lying.variousequipment.network.PacketHandler;
 import com.lying.variousequipment.proxy.ClientProxy;
 import com.lying.variousequipment.proxy.IProxy;
@@ -51,6 +52,7 @@ public class VariousEquipment
         bus.addGenericListener(IRecipeSerializer.class, VEItems::onRecipeSerializerRegistry);
         
         MinecraftForge.EVENT_BUS.register(this);
+        MinecraftForge.EVENT_BUS.addListener(VELootTables::onLootLoadEvent);
 	}
 	
     private void doCommonSetup(final FMLCommonSetupEvent event)

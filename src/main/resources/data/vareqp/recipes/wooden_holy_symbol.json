@@ -1,0 +1,16 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "PP",
+        " S"
+    ],
+    "key": {
+        "P":{ "tag": "minecraft:planks" },
+        "S":{ "tag": "forge:rods/wooden" }
+    },
+    "result": {
+        "item": "vareqp:wooden_holy_symbol",
+        "count": 1
+    },
+    "group": "holy_symbol"
+}

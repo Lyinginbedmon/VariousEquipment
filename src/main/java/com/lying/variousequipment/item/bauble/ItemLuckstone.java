@@ -17,7 +17,7 @@ public class ItemLuckstone extends ItemBauble
 {
 	public ItemLuckstone(Properties properties)
 	{
-		super(properties);
+		super(properties.maxStackSize(1));
 	}
 	
 	public int getFortuneBonus(String identifier, LivingEntity livingEntity, ItemStack curio, int index)
