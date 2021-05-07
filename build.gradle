@@ -19,7 +19,7 @@ apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 apply plugin: 'org.spongepowered.mixin'
 
-version = '1.16.5_001k'
+version = '1.16.5_001m'
 group = 'com.lying.variousequipment' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'vareqp'
 
@@ -148,17 +148,20 @@ dependencies {
     // Real examples
     // compile 'com.mod-buildcraft:buildcraft:6.0.8:dev'  // adds buildcraft to the dev env
     // compile 'com.googlecode.efficient-java-matrix-library:ejml:0.24' // adds ejml to the dev env
+    
+    compile 'org.spongepowered:mixin:0.8'
+    annotationProcessor 'org.spongepowered:mixin:0.8:processor'
 	
     // The 'provided' configuration is for optional dependencies that exist at compile-time but might not at runtime.
     // provided 'com.mod-buildcraft:buildcraft:6.0.8:dev'
-
+	
     // These dependencies get remapped to your current MCP mappings
     // deobf 'com.mod-buildcraft:buildcraft:6.0.8:dev'
-
+	
     // For more info...
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
-    compileOnly files('libs/varodd-1.16_001k_sources.jar')
+    compileOnly files('libs/varodd-1.16_001m_sources.jar')
     compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.16.5-4.0.4.0:api")
     runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.16.5-4.0.4.0")
 	
@@ -170,7 +173,7 @@ jar {
         attributes([
             "Specification-Title": "VariousEquipment",
             "Specification-Vendor": "lyinginbedmon",
-            "Specification-Version": "1.16.5_001k",
+            "Specification-Version": "1.16.5_001m",
             "Implementation-Title": project.name,
             "Implementation-Version": "${version}",
             "Implementation-Vendor" :"lyinginbedmon",

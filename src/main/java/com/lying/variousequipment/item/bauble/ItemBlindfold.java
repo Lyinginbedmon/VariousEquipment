@@ -4,6 +4,9 @@ import javax.annotation.Nonnull;
 
 import com.lying.variousequipment.init.VEItems;
 import com.lying.variousequipment.reference.Reference;
+import com.lying.variousoddities.api.event.GatherAbilitiesEvent;
+import com.lying.variousoddities.types.abilities.AbilityBlind;
+import com.lying.variousoddities.types.abilities.AbilityRegistry;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 
@@ -20,9 +23,12 @@ import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.eventbus.api.EventPriority;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.type.capability.ICurioItem;
 
@@ -34,11 +40,18 @@ public class ItemBlindfold extends ArmorItem implements ICurioItem
 	public ItemBlindfold(Properties builderIn)
 	{
 		super(ArmorMaterial.LEATHER, EquipmentSlotType.HEAD, builderIn);
+		
+		MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGHEST, true, GatherAbilitiesEvent.class, this::onAbilityGather);
 	}
 	
-	public static boolean isBlindfolded(LivingEntity entity)
+	public void onAbilityGather(GatherAbilitiesEvent event)
 	{
-		return entity.getItemStackFromSlot(EquipmentSlotType.HEAD).getItem() == VEItems.BLINDFOLD || CuriosApi.getCuriosHelper().findEquippedCurio(VEItems.BLINDFOLD, entity).isPresent();
+		if(!event.hasAbility(AbilityBlind.REGISTRY_NAME))
+		{
+			LivingEntity entity = event.getEntityLiving();
+			if(entity.getItemStackFromSlot(EquipmentSlotType.HEAD).getItem() == VEItems.BLINDFOLD || CuriosApi.getCuriosHelper().findEquippedCurio(VEItems.BLINDFOLD, entity).isPresent())
+				event.addAbility(AbilityRegistry.getAbility(AbilityBlind.REGISTRY_NAME, new CompoundNBT()));
+		}
 	}
 	
 	public boolean isEnderMask(ItemStack stack, PlayerEntity player, EndermanEntity endermanEntity)

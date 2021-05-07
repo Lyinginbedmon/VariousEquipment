@@ -8,6 +8,6 @@ public class Reference
 		public static final String MOD_ID	= "vareqp";
 		public static final String MOD_PREFIX	= MOD_ID + ":";
 		
-		public static final String VERSION	= "1.16_001k";
+		public static final String VERSION	= "1.16_001m";
 	}
 }

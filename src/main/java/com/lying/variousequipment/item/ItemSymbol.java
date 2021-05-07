@@ -5,10 +5,7 @@ import java.util.List;
 import java.util.Random;
 
 import com.google.common.base.Predicate;
-import com.lying.variousoddities.types.EnumCreatureType;
-import com.lying.variousoddities.world.savedata.TypesManager;
 
-import net.minecraft.entity.CreatureAttribute;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.Attributes;
@@ -31,18 +28,7 @@ public class ItemSymbol extends TieredItem
 		public boolean apply(Entity input)
 		{
 			if(input.isAlive() && input instanceof LivingEntity)
-			{
-				LivingEntity living = (LivingEntity)input;
-				TypesManager manager = TypesManager.get(input.getEntityWorld());
-				if(manager.hasCustomTypes(living))
-				{
-					for(EnumCreatureType type : manager.getMobTypes(living))
-						if(type.hasParentAttribute() && type.getParentAttribute() == CreatureAttribute.UNDEAD)
-							return true;
-				}
-				else
-					return living.getCreatureAttribute() == CreatureAttribute.UNDEAD;
-			}
+				return ((LivingEntity)input).isEntityUndead();
 			return false;
 		}
 	};
