@@ -19,6 +19,7 @@ import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.registries.IForgeRegistry;
 
@@ -66,6 +67,12 @@ public class VEItems
     	IForgeRegistry<Item> registry = itemRegistryEvent.getRegistry();
     	registry.registerAll(ITEMS.toArray(new Item[0]));
     	registry.registerAll(BLOCK_ITEMS.toArray(new Item[0]));
+    	
+    	ITEMS.forEach((item) -> 
+    	{
+    		if(item instanceof IEventListenerItem)
+    			((IEventListenerItem)item).addListeners(MinecraftForge.EVENT_BUS);
+    	});
     }
     
     @OnlyIn(Dist.CLIENT)
