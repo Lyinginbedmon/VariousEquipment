@@ -23,6 +23,7 @@ public class VERecipeProvider extends RecipeProvider
 	protected void registerRecipes(Consumer<IFinishedRecipe> consumer)
 	{
 		registerSpecialRecipe(consumer, CoatItemRecipe.SERIALIZER);
+		registerSpecialRecipe(consumer, HolyWaterRecipe.SERIALIZER);
 	}
 	
 	@SuppressWarnings("deprecation")

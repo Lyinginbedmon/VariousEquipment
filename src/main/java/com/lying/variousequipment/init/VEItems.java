@@ -3,21 +3,10 @@ package com.lying.variousequipment.init;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.lying.variousequipment.data.recipes.CoatItemRecipe;
-import com.lying.variousequipment.item.ItemCoating;
-import com.lying.variousequipment.item.ItemCrowbar;
-import com.lying.variousequipment.item.ItemFoodSpoon;
-import com.lying.variousequipment.item.ItemHatArchfey;
-import com.lying.variousequipment.item.ItemHatFeyMask;
-import com.lying.variousequipment.item.ItemHatHood;
-import com.lying.variousequipment.item.ItemHatWitch;
-import com.lying.variousequipment.item.ItemSymbol;
+import com.lying.variousequipment.data.recipes.*;
+import com.lying.variousequipment.item.*;
 import com.lying.variousequipment.item.VEItemGroup;
-import com.lying.variousequipment.item.bauble.ItemBlindfold;
-import com.lying.variousequipment.item.bauble.ItemHorns;
-import com.lying.variousequipment.item.bauble.ItemLuckstone;
-import com.lying.variousequipment.item.bauble.ItemRing;
-import com.lying.variousequipment.item.bauble.ItemScarabGolem;
+import com.lying.variousequipment.item.bauble.*;
 import com.lying.variousequipment.reference.Reference;
 import com.lying.variousoddities.init.VOEnchantments;
 import com.lying.variousoddities.item.VOItemGroup;
@@ -58,6 +47,7 @@ public class VEItems
 	public static final Item SYMBOL_IRON	= register("iron_holy_symbol", new ItemSymbol(ItemTier.IRON, new Item.Properties().group(VEItemGroup.GEAR)));
 	public static final Item SYMBOL_GOLD	= register("golden_holy_symbol", new ItemSymbol(ItemTier.GOLD, new Item.Properties().group(VEItemGroup.GEAR)));
 	public static final Item SYMBOL_DIAMOND	= register("diamond_holy_symbol", new ItemSymbol(ItemTier.DIAMOND, new Item.Properties().group(VEItemGroup.GEAR)));
+	public static final Item HOLY_WATER		= register("vial_holy", new ItemHolyWater(new Item.Properties().group(VEItemGroup.GEAR)));
 	
 	public static final Item SCARAB_GOLEM	= register("scarab_golem", new ItemScarabGolem(new Item.Properties().group(VOItemGroup.LOOT)));
 	public static final Item STONE_LUCK		= register("luckstone", new ItemLuckstone(new Item.Properties().group(VOItemGroup.LOOT)));
@@ -88,5 +78,6 @@ public class VEItems
     {
     	IForgeRegistry<IRecipeSerializer<?>> registry = event.getRegistry();
     	registry.register(CoatItemRecipe.SERIALIZER.setRegistryName(new ResourceLocation(Reference.ModInfo.MOD_ID, "coat_item")));
+    	registry.register(HolyWaterRecipe.SERIALIZER.setRegistryName(new ResourceLocation(Reference.ModInfo.MOD_ID, "holy_water")));
     }
 }

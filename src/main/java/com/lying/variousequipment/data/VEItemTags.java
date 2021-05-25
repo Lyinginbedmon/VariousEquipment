@@ -31,6 +31,8 @@ public class VEItemTags extends ItemTagsProvider
     public static final ITag.INamedTag<Item> HEAD = ItemTags.createOptional(new ResourceLocation(CuriosApi.MODID, "head"));
     public static final ITag.INamedTag<Item> NECKLACE = ItemTags.createOptional(new ResourceLocation(CuriosApi.MODID, "necklace"));
     
+    public static final ITag.INamedTag<Item> HOLY_SYMBOL = ItemTags.createOptional(new ResourceLocation(Reference.ModInfo.MOD_ID, "holy_symbol"));
+    
 	public VEItemTags(DataGenerator dataGenerator, @Nullable ExistingFileHelper existingFileHelper)
 	{
 		super(dataGenerator, new VEBlockTags(dataGenerator, existingFileHelper), Reference.ModInfo.MOD_ID, existingFileHelper);
@@ -52,6 +54,14 @@ public class VEItemTags extends ItemTagsProvider
 				VEItems.HORNS_RAM
 				);
 		getOrCreateBuilder(NECKLACE).add(VEItems.SCARAB_GOLEM);
+		
+		getOrCreateBuilder(HOLY_SYMBOL).add(
+				VEItems.SYMBOL_DIAMOND,
+				VEItems.SYMBOL_GOLD,
+				VEItems.SYMBOL_IRON,
+				VEItems.SYMBOL_STONE,
+				VEItems.SYMBOL_WOOD
+				);
 	}
 	
 	@SubscribeEvent

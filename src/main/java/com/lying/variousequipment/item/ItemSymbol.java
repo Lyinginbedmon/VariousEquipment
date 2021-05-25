@@ -102,4 +102,15 @@ public class ItemSymbol extends TieredItem
 				stack.damageItem(rng.nextInt(20) == 0 ? 1 : 0, livingEntityIn, e -> e.sendBreakAnimation(livingEntityIn.getActiveHand()));
 		}
 	}
+	
+	@Override
+	public boolean hasContainerItem(ItemStack stack){ return true; }
+	
+	@Override
+	public ItemStack getContainerItem(ItemStack stack)
+	{
+		ItemStack clone = stack.copy();
+		clone.setCount(1);
+		return clone;
+	}
 }

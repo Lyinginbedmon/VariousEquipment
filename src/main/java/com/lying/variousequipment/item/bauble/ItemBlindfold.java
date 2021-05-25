@@ -1,12 +1,16 @@
 package com.lying.variousequipment.item.bauble;
 
+import java.util.Optional;
+
 import javax.annotation.Nonnull;
+
+import org.apache.commons.lang3.tuple.ImmutableTriple;
 
 import com.lying.variousequipment.init.VEItems;
 import com.lying.variousequipment.reference.Reference;
 import com.lying.variousoddities.api.event.GatherAbilitiesEvent;
-import com.lying.variousoddities.types.abilities.AbilityBlind;
-import com.lying.variousoddities.types.abilities.AbilityRegistry;
+import com.lying.variousoddities.species.abilities.AbilityBlind;
+import com.lying.variousoddities.species.abilities.AbilityRegistry;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 
@@ -28,7 +32,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.eventbus.api.EventPriority;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.type.capability.ICurioItem;
 
@@ -41,15 +44,33 @@ public class ItemBlindfold extends ArmorItem implements ICurioItem
 	{
 		super(ArmorMaterial.LEATHER, EquipmentSlotType.HEAD, builderIn);
 		
-		MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGHEST, true, GatherAbilitiesEvent.class, this::onAbilityGather);
+		MinecraftForge.EVENT_BUS.addListener(this::onAbilityGather);
 	}
 	
 	public void onAbilityGather(GatherAbilitiesEvent event)
 	{
+		System.out.println("Receiving GatherAbilitiesEvent");
+		if(event.getEntityLiving() == null || !event.getEntityLiving().isAlive())
+			return;
+		
 		if(!event.hasAbility(AbilityBlind.REGISTRY_NAME))
 		{
 			LivingEntity entity = event.getEntityLiving();
-			if(entity.getItemStackFromSlot(EquipmentSlotType.HEAD).getItem() == VEItems.BLINDFOLD || CuriosApi.getCuriosHelper().findEquippedCurio(VEItems.BLINDFOLD, entity).isPresent())
+			ItemStack headStack = entity.getItemStackFromSlot(EquipmentSlotType.HEAD);
+			boolean addBlindness = headStack != null && !headStack.isEmpty() && headStack.getItem() == VEItems.BLINDFOLD;
+			if(addBlindness)
+				System.out.println("Blindfold worn as helmet by "+entity.getDisplayName().getString());
+			if(!addBlindness)
+			{
+				Optional<ImmutableTriple<String, Integer, ItemStack>> blindfoldCurio = CuriosApi.getCuriosHelper().findEquippedCurio(VEItems.BLINDFOLD, entity);
+				if(blindfoldCurio != null && blindfoldCurio.isPresent())
+				{
+					addBlindness = true;
+					System.out.println("Blindfold worn as curio by "+entity.getDisplayName().getString());
+				}
+			}
+			
+			if(addBlindness)
 				event.addAbility(AbilityRegistry.getAbility(AbilityBlind.REGISTRY_NAME, new CompoundNBT()));
 		}
 	}

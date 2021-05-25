@@ -1,6 +1,7 @@
 package com.lying.variousequipment.client.renderer;
 
 import com.lying.variousequipment.init.VEItems;
+import com.lying.variousequipment.item.ItemVialThrowable;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.color.ItemColors;
@@ -20,5 +21,6 @@ public class ColorHandler
 		registry.register((stack, val) -> { return val == 0 ? ((IDyeableArmorItem)stack.getItem()).getColor(stack) : -1; }, VEItems.HORNS_RAM);
 		registry.register((stack, val) -> { return val == 0 ? ((IDyeableArmorItem)stack.getItem()).getColor(stack) : -1; }, VEItems.HORNS_KIRIN);
 		registry.register((stack, val) -> { return val == 0 ? ((IDyeableArmorItem)stack.getItem()).getColor(stack) : -1; }, VEItems.HORNS_HARTEBEEST);
+		registry.register((stack, val) -> { return val == 0 ? ((ItemVialThrowable)stack.getItem()).getColor() : -1; }, VEItems.HOLY_WATER);
 	}
 }

@@ -7,7 +7,7 @@ import javax.annotation.Nullable;
 import com.google.common.base.Predicate;
 import com.lying.variousequipment.init.VEItems;
 import com.lying.variousequipment.reference.Reference;
-import com.lying.variousoddities.world.savedata.TypesManager;
+import com.lying.variousoddities.species.types.EnumCreatureType;
 import com.mojang.blaze3d.matrix.MatrixStack;
 
 import net.minecraft.client.Minecraft;
@@ -42,7 +42,7 @@ public class ItemScarabGolem extends ItemBauble
 	{
 		public boolean apply(Entity input)
 		{
-			return input instanceof LivingEntity ? TypesManager.get(input.getEntityWorld()).isGolem((LivingEntity)input) : false;
+			return input instanceof LivingEntity ? EnumCreatureType.getTypes((LivingEntity)input).isGolem() : false;
 		}
 	};
 	
