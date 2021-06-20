@@ -24,6 +24,8 @@ public class VERecipeProvider extends RecipeProvider
 	{
 		registerSpecialRecipe(consumer, CoatItemRecipe.SERIALIZER);
 		registerSpecialRecipe(consumer, HolyWaterRecipe.SERIALIZER);
+		registerSpecialRecipe(consumer, KitsuneTailRecipe.SERIALIZER);
+		registerSpecialRecipe(consumer, AntennaRecipe.SERIALIZER);
 	}
 	
 	@SuppressWarnings("deprecation")

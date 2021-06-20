@@ -31,10 +31,30 @@ public class VEItems
 	// Items
 	public static final Item HAT_ARCHFEY	= register("hat_archfey", new ItemHatArchfey(new Item.Properties().group(VEItemGroup.PROPS)));
 	public static final Item HAT_MASK		= register("hat_fey_mask", new ItemHatFeyMask(new Item.Properties().group(VEItemGroup.PROPS)));
+	public static final Item EARS_WOLF		= register("ears_wolf", new ItemHorns.Wolf(new Item.Properties().group(VEItemGroup.PROPS)));
+	public static final Item EARS_CAT		= register("ears_cat", new ItemHorns.Cat(new Item.Properties().group(VEItemGroup.PROPS)));
+	public static final Item GILLS_AXOLOTL	= register("gills_axolotl", new ItemHorns.Axolotl(new Item.Properties().group(VEItemGroup.PROPS)));
+	public static final Item ANTENNA		= register("ant_antenna", new ItemHorns.Antenna(new Item.Properties().group(VEItemGroup.PROPS)));
 	public static final Item HORNS_RAM		= register("horns_ram", new ItemHorns.Ram(new Item.Properties().group(VEItemGroup.PROPS)));
 	public static final Item HORNS_DEER		= register("horns_deer", new ItemHorns.Deer(new Item.Properties().group(VEItemGroup.PROPS)));
 	public static final Item HORNS_KIRIN	= register("horns_kirin", new ItemHorns.Kirin(new Item.Properties().group(VEItemGroup.PROPS)));
+	public static final Item HORNS_KIRIN_STORM	= register("horns_kirin_storm", new ItemHorns.KirinStorm(new Item.Properties().group(VEItemGroup.PROPS)));
 	public static final Item HORNS_HARTEBEEST = register("horns_hartebeest", new ItemHorns.Hartebeest(new Item.Properties().group(VEItemGroup.PROPS)));
+	public static final Item TAIL_KOBOLD	= register("tail_kobold", new ItemTails.Kobold(new Item.Properties().group(VEItemGroup.PROPS)));
+	public static final Item TAIL_KIRIN		= register("tail_kirin", new ItemTails.Kirin(new Item.Properties().group(VEItemGroup.PROPS)));
+	public static final Item TAIL_WOLF		= register("tail_wolf", new ItemTails.Wolf(new Item.Properties().group(VEItemGroup.PROPS)));
+	public static final Item TAIL_CAT		= register("tail_cat", new ItemTails.Cat(new Item.Properties().group(VEItemGroup.PROPS)));
+	public static final Item TAIL_FOX		= register("tail_fox", new ItemTails.Fox(new Item.Properties().group(VEItemGroup.PROPS)));
+	public static final Item TAIL_RAT		= register("tail_rat", new ItemTails.Rat(new Item.Properties().group(VEItemGroup.PROPS)));
+	public static final Item TAIL_CAT_2		= register("tail_bakeneko", new ItemTails.Cat2(new Item.Properties().group(VEItemGroup.PROPS)));
+	public static final Item TAIL_DRAGON	= register("tail_dragon", new ItemTails.Dragon(new Item.Properties().group(VEItemGroup.PROPS)));
+	public static final Item TAIL_DEVIL		= register("tail_devil", new ItemTails.Devil(new Item.Properties().group(VEItemGroup.PROPS)));
+	public static final Item TAIL_RABBIT	= register("tail_rabbit", new ItemTails.Rabbit(new Item.Properties().group(VEItemGroup.PROPS)));
+	public static final Item TAIL_HORSE		= register("tail_horse", new ItemTails.Horse(new Item.Properties().group(VEItemGroup.PROPS)));
+	public static final Item TAIL_DRAGONFLY	= register("tail_dragonfly", new ItemTails.Dragonfly(new Item.Properties().group(VEItemGroup.PROPS)));
+	public static final Item TAIL_ANT		= register("tail_ant", new ItemTails.Ant(new Item.Properties().group(VEItemGroup.PROPS)));
+	public static final Item TAIL_LIZARD	= register("tail_lizard", new ItemTails.Lizard(new Item.Properties().group(VEItemGroup.PROPS)));
+	public static final Item TAIL_LIZARD2	= register("tail_lizard_barbed", new ItemTails.Lizard2(new Item.Properties().group(VEItemGroup.PROPS)));
 	
 	public static final Item HAT_WITCH		= register("hat_witch", new ItemHatWitch(new Item.Properties().group(VEItemGroup.GEAR)));
 	public static final Item HAT_HOOD		= register("hat_hood", new ItemHatHood(new Item.Properties().group(VEItemGroup.GEAR)));
@@ -86,5 +106,7 @@ public class VEItems
     	IForgeRegistry<IRecipeSerializer<?>> registry = event.getRegistry();
     	registry.register(CoatItemRecipe.SERIALIZER.setRegistryName(new ResourceLocation(Reference.ModInfo.MOD_ID, "coat_item")));
     	registry.register(HolyWaterRecipe.SERIALIZER.setRegistryName(new ResourceLocation(Reference.ModInfo.MOD_ID, "holy_water")));
+    	registry.register(KitsuneTailRecipe.SERIALIZER.setRegistryName(new ResourceLocation(Reference.ModInfo.MOD_ID, "kitsune_tail")));
+    	registry.register(AntennaRecipe.SERIALIZER.setRegistryName(new ResourceLocation(Reference.ModInfo.MOD_ID, "antennae")));
     }
 }

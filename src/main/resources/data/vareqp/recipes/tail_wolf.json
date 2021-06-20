@@ -1,0 +1,12 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients":
+    [
+        { "item": "vareqp:tail_cat" }
+    ],
+    "result": {
+        "item": "vareqp:tail_wolf",
+        "count": 1
+    },
+    "group": "tail_wolf"
+}

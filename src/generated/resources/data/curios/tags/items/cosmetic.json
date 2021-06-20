@@ -1,0 +1,29 @@
+{
+  "replace": false,
+  "values": [
+    "vareqp:ears_wolf",
+    "vareqp:ears_cat",
+    "vareqp:gills_axolotl",
+    "vareqp:ant_antenna",
+    "vareqp:horns_deer",
+    "vareqp:horns_hartebeest",
+    "vareqp:horns_kirin",
+    "vareqp:horns_ram",
+    "vareqp:horns_kirin_storm",
+    "vareqp:tail_kobold",
+    "vareqp:tail_kirin",
+    "vareqp:tail_wolf",
+    "vareqp:tail_cat",
+    "vareqp:tail_fox",
+    "vareqp:tail_rat",
+    "vareqp:tail_bakeneko",
+    "vareqp:tail_dragon",
+    "vareqp:tail_devil",
+    "vareqp:tail_rabbit",
+    "vareqp:tail_horse",
+    "vareqp:tail_dragonfly",
+    "vareqp:tail_ant",
+    "vareqp:tail_lizard",
+    "vareqp:tail_lizard_barbed"
+  ]
+}

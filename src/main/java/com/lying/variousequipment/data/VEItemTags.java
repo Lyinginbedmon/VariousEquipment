@@ -24,6 +24,8 @@ import top.theillusivec4.curios.api.SlotTypePreset;
 @Mod.EventBusSubscriber(modid = Reference.ModInfo.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class VEItemTags extends ItemTagsProvider
 {
+    public static final ITag.INamedTag<Item> COSMETIC = ItemTags.createOptional(new ResourceLocation(CuriosApi.MODID, "cosmetic"));
+    
     public static final ITag.INamedTag<Item> BACK = ItemTags.createOptional(new ResourceLocation(CuriosApi.MODID, "back"));
     public static final ITag.INamedTag<Item> BELT = ItemTags.createOptional(new ResourceLocation(CuriosApi.MODID, "belt"));
     public static final ITag.INamedTag<Item> BRACELET = ItemTags.createOptional(new ResourceLocation(CuriosApi.MODID, "bracelet"));
@@ -48,12 +50,35 @@ public class VEItemTags extends ItemTagsProvider
 	{
 		getOrCreateBuilder(HEAD).add(
 				VEItems.BLINDFOLD,
+				VEItems.BLINDFOLD_FAKE,
+				VEItems.EARS_WOLF,
+				VEItems.EARS_CAT,
+				VEItems.ANTENNA,
+				VEItems.GILLS_AXOLOTL,
 				VEItems.HORNS_DEER,
 				VEItems.HORNS_HARTEBEEST,
 				VEItems.HORNS_KIRIN,
-				VEItems.HORNS_RAM
+				VEItems.HORNS_RAM,
+				VEItems.HORNS_KIRIN_STORM
 				);
 		getOrCreateBuilder(NECKLACE).add(VEItems.SCARAB_GOLEM);
+		getOrCreateBuilder(BACK).add(
+				VEItems.TAIL_KOBOLD,
+				VEItems.TAIL_KIRIN,
+				VEItems.TAIL_WOLF,
+				VEItems.TAIL_CAT,
+				VEItems.TAIL_FOX,
+				VEItems.TAIL_RAT,
+				VEItems.TAIL_CAT_2,
+				VEItems.TAIL_DRAGON,
+				VEItems.TAIL_DEVIL,
+				VEItems.TAIL_RABBIT,
+				VEItems.TAIL_HORSE,
+				VEItems.TAIL_DRAGONFLY,
+				VEItems.TAIL_ANT,
+				VEItems.TAIL_LIZARD,
+				VEItems.TAIL_LIZARD2
+				);
 		
 		getOrCreateBuilder(HOLY_SYMBOL).add(
 				VEItems.SYMBOL_DIAMOND,
@@ -61,6 +86,33 @@ public class VEItemTags extends ItemTagsProvider
 				VEItems.SYMBOL_IRON,
 				VEItems.SYMBOL_STONE,
 				VEItems.SYMBOL_WOOD
+				);
+		
+		getOrCreateBuilder(COSMETIC).add(
+				VEItems.EARS_WOLF,
+				VEItems.EARS_CAT,
+				VEItems.GILLS_AXOLOTL,
+				VEItems.ANTENNA,
+				VEItems.HORNS_DEER,
+				VEItems.HORNS_HARTEBEEST,
+				VEItems.HORNS_KIRIN,
+				VEItems.HORNS_RAM,
+				VEItems.HORNS_KIRIN_STORM,
+				VEItems.TAIL_KOBOLD,
+				VEItems.TAIL_KIRIN,
+				VEItems.TAIL_WOLF,
+				VEItems.TAIL_CAT,
+				VEItems.TAIL_FOX,
+				VEItems.TAIL_RAT,
+				VEItems.TAIL_CAT_2,
+				VEItems.TAIL_DRAGON,
+				VEItems.TAIL_DEVIL,
+				VEItems.TAIL_RABBIT,
+				VEItems.TAIL_HORSE,
+				VEItems.TAIL_DRAGONFLY,
+				VEItems.TAIL_ANT,
+				VEItems.TAIL_LIZARD,
+				VEItems.TAIL_LIZARD2
 				);
 	}
 	
@@ -79,7 +131,24 @@ public class VEItemTags extends ItemTagsProvider
             InterModComms.sendTo(CuriosApi.MODID, SlotTypeMessage.REGISTER_TYPE, () -> type.getMessageBuilder().build());
         InterModComms.sendTo(CuriosApi.MODID, SlotTypeMessage.REGISTER_TYPE, () -> SlotTypePreset.RING.getMessageBuilder().size(2).build());
         InterModComms.sendTo(CuriosApi.MODID, SlotTypeMessage.REGISTER_TYPE, () -> SlotTypePreset.CHARM.getMessageBuilder().size(2).build());
+        registerCustomCurio("cosmetic", 4, true, false, null);
     }
+	
+	private static void registerCustomCurio(final String identifier, final int slots, final boolean isEnabled, final boolean isHidden, @Nullable final ResourceLocation icon)
+	{
+		final SlotTypeMessage.Builder message = new SlotTypeMessage.Builder(identifier);
+		message.size(slots);
+		if(!isEnabled)
+			message.lock();
+		
+		if(isHidden)
+			message.hide();
+		
+		if (icon != null)
+			message.icon(icon);
+		
+		InterModComms.sendTo(CuriosApi.MODID, SlotTypeMessage.REGISTER_TYPE, () -> message.build());
+	}
 	
 	private static class VEBlockTags extends BlockTagsProvider
 	{

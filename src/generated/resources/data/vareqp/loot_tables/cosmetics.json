@@ -1,0 +1,99 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "name": "main",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "weight": 5,
+          "name": "vareqp:ears_wolf"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 5,
+          "name": "vareqp:ant_antenna"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 5,
+          "name": "vareqp:gills_axolotl"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 5,
+          "name": "vareqp:horns_deer"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 5,
+          "name": "vareqp:horns_hartebeest"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 5,
+          "name": "vareqp:horns_ram"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 5,
+          "name": "vareqp:tail_wolf"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 3,
+          "name": "vareqp:tail_fox"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "vareqp:tail_kirin"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 5,
+          "name": "vareqp:tail_kobold"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 5,
+          "name": "vareqp:tail_rat"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "vareqp:tail_dragon"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 3,
+          "name": "vareqp:tail_devil"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 5,
+          "name": "vareqp:tail_rabbit"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 5,
+          "name": "vareqp:tail_horse"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 5,
+          "name": "vareqp:tail_dragonfly"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 5,
+          "name": "vareqp:tail_ant"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 5,
+          "name": "vareqp:tail_lizard"
+        }
+      ]
+    }
+  ]
+}

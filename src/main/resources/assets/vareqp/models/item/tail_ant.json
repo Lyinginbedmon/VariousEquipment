@@ -1,0 +1,8 @@
+{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "vareqp:items/tail_ant",
+        "layer1": "vareqp:items/tail_ant_overlay",
+        "layer2": "vareqp:items/tail_chest_overlay"
+    }
+}

@@ -1,6 +1,7 @@
 package com.lying.variousequipment.item.bauble;
 
 import java.util.Optional;
+import java.util.UUID;
 
 import javax.annotation.Nonnull;
 
@@ -10,6 +11,7 @@ import com.lying.variousequipment.init.VEItems;
 import com.lying.variousequipment.item.IEventListenerItem;
 import com.lying.variousequipment.reference.Reference;
 import com.lying.variousoddities.api.event.GatherAbilitiesEvent;
+import com.lying.variousoddities.capabilities.LivingData;
 import com.lying.variousoddities.species.abilities.AbilityBlind;
 import com.lying.variousoddities.species.abilities.AbilityRegistry;
 import com.mojang.blaze3d.matrix.MatrixStack;
@@ -30,14 +32,16 @@ import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.eventbus.api.IEventBus;
 import top.theillusivec4.curios.api.CuriosApi;
-import top.theillusivec4.curios.api.type.capability.ICurioItem;
 
-public class ItemBlindfold extends ArmorItem implements ICurioItem, IEventListenerItem
+public class ItemBlindfold extends ArmorItem implements ICurioAbilityItem, IEventListenerItem
 {
+	public static final UUID BLINDFOLD_UUID = UUID.fromString("4d75daeb-e3a2-4e1f-ab8a-82fd5f553ec2");
+	
 	@OnlyIn(Dist.CLIENT)
 	private BipedModel<LivingEntity> model;
 	
@@ -51,32 +55,42 @@ public class ItemBlindfold extends ArmorItem implements ICurioItem, IEventListen
 		bus.addListener(this::onAbilityGather);
 	}
 	
-	public void onAbilityGather(GatherAbilitiesEvent event)
+	public boolean shouldAddAbilitiesTo(LivingEntity entity)
 	{
-		if(event.getEntityLiving() == null)
-			return;
-		
-		if(!event.hasAbility(AbilityBlind.REGISTRY_NAME))
+		ItemStack headStack = entity.getItemStackFromSlot(EquipmentSlotType.HEAD);
+		boolean addBlindness = headStack != null && !headStack.isEmpty() && headStack.getItem() == VEItems.BLINDFOLD;
+		if(!addBlindness)
 		{
-			LivingEntity entity = event.getEntityLiving();
-			
-			// FIXME Temp solution to world load crashes
-			try
-			{
-				ItemStack headStack = entity.getItemStackFromSlot(EquipmentSlotType.HEAD);
-				boolean addBlindness = headStack != null && !headStack.isEmpty() && headStack.getItem() == VEItems.BLINDFOLD;
-				if(!addBlindness)
-				{
-					Optional<ImmutableTriple<String, Integer, ItemStack>> blindfoldCurio = CuriosApi.getCuriosHelper().findEquippedCurio(VEItems.BLINDFOLD, entity);
-					if(blindfoldCurio != null && blindfoldCurio.isPresent())
-						addBlindness = true;
-				}
-				
-				if(addBlindness)
-					event.addAbility(AbilityRegistry.getAbility(AbilityBlind.REGISTRY_NAME, new CompoundNBT()));
-			}
-			catch(Exception e){ }
+			Optional<ImmutableTriple<String, Integer, ItemStack>> blindfoldCurio = CuriosApi.getCuriosHelper().findEquippedCurio(VEItems.BLINDFOLD, entity);
+			if(blindfoldCurio != null && blindfoldCurio.isPresent())
+				addBlindness = true;
 		}
+		return addBlindness;
+	}
+	
+	public void addAbilitiesTo(GatherAbilitiesEvent event)
+	{
+		event.addAbility(AbilityRegistry.getAbility(AbilityBlind.REGISTRY_NAME, new CompoundNBT()).setSourceId(BLINDFOLD_UUID));
+	}
+	
+	public void inventoryTick(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected)
+	{
+		if(entityIn instanceof LivingEntity)
+		{
+			LivingEntity living = (LivingEntity)entityIn;
+			if(living.hasItemInSlot(EquipmentSlotType.HEAD) && living.getItemStackFromSlot(EquipmentSlotType.HEAD).getItem() == VEItems.BLINDFOLD)
+			{
+				if(!hasBlindAbility(living, false))
+					LivingData.forEntity(living).getAbilities().markForRecache();
+			}
+			else if(hasBlindAbility(living, true) && !CuriosApi.getCuriosHelper().findEquippedCurio(this, living).isPresent())
+				LivingData.forEntity(living).getAbilities().markForRecache();
+		}
+	}
+	
+	private boolean hasBlindAbility(LivingEntity living, boolean fromBlindfold)
+	{
+		return AbilityRegistry.hasAbility(living, AbilityBlind.REGISTRY_NAME) && (!fromBlindfold || AbilityRegistry.getAbilityByName(living, AbilityBlind.REGISTRY_NAME).getSourceId().equals(BLINDFOLD_UUID));
 	}
 	
 	public boolean isEnderMask(ItemStack stack, PlayerEntity player, EndermanEntity endermanEntity)

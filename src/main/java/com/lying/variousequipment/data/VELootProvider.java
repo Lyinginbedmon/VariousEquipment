@@ -78,6 +78,27 @@ public class VELootProvider extends LootTableProvider
                 .rolls(ConstantRange.of(1))
                 )
         );
+        
+        addChestLootTable(VELootTables.COSMETICS.getPath(), LootTable.builder().addLootPool(LootPool.builder().name("main")
+        		.rolls(ConstantRange.of(1))
+        			.addEntry(itemEntry(VEItems.EARS_WOLF, 5))
+        			.addEntry(itemEntry(VEItems.ANTENNA, 5))
+        			.addEntry(itemEntry(VEItems.GILLS_AXOLOTL, 5))
+        			.addEntry(itemEntry(VEItems.HORNS_DEER, 5))
+        			.addEntry(itemEntry(VEItems.HORNS_HARTEBEEST, 5))
+        			.addEntry(itemEntry(VEItems.HORNS_RAM, 5))
+        			.addEntry(itemEntry(VEItems.TAIL_WOLF, 5))
+        			.addEntry(itemEntry(VEItems.TAIL_FOX, 3))
+        			.addEntry(itemEntry(VEItems.TAIL_KIRIN, 1))
+        			.addEntry(itemEntry(VEItems.TAIL_KOBOLD, 5))
+        			.addEntry(itemEntry(VEItems.TAIL_RAT, 5))
+        			.addEntry(itemEntry(VEItems.TAIL_DRAGON, 1))
+        			.addEntry(itemEntry(VEItems.TAIL_DEVIL, 3))
+        			.addEntry(itemEntry(VEItems.TAIL_RABBIT, 5))
+        			.addEntry(itemEntry(VEItems.TAIL_HORSE, 5))
+        			.addEntry(itemEntry(VEItems.TAIL_DRAGONFLY, 5))
+        			.addEntry(itemEntry(VEItems.TAIL_ANT, 5))
+        			.addEntry(itemEntry(VEItems.TAIL_LIZARD, 5))));
     }
     
     private void addChestLootTables()
@@ -97,7 +118,12 @@ public class VELootProvider extends LootTableProvider
                         .acceptCondition(RandomChance.builder(0.35F))
                         .addEntry(tableEntry(VELootTables.MAGIC_ITEM_MINOR, 8))
                         .addEntry(tableEntry(VELootTables.MAGIC_ITEM_MEDIUM, 5))
-                )
+                ).addLootPool(
+                LootPool.builder()
+                		.name("cosmetics")
+                		.rolls(ConstantRange.of(1))
+                		.acceptCondition(RandomChance.builder(0.1F))
+                		.addEntry(tableEntry(VELootTables.COSMETICS, 1)))
         );
         addChestLootTable("inject/chests/abandoned_mineshaft", LootTable.builder().addLootPool(
                 LootPool.builder()
@@ -107,7 +133,12 @@ public class VELootProvider extends LootTableProvider
                         .addEntry(tableEntry(VELootTables.MAGIC_ITEM_MINOR, 8))
                         .addEntry(tableEntry(VELootTables.MAGIC_ITEM_MEDIUM, 5))
                         .addEntry(tableEntry(VELootTables.MAGIC_ITEM_MAJOR, 1))
-                )
+                ).addLootPool(
+                LootPool.builder()
+                		.name("cosmetics")
+                		.rolls(ConstantRange.of(1))
+                		.acceptCondition(RandomChance.builder(0.1F))
+                		.addEntry(tableEntry(VELootTables.COSMETICS, 1)))
         );
         addChestLootTable("inject/chests/bastion_hoglin_stable", LootTable.builder().addLootPool(
                 LootPool.builder()
@@ -137,7 +168,12 @@ public class VELootProvider extends LootTableProvider
                         .addEntry(tableEntry(VELootTables.MAGIC_ITEM_MINOR, 8))
                         .addEntry(tableEntry(VELootTables.MAGIC_ITEM_MEDIUM, 5))
                         .addEntry(tableEntry(VELootTables.MAGIC_ITEM_MAJOR, 1))
-                )
+                ).addLootPool(
+                LootPool.builder()
+                		.name("cosmetics")
+                		.rolls(ConstantRange.of(1))
+                		.acceptCondition(RandomChance.builder(0.1F))
+                		.addEntry(tableEntry(VELootTables.COSMETICS, 1)))
         );
         addChestLootTable("inject/chests/desert_pyramid", LootTable.builder().addLootPool(
                 LootPool.builder()
@@ -147,7 +183,12 @@ public class VELootProvider extends LootTableProvider
                         .addEntry(tableEntry(VELootTables.MAGIC_ITEM_MINOR, 8))
                         .addEntry(tableEntry(VELootTables.MAGIC_ITEM_MEDIUM, 5))
                         .addEntry(tableEntry(VELootTables.MAGIC_ITEM_MAJOR, 1))
-                )
+                ).addLootPool(
+                LootPool.builder()
+                		.name("cosmetics")
+                		.rolls(ConstantRange.of(1))
+                		.acceptCondition(RandomChance.builder(0.1F))
+                		.addEntry(tableEntry(VELootTables.COSMETICS, 1)))
         );
         addChestLootTable("inject/chests/end_city_treasure", LootTable.builder().addLootPool(
                 LootPool.builder()
@@ -192,7 +233,12 @@ public class VELootProvider extends LootTableProvider
                         .rolls(ConstantRange.of(1))
                         .acceptCondition(RandomChance.builder(0.25F))
                         .addEntry(tableEntry(VELootTables.MAGIC_ITEM_MINOR, 1))
-                )
+                ).addLootPool(
+                LootPool.builder()
+                		.name("cosmetics")
+                		.rolls(ConstantRange.of(1))
+                		.acceptCondition(RandomChance.builder(0.1F))
+                		.addEntry(tableEntry(VELootTables.COSMETICS, 1)))
         );
         addChestLootTable("inject/chests/shipwreck_treasure", LootTable.builder().addLootPool(
                 LootPool.builder()
@@ -201,7 +247,12 @@ public class VELootProvider extends LootTableProvider
                         .acceptCondition(RandomChance.builder(0.25F))
                         .addEntry(tableEntry(VELootTables.MAGIC_ITEM_MINOR, 8))
                         .addEntry(tableEntry(VELootTables.MAGIC_ITEM_MEDIUM, 5))
-                )
+                ).addLootPool(
+                LootPool.builder()
+                		.name("cosmetics")
+                		.rolls(ConstantRange.of(1))
+                		.acceptCondition(RandomChance.builder(0.1F))
+                		.addEntry(tableEntry(VELootTables.COSMETICS, 1)))
         );
         addChestLootTable("inject/chests/stronghold_corridor", LootTable.builder().addLootPool(
                 LootPool.builder()
@@ -217,7 +268,12 @@ public class VELootProvider extends LootTableProvider
                         .rolls(ConstantRange.of(1))
                         .acceptCondition(RandomChance.builder(0.65F))
                         .addEntry(tableEntry(VELootTables.MAGIC_ITEM_MINOR, 1))
-                )
+                ).addLootPool(
+                LootPool.builder()
+                		.name("cosmetics")
+                		.rolls(ConstantRange.of(1))
+                		.acceptCondition(RandomChance.builder(0.1F))
+                		.addEntry(tableEntry(VELootTables.COSMETICS, 1)))
         );
         addChestLootTable("inject/chests/woodland_mansion", LootTable.builder().addLootPool(
                 LootPool.builder()
@@ -225,6 +281,14 @@ public class VELootProvider extends LootTableProvider
                         .rolls(ConstantRange.of(1))
                         .acceptCondition(RandomChance.builder(0.25F))
                         .addEntry(tableEntry(VELootTables.MAGIC_ITEM_MINOR, 1))
+                )
+        );
+        addChestLootTable("inject/gameplay/fishing/treasure", LootTable.builder().addLootPool(
+                LootPool.builder()
+                		.name("cosmetics")
+                		.rolls(ConstantRange.of(1))
+                		.acceptCondition(RandomChance.builder(0.1F))
+                		.addEntry(tableEntry(VELootTables.COSMETICS, 1))
                 )
         );
     }

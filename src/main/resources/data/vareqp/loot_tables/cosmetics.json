@@ -1,0 +1,50 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "name": "main",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "weight": 5,
+          "name": "vareqp:ears_wolf"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 5,
+          "name": "vareqp:horns_deer"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 5,
+          "name": "vareqp:horns_hartebeest"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 5,
+          "name": "vareqp:horns_ram"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 5,
+          "name": "vareqp:tail_wolf"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 3,
+          "name": "vareqp:tail_fox"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "vareqp:tail_kirin"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 5,
+          "name": "vareqp:tail_kobold"
+        }
+      ]
+    }
+  ]
+}

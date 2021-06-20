@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "vareqp:diamond_holy_symbol",
+    "vareqp:golden_holy_symbol",
+    "vareqp:iron_holy_symbol",
+    "vareqp:stone_holy_symbol",
+    "vareqp:wooden_holy_symbol"
+  ]
+}

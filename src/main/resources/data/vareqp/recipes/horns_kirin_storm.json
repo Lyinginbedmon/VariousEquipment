@@ -1,0 +1,17 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients":
+    [
+        {
+            "item": "vareqp:horns_kirin"
+        },
+        {
+        	"item": "minecraft:nether_star"
+        }
+    ],
+    "result": {
+        "item": "vareqp:horns_kirin_storm",
+        "count": 1
+    },
+    "group": "horns_kirin_storm"
+}

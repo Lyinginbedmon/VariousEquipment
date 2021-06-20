@@ -15,6 +15,8 @@ import net.minecraftforge.event.LootTableLoadEvent;
 public class VELootTables
 {
 	private static final List<String> INJECTED_LOOT_TABLES = Lists.newArrayList();
+	
+	public static final ResourceLocation COSMETICS			= new ResourceLocation(Reference.ModInfo.MOD_ID, "cosmetics");
 	public static final ResourceLocation MAGIC_ITEM_MINOR	= new ResourceLocation(Reference.ModInfo.MOD_ID, "magic_item_minor");
 	public static final ResourceLocation MAGIC_ITEM_MEDIUM	= new ResourceLocation(Reference.ModInfo.MOD_ID, "magic_item_medium");
 	public static final ResourceLocation MAGIC_ITEM_MAJOR	= new ResourceLocation(Reference.ModInfo.MOD_ID, "magic_item_major");
@@ -67,5 +69,6 @@ public class VELootTables
 		INJECTED_LOOT_TABLES.add("chests/stronghold_corridor");
 		INJECTED_LOOT_TABLES.add("chests/underwater_ruin_big");
 		INJECTED_LOOT_TABLES.add("chests/chests/woodland_mansion");
+		INJECTED_LOOT_TABLES.add("gameplay/fishing/treasure");
 	}
 }
