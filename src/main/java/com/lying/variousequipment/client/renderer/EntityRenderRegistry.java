@@ -19,7 +19,7 @@ public class EntityRenderRegistry
 		if(ConfigVO.GENERAL.verboseLogs())
 			VariousEquipment.log.info("Registering renderers");
 		
-//		registerRenderer(VOEntities.SPELL, new EntitySpellRenderer.RenderFactory());
+//		registerRenderer(VEEntities.TOSSED_VIAL, new EntityVialRenderer.RenderFactory());
 	}
 	
 	@SuppressWarnings("unused")

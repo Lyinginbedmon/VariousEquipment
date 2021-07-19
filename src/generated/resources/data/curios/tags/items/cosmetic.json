@@ -1,8 +1,10 @@
 {
   "replace": false,
   "values": [
+    "vareqp:costume",
     "vareqp:ears_wolf",
     "vareqp:ears_cat",
+    "vareqp:ears_rabbit",
     "vareqp:gills_axolotl",
     "vareqp:ant_antenna",
     "vareqp:horns_deer",

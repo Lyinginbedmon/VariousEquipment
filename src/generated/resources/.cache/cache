@@ -1,8 +1,8 @@
 142affddafccf5247343ed9b1540ea80e2884e38 data/curios/tags/items/back.json
-daa4cd2866be4af5b9416deb4d2dcdcc5c5dafb8 data/curios/tags/items/cosmetic.json
-2a286b8604de08e42071eff9b862317c35d16df3 data/curios/tags/items/head.json
+00772295a0ac97e923aa4b159694bfbaff569062 data/curios/tags/items/cosmetic.json
+848647fb5e568d77480343d2cd0685d883f4fb2d data/curios/tags/items/head.json
 f580da41de0d8f1f742f2e12bde9cc1246251d31 data/curios/tags/items/necklace.json
-0db67c0615a611629b4d3ba782bf6753bce5ef2d data/vareqp/loot_tables/cosmetics.json
+a8cffe4d2db913b668c35153ad0d0c81f79f71f4 data/vareqp/loot_tables/cosmetics.json
 0ebf53aff41880a8316436eddb7be24e96d468ce data/vareqp/loot_tables/inject/chests/abandoned_mineshaft.json
 8d9f2ed2590c2da6c2b6bd1a1bcfd9f140d8dc32 data/vareqp/loot_tables/inject/chests/bastion_hoglin_stable.json
 fee33d91d1948b227693ccc08856646c689e4397 data/vareqp/loot_tables/inject/chests/bastion_treasure.json
@@ -22,9 +22,10 @@ cd13d4e54dc0f8826180825a8e695b266e58cfe1 data/vareqp/loot_tables/inject/chests/w
 69323057d3557341a0d2589f7cc3ae25154d827f data/vareqp/loot_tables/inject/gameplay/fishing/treasure.json
 da593954ab613ac2ab3baf9f8acb35137faed7cb data/vareqp/loot_tables/magic_item_major.json
 a7474812f6cb42d9465591806fc75f8a119c8279 data/vareqp/loot_tables/magic_item_medium.json
-455b3653993623b2abbf4fc41cc06043a2522c40 data/vareqp/loot_tables/magic_item_minor.json
+dd9ebee96c64a64fb72fe4213718f2c4c88ad282 data/vareqp/loot_tables/magic_item_minor.json
 377f1221d739ae532e0c0a99a4ab6bf3ffa010f4 data/vareqp/recipes/dynamic/antennae.json
 2fb3fce72d4f7105239ed4415adb10ff6821e28f data/vareqp/recipes/dynamic/coat_item.json
+744b5f45d7c10bcd7f795927ffde7d5c95349ff2 data/vareqp/recipes/dynamic/costume.json
 3d2e03daf142861c04a9d39079f8994263718963 data/vareqp/recipes/dynamic/holy_water.json
 9afa8199f4ecfa5131de95b3cabcca809198f763 data/vareqp/recipes/dynamic/kitsune_tail.json
 e4b86e41fb54dc07bf809b8a2e2c5550fd4503c6 data/vareqp/tags/items/holy_symbol.json

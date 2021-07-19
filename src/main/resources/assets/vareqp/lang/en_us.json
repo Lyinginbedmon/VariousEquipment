@@ -10,6 +10,7 @@
 	"item.vareqp.hat_fey_mask": "Court Fey Mask",
 	"item.vareqp.ears_wolf": "Wolf Ears",
 	"item.vareqp.ears_cat": "Cat Ears",
+	"item.vareqp.ears_rabbit": "Rabbit Ears",
 	"item.vareqp.gills_axolotl": "Axolotl Gills",
 	"item.vareqp.antenna.single": "Antenna",
 	"item.vareqp.antenna.geniculate": "Ant Antennae",
@@ -35,6 +36,7 @@
 	"item.vareqp.tail_ant": "Ant Abdommen",
 	"item.vareqp.tail_lizard": "Lizard Tail",
 	"item.vareqp.tail_lizard_barbed": "Barbed Lizard Tail",
+	"item.vareqp.costume": "Costume",
 	"item.vareqp.blindfold": "Blindfold",
 	"item.vareqp.cosmetic_blindfold": "Cosmetic Blindfold",
 	"item.vareqp.gold_ring": "Gold Ring",
@@ -51,6 +53,8 @@
 	"item.vareqp.diamond_holy_symbol": "Diamond Holy Symbol",
 	"item.vareqp.silversheen": "Silversheen",
 	"item.vareqp.vial_holy": "Holy Water",
+	"item.vareqp.stone_salve": "Stone Salve",
+	"item.vareqp.stone_salve.tooltip": "Cures petrification when applied to self or others.",
 	
 	"enchantment.vareqp.silversheen": "Silversheen"
 }

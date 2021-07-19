@@ -2,6 +2,7 @@ package com.lying.variousequipment.item.bauble;
 
 import com.lying.variousequipment.client.model.bauble.ModelAntenna;
 import com.lying.variousequipment.client.model.bauble.ModelEarsCat;
+import com.lying.variousequipment.client.model.bauble.ModelEarsRabbit;
 import com.lying.variousequipment.client.model.bauble.ModelEarsWolf;
 import com.lying.variousequipment.client.model.bauble.ModelGillsAxolotl;
 import com.lying.variousequipment.client.model.bauble.ModelHorns;
@@ -232,6 +233,19 @@ public abstract class ItemHorns extends ItemCosmetic implements IDyeableArmorIte
 		public ModelHorns<LivingEntity> getModel(){ return new ModelEarsCat<LivingEntity>(); }
 		
 		protected int getDefaultColor(){ return 15840099; }
+	}
+	
+	public static class Rabbit extends Wolf
+	{
+		public Rabbit(Properties properties)
+		{
+			super(properties);
+		}
+		
+		@OnlyIn(Dist.CLIENT)
+		public ModelHorns<LivingEntity> getModel(){ return new ModelEarsRabbit<LivingEntity>(); }
+		
+		protected int getDefaultColor(){ return 9731426; }
 	}
 	
 	public static class Axolotl extends ItemHorns

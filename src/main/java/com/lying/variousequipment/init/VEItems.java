@@ -1,17 +1,38 @@
 package com.lying.variousequipment.init;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import com.lying.variousequipment.data.recipes.*;
-import com.lying.variousequipment.item.*;
+import com.google.common.collect.Lists;
+import com.lying.variousequipment.data.recipes.AntennaRecipe;
+import com.lying.variousequipment.data.recipes.CoatItemRecipe;
+import com.lying.variousequipment.data.recipes.CostumeRecipe;
+import com.lying.variousequipment.data.recipes.HolyWaterRecipe;
+import com.lying.variousequipment.data.recipes.KitsuneTailRecipe;
+import com.lying.variousequipment.item.IEventListenerItem;
+import com.lying.variousequipment.item.ItemCoating;
+import com.lying.variousequipment.item.ItemCrowbar;
+import com.lying.variousequipment.item.ItemFoodSpoon;
+import com.lying.variousequipment.item.ItemHatArchfey;
+import com.lying.variousequipment.item.ItemHatFeyMask;
+import com.lying.variousequipment.item.ItemHatHood;
+import com.lying.variousequipment.item.ItemHatWitch;
+import com.lying.variousequipment.item.ItemHolyWater;
+import com.lying.variousequipment.item.ItemSalveStone;
+import com.lying.variousequipment.item.ItemSymbol;
 import com.lying.variousequipment.item.VEItemGroup;
-import com.lying.variousequipment.item.bauble.*;
+import com.lying.variousequipment.item.bauble.ItemBlindfold;
+import com.lying.variousequipment.item.bauble.ItemCostume;
+import com.lying.variousequipment.item.bauble.ItemHorns;
+import com.lying.variousequipment.item.bauble.ItemLuckstone;
+import com.lying.variousequipment.item.bauble.ItemRing;
+import com.lying.variousequipment.item.bauble.ItemScarabGolem;
+import com.lying.variousequipment.item.bauble.ItemTails;
 import com.lying.variousequipment.reference.Reference;
 import com.lying.variousoddities.init.VOEnchantments;
 import com.lying.variousoddities.item.VOItemGroup;
 
 import net.minecraft.item.BlockItem;
+import net.minecraft.item.IDyeableArmorItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemModelsProperties;
 import net.minecraft.item.ItemTier;
@@ -25,14 +46,17 @@ import net.minecraftforge.registries.IForgeRegistry;
 
 public class VEItems
 {
-	private static final List<Item> ITEMS = new ArrayList<>();
-	private static final List<BlockItem> BLOCK_ITEMS = new ArrayList<>();
+	private static final List<Item> ITEMS = Lists.newArrayList();
+	private static final List<BlockItem> BLOCK_ITEMS = Lists.newArrayList();
+	
+	public static final List<Item> DYEABLES = Lists.newArrayList();
 	
 	// Items
 	public static final Item HAT_ARCHFEY	= register("hat_archfey", new ItemHatArchfey(new Item.Properties().group(VEItemGroup.PROPS)));
 	public static final Item HAT_MASK		= register("hat_fey_mask", new ItemHatFeyMask(new Item.Properties().group(VEItemGroup.PROPS)));
 	public static final Item EARS_WOLF		= register("ears_wolf", new ItemHorns.Wolf(new Item.Properties().group(VEItemGroup.PROPS)));
 	public static final Item EARS_CAT		= register("ears_cat", new ItemHorns.Cat(new Item.Properties().group(VEItemGroup.PROPS)));
+	public static final Item EARS_RABBIT	= register("ears_rabbit", new ItemHorns.Rabbit(new Item.Properties().group(VEItemGroup.PROPS)));
 	public static final Item GILLS_AXOLOTL	= register("gills_axolotl", new ItemHorns.Axolotl(new Item.Properties().group(VEItemGroup.PROPS)));
 	public static final Item ANTENNA		= register("ant_antenna", new ItemHorns.Antenna(new Item.Properties().group(VEItemGroup.PROPS)));
 	public static final Item HORNS_RAM		= register("horns_ram", new ItemHorns.Ram(new Item.Properties().group(VEItemGroup.PROPS)));
@@ -55,6 +79,7 @@ public class VEItems
 	public static final Item TAIL_ANT		= register("tail_ant", new ItemTails.Ant(new Item.Properties().group(VEItemGroup.PROPS)));
 	public static final Item TAIL_LIZARD	= register("tail_lizard", new ItemTails.Lizard(new Item.Properties().group(VEItemGroup.PROPS)));
 	public static final Item TAIL_LIZARD2	= register("tail_lizard_barbed", new ItemTails.Lizard2(new Item.Properties().group(VEItemGroup.PROPS)));
+	public static final Item COSTUME		= register("costume", new ItemCostume(new Item.Properties()));
 	
 	public static final Item HAT_WITCH		= register("hat_witch", new ItemHatWitch(new Item.Properties().group(VEItemGroup.GEAR)));
 	public static final Item HAT_HOOD		= register("hat_hood", new ItemHatHood(new Item.Properties().group(VEItemGroup.GEAR)));
@@ -74,11 +99,16 @@ public class VEItems
 	public static final Item STONE_LUCK		= register("luckstone", new ItemLuckstone(new Item.Properties().group(VOItemGroup.LOOT)));
 	public static final Item FOOD_SPOON		= register("sustaining_spoon", new ItemFoodSpoon(new Item.Properties().group(VOItemGroup.LOOT)));
 	public static final Item COATING_SILVER	= register("silversheen", new ItemCoating(VOEnchantments.SILVERSHEEN, new Item.Properties().group(VOItemGroup.LOOT)));
+	public static final Item SALVE_STONE	= register("stone_salve", new ItemSalveStone(new Item.Properties().group(VOItemGroup.LOOT)));
 	
 	public static Item register(String nameIn, Item itemIn)
 	{
 		itemIn.setRegistryName(Reference.ModInfo.MOD_PREFIX+nameIn);
 		ITEMS.add(itemIn);
+		
+		if(itemIn instanceof IDyeableArmorItem)
+			DYEABLES.add(itemIn);
+		
 		return itemIn;
 	}
 	
@@ -108,5 +138,6 @@ public class VEItems
     	registry.register(HolyWaterRecipe.SERIALIZER.setRegistryName(new ResourceLocation(Reference.ModInfo.MOD_ID, "holy_water")));
     	registry.register(KitsuneTailRecipe.SERIALIZER.setRegistryName(new ResourceLocation(Reference.ModInfo.MOD_ID, "kitsune_tail")));
     	registry.register(AntennaRecipe.SERIALIZER.setRegistryName(new ResourceLocation(Reference.ModInfo.MOD_ID, "antennae")));
+    	registry.register(CostumeRecipe.SERIALIZER.setRegistryName(new ResourceLocation(Reference.ModInfo.MOD_ID, "costume")));
     }
 }

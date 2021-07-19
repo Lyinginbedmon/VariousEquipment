@@ -53,6 +53,7 @@ public class VEItemTags extends ItemTagsProvider
 				VEItems.BLINDFOLD_FAKE,
 				VEItems.EARS_WOLF,
 				VEItems.EARS_CAT,
+				VEItems.EARS_RABBIT,
 				VEItems.ANTENNA,
 				VEItems.GILLS_AXOLOTL,
 				VEItems.HORNS_DEER,
@@ -89,8 +90,10 @@ public class VEItemTags extends ItemTagsProvider
 				);
 		
 		getOrCreateBuilder(COSMETIC).add(
+				VEItems.COSTUME,
 				VEItems.EARS_WOLF,
 				VEItems.EARS_CAT,
+				VEItems.EARS_RABBIT,
 				VEItems.GILLS_AXOLOTL,
 				VEItems.ANTENNA,
 				VEItems.HORNS_DEER,

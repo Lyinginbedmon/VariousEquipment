@@ -24,10 +24,12 @@ import net.minecraft.loot.LootParameterSets;
 import net.minecraft.loot.LootPool;
 import net.minecraft.loot.LootTable;
 import net.minecraft.loot.LootTableManager;
+import net.minecraft.loot.RandomValueRange;
 import net.minecraft.loot.StandaloneLootEntry;
 import net.minecraft.loot.TableLootEntry;
 import net.minecraft.loot.ValidationTracker;
 import net.minecraft.loot.conditions.RandomChance;
+import net.minecraft.loot.functions.SetCount;
 import net.minecraft.resources.ResourcePackType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -65,6 +67,7 @@ public class VELootProvider extends LootTableProvider
                     .addEntry(itemEntry(VEItems.SCARAB_GOLEM, 3))
                     .addEntry(itemEntry(VEItems.FOOD_SPOON, 5))
                     .addEntry(itemEntry(VEItems.COATING_SILVER, 8))
+                    .addEntry(itemEntry(VEItems.SALVE_STONE, 12).acceptFunction(SetCount.builder(RandomValueRange.of(1F, 4F))))
                 )
         );
         
@@ -82,6 +85,7 @@ public class VELootProvider extends LootTableProvider
         addChestLootTable(VELootTables.COSMETICS.getPath(), LootTable.builder().addLootPool(LootPool.builder().name("main")
         		.rolls(ConstantRange.of(1))
         			.addEntry(itemEntry(VEItems.EARS_WOLF, 5))
+        			.addEntry(itemEntry(VEItems.EARS_RABBIT, 5))
         			.addEntry(itemEntry(VEItems.ANTENNA, 5))
         			.addEntry(itemEntry(VEItems.GILLS_AXOLOTL, 5))
         			.addEntry(itemEntry(VEItems.HORNS_DEER, 5))
