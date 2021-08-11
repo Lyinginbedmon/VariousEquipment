@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:entity",
+  "pools": [
+    {
+      "name": "main",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "weight": 5,
+          "name": "vareqp:tail_horse"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "vareqp:horns_deer"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "vareqp:horns_hartebeest"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:random_chance",
+          "chance": 0.05
+        },
+        {
+          "condition": "minecraft:killed_by_player"
+        }
+      ]
+    }
+  ]
+}

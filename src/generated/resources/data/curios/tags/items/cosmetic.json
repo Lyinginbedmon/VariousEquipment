@@ -26,6 +26,13 @@
     "vareqp:tail_dragonfly",
     "vareqp:tail_ant",
     "vareqp:tail_lizard",
-    "vareqp:tail_lizard_barbed"
+    "vareqp:tail_lizard_barbed",
+    "vareqp:nose_pig",
+    "vareqp:nose_piglin",
+    "vareqp:ears_piglin",
+    "vareqp:nose_villager",
+    "vareqp:nose_witch",
+    "vareqp:ears_pointy",
+    "vareqp:ears_goblin"
   ]
 }

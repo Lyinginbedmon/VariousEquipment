@@ -1,0 +1,8 @@
+{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "vareqp:items/nose_piglin",
+        "layer1": "vareqp:items/nose_piglin_overlay",
+        "layer2": "vareqp:items/horns_head_overlay"
+    }
+}

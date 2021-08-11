@@ -8,7 +8,7 @@ import java.util.Random;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
-import com.lying.variousequipment.entity.EntityTossedVial;
+import com.lying.variousequipment.entity.*;
 import com.lying.variousequipment.reference.Reference;
 
 import net.minecraft.entity.Entity;
@@ -36,6 +36,7 @@ public class VEEntities
     public static final List<EntityType<?>> ENTITIES = Lists.newArrayList();
 	
 	public static final EntityType<EntityTossedVial> TOSSED_VIAL	= register("tossed_vial", EntityTossedVial::new, EntityClassification.MISC, 0.3125F, 0.3125F, 4);
+	public static final EntityType<EntityCaltrop> CALTROP			= register("caltrop", EntityCaltrop::new, EntityClassification.MISC, 0.3125F, 0.3125F, 4);
     
 	private static <T extends Entity> EntityType<T> register(String name, EntityType.IFactory<T> factory, EntityClassification type, float width, float height, int trackingRange)
 	{

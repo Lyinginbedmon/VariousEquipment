@@ -13,6 +13,21 @@
         {
           "type": "minecraft:item",
           "weight": 5,
+          "name": "vareqp:ears_rabbit"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 5,
+          "name": "vareqp:ant_antenna"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 5,
+          "name": "vareqp:gills_axolotl"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 5,
           "name": "vareqp:horns_deer"
         },
         {
@@ -43,6 +58,60 @@
           "type": "minecraft:item",
           "weight": 5,
           "name": "vareqp:tail_kobold"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 5,
+          "name": "vareqp:tail_rat"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "vareqp:tail_dragon"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 3,
+          "name": "vareqp:tail_devil"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 5,
+          "name": "vareqp:tail_rabbit"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 5,
+          "name": "vareqp:tail_horse"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 5,
+          "name": "vareqp:tail_dragonfly"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 5,
+          "name": "vareqp:tail_ant"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 5,
+          "name": "vareqp:tail_lizard"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 5,
+          "name": "vareqp:ears_piglin"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 5,
+          "name": "vareqp:nose_pig"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 5,
+          "name": "vareqp:nose_villager"
         }
       ]
     }

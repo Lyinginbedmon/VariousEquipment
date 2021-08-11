@@ -1,2 +1,1 @@
-Added holy water, which damages & weakens undead and evil creatures whilst healing and empowering holy creatures
-Updated references to creature types to reflect the recent reworking in Various Oddities
+Added screen blocks and missing texture block

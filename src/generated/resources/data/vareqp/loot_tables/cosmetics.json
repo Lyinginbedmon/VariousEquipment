@@ -97,6 +97,21 @@
           "type": "minecraft:item",
           "weight": 5,
           "name": "vareqp:tail_lizard"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 5,
+          "name": "vareqp:ears_piglin"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 5,
+          "name": "vareqp:nose_pig"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 5,
+          "name": "vareqp:nose_villager"
         }
       ]
     }

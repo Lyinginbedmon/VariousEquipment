@@ -14,7 +14,7 @@ import net.minecraftforge.event.LootTableLoadEvent;
 
 public class VELootTables
 {
-	private static final List<String> INJECTED_LOOT_TABLES = Lists.newArrayList();
+	public static final List<String> INJECTED_LOOT_TABLES = Lists.newArrayList();
 	
 	public static final ResourceLocation COSMETICS			= new ResourceLocation(Reference.ModInfo.MOD_ID, "cosmetics");
 	public static final ResourceLocation MAGIC_ITEM_MINOR	= new ResourceLocation(Reference.ModInfo.MOD_ID, "magic_item_minor");
@@ -69,6 +69,26 @@ public class VELootTables
 		INJECTED_LOOT_TABLES.add("chests/stronghold_corridor");
 		INJECTED_LOOT_TABLES.add("chests/underwater_ruin_big");
 		INJECTED_LOOT_TABLES.add("chests/chests/woodland_mansion");
+		INJECTED_LOOT_TABLES.add("entities/pig");
+		INJECTED_LOOT_TABLES.add("entities/piglin");
+		INJECTED_LOOT_TABLES.add("entities/piglin_brute");
+		INJECTED_LOOT_TABLES.add("entities/zombified_piglin");
+		INJECTED_LOOT_TABLES.add("entities/wolf");
+		INJECTED_LOOT_TABLES.add("entities/cat");
+		INJECTED_LOOT_TABLES.add("entities/ocelot");
+		INJECTED_LOOT_TABLES.add("entities/witch");
+		INJECTED_LOOT_TABLES.add("entities/villager");
+		INJECTED_LOOT_TABLES.add("entities/illusioner");
+		INJECTED_LOOT_TABLES.add("entities/evoker");
+		INJECTED_LOOT_TABLES.add("entities/vindicator");
+		INJECTED_LOOT_TABLES.add("entities/wandering_trader");
+		INJECTED_LOOT_TABLES.add("entities/rabbit");
+		INJECTED_LOOT_TABLES.add("entities/fox");
+		INJECTED_LOOT_TABLES.add("entities/ender_dragon");
+		INJECTED_LOOT_TABLES.add("entities/horse");
+		INJECTED_LOOT_TABLES.add("entities/sheep");
 		INJECTED_LOOT_TABLES.add("gameplay/fishing/treasure");
+		
+		INJECTED_LOOT_TABLES.add("entities/kobold");
 	}
 }

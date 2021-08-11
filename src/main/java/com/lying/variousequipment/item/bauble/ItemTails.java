@@ -14,6 +14,7 @@ import com.lying.variousequipment.client.model.bauble.ModelTailLizard;
 import com.lying.variousequipment.client.model.bauble.ModelTailRabbit;
 import com.lying.variousequipment.client.model.bauble.ModelTailRat;
 import com.lying.variousequipment.client.model.bauble.ModelTailWolf;
+import com.lying.variousequipment.item.VEItemGroup;
 import com.lying.variousequipment.reference.Reference;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
@@ -41,7 +42,7 @@ public abstract class ItemTails extends ItemCosmetic implements IDyeableArmorIte
 	
 	public ItemTails(Properties properties)
 	{
-		super(properties.maxStackSize(1).maxDamage(0));
+		super(properties.maxStackSize(1).maxDamage(0).group(VEItemGroup.PROPS));
 	}
 	
 	public int getColor(ItemStack stack)

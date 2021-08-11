@@ -60,7 +60,14 @@ public class VEItemTags extends ItemTagsProvider
 				VEItems.HORNS_HARTEBEEST,
 				VEItems.HORNS_KIRIN,
 				VEItems.HORNS_RAM,
-				VEItems.HORNS_KIRIN_STORM
+				VEItems.HORNS_KIRIN_STORM,
+				VEItems.NOSE_PIG,
+				VEItems.NOSE_PIGLIN,
+				VEItems.EARS_PIGLIN,
+				VEItems.NOSE_VILLAGER,
+				VEItems.NOSE_WITCH,
+				VEItems.EARS_ELF,
+				VEItems.EARS_GOBLIN
 				);
 		getOrCreateBuilder(NECKLACE).add(VEItems.SCARAB_GOLEM);
 		getOrCreateBuilder(BACK).add(
@@ -115,7 +122,14 @@ public class VEItemTags extends ItemTagsProvider
 				VEItems.TAIL_DRAGONFLY,
 				VEItems.TAIL_ANT,
 				VEItems.TAIL_LIZARD,
-				VEItems.TAIL_LIZARD2
+				VEItems.TAIL_LIZARD2,
+				VEItems.NOSE_PIG,
+				VEItems.NOSE_PIGLIN,
+				VEItems.EARS_PIGLIN,
+				VEItems.NOSE_VILLAGER,
+				VEItems.NOSE_WITCH,
+				VEItems.EARS_ELF,
+				VEItems.EARS_GOBLIN
 				);
 	}
 	

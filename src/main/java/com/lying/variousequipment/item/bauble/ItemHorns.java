@@ -2,6 +2,9 @@ package com.lying.variousequipment.item.bauble;
 
 import com.lying.variousequipment.client.model.bauble.ModelAntenna;
 import com.lying.variousequipment.client.model.bauble.ModelEarsCat;
+import com.lying.variousequipment.client.model.bauble.ModelEarsElf;
+import com.lying.variousequipment.client.model.bauble.ModelEarsGoblin;
+import com.lying.variousequipment.client.model.bauble.ModelEarsPiglin;
 import com.lying.variousequipment.client.model.bauble.ModelEarsRabbit;
 import com.lying.variousequipment.client.model.bauble.ModelEarsWolf;
 import com.lying.variousequipment.client.model.bauble.ModelGillsAxolotl;
@@ -9,7 +12,10 @@ import com.lying.variousequipment.client.model.bauble.ModelHorns;
 import com.lying.variousequipment.client.model.bauble.ModelHornsDeer;
 import com.lying.variousequipment.client.model.bauble.ModelHornsHartebeest;
 import com.lying.variousequipment.client.model.bauble.ModelHornsRam;
+import com.lying.variousequipment.client.model.bauble.ModelNosePig;
+import com.lying.variousequipment.client.model.bauble.ModelNoseVillager;
 import com.lying.variousequipment.init.VEItems;
+import com.lying.variousequipment.item.VEItemGroup;
 import com.lying.variousequipment.reference.Reference;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -39,7 +45,7 @@ public abstract class ItemHorns extends ItemCosmetic implements IDyeableArmorIte
 	
 	public ItemHorns(Properties properties)
 	{
-		super(properties.maxStackSize(1).maxDamage(0));
+		super(properties.maxStackSize(1).maxDamage(0).group(VEItemGroup.PROPS));
 	}
 	
 	public int getColor(ItemStack stack)
@@ -75,6 +81,33 @@ public abstract class ItemHorns extends ItemCosmetic implements IDyeableArmorIte
         float b = (float)(i & 255) / 255.0F;
         
 		horns.render(matrixStackIn, vertexBuilder, light, OverlayTexture.NO_OVERLAY, r, g, b, 1F);
+	}
+	
+	public static abstract class ItemHornsOverlay extends ItemHorns
+	{
+		public ItemHornsOverlay(Properties properties)
+		{
+			super(properties);
+		}
+		
+		@SuppressWarnings("unchecked")
+		public void render(String identifier, int index, MatrixStack matrixStackIn, IRenderTypeBuffer renderTypeBuffer,
+				int light, LivingEntity living, float limbSwing, float limbSwingAmount, float partialTicks,
+				float ageInTicks, float netHeadYaw, float headPitch, ItemStack stack)
+		{
+			if(this.model == null)
+				this.model = getModel();
+			super.render(identifier, index, matrixStackIn, renderTypeBuffer, light, living, limbSwing, limbSwingAmount, partialTicks, ageInTicks, netHeadYaw, headPitch, stack);
+			
+			ModelHorns<LivingEntity> horns = (ModelHorns<LivingEntity>)this.model;
+			ICurio.RenderHelper.followHeadRotations(living, horns.horns);
+			horns.setRotationAngles(living, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
+			IVertexBuilder vertexBuilder = ItemRenderer.getBuffer(renderTypeBuffer, horns.getRenderType(getOverlayTexture()), false, stack.hasEffect());
+			horns.render(matrixStackIn, vertexBuilder, light, OverlayTexture.NO_OVERLAY, 1F, 1F, 1F, 1F);
+		}
+		
+		@OnlyIn(Dist.CLIENT)
+		public abstract ResourceLocation getOverlayTexture();
 	}
 	
 	public static class Deer extends ItemHorns
@@ -344,5 +377,129 @@ public abstract class ItemHorns extends ItemCosmetic implements IDyeableArmorIte
 				return SINGLE;
 			}
 		}
+	}
+	
+	public static class NosePig extends ItemHorns
+	{
+		private static final ResourceLocation TEXTURE = new ResourceLocation(Reference.ModInfo.MOD_ID, "textures/models/bauble/nose_pig.png");
+		
+		public NosePig(Properties properties)
+		{
+			super(properties);
+		}
+		
+		@OnlyIn(Dist.CLIENT)
+		public ModelHorns<LivingEntity> getModel(){ return new ModelNosePig.Pig<LivingEntity>(); }
+		
+		@OnlyIn(Dist.CLIENT)
+		public ResourceLocation getTexture(ItemStack stack){ return TEXTURE; }
+		
+		public int getDefaultColor(){ return 15834776; }
+	}
+	
+	public static class NosePiglin extends ItemHornsOverlay
+	{
+		private static final ResourceLocation TEXTURE = new ResourceLocation(Reference.ModInfo.MOD_ID, "textures/models/bauble/nose_pig.png");
+		private static final ResourceLocation TEXTURE_OVERLAY = new ResourceLocation(Reference.ModInfo.MOD_ID, "textures/models/bauble/nose_pig_overlay.png");
+		
+		public NosePiglin(Properties properties)
+		{
+			super(properties);
+		}
+		
+		@OnlyIn(Dist.CLIENT)
+		public ModelHorns<LivingEntity> getModel(){ return new ModelNosePig.Piglin<LivingEntity>(); }
+		
+		@OnlyIn(Dist.CLIENT)
+		public ResourceLocation getTexture(ItemStack stack){ return TEXTURE; }
+
+		@Override
+		public ResourceLocation getOverlayTexture(){ return TEXTURE_OVERLAY; }
+		
+		public int getDefaultColor(){ return 15245428; }
+	}
+	
+	public static class Piglin extends ItemHorns
+	{
+		private static final ResourceLocation TEXTURE = new ResourceLocation(Reference.ModInfo.MOD_ID, "textures/models/bauble/ears_piglin.png");
+		
+		public Piglin(Properties properties)
+		{
+			super(properties);
+		}
+
+		@Override
+		public ModelHorns<LivingEntity> getModel(){ return new ModelEarsPiglin<LivingEntity>(); }
+
+		@Override
+		public ResourceLocation getTexture(ItemStack stack){ return TEXTURE; }
+		
+		public int getDefaultColor(){ return 15245428; }
+	}
+	
+	public static class NoseVillager extends ItemHorns
+	{
+		private static final ResourceLocation TEXTURE = new ResourceLocation(Reference.ModInfo.MOD_ID, "textures/models/bauble/nose_villager.png");
+		
+		public NoseVillager(Properties properties)
+		{
+			super(properties);
+		}
+		
+		@Override
+		public ModelHorns<LivingEntity> getModel(){ return new ModelNoseVillager<LivingEntity>(); }
+		
+		@Override
+		public ResourceLocation getTexture(ItemStack stack){ return TEXTURE; }
+		
+		public int getDefaultColor(){ return 9461315; }
+	}
+	
+	public static class NoseWitch extends NoseVillager
+	{
+		private static final ResourceLocation TEXTURE = new ResourceLocation(Reference.ModInfo.MOD_ID, "textures/models/bauble/nose_witch.png");
+		
+		public NoseWitch(Properties properties)
+		{
+			super(properties);
+		}
+		
+		@Override
+		public ModelHorns<LivingEntity> getModel(){ return new ModelNoseVillager.Witch<LivingEntity>(); }
+		
+		@Override
+		public ResourceLocation getTexture(ItemStack stack){ return TEXTURE; }
+	}
+	
+	public static class EarsElf extends ItemHorns
+	{
+		private static final ResourceLocation TEXTURE = new ResourceLocation(Reference.ModInfo.MOD_ID, "textures/models/bauble/ears_pointy.png");
+		
+		public EarsElf(Properties properties)
+		{
+			super(properties);
+		}
+		
+		public ModelHorns<LivingEntity> getModel(){ return new ModelEarsElf<LivingEntity>(); }
+		
+		public ResourceLocation getTexture(ItemStack stack){ return TEXTURE; }
+		
+		public int getDefaultColor(){ return 16764057; }
+	}
+	
+	public static class EarsGoblin extends ItemHorns
+	{
+		private static final ResourceLocation TEXTURE = new ResourceLocation(Reference.ModInfo.MOD_ID, "textures/models/bauble/ears_goblin.png");
+		
+		public EarsGoblin(Properties properties)
+		{
+			super(properties);
+		}
+		
+		public ModelHorns<LivingEntity> getModel(){ return new ModelEarsGoblin<LivingEntity>(); }
+		
+		public ResourceLocation getTexture(ItemStack stack){ return TEXTURE; }
+		
+		public int getDefaultColor(){ return 2394429; }
 	}
 }

@@ -1,4 +1,5 @@
-Fix rendering of holy water entity
+Fix rendering of holy water and caltrop entities
+Add Needled status effect to bone needle entities
 Implement basic alchemy
 	Alembic
 	Mixer
@@ -7,3 +8,9 @@ Implement basic alchemy
 		Antitoxin
 		Thunderstone
 		Vial of Acid
+Blowgun
+Shortbow
+Shuriken
+Tindertwig
+Burnt-out torch
+Horse-drawn cart

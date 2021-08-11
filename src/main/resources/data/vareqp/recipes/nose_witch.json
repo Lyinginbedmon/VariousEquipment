@@ -1,0 +1,13 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients":
+    [
+        { "item": "vareqp:nose_villager" },
+        { "item": "minecraft:brown_mushroom" }
+    ],
+    "result": {
+        "item": "vareqp:nose_witch",
+        "count": 1
+    },
+    "group": "nose_witch"
+}

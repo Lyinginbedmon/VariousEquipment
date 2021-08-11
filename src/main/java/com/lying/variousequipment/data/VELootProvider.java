@@ -28,10 +28,14 @@ import net.minecraft.loot.RandomValueRange;
 import net.minecraft.loot.StandaloneLootEntry;
 import net.minecraft.loot.TableLootEntry;
 import net.minecraft.loot.ValidationTracker;
+import net.minecraft.loot.conditions.KilledByPlayer;
 import net.minecraft.loot.conditions.RandomChance;
 import net.minecraft.loot.functions.SetCount;
+import net.minecraft.loot.functions.SetNBT;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.resources.ResourcePackType;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.Util;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
 public class VELootProvider extends LootTableProvider
@@ -56,6 +60,7 @@ public class VELootProvider extends LootTableProvider
     {
         tables.clear();
         addMagicItemTables();
+        addEntityLootTables();
         addChestLootTables();
         return tables;
     }
@@ -102,7 +107,169 @@ public class VELootProvider extends LootTableProvider
         			.addEntry(itemEntry(VEItems.TAIL_HORSE, 5))
         			.addEntry(itemEntry(VEItems.TAIL_DRAGONFLY, 5))
         			.addEntry(itemEntry(VEItems.TAIL_ANT, 5))
-        			.addEntry(itemEntry(VEItems.TAIL_LIZARD, 5))));
+        			.addEntry(itemEntry(VEItems.TAIL_LIZARD, 5))
+        			.addEntry(itemEntry(VEItems.EARS_PIGLIN, 5))
+        			.addEntry(itemEntry(VEItems.NOSE_PIG, 5))
+        			.addEntry(itemEntry(VEItems.NOSE_VILLAGER, 5))));
+    }
+    
+    private void addEntityLootTables()
+    {
+    	addEntityLootTable("inject/entities/pig", LootTable.builder().addLootPool(
+    			LootPool.builder()
+    					.name("main")
+    					.rolls(ConstantRange.of(1))
+    					.acceptCondition(RandomChance.builder(0.05F))
+						.acceptCondition(KilledByPlayer.builder())
+    					.addEntry(itemEntry(VEItems.NOSE_PIG, 1))));
+    	addEntityLootTable("inject/entities/piglin", LootTable.builder().addLootPool(
+    			LootPool.builder()
+    					.name("main")
+    					.rolls(ConstantRange.of(1))
+    					.acceptCondition(RandomChance.builder(0.05F))
+    					.acceptCondition(KilledByPlayer.builder())
+    					.addEntry(itemEntry(VEItems.NOSE_PIGLIN, 1))
+    					.addEntry(itemEntry(VEItems.EARS_PIGLIN, 1))));
+    	addEntityLootTable("inject/entities/piglin_brute", LootTable.builder().addLootPool(
+    			LootPool.builder()
+    					.name("main")
+    					.rolls(ConstantRange.of(1))
+    					.acceptCondition(RandomChance.builder(0.05F))
+    					.acceptCondition(KilledByPlayer.builder())
+    					.addEntry(itemEntry(VEItems.NOSE_PIGLIN, 1))
+    					.addEntry(itemEntry(VEItems.EARS_PIGLIN, 1))));
+    	addEntityLootTable("inject/entities/zombified_piglin", LootTable.builder().addLootPool(
+    			LootPool.builder()
+    					.name("main")
+    					.rolls(ConstantRange.of(1))
+    					.acceptCondition(RandomChance.builder(0.05F))
+    					.acceptCondition(KilledByPlayer.builder())
+    					.addEntry(itemEntry(VEItems.NOSE_PIGLIN, 1))
+    					.addEntry(itemEntry(VEItems.EARS_PIGLIN, 1))));
+    	addEntityLootTable("inject/entities/wolf", LootTable.builder().addLootPool(
+    			LootPool.builder()
+    					.name("main")
+    					.rolls(ConstantRange.of(1))
+    					.acceptCondition(RandomChance.builder(0.05F))
+						.acceptCondition(KilledByPlayer.builder())
+    					.addEntry(itemEntry(VEItems.EARS_WOLF, 1))
+    					.addEntry(itemEntry(VEItems.TAIL_WOLF, 1))));
+    	addEntityLootTable("inject/entities/cat", LootTable.builder().addLootPool(
+    			LootPool.builder()
+    					.name("main")
+    					.rolls(ConstantRange.of(1))
+    					.acceptCondition(RandomChance.builder(0.05F))
+						.acceptCondition(KilledByPlayer.builder())
+    					.addEntry(itemEntry(VEItems.EARS_CAT, 1))
+    					.addEntry(itemEntry(VEItems.TAIL_CAT, 1))));
+    	addEntityLootTable("inject/entities/ocelot", LootTable.builder().addLootPool(
+    			LootPool.builder()
+    					.name("main")
+    					.rolls(ConstantRange.of(1))
+    					.acceptCondition(RandomChance.builder(0.05F))
+						.acceptCondition(KilledByPlayer.builder())
+    					.addEntry(itemEntry(VEItems.EARS_CAT, 1))
+    					.addEntry(itemEntry(VEItems.TAIL_CAT, 1))));
+    	addEntityLootTable("inject/entities/witch", LootTable.builder().addLootPool(
+    			LootPool.builder()
+    					.name("main")
+    					.rolls(ConstantRange.of(1))
+    					.acceptCondition(RandomChance.builder(0.05F))
+    					.acceptCondition(KilledByPlayer.builder())
+    					.addEntry(itemEntry(VEItems.NOSE_WITCH, 1))));
+    	addEntityLootTable("inject/entities/villager", LootTable.builder().addLootPool(
+    			LootPool.builder()
+    					.name("main")
+    					.rolls(ConstantRange.of(1))
+    					.acceptCondition(RandomChance.builder(0.05F))
+    					.acceptCondition(KilledByPlayer.builder())
+    					.addEntry(itemEntry(VEItems.NOSE_VILLAGER, 1))));
+    	addEntityLootTable("inject/entities/illusioner", LootTable.builder().addLootPool(
+    			LootPool.builder()
+    					.name("main")
+    					.rolls(ConstantRange.of(1))
+    					.acceptCondition(RandomChance.builder(0.05F))
+    					.acceptCondition(KilledByPlayer.builder())
+    					.addEntry(itemEntry(VEItems.NOSE_VILLAGER, 1).acceptFunction(SetNBT.builder(Util.make(new CompoundNBT(), (nbt) -> {
+    						CompoundNBT display = new CompoundNBT();
+    						display.putInt("color", 6844014);
+    						nbt.put("display", display);
+    				    }))))));
+    	addEntityLootTable("inject/entities/evoker", LootTable.builder().addLootPool(
+    			LootPool.builder()
+    					.name("main")
+    					.rolls(ConstantRange.of(1))
+    					.acceptCondition(RandomChance.builder(0.05F))
+    					.acceptCondition(KilledByPlayer.builder())
+    					.addEntry(itemEntry(VEItems.NOSE_VILLAGER, 1).acceptFunction(SetNBT.builder(Util.make(new CompoundNBT(), (nbt) -> {
+    						CompoundNBT display = new CompoundNBT();
+    						display.putInt("color", 6844014);
+    						nbt.put("display", display);
+    				    }))))));
+    	addEntityLootTable("inject/entities/vindicator", LootTable.builder().addLootPool(
+    			LootPool.builder()
+    					.name("main")
+    					.rolls(ConstantRange.of(1))
+    					.acceptCondition(RandomChance.builder(0.05F))
+    					.acceptCondition(KilledByPlayer.builder())
+    					.addEntry(itemEntry(VEItems.NOSE_VILLAGER, 1).acceptFunction(SetNBT.builder(Util.make(new CompoundNBT(), (nbt) -> {
+    						CompoundNBT display = new CompoundNBT();
+    						display.putInt("color", 6844014);
+    						nbt.put("display", display);
+    				    }))))));
+    	addEntityLootTable("inject/entities/wandering_trader", LootTable.builder().addLootPool(
+    			LootPool.builder()
+    					.name("main")
+    					.rolls(ConstantRange.of(1))
+    					.acceptCondition(RandomChance.builder(0.05F))
+    					.acceptCondition(KilledByPlayer.builder())
+    					.addEntry(itemEntry(VEItems.NOSE_VILLAGER, 1))));
+    	addEntityLootTable("inject/entities/rabbit", LootTable.builder().addLootPool(
+    			LootPool.builder()
+    					.name("main")
+    					.rolls(ConstantRange.of(1))
+    					.acceptCondition(RandomChance.builder(0.05F))
+    					.acceptCondition(KilledByPlayer.builder())
+    					.addEntry(itemEntry(VEItems.EARS_RABBIT, 1))
+    					.addEntry(itemEntry(VEItems.TAIL_RABBIT, 1))));
+    	addEntityLootTable("inject/entities/fox", LootTable.builder().addLootPool(
+    			LootPool.builder()
+    					.name("main")
+    					.rolls(ConstantRange.of(1))
+    					.acceptCondition(RandomChance.builder(0.05F))
+    					.acceptCondition(KilledByPlayer.builder())
+    					.addEntry(itemEntry(VEItems.TAIL_FOX, 1))));
+    	addEntityLootTable("inject/entities/ender_dragon", LootTable.builder().addLootPool(
+    			LootPool.builder()
+    					.name("main")
+    					.rolls(ConstantRange.of(1))
+    					.acceptCondition(RandomChance.builder(0.05F))
+    					.acceptCondition(KilledByPlayer.builder())
+    					.addEntry(itemEntry(VEItems.TAIL_DRAGON, 1))));
+    	addEntityLootTable("inject/entities/horse", LootTable.builder().addLootPool(
+    			LootPool.builder()
+    					.name("main")
+    					.rolls(ConstantRange.of(1))
+    					.acceptCondition(RandomChance.builder(0.05F))
+    					.acceptCondition(KilledByPlayer.builder())
+    					.addEntry(itemEntry(VEItems.TAIL_HORSE, 5))
+    					.addEntry(itemEntry(VEItems.HORNS_DEER, 1))
+    					.addEntry(itemEntry(VEItems.HORNS_HARTEBEEST, 1))));
+    	addEntityLootTable("inject/entities/sheep", LootTable.builder().addLootPool(
+    			LootPool.builder()
+    					.name("main")
+    					.rolls(ConstantRange.of(1))
+    					.acceptCondition(RandomChance.builder(0.05F))
+    					.acceptCondition(KilledByPlayer.builder())
+    					.addEntry(itemEntry(VEItems.HORNS_RAM, 1))));
+    	
+//    	addEntityLootTable("inject/entities/kobold", LootTable.builder().addLootPool(
+//    			LootPool.builder()
+//    					.name("main")
+//    					.rolls(ConstantRange.of(1))
+//    					.acceptCondition(RandomChance.builder(0.05F))
+//    					.acceptCondition(KilledByPlayer.builder())
+//    					.addEntry(itemEntry(VEItems.TAIL_KOBOLD, 1))));
     }
     
     private void addChestLootTables()
@@ -323,6 +490,11 @@ public class VELootProvider extends LootTableProvider
     
     private void addChestLootTable(String location, LootTable.Builder lootTable) {
         addLootTable(location, lootTable, LootParameterSets.CHEST);
+    }
+    
+    private void addEntityLootTable(String location, LootTable.Builder lootTable)
+    {
+    	addLootTable(location, lootTable, LootParameterSets.ENTITY);
     }
     
     @Override
