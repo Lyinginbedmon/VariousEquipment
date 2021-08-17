@@ -32,6 +32,7 @@ public class VEItemTags extends ItemTagsProvider
     public static final ITag.INamedTag<Item> HANDS = ItemTags.createOptional(new ResourceLocation(CuriosApi.MODID, "hands"));
     public static final ITag.INamedTag<Item> HEAD = ItemTags.createOptional(new ResourceLocation(CuriosApi.MODID, "head"));
     public static final ITag.INamedTag<Item> NECKLACE = ItemTags.createOptional(new ResourceLocation(CuriosApi.MODID, "necklace"));
+    public static final ITag.INamedTag<Item> CHARM = ItemTags.createOptional(new ResourceLocation(CuriosApi.MODID, "charm"));
     
     public static final ITag.INamedTag<Item> HOLY_SYMBOL = ItemTags.createOptional(new ResourceLocation(Reference.ModInfo.MOD_ID, "holy_symbol"));
     
@@ -67,9 +68,11 @@ public class VEItemTags extends ItemTagsProvider
 				VEItems.NOSE_VILLAGER,
 				VEItems.NOSE_WITCH,
 				VEItems.EARS_ELF,
-				VEItems.EARS_GOBLIN
+				VEItems.EARS_GOBLIN,
+				VEItems.THIRD_EYE
 				);
 		getOrCreateBuilder(NECKLACE).add(VEItems.SCARAB_GOLEM);
+		getOrCreateBuilder(CHARM).add(VEItems.STONE_LUCK);
 		getOrCreateBuilder(BACK).add(
 				VEItems.TAIL_KOBOLD,
 				VEItems.TAIL_KIRIN,
@@ -129,8 +132,11 @@ public class VEItemTags extends ItemTagsProvider
 				VEItems.NOSE_VILLAGER,
 				VEItems.NOSE_WITCH,
 				VEItems.EARS_ELF,
-				VEItems.EARS_GOBLIN
+				VEItems.EARS_GOBLIN,
+				VEItems.THIRD_EYE
 				);
+		
+		
 	}
 	
 	@SubscribeEvent

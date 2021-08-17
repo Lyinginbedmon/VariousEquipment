@@ -1,11 +1,25 @@
 {
-    "replace": false,
-    "values": [
-        "vareqp:horns_ram",
-        "vareqp:horns_deer",
-        "vareqp:horns_kirin",
-        "vareqp:horns_hartebeest",
-        "vareqp:blindfold",
-        "vareqp:cosmetic_blindfold"
-    ]
+  "replace": false,
+  "values": [
+    "vareqp:blindfold",
+    "vareqp:cosmetic_blindfold",
+    "vareqp:ears_wolf",
+    "vareqp:ears_cat",
+    "vareqp:ears_rabbit",
+    "vareqp:ant_antenna",
+    "vareqp:gills_axolotl",
+    "vareqp:horns_deer",
+    "vareqp:horns_hartebeest",
+    "vareqp:horns_kirin",
+    "vareqp:horns_ram",
+    "vareqp:horns_kirin_storm",
+    "vareqp:nose_pig",
+    "vareqp:nose_piglin",
+    "vareqp:ears_piglin",
+    "vareqp:nose_villager",
+    "vareqp:nose_witch",
+    "vareqp:ears_pointy",
+    "vareqp:ears_goblin",
+    "vareqp:third_eye"
+  ]
 }

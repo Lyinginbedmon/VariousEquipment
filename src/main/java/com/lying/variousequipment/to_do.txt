@@ -11,6 +11,6 @@ Implement basic alchemy
 Blowgun
 Shortbow
 Shuriken
-Tindertwig
+Tindertwig (how distinct from fire charge?)
 Burnt-out torch
 Horse-drawn cart

@@ -270,6 +270,12 @@ public class VELootProvider extends LootTableProvider
 //    					.acceptCondition(RandomChance.builder(0.05F))
 //    					.acceptCondition(KilledByPlayer.builder())
 //    					.addEntry(itemEntry(VEItems.TAIL_KOBOLD, 1))));
+//    	addEntityLootTable("inject/entities/kobold", LootTable.builder().addLootPool(
+//    			LootPool.builder()
+//    					.name("main")
+//    					.rolls(RandomValueRange.of(1, 2))
+//    					.acceptCondition(KilledByPlayer.builder())
+//    					.addEntry(itemEntry(VEItems.EARS_GOBLIN, 1))));
     }
     
     private void addChestLootTables()

@@ -15,7 +15,9 @@ import com.lying.variousequipment.item.ItemCaltrop;
 import com.lying.variousequipment.item.ItemCoating;
 import com.lying.variousequipment.item.ItemCrossbowRepeating;
 import com.lying.variousequipment.item.ItemCrowbar;
+import com.lying.variousequipment.item.ItemDagger;
 import com.lying.variousequipment.item.ItemFoodSpoon;
+import com.lying.variousequipment.item.ItemGlaive;
 import com.lying.variousequipment.item.ItemHatArchfey;
 import com.lying.variousequipment.item.ItemHatFeyMask;
 import com.lying.variousequipment.item.ItemHatHood;
@@ -32,6 +34,7 @@ import com.lying.variousequipment.item.bauble.ItemLuckstone;
 import com.lying.variousequipment.item.bauble.ItemRing;
 import com.lying.variousequipment.item.bauble.ItemScarabGolem;
 import com.lying.variousequipment.item.bauble.ItemTails;
+import com.lying.variousequipment.item.bauble.ItemThirdEye;
 import com.lying.variousequipment.reference.Reference;
 import com.lying.variousoddities.init.VOEnchantments;
 import com.lying.variousoddities.item.VOItemGroup;
@@ -93,6 +96,7 @@ public class VEItems
 	public static final Item NOSE_WITCH		= register("nose_witch", new ItemHorns.NoseWitch(new Item.Properties()));
 	public static final Item EARS_ELF		= register("ears_pointy", new ItemHorns.EarsElf(new Item.Properties()));
 	public static final Item EARS_GOBLIN	= register("ears_goblin", new ItemHorns.EarsGoblin(new Item.Properties()));
+	public static final Item THIRD_EYE		= register("third_eye", new ItemThirdEye(new Item.Properties()));
 	public static final Item COSTUME		= register("costume", new ItemCostume(new Item.Properties()));
 	
 	public static final Item HAT_WITCH		= register("hat_witch", new ItemHatWitch(new Item.Properties().group(VEItemGroup.GEAR)));
@@ -111,6 +115,18 @@ public class VEItems
 	public static final Item NEEDLE_BONE	= register("needle_bone", new ItemNeedleBone(new Item.Properties().group(VEItemGroup.GEAR)));
 	public static final Item CALTROP		= register("caltrop", new ItemCaltrop(new Item.Properties()));
 	public static final Item REPEATING_CROSSBOW	= register("repeating_crossbow", new ItemCrossbowRepeating(new Item.Properties().group(VEItemGroup.GEAR)));
+	public static final Item NETHERITE_DAGGER	= register("netherite_dagger", new ItemDagger(ItemTier.NETHERITE, 1, -1.2F, (new Item.Properties())));
+	public static final Item DIAMOND_DAGGER	= register("diamond_dagger", new ItemDagger(ItemTier.DIAMOND, 1, -1.2F, (new Item.Properties())));
+	public static final Item IRON_DAGGER	= register("iron_dagger", new ItemDagger(ItemTier.IRON, 1, -1.2F, (new Item.Properties())));
+	public static final Item GOLDEN_DAGGER	= register("golden_dagger", new ItemDagger(ItemTier.GOLD, 1, -1.2F, (new Item.Properties())));
+	public static final Item STONE_DAGGER	= register("stone_dagger", new ItemDagger(ItemTier.STONE, 1, -1.2F, (new Item.Properties())));
+	public static final Item WOODEN_DAGGER	= register("wooden_dagger", new ItemDagger(ItemTier.WOOD, 1, -1.2F, (new Item.Properties())));
+	public static final Item NETHERITE_GLAIVE	= register("netherite_glaive", new ItemGlaive(ItemTier.NETHERITE, 4, -3F, new Item.Properties()));
+	public static final Item DIAMOND_GLAIVE	= register("diamond_glaive", new ItemGlaive(ItemTier.DIAMOND, 4, -3F, new Item.Properties()));
+	public static final Item IRON_GLAIVE	= register("iron_glaive", new ItemGlaive(ItemTier.IRON, 4, -3.1F, new Item.Properties()));
+	public static final Item GOLDEN_GLAIVE	= register("golden_glaive", new ItemGlaive(ItemTier.GOLD, 2, -3F, new Item.Properties()));
+	public static final Item STONE_GLAIVE	= register("stone_glaive", new ItemGlaive(ItemTier.STONE, 4, -3.2F, new Item.Properties()));
+	public static final Item WOODEN_GLAIVE	= register("wooden_glaive", new ItemGlaive(ItemTier.WOOD, 2, -3.2F, new Item.Properties()));
 	
 	public static final Item SCARAB_GOLEM	= register("scarab_golem", new ItemScarabGolem(new Item.Properties().group(VOItemGroup.LOOT)));
 	public static final Item STONE_LUCK		= register("luckstone", new ItemLuckstone(new Item.Properties().group(VOItemGroup.LOOT)));
@@ -182,7 +198,6 @@ public class VEItems
     public static void registerProperties()
     {
     	ItemModelsProperties.registerProperty(HAT_HOOD, new ResourceLocation(Reference.ModInfo.MOD_ID, "is_up"), (stack, world, entity) -> { return ItemHatHood.getIsUp(stack) ? 1F : 0F; });
-    	
     	ItemModelsProperties.registerProperty(REPEATING_CROSSBOW, new ResourceLocation(Reference.ModInfo.MOD_ID, "ammo"), (stack, world, entity) -> { return ItemCrossbowRepeating.hasAmmo(stack) ? (ItemCrossbowRepeating.isNextShotFirework(stack) ? 2 : 1) : 0; });
     }
     

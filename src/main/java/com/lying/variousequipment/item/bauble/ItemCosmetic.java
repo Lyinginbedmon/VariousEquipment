@@ -1,5 +1,6 @@
 package com.lying.variousequipment.item.bauble;
 
+import com.lying.variousequipment.item.VEItemGroup;
 import com.mojang.blaze3d.matrix.MatrixStack;
 
 import net.minecraft.client.renderer.IRenderTypeBuffer;
@@ -13,7 +14,7 @@ public abstract class ItemCosmetic extends ItemBaublePersistent
 {
 	public ItemCosmetic(Properties properties)
 	{
-		super(properties);
+		super(properties.maxStackSize(1).group(VEItemGroup.PROPS));
 	}
 	
 	public boolean canEquipFromUse(SlotContext slotContext, ItemStack stack){ return true; }

@@ -3,7 +3,7 @@
 	"package": "com.lying.variousequipment.mixin",
 	"mixins":
 	[
-		
+		"MobEntityMixin"
 	],
 	"client":
 	[

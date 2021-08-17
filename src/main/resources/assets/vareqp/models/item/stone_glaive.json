@@ -1,0 +1,7 @@
+{
+    "parent": "vareqp:item/glaive",
+    "textures":
+    {
+    	"layer0": "vareqp:items/stone_glaive"
+    }
+}
