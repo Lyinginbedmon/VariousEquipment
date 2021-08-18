@@ -77,6 +77,8 @@
 	"item.vareqp.golden_glaive": "Golden Glaive",
 	"item.vareqp.diamond_glaive": "Diamond Glaive",
 	"item.vareqp.netherite_glaive": "Netherite Glaive",
+	"item.vareqp.caltrop": "Caltrop",
+	"item.vareqp.shortbow": "Shortbow",
 	
 	"block.vareqp.white_screen": "White Screen",
 	"block.vareqp.black_screen": "Black Screen",
@@ -95,6 +97,7 @@
 	"block.vareqp.brown_screen": "Brown Screen",
 	"block.vareqp.yellow_screen": "Yellow Screen",
 	"block.vareqp.missing_block": "Missing Block",
+	"block.vareqp.burnt_torch": "Extinguished Torch",
 	
 	"enchantment.vareqp.silversheen": "Silversheen"
 }

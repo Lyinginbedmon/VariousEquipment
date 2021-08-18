@@ -1,0 +1,6 @@
+{
+	"parent": "varodd:block/alembic_water",
+    "textures": {
+        "4": "blocks/water_flow"
+    }
+}

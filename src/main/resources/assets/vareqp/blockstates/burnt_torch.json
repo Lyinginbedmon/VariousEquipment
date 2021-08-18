@@ -1,0 +1,6 @@
+{
+    "variants":
+    {
+    	"": { "model": "block/redstone_torch_off" }
+    }
+}

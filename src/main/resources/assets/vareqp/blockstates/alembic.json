@@ -1,0 +1,17 @@
+{
+    "variants":
+    {
+    	"facing=north,water=0": { "model": "varodd:alembic" },
+    	"facing=north,water=1": { "model": "varodd:alembic_water" },
+    	"facing=north,water=2": { "model": "varodd:alembic_active" },
+    	"facing=south,water=0": { "model": "varodd:alembic", "y": 180 },
+    	"facing=south,water=1": { "model": "varodd:alembic_water", "y": 180 },
+    	"facing=south,water=2": { "model": "varodd:alembic_active", "y": 180 },
+    	"facing=east,water=0": { "model": "varodd:alembic", "y": 90 },
+    	"facing=east,water=1": { "model": "varodd:alembic_water", "y": 90 },
+    	"facing=east,water=2": { "model": "varodd:alembic_active", "y": 90 },
+    	"facing=west,water=0": { "model": "varodd:alembic", "y": 270 },
+    	"facing=west,water=1": { "model": "varodd:alembic_water", "y": 270 },
+    	"facing=west,water=2": { "model": "varodd:alembic_active", "y": 270 }
+    }
+}

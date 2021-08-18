@@ -1,0 +1,16 @@
+{
+    "textures":
+    {
+        "0": "varodd:block/liquid_still"
+    },
+    "elements": [
+        {
+            "name": "liquid",
+            "from": [ 13.0, 3.1, 5.500000007450581 ], 
+            "to": [ 16.0, 3.1, 8.50000000745058 ], 
+            "faces": {
+                "up": { "texture": "#0", "uv": [ 0.0, 0.0, 3.0, 3.0 ], "tintindex": 2 }
+            }
+        }
+    ]
+}

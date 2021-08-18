@@ -3,8 +3,7 @@ package com.lying.variousequipment.init;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.lying.variousequipment.block.BlockMissing;
-import com.lying.variousequipment.block.BlockScreen;
+import com.lying.variousequipment.block.*;
 import com.lying.variousequipment.reference.Reference;
 
 import net.minecraft.block.AbstractBlock;
@@ -39,6 +38,8 @@ public class VEBlocks
 	public static final Block SCREEN_PURPLE		= register("purple_screen", new BlockScreen(DyeColor.PURPLE, AbstractBlock.Properties.create(Material.ROCK, DyeColor.PURPLE)));
 	public static final Block SCREEN_RED		= register("red_screen", new BlockScreen(DyeColor.RED, AbstractBlock.Properties.create(Material.ROCK, DyeColor.RED)));
 	public static final Block SCREEN_YELLOW		= register("yellow_screen", new BlockScreen(DyeColor.YELLOW, AbstractBlock.Properties.create(Material.ROCK, DyeColor.YELLOW)));
+	public static final Block BURNT_TORCH		= register("burnt_torch", new BlockBurntTorch(AbstractBlock.Properties.create(Material.MISCELLANEOUS)));
+	public static final Block BURNT_TORCH_WALL	= register("burnt_torch_wall", new BlockBurntTorchWall(AbstractBlock.Properties.create(Material.MISCELLANEOUS)));
 	
 	public static Block register(String nameIn, Block blockIn)
 	{

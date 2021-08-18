@@ -25,6 +25,7 @@ import com.lying.variousequipment.item.ItemHatWitch;
 import com.lying.variousequipment.item.ItemHolyWater;
 import com.lying.variousequipment.item.ItemNeedleBone;
 import com.lying.variousequipment.item.ItemSalveStone;
+import com.lying.variousequipment.item.ItemShortbow;
 import com.lying.variousequipment.item.ItemSymbol;
 import com.lying.variousequipment.item.VEItemGroup;
 import com.lying.variousequipment.item.bauble.ItemBlindfold;
@@ -46,6 +47,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemModelsProperties;
 import net.minecraft.item.ItemTier;
+import net.minecraft.item.WallOrFloorItem;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
@@ -127,6 +129,7 @@ public class VEItems
 	public static final Item GOLDEN_GLAIVE	= register("golden_glaive", new ItemGlaive(ItemTier.GOLD, 2, -3F, new Item.Properties()));
 	public static final Item STONE_GLAIVE	= register("stone_glaive", new ItemGlaive(ItemTier.STONE, 4, -3.2F, new Item.Properties()));
 	public static final Item WOODEN_GLAIVE	= register("wooden_glaive", new ItemGlaive(ItemTier.WOOD, 2, -3.2F, new Item.Properties()));
+	public static final Item SHORTBOW		= register("shortbow", new ItemShortbow(new Item.Properties().group(VEItemGroup.GEAR)));
 	
 	public static final Item SCARAB_GOLEM	= register("scarab_golem", new ItemScarabGolem(new Item.Properties().group(VOItemGroup.LOOT)));
 	public static final Item STONE_LUCK		= register("luckstone", new ItemLuckstone(new Item.Properties().group(VOItemGroup.LOOT)));
@@ -152,6 +155,7 @@ public class VEItems
 	public static final BlockItem SCREEN_RED		= registerBlock("red_screen", VEBlocks.SCREEN_RED, VOItemGroup.BLOCKS);
 	public static final BlockItem SCREEN_YELLOW		= registerBlock("yellow_screen", VEBlocks.SCREEN_YELLOW, VOItemGroup.BLOCKS);
 	public static final BlockItem MISSING_BLOCK		= registerBlock("missing_block", VEBlocks.MISSING_BLOCK, VOItemGroup.BLOCKS);
+	public static final BlockItem BURNT_TORCH		= registerBlock("burnt_torch", new WallOrFloorItem(VEBlocks.BURNT_TORCH, VEBlocks.BURNT_TORCH_WALL, (new Item.Properties()).group(VOItemGroup.BLOCKS)));
 	
 	public static Item register(String nameIn, Item itemIn)
 	{
@@ -199,6 +203,8 @@ public class VEItems
     {
     	ItemModelsProperties.registerProperty(HAT_HOOD, new ResourceLocation(Reference.ModInfo.MOD_ID, "is_up"), (stack, world, entity) -> { return ItemHatHood.getIsUp(stack) ? 1F : 0F; });
     	ItemModelsProperties.registerProperty(REPEATING_CROSSBOW, new ResourceLocation(Reference.ModInfo.MOD_ID, "ammo"), (stack, world, entity) -> { return ItemCrossbowRepeating.hasAmmo(stack) ? (ItemCrossbowRepeating.isNextShotFirework(stack) ? 2 : 1) : 0; });
+    	ItemModelsProperties.registerProperty(SHORTBOW, new ResourceLocation("pull"), (stack, world, entity) -> { return entity == null ? 0F : entity.getActiveItemStack() != stack ? 0.0F : (float)(stack.getUseDuration() - entity.getItemInUseCount()) / 10.0F; });
+	 	ItemModelsProperties.registerProperty(SHORTBOW, new ResourceLocation("pulling"), (stack, world, entity) -> { return entity != null && entity.isHandActive() && entity.getActiveItemStack() == stack ? 1.0F : 0.0F; });
     }
     
     public static void onRecipeSerializerRegistry(final RegistryEvent.Register<IRecipeSerializer<?>> event)

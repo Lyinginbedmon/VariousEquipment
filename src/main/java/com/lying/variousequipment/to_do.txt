@@ -1,5 +1,6 @@
 Fix rendering of holy water and caltrop entities
 Add Needled status effect to bone needle entities
+Item textures for repeating crossbow, caltrop, and shortbow
 Implement basic alchemy
 	Alembic
 	Mixer
@@ -8,9 +9,7 @@ Implement basic alchemy
 		Antitoxin
 		Thunderstone
 		Vial of Acid
-Blowgun
-Shortbow
-Shuriken
+Blowgun (shoots darts)
+Shuriken (pain snowballs)
 Tindertwig (how distinct from fire charge?)
-Burnt-out torch
 Horse-drawn cart

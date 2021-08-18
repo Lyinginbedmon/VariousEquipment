@@ -17,7 +17,7 @@ import net.minecraft.item.Items;
 public class MobEntityMixin
 {
 	@Inject(method = "func_233655_a_(Lnet/minecraft/entity/player/PlayerEntity;Lnet/minecraft/item/ItemStack;Lnet/minecraft/item/ItemStack;)V", at = @At("HEAD"))
-	public void applyShieldBreak(PlayerEntity player, ItemStack hitByItem, ItemStack heldItem, CallbackInfo ci)
+	private void applyShieldBreak(PlayerEntity player, ItemStack hitByItem, ItemStack heldItem, final CallbackInfo ci)
 	{
 		MobEntity mob = (MobEntity)(Object)this;
 		if(!hitByItem.isEmpty() && !heldItem.isEmpty() && hitByItem.getItem() instanceof IShieldBreakItem && ((IShieldBreakItem)hitByItem.getItem()).isShield(heldItem))

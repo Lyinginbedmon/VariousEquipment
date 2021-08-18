@@ -1,0 +1,9 @@
+{
+    "variants":
+    {
+    	"facing=north": { "model": "varodd:alembic_liquid" },
+    	"facing=south": { "model": "varodd:alembic_liquid", "y": 180 },
+    	"facing=east": { "model": "varodd:alembic_liquid", "y": 90 },
+    	"facing=west": { "model": "varodd:alembic_liquid", "y": 270 }
+    }
+}

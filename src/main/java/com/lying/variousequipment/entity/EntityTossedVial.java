@@ -11,10 +11,12 @@ import net.minecraft.entity.projectile.ProjectileItemEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.network.IPacket;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.fml.network.NetworkHooks;
 
 @OnlyIn(value = Dist.CLIENT, _interface = IRendersAsItem.class)
 public class EntityTossedVial extends ProjectileItemEntity implements IRendersAsItem
@@ -34,6 +36,11 @@ public class EntityTossedVial extends ProjectileItemEntity implements IRendersAs
 	{
 		super(VEEntities.TOSSED_VIAL, posX, posY, posZ, worldIn);
 		setItem(stack);
+	}
+	
+	public IPacket<?> createSpawnPacket()
+	{
+		return NetworkHooks.getEntitySpawningPacket(this);
 	}
 	
 	protected Item getDefaultItem(){ return VEItems.HOLY_WATER; }

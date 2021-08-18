@@ -3,7 +3,8 @@
 	"package": "com.lying.variousequipment.mixin",
 	"mixins":
 	[
-		"MobEntityMixin"
+		"MobEntityMixin",
+		"TorchBlockMixin"
 	],
 	"client":
 	[
