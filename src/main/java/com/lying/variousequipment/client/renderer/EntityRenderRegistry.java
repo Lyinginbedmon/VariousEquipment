@@ -1,6 +1,9 @@
 package com.lying.variousequipment.client.renderer;
 
 import com.lying.variousequipment.VariousEquipment;
+import com.lying.variousequipment.client.renderer.entity.EntityCaltropRenderer;
+import com.lying.variousequipment.client.renderer.entity.EntityVialRenderer;
+import com.lying.variousequipment.init.VEEntities;
 import com.lying.variousoddities.config.ConfigVO;
 
 import net.minecraft.entity.Entity;
@@ -19,10 +22,10 @@ public class EntityRenderRegistry
 		if(ConfigVO.GENERAL.verboseLogs())
 			VariousEquipment.log.info("Registering renderers");
 		
-//		registerRenderer(VEEntities.TOSSED_VIAL, new EntityVialRenderer.RenderFactory());
+		registerRenderer(VEEntities.TOSSED_VIAL, new EntityVialRenderer.RenderFactory());
+		registerRenderer(VEEntities.CALTROP, new EntityCaltropRenderer.RenderFactory());
 	}
 	
-	@SuppressWarnings("unused")
 	private static <T extends Entity> void registerRenderer(EntityType<T> entityClass, IRenderFactory<? super T> renderFactory)
 	{
 		if(renderFactory == null)

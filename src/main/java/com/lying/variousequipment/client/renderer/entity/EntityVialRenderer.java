@@ -1,22 +1,21 @@
 package com.lying.variousequipment.client.renderer.entity;
 
-import net.minecraft.client.Minecraft;
+import com.lying.variousequipment.entity.EntityTossedVial;
+
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
-import net.minecraft.client.renderer.entity.ItemRenderer;
-import net.minecraft.entity.item.ItemEntity;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 
-public class EntityVialRenderer extends ItemRenderer
+public class EntityVialRenderer extends AbstractEntityItemRenderer<EntityTossedVial>
 {
 	public EntityVialRenderer(EntityRendererManager renderManagerIn)
 	{
-		super(renderManagerIn, Minecraft.getInstance().getItemRenderer());
+		super(renderManagerIn);
 	}
 	
-	public static class RenderFactory implements IRenderFactory<ItemEntity>
+	public static class RenderFactory implements IRenderFactory<EntityTossedVial>
 	{
-		public EntityRenderer<? super ItemEntity> createRenderFor(EntityRendererManager manager) 
+		public EntityRenderer<? super EntityTossedVial> createRenderFor(EntityRendererManager manager) 
 		{
 			return new EntityVialRenderer(manager);
 		}

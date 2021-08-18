@@ -4,7 +4,6 @@ import com.lying.variousequipment.init.VEEntities;
 import com.lying.variousequipment.init.VEItems;
 
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.IRendersAsItem;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ProjectileItemEntity;
@@ -14,14 +13,8 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.network.NetworkHooks;
 
-@OnlyIn(
-   value = Dist.CLIENT,
-   _interface = IRendersAsItem.class
-)
 public class EntityCaltrop extends ProjectileItemEntity
 {
 	public EntityCaltrop(EntityType<EntityCaltrop> type, World world)
