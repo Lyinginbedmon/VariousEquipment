@@ -16,7 +16,6 @@ import net.minecraftforge.fml.client.registry.RenderingRegistry;
 @OnlyIn(Dist.CLIENT)
 public class EntityRenderRegistry
 {
-	@SuppressWarnings({ })
 	public static void registerEntityRenderers()
 	{
 		if(ConfigVO.GENERAL.verboseLogs())
