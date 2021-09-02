@@ -16,7 +16,7 @@ public class ItemCaltrop extends Item
 {
 	public ItemCaltrop(Item.Properties properties)
 	{
-		super(properties.maxStackSize(32).group(VEItemGroup.GEAR).maxDamage(0));
+		super(properties.maxStackSize(8).group(VEItemGroup.GEAR));
 	}
 	
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn)
@@ -27,7 +27,7 @@ public class ItemCaltrop extends Item
 		{
 			EntityCaltrop caltropEntity = new EntityCaltrop(worldIn, playerIn);
 			caltropEntity.setItem(itemstack);
-			caltropEntity.func_234612_a_(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0F, 1.5F, 1F);
+			caltropEntity.func_234612_a_(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0F, 0.75F, 1F);
 			worldIn.addEntity(caltropEntity);
 		}
 		

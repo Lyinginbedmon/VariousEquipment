@@ -14,7 +14,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 
 @Mixin(MobEntity.class)
-public class MobEntityMixin
+public class MobEntityMixin extends LivingEntityMixin
 {
 	@Inject(method = "func_233655_a_(Lnet/minecraft/entity/player/PlayerEntity;Lnet/minecraft/item/ItemStack;Lnet/minecraft/item/ItemStack;)V", at = @At("HEAD"))
 	private void applyShieldBreak(PlayerEntity player, ItemStack hitByItem, ItemStack heldItem, final CallbackInfo ci)

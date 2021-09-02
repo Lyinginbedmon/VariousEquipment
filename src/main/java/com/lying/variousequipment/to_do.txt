@@ -1,6 +1,5 @@
-Fix rendering of holy water and caltrop entities
-Add Needled status effect to bone needle entities
-Item textures for repeating crossbow, caltrop, and shortbow
+Item textures for shortbow
+Fix repeating crossbow rendering pose (see: PlayerRenderer & FirstPersonRenderer)
 Implement basic alchemy
 	Alembic
 	Mixer
@@ -9,7 +8,12 @@ Implement basic alchemy
 		Antitoxin
 		Thunderstone
 		Vial of Acid
-Blowgun (shoots darts)
-Shuriken (pain snowballs)
+Blowgun (shoots darts, 1 dmg but short draw time, can be tipped with potions)
+Shuriken (pain snowballs, 50% chance to drop on impact with a surface for recollection)
 Tindertwig (how distinct from fire charge?)
 Horse-drawn cart
+	Fix model & rescale to 3x4
+	Add solid bounding box
+	4 wheels, made from wheel item
+	Leash to horse
+	Control horse from wagon seat

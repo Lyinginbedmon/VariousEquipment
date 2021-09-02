@@ -1,0 +1,16 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "NN",
+        "NS"
+    ],
+    "key": {
+        "N":{ "tag": "forge:rods/wooden" },
+        "S":{ "tag": "forge:string" }
+    },
+    "result": {
+        "item": "vareqp:shortbow",
+        "count": 1
+    },
+    "group": "shortbow"
+}

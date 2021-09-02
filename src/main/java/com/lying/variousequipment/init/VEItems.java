@@ -12,6 +12,7 @@ import com.lying.variousequipment.data.recipes.RepeatingCrossbowRecipe;
 import com.lying.variousequipment.data.recipes.ScreenRecipe;
 import com.lying.variousequipment.item.IEventListenerItem;
 import com.lying.variousequipment.item.ItemCaltrop;
+import com.lying.variousequipment.item.ItemChassis;
 import com.lying.variousequipment.item.ItemCoating;
 import com.lying.variousequipment.item.ItemCrossbowRepeating;
 import com.lying.variousequipment.item.ItemCrowbar;
@@ -27,6 +28,7 @@ import com.lying.variousequipment.item.ItemNeedleBone;
 import com.lying.variousequipment.item.ItemSalveStone;
 import com.lying.variousequipment.item.ItemShortbow;
 import com.lying.variousequipment.item.ItemSymbol;
+import com.lying.variousequipment.item.ItemWheel;
 import com.lying.variousequipment.item.VEItemGroup;
 import com.lying.variousequipment.item.bauble.ItemBlindfold;
 import com.lying.variousequipment.item.bauble.ItemCostume;
@@ -47,7 +49,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemModelsProperties;
 import net.minecraft.item.ItemTier;
-import net.minecraft.item.WallOrFloorItem;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
@@ -130,6 +131,14 @@ public class VEItems
 	public static final Item STONE_GLAIVE	= register("stone_glaive", new ItemGlaive(ItemTier.STONE, 4, -3.2F, new Item.Properties()));
 	public static final Item WOODEN_GLAIVE	= register("wooden_glaive", new ItemGlaive(ItemTier.WOOD, 2, -3.2F, new Item.Properties()));
 	public static final Item SHORTBOW		= register("shortbow", new ItemShortbow(new Item.Properties().group(VEItemGroup.GEAR)));
+	public static final Item WHEEL_OAK		= register("oak_wheel", new ItemWheel(ItemTier.WOOD, new Item.Properties()));
+	public static final Item WHEEL_SPRUCE	= register("spruce_wheel", new ItemWheel(ItemTier.WOOD, new Item.Properties()));
+	public static final Item WHEEL_BIRCH	= register("birch_wheel", new ItemWheel(ItemTier.WOOD, new Item.Properties()));
+	public static final Item WHEEL_ACACIA	= register("acacia_wheel", new ItemWheel(ItemTier.WOOD, new Item.Properties()));
+	public static final Item WHEEL_JUNGLE	= register("jungle_wheel", new ItemWheel(ItemTier.WOOD, new Item.Properties()));
+	public static final Item WHEEL_DARK_OAK	= register("dark_oak_wheel", new ItemWheel(ItemTier.WOOD, new Item.Properties()));
+	public static final Item WHEEL_CRIMSON	= register("crimson_wheel", new ItemWheel(ItemTier.WOOD, new Item.Properties()));
+	public static final Item WHEEL_WARPED	= register("warped_wheel", new ItemWheel(ItemTier.WOOD, new Item.Properties()));
 	
 	public static final Item SCARAB_GOLEM	= register("scarab_golem", new ItemScarabGolem(new Item.Properties().group(VOItemGroup.LOOT)));
 	public static final Item STONE_LUCK		= register("luckstone", new ItemLuckstone(new Item.Properties().group(VOItemGroup.LOOT)));
@@ -155,7 +164,14 @@ public class VEItems
 	public static final BlockItem SCREEN_RED		= registerBlock("red_screen", VEBlocks.SCREEN_RED, VOItemGroup.BLOCKS);
 	public static final BlockItem SCREEN_YELLOW		= registerBlock("yellow_screen", VEBlocks.SCREEN_YELLOW, VOItemGroup.BLOCKS);
 	public static final BlockItem MISSING_BLOCK		= registerBlock("missing_block", VEBlocks.MISSING_BLOCK, VOItemGroup.BLOCKS);
-	public static final BlockItem BURNT_TORCH		= registerBlock("burnt_torch", new WallOrFloorItem(VEBlocks.BURNT_TORCH, VEBlocks.BURNT_TORCH_WALL, (new Item.Properties()).group(VOItemGroup.BLOCKS)));
+	public static final BlockItem CHASSIS_OAK			= registerBlock("oak_wagon_chassis", new ItemChassis(VEBlocks.WAGON_CHASSIS_OAK, new Item.Properties()));
+	public static final BlockItem CHASSIS_SPRUCE		= registerBlock("spruce_wagon_chassis", new ItemChassis(VEBlocks.WAGON_CHASSIS_SPRUCE, new Item.Properties()));
+	public static final BlockItem CHASSIS_BIRCH			= registerBlock("birch_wagon_chassis", new ItemChassis(VEBlocks.WAGON_CHASSIS_BIRCH, new Item.Properties()));
+	public static final BlockItem CHASSIS_ACACIA		= registerBlock("acacia_wagon_chassis", new ItemChassis(VEBlocks.WAGON_CHASSIS_ACACIA, new Item.Properties()));
+	public static final BlockItem CHASSIS_JUNGLE		= registerBlock("jungle_wagon_chassis", new ItemChassis(VEBlocks.WAGON_CHASSIS_JUNGLE, new Item.Properties()));
+	public static final BlockItem CHASSIS_DARK_OAK		= registerBlock("dark_oak_wagon_chassis", new ItemChassis(VEBlocks.WAGON_CHASSIS_DARK_OAK, new Item.Properties()));
+	public static final BlockItem CHASSIS_CRIMSON		= registerBlock("crimson_wagon_chassis", new ItemChassis(VEBlocks.WAGON_CHASSIS_CRIMSON, new Item.Properties()));
+	public static final BlockItem CHASSIS_WARPED		= registerBlock("warped_wagon_chassis", new ItemChassis(VEBlocks.WAGON_CHASSIS_WARPED, new Item.Properties()));
 	
 	public static Item register(String nameIn, Item itemIn)
 	{

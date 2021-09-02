@@ -79,6 +79,16 @@
 	"item.vareqp.netherite_glaive": "Netherite Glaive",
 	"item.vareqp.caltrop": "Caltrop",
 	"item.vareqp.shortbow": "Shortbow",
+	"item.vareqp.oak_wheel": "Oak Wheel",
+	"item.vareqp.spruce_wheel": "Spruce Wheel",
+	"item.vareqp.birch_wheel": "Birch Wheel",
+	"item.vareqp.acacia_wheel": "Acacia Wheel",
+	"item.vareqp.jungle_wheel": "Jungle Wheel",
+	"item.vareqp.dark_oak_wheel": "Dark Oak Wheel",
+	"item.vareqp.crimson_wheel": "Crimson Wheel",
+	"item.vareqp.warped_wheel": "Warped Wheel",
+	
+	"entity.vareqp.wagon": "Wagon",
 	
 	"block.vareqp.white_screen": "White Screen",
 	"block.vareqp.black_screen": "Black Screen",
@@ -98,6 +108,14 @@
 	"block.vareqp.yellow_screen": "Yellow Screen",
 	"block.vareqp.missing_block": "Missing Block",
 	"block.vareqp.burnt_torch": "Extinguished Torch",
+	"block.vareqp.oak_wagon_chassis": "Oak Wagon Chassis",
+	"block.vareqp.spruce_wagon_chassis": "Spruce Wagon Chassis",
+	"block.vareqp.birch_wagon_chassis": "Birch Wagon Chassis",
+	"block.vareqp.acacia_wagon_chassis": "Acacia Wagon Chassis",
+	"block.vareqp.jungle_wagon_chassis": "Jungle Wagon Chassis",
+	"block.vareqp.dark_oak_wagon_chassis": "Dark Oak Wagon Chassis",
+	"block.vareqp.crimson_wagon_chassis": "Crimson Wagon Chassis",
+	"block.vareqp.warped_wagon_chassis": "Warped Wagon Chassis",
 	
 	"enchantment.vareqp.silversheen": "Silversheen"
 }

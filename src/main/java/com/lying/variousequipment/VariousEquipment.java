@@ -6,7 +6,7 @@ import org.apache.logging.log4j.Logger;
 import com.lying.variousequipment.client.renderer.EntityRenderRegistry;
 import com.lying.variousequipment.config.ConfigVE;
 import com.lying.variousequipment.data.VEDataGenerators;
-import com.lying.variousequipment.init.VEBlocks;
+import com.lying.variousequipment.init.VEEntities;
 import com.lying.variousequipment.init.VEItems;
 import com.lying.variousequipment.init.VELootTables;
 import com.lying.variousequipment.network.PacketHandler;
@@ -17,8 +17,6 @@ import com.lying.variousequipment.reference.Reference;
 import com.lying.variousequipment.utility.bus.BusClient;
 import com.lying.variousequipment.utility.bus.BusServer;
 
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.item.Item;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraftforge.api.distmarker.Dist;
@@ -54,12 +52,15 @@ public class VariousEquipment
         bus.addListener(this::doClientSetup);
         bus.addListener(this::doLoadComplete);
         bus.addListener(VEDataGenerators::onGatherData);
+        bus.addListener(VEEntities::registerAttributes);
         
         bus.addGenericListener(Item.class, VEItems::onItemsRegistry);
         bus.addGenericListener(IRecipeSerializer.class, VEItems::onRecipeSerializerRegistry);
         
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ConfigVE.server_spec);
         bus.addListener(this::onConfigEvent);
+        
+        VEEntities.registerEntityTypes(bus);
         
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.addListener(VELootTables::onLootLoadEvent);
@@ -75,8 +76,6 @@ public class VariousEquipment
     {
         EntityRenderRegistry.registerEntityRenderers();
         event.enqueueWork(VEItems::registerProperties);
-        RenderTypeLookup.setRenderLayer(VEBlocks.BURNT_TORCH, RenderType.getCutout());
-        RenderTypeLookup.setRenderLayer(VEBlocks.BURNT_TORCH_WALL, RenderType.getCutout());
         
         MinecraftForge.EVENT_BUS.register(BusClient.class);
     }

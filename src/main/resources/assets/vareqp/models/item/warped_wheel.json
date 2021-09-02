@@ -1,0 +1,7 @@
+{
+    "parent": "vareqp:item/wheel",
+    "textures":
+    {
+    	"layer0": "vareqp:items/wheel_warped"
+    }
+}

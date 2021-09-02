@@ -13,6 +13,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.network.IPacket;
 import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
 
@@ -20,24 +21,31 @@ public class EntityTossedVial extends ProjectileItemEntity implements IRendersAs
 {
 	public EntityTossedVial(EntityType<? extends EntityTossedVial> typeIn, World worldIn)
 	{
-		super(VEEntities.TOSSED_VIAL, worldIn);
+		super(VEEntities.TOSSED_VIAL.get(), worldIn);
 	}
 	
     public EntityTossedVial(World worldIn, LivingEntity throwerIn, ItemStack vialStackIn)
     {
-        super(VEEntities.TOSSED_VIAL, throwerIn, worldIn);
+        super(VEEntities.TOSSED_VIAL.get(), throwerIn, worldIn);
         setItem(vialStackIn);
     }
     
 	public EntityTossedVial(World worldIn, double posX, double posY, double posZ, ItemStack stack)
 	{
-		super(VEEntities.TOSSED_VIAL, posX, posY, posZ, worldIn);
+		super(VEEntities.TOSSED_VIAL.get(), posX, posY, posZ, worldIn);
 		setItem(stack);
 	}
 	
 	public IPacket<?> createSpawnPacket()
 	{
 		return NetworkHooks.getEntitySpawningPacket(this);
+	}
+	
+	public ITextComponent getName()
+	{
+		if(!getItem().isEmpty())
+			return this.getItem().getDisplayName();
+		return super.getName();
 	}
 	
 	protected Item getDefaultItem(){ return VEItems.HOLY_WATER; }
