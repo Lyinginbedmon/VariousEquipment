@@ -14,29 +14,25 @@ import net.minecraft.util.math.vector.Vector3d;
 @Mixin(LivingEntity.class)
 public class LivingEntityMixin extends EntityMixin
 {
-//	@Inject(method = "travel(Lnet/minecraft/util/math/vector/Vector3d;)V", at = @At("HEAD"), cancellable = true)
-//	private void travel(Vector3d travelVector, final CallbackInfo ci)
-//	{
-//		LivingEntity living = (LivingEntity)(Object)this;
-//		if(living instanceof HorseEntity)
-//		{
-//			HorseEntity horse = (HorseEntity)living;
-//			EntityWagon wagon = EntityWagon.getConnectedWagon(horse);
-//			if(wagon == null)
-//				return;
-//			
-//			System.out.println("Riding conditions of "+horse.getDisplayName().getString()+":");
-//			System.out.println(" * Wagon: "+true);
-//			System.out.println(" * Alive: "+horse.isAlive());
-//			if(!horse.isAlive()) return;
-//			System.out.println(" * Ridden: "+horse.isBeingRidden());
-//			if(!horse.isBeingRidden()) return;
-//			System.out.println(" * Steerable: "+horse.canBeSteered());
-//			if(!horse.canBeSteered()) return;
-//			System.out.println(" * Saddle: "+horse.isHorseSaddled());
-//			if(!horse.isHorseSaddled()) return;
-//		    LivingEntity rider = (LivingEntity)horse.getControllingPassenger();
-//			System.out.println(" * Rider: "+(rider == null ? "NULL" : rider.getDisplayName().getString()));
-//		}
-//	}
+	@Inject(method = "travel(Lnet/minecraft/util/math/vector/Vector3d;)V", at = @At("HEAD"), cancellable = true)
+	private void travel(Vector3d travelVector, final CallbackInfo ci)
+	{
+		LivingEntity living = (LivingEntity)(Object)this;
+		if(living instanceof HorseEntity)
+		{
+			HorseEntity horse = (HorseEntity)living;
+			EntityWagon wagon = EntityWagon.getConnectedWagon(horse);
+			if(wagon == null)
+				return;
+			
+			LivingEntity rider = (LivingEntity)wagon.getDriver();
+			if(rider == null)
+				return;
+			
+			System.out.println("Riding conditions of "+horse.getDisplayName().getString()+":");
+			System.out.println("* Side: "+(horse.getEntityWorld().isRemote ? "CLIENT" : "SERVER"));
+			System.out.println("* Forward: "+rider.moveForward);
+			System.out.println("* Strafe: "+rider.moveStrafing);
+		}
+	}
 }

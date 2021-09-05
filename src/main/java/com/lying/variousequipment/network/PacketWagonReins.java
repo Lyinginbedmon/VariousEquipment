@@ -49,9 +49,15 @@ public class PacketWagonReins
 			PlayerEntity player = ((CommonProxy)VariousEquipment.proxy).getPlayerEntity(context);
 			World world = player.getEntityWorld();
 			Entity wagon = world.getEntityByID(msg.wagonId);
-			Entity entity = world.getEntityByID(msg.holderEntityId);
-			if(entity instanceof LivingEntity && wagon instanceof EntityWagon)
-				((EntityWagon)wagon).setReinsHolder(entity, false);
+			if(wagon instanceof EntityWagon)
+				if(msg.holderEntityId == 0)
+					((EntityWagon)wagon).setReinsHolder(null, false);
+				else
+				{
+					Entity entity = world.getEntityByID(msg.holderEntityId);
+					if(entity instanceof LivingEntity)
+						((EntityWagon)wagon).setReinsHolder(entity, false);
+				}
 		}
 		
 		context.setPacketHandled(true);
