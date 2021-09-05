@@ -79,8 +79,6 @@ public class ItemCostume extends ItemBaublePersistent
 		stack.setTag(stackData);
 	}
 	
-	// FIXME Prevent costume being left over when used in addition recipe
-	
 	@Override
 	public boolean hasContainerItem(ItemStack stack){ return getComponents(stack).size() > 1; }
 	

@@ -518,22 +518,18 @@ public class EntityWagon extends LivingEntity implements IInventoryChangedListen
 		return hasWheels() ? SIZE_WHEELS : SIZE_CHASSIS;
 	}
 	
-	public void recalculateSize()
-	{
-		super.recalculateSize();
-	}
-	
-	public void move(MoverType typeIn, Vector3d pos)
-	{
-		super.move(typeIn, pos);
-		
-		// Move entities on top of this entity
-		List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, this.getBoundingBox().grow(0D, 1D, 0D));
-		if(!list.isEmpty())
-			for(Entity entity : list)
-				if(!entity.noClip && !this.isPassenger(entity))
-					entity.move(typeIn, pos);
-	}
+	// TODO Code temporarily disabled for testing conditions
+//	public void move(MoverType typeIn, Vector3d pos)
+//	{
+//		super.move(typeIn, pos);
+//		
+//		// Move entities on top of this entity
+//		List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, this.getBoundingBox().grow(0D, 1D, 0D));
+//		if(!list.isEmpty())
+//			for(Entity entity : list)
+//				if(!entity.noClip && !this.isPassenger(entity))
+//					entity.move(typeIn, pos);
+//	}
 	
 	public void addPassenger(Entity entity)
 	{
