@@ -1,0 +1,7 @@
+{
+    "parent": "item/handheld",
+    "textures":
+    {
+    	"layer0": "vareqp:items/needle_iron"
+    }
+}

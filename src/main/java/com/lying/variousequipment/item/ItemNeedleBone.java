@@ -4,7 +4,6 @@ import com.lying.variousequipment.entity.EntityNeedle;
 import com.lying.variousequipment.reference.Reference;
 import com.lying.variousoddities.init.VOPotions;
 
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -15,7 +14,6 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.world.World;
 
 public class ItemNeedleBone extends ItemNeedle
@@ -41,6 +39,7 @@ public class ItemNeedleBone extends ItemNeedle
 			EntityNeedle needleEntity = new EntityNeedle(worldIn, playerIn);
 			needleEntity.setItem(itemstack);
 			needleEntity.func_234612_a_(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, 0.5F, 1.0F);
+			addEffects(needleEntity, playerIn);
 			worldIn.addEntity(needleEntity);
 		}
 		
@@ -51,9 +50,9 @@ public class ItemNeedleBone extends ItemNeedle
 		return ActionResult.func_233538_a_(itemstack, worldIn.isRemote());
 	}
 	
-	public void affectEntity(LivingEntity entityIn, World worldIn, EntityRayTraceResult resultIn, boolean damageSuccess)
+	public void addEffects(EntityNeedle needleEntity, PlayerEntity player)
 	{
-		entityIn.addPotionEffect(new EffectInstance(VOPotions.NEEDLED, Reference.Values.TICKS_PER_SECOND * 30));
+		needleEntity.addEffect(new EffectInstance(VOPotions.NEEDLED, Reference.Values.TICKS_PER_SECOND * 30));
 	}
 	
 	public ResourceLocation getEntityTexture(EntityNeedle entity){ return TEXTURE; }

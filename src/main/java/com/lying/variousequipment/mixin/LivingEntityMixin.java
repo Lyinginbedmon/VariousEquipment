@@ -29,10 +29,10 @@ public class LivingEntityMixin extends EntityMixin
 			if(rider == null)
 				return;
 			
-			System.out.println("Riding conditions of "+horse.getDisplayName().getString()+":");
-			System.out.println("* Side: "+(horse.getEntityWorld().isRemote ? "CLIENT" : "SERVER"));
-			System.out.println("* Forward: "+rider.moveForward);
-			System.out.println("* Strafe: "+rider.moveStrafing);
+//			System.out.println("Riding conditions of "+horse.getDisplayName().getString()+":");
+//			System.out.println("* Side: "+(horse.getEntityWorld().isRemote ? "CLIENT" : "SERVER"));
+//			System.out.println("* Forward: "+rider.moveForward);
+//			System.out.println("* Strafe: "+rider.moveStrafing);
 		}
 	}
 }

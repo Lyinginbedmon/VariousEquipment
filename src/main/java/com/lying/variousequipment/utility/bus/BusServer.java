@@ -28,7 +28,7 @@ public class BusServer
 	public static boolean checkForWagonReins(PlayerEntity player, LivingEntity living)
 	{
 		EntityWagon closestWagon = EntityWagon.getConnectedWagon(player);
-		if(closestWagon != null)
+		if(closestWagon != null && EntityWagon.getConnectedWagon(living) == null)
 		{
 			closestWagon.setReinsHolder(living, true);
 			return true;

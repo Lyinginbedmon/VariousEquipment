@@ -1,6 +1,5 @@
 package com.lying.variousequipment.entity;
 
-import java.util.List;
 import java.util.UUID;
 
 import javax.annotation.Nullable;
@@ -103,7 +102,7 @@ public class EntityWagon extends LivingEntity implements IInventoryChangedListen
 		this.initPartInventory();
 		
 		this.componentChassis = new WagonPartEntity(this, PartType.CHASSIS, -1, 3.5F, 0.1F);
-		this.componentReins = new WagonPartEntity(this, PartType.REINS, 0, 1F, 1F);
+		this.componentReins = new WagonPartEntity(this, PartType.REINS, 0, 0.3F, 0.3F);
 		this.componentWheel0 = new WagonPartEntity(this, PartType.WHEEL, 2, 1F, 1F);
 		this.componentWheel1 = new WagonPartEntity(this, PartType.WHEEL, 3, 1F, 1F);
 		this.componentWheel2 = new WagonPartEntity(this, PartType.WHEEL, 4, 1F, 1F);
@@ -159,14 +158,8 @@ public class EntityWagon extends LivingEntity implements IInventoryChangedListen
 			return ActionResultType.PASS;
 		else
 		{
-			ActionResultType result = this.applyPlayerInteraction(player, hand);
-			if(result.isSuccessOrConsume())
-				return result;
-			else
-			{
-				result = ActionResultType.PASS;
-				return result.isSuccessOrConsume() ? result : super.processInitialInteract(player, hand);
-			}
+			this.applyPlayerInteraction(player, hand);
+			return ActionResultType.CONSUME;
 		}
 	}
 	
@@ -203,13 +196,12 @@ public class EntityWagon extends LivingEntity implements IInventoryChangedListen
 								heldItem.shrink(1);
 							}
 							
-							return ActionResultType.SUCCESS;
+							return ActionResultType.CONSUME;
 						}
 						break;
 					case REINS:
 						if(this.reinsTimer == 0)
 						{
-							System.out.println("Reins side: "+(this.getEntityWorld().isRemote ? "CLIENT" : "SERVER"));
 							if(this.getReined())
 								clearReined(true, !player.abilities.isCreativeMode);
 							else if(heldItem.getItem() == Items.LEAD)
@@ -220,7 +212,7 @@ public class EntityWagon extends LivingEntity implements IInventoryChangedListen
 							}
 							
 							this.reinsTimer = Reference.Values.TICKS_PER_SECOND;
-							return ActionResultType.SUCCESS;
+							return ActionResultType.CONSUME;
 						}
 						break;
 					case CHASSIS:
@@ -229,8 +221,12 @@ public class EntityWagon extends LivingEntity implements IInventoryChangedListen
 				}
 		}
 		
-		if(getPassengers().size() < 3 && player != getReinsHolder() && !this.world.isRemote)
-			player.startRiding(this);
+		if(getPassengers().size() < 3 && player != getReinsHolder())
+		{
+			if(!this.world.isRemote)
+				player.startRiding(this);
+			return ActionResultType.func_233537_a_(this.world.isRemote);
+		}
 		
 		return ActionResultType.func_233537_a_(this.world.isRemote);
 	}
@@ -334,7 +330,10 @@ public class EntityWagon extends LivingEntity implements IInventoryChangedListen
 		}
 		
 		if(compound.contains("Reins", 10))
+		{
 			this.reinsNBTTag = compound.getCompound("Reins");
+			
+		}
 	}
 	
 	public void setPartInSlot(int slot, ItemStack itemStack)
@@ -393,23 +392,8 @@ public class EntityWagon extends LivingEntity implements IInventoryChangedListen
 			--this.reinsTimer;
 		
 		updateComponentBounds();
-		
 		if(!this.world.isRemote)
-		{
 			this.updateReinedState();
-			if(this.ticksExisted % 5 == 0)
-				this.setReinsHolder(getReinsHolder(), true);
-			
-			if(this.tickCounter++ == 100)
-			{
-				this.tickCounter = 0;
-				if(isAlive() && this.parts != null && this.parts.getStackInSlot(0).isEmpty())
-				{
-					this.dropInventory();
-					this.remove();
-				}
-			}
-		}
 	}
 	
 	public void updateComponentBounds()
@@ -442,6 +426,38 @@ public class EntityWagon extends LivingEntity implements IInventoryChangedListen
 	{
 		super.livingTick();
 		updateComponentParts();
+		
+		if(!this.world.isRemote)
+		{
+			updateReinedState();
+			if(this.ticksExisted % (Reference.Values.TICKS_PER_SECOND * 10) == 0)
+				setReinsHolder(getReinsHolder(), true);
+			
+			if(getReined() && hasWheels())
+			{
+				Entity reinsHolder = this.getReinsHolder();
+				double dist = getDistance(reinsHolder);
+				double idealDist = 1D + (this.getWidth() + reinsHolder.getWidth()) * 0.5D;
+				if(dist > idealDist + 5F)
+					clearReined(true, true);
+				else if(dist != idealDist)
+				{
+					double delta = dist - idealDist;
+					Vector3d direction = reinsHolder.getPositionVec().subtract(getPositionVec()).normalize().mul(delta, 0D, delta);
+					this.move(MoverType.SELF, direction);
+				}
+			}
+			
+			if(this.tickCounter++ == (Reference.Values.TICKS_PER_SECOND * 3))
+			{
+				this.tickCounter = 0;
+				if(isAlive() && this.parts != null && this.parts.getStackInSlot(0).isEmpty())
+				{
+					this.dropInventory();
+					this.remove();
+				}
+			}
+		}
 	}
 	
 	public void updateComponentParts()
@@ -463,7 +479,7 @@ public class EntityWagon extends LivingEntity implements IInventoryChangedListen
 		Vector3d axleRear = forward.mul(-1.45D, 0D, -1.45D);
 		double width = 1.6D;
 		setPartPosition(this.componentChassis, Vector3d.ZERO);
-		setPartPosition(this.componentReins, axleFront.add(forward));
+		setPartPosition(this.componentReins, axleFront.add(forward.mul(0.5D, 0.5D, 0.5D)).add(0D, hasWheels() ? 0.7D : 0.3D, 0D));
 		setPartPosition(this.componentWheel0, axleFront.add(right.mul(-width, 0D, -width)));
 		setPartPosition(this.componentWheel1, axleFront.add(right.mul(width, 0D, width)));
 		setPartPosition(this.componentWheel2, axleRear.add(right.mul(-width, 0D, -width)));
@@ -558,6 +574,7 @@ public class EntityWagon extends LivingEntity implements IInventoryChangedListen
 		return this.getPassengers().isEmpty() ? null : this.getPassengers().get(0);
 	}
 	
+	/** Retrieves the wagon connected to the given entity, if any */
 	public static EntityWagon getConnectedWagon(LivingEntity living)
 	{
 		EntityWagon attachedWagon = null;
@@ -611,39 +628,43 @@ public class EntityWagon extends LivingEntity implements IInventoryChangedListen
 	
 	public HandSide getPrimaryHand(){ return HandSide.RIGHT; }
 	
+	/** Controls the wagon's motion to stay close to the attached reins entity */
 	protected void updateReinedState()
 	{
-		if(!getReined() && this.reinsNBTTag != null)
+		if(this.reinsNBTTag != null)
 			recreateReins();
 		
-		Entity reinsHolder = this.getReinsHolder();
-		if(reinsHolder != null)
+		if(getReined())
 		{
-			if(!this.isAlive() || !reinsHolder.isAlive())
-				this.clearReined(true, true);
+			if(!this.isAlive() || !this.getReinsHolder().isAlive())
+				clearReined(true, true);
 			
 			if(hasWheels())
-			{
-				Vector3d yawToReins = getPositionVec().subtract(reinsHolder.getPositionVec());
-				double yaw = (Math.atan2(yawToReins.z, yawToReins.x) * (double)(180F / (float)Math.PI)) + 90.0F;
-				
-				this.prevRotationYaw = this.rotationYaw;
-				this.rotationYaw = (float)yaw;
-				this.setRotation(this.rotationYaw, this.rotationPitch);
-				this.renderYawOffset = this.rotationYaw;
-				
-				double dist = getPositionVec().distanceTo(reinsHolder.getPositionVec());
-				double idealDist = 1D + (this.getWidth() + reinsHolder.getWidth()) * 0.5D;
-				if(dist > idealDist + 5F)
-					this.clearReined(true, true);
-				else if(dist != idealDist)
-				{
-					double delta = dist - idealDist;
-					Vector3d direction = reinsHolder.getPositionVec().subtract(getPositionVec()).normalize().mul(delta, 0D, delta);
-					this.move(MoverType.SELF, direction);
-				}
-			}
+				repositionToReins();
 		}
+	}
+	
+	public void travel(Vector3d travelVector)
+	{
+		if(isAlive())
+			if(getReined() && hasWheels())
+				repositionToReins();
+			else
+				super.travel(travelVector);
+	}
+	
+	/** Face the reins holder and move towards them */
+	private void repositionToReins()
+	{
+		if(!getReined() || !hasWheels()) return;
+		
+		Entity reinsHolder = this.getReinsHolder();
+		Vector3d yawToReins = getPositionVec().subtract(reinsHolder.getPositionVec());
+		double yaw = (Math.atan2(yawToReins.z, yawToReins.x) * (double)(180F / (float)Math.PI)) + 90.0F;
+		this.prevRotationYaw = this.rotationYaw;
+		this.rotationYaw = (float)yaw;
+		this.setRotation(this.rotationYaw, this.rotationPitch);
+		this.renderYawOffset = this.rotationYaw;
 	}
 	
 	public void clearReined(boolean sendPacket, boolean dropLead)
@@ -711,7 +732,7 @@ public class EntityWagon extends LivingEntity implements IInventoryChangedListen
 				}
 			}
 			
-			if(this.ticksExisted > 100)
+			if(this.ticksExisted > (Reference.Values.TICKS_PER_SECOND * 5))
 			{
 				this.entityDropItem(Items.LEAD);
 				this.reinsNBTTag = null;

@@ -7,6 +7,7 @@ import java.util.function.Predicate;
 import javax.annotation.Nullable;
 
 import com.google.common.collect.Lists;
+import com.lying.variousequipment.api.ISightedItem;
 import com.lying.variousequipment.init.VEItems;
 import com.lying.variousequipment.reference.Reference;
 
@@ -40,7 +41,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class ItemCrossbowRepeating extends CrossbowItem
+public class ItemCrossbowRepeating extends CrossbowItem implements ISightedItem
 {
 	public ItemCrossbowRepeating(Properties builder)
 	{
@@ -249,4 +250,8 @@ public class ItemCrossbowRepeating extends CrossbowItem
 					tooltip.add(new StringTextComponent(" ").append(ammo.get(i).getTextComponent()));
 		}
 	}
+	
+	public boolean aimDownSights(ItemStack itemStackIn){ return hasAmmo(itemStackIn); }
+	
+	public int getDrawTime(ItemStack itemStackIn){ return 0; }
 }
