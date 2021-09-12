@@ -1,11 +1,6 @@
-Item textures for shortbow, iron needle, blowpipe
 Implement basic alchemy
 	Alembic
 	Mixer
-		Tanglefoot Bag
-		Alchemist's Fire
-		Antitoxin
-		Thunderstone
 		Vial of Acid
 Shuriken (pain snowballs, 50% chance to drop on impact with a surface for recollection)
 Tindertwig (how distinct from fire charge?)

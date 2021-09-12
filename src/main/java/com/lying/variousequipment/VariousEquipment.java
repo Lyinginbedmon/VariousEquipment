@@ -9,6 +9,7 @@ import com.lying.variousequipment.data.VEDataGenerators;
 import com.lying.variousequipment.init.VEEntities;
 import com.lying.variousequipment.init.VEItems;
 import com.lying.variousequipment.init.VELootTables;
+import com.lying.variousequipment.init.VERegistryHandler;
 import com.lying.variousequipment.network.PacketHandler;
 import com.lying.variousequipment.proxy.ClientProxy;
 import com.lying.variousequipment.proxy.IProxy;
@@ -41,6 +42,8 @@ public class VariousEquipment
 	
 	public static IProxy proxy = new ServerProxy();
 	
+	private final VERegistryHandler registries;
+	
 	@SuppressWarnings("deprecation")
 	public VariousEquipment()
 	{
@@ -56,6 +59,9 @@ public class VariousEquipment
         
         bus.addGenericListener(Item.class, VEItems::onItemsRegistry);
         bus.addGenericListener(IRecipeSerializer.class, VEItems::onRecipeSerializerRegistry);
+        
+        bus.register(registries = new VERegistryHandler());
+        MinecraftForge.EVENT_BUS.register(registries);
         
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ConfigVE.server_spec);
         bus.addListener(this::onConfigEvent);

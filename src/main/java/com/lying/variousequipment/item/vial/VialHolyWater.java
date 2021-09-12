@@ -1,4 +1,4 @@
-package com.lying.variousequipment.item;
+package com.lying.variousequipment.item.vial;
 
 import java.util.List;
 
@@ -10,18 +10,25 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
-public class ItemHolyWater extends ItemVialThrowable
+public class VialHolyWater extends Vial
 {
-	public ItemHolyWater(Properties builder)
+	public static final ResourceLocation REGISTRY_NAME = new ResourceLocation(Reference.ModInfo.MOD_ID, "holy_water");
+	
+	public VialHolyWater()
 	{
-		super(builder.maxStackSize(8), 3694022);
+		super(VialType.THROWABLE, 8, 3694022);
 	}
 	
-	public void applyEffect(Entity entityIn, World worldIn, RayTraceResult resultIn)
+	public ResourceLocation getRegistryName(){ return REGISTRY_NAME; }
+	
+	public boolean canReturnBottle(){ return true; }
+	
+	public void onSplash(Entity entityIn, World worldIn, RayTraceResult resultIn)
 	{
 		AxisAlignedBB boundingBox = entityIn.getBoundingBox().grow(4, 2, 4);
 		List<LivingEntity> affected = worldIn.getEntitiesWithinAABB(LivingEntity.class, boundingBox);
@@ -45,7 +52,13 @@ public class ItemHolyWater extends ItemVialThrowable
 				});
 	}
 	
-	public boolean hasInstantEffect(){ return true; }
-	
-	public boolean canReturnBottle(){ return true; }
+	public static class Builder extends Vial.Builder
+	{
+		public Builder(){ super(REGISTRY_NAME); }
+		
+		public Vial create()
+		{
+			return new VialHolyWater();
+		}
+	}
 }

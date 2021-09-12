@@ -8,6 +8,7 @@ import com.lying.variousequipment.init.VEItems;
 
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
+import net.minecraft.enchantment.IVanishable;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BowItem;
@@ -18,7 +19,7 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.world.World;
 
-public class ItemBlowpipe extends BowItem implements ISightedItem
+public class ItemBlowpipe extends BowItem implements ISightedItem, IVanishable
 {
 	private static final Predicate<ItemStack> AMMO_INV = new Predicate<ItemStack>()
 			{
@@ -30,7 +31,7 @@ public class ItemBlowpipe extends BowItem implements ISightedItem
 	
 	public ItemBlowpipe(Properties properties)
 	{
-		super(properties.group(VEItemGroup.GEAR));
+		super(properties.group(VEItemGroup.GEAR).maxDamage(384));
 	}
 	
 	public boolean aimDownSights(ItemStack itemStackIn)
@@ -103,5 +104,15 @@ public class ItemBlowpipe extends BowItem implements ISightedItem
 				}
 			}
 		}
+	}
+	
+	public int getItemEnchantability(){ return 1; }
+	
+	public boolean canApplyAtEnchantingTable(ItemStack stack, net.minecraft.enchantment.Enchantment enchantment)
+	{
+		return 
+				enchantment == Enchantments.UNBREAKING ||
+				enchantment == Enchantments.MENDING ||
+				enchantment == Enchantments.INFINITY;
 	}
 }

@@ -2,6 +2,8 @@ package com.lying.variousequipment.data.recipes;
 
 import com.lying.variousequipment.data.VEItemTags;
 import com.lying.variousequipment.init.VEItems;
+import com.lying.variousequipment.item.ItemVial;
+import com.lying.variousequipment.item.vial.Vial;
 
 import net.minecraft.inventory.CraftingInventory;
 import net.minecraft.item.ItemStack;
@@ -86,7 +88,9 @@ public class HolyWaterRecipe extends SpecialRecipe
 		if(symbol.isEmpty() || waterCount == 0)
 			return ItemStack.EMPTY;
 		
-		return new ItemStack(VEItems.HOLY_WATER, waterCount);
+		ItemStack output = new ItemStack(VEItems.VIAL_THROWABLE, waterCount);
+		ItemVial.addVialToItemStack(output, Vial.HOLY_WATER);
+		return output;
 	}
 	
 	public boolean canFit(int width, int height)

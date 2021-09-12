@@ -81,20 +81,6 @@ public class EntityWagon extends LivingEntity implements IInventoryChangedListen
 	private CompoundNBT reinsNBTTag;
 	private int reinsTimer = 0;
 	
-	/*
-	 * TO DO
-	 * * Can be leashed to horse/donkey
-	 * * Apply movement debuff to leashed horse/donkey relative to number of wheels
-	 * * Inherit movement speed of leashed horse/donkey (after debuff)
-	 * * Multiple seat positions, selected based on right-click position
-	 * * Seat position 1 controls leashed horse/donkey
-	 * * Front and rear inventory accessed based on seat position
-	 * 
-	 * STREAM
-	 * * Allow wagons to be leashed to horse-type entities
-	 * * Translate wagon control to the leashed horse
-	 */
-	
 	public EntityWagon(EntityType<? extends EntityWagon> type, World worldIn)
 	{
 		super(type, worldIn);

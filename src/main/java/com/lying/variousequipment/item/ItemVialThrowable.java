@@ -1,6 +1,7 @@
 package com.lying.variousequipment.item;
 
 import com.lying.variousequipment.entity.EntityTossedVial;
+import com.lying.variousequipment.item.vial.Vial;
 
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.dispenser.DefaultDispenseItemBehavior;
@@ -8,20 +9,20 @@ import net.minecraft.dispenser.IBlockSource;
 import net.minecraft.dispenser.IDispenseItemBehavior;
 import net.minecraft.dispenser.IPosition;
 import net.minecraft.dispenser.ProjectileDispenseBehavior;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
-public abstract class ItemVialThrowable extends ItemVial
+public class ItemVialThrowable extends ItemVial
 {
 	public static final IDispenseItemBehavior DISPENSER_BEHAVIOUR = new DefaultDispenseItemBehavior()
     {
@@ -50,9 +51,9 @@ public abstract class ItemVialThrowable extends ItemVial
         }
     };
     
-	public ItemVialThrowable(Item.Properties properties, int colorIn)
+	public ItemVialThrowable(Item.Properties properties)
 	{
-		super(properties, colorIn);
+		super(properties);
         DispenserBlock.registerDispenseBehavior(this, DISPENSER_BEHAVIOUR);
 	}
 	
@@ -73,17 +74,11 @@ public abstract class ItemVialThrowable extends ItemVial
 		
 		return ActionResult.func_233538_a_(itemstack, worldIn.isRemote());
 	}
-    
-    /** Applies the appropriate effect for this vial from the given vial entity under the given collision event
-     * @param entityIn The tossed vial entity at the root of the effect
-     * @param worldIn The world the effect is happening in
-     * @param resultIn The ray trace describing the collision event
-     */
-	public abstract void applyEffect(Entity entityIn, World worldIn, RayTraceResult resultIn);
 	
-	/** Determines the type of particle emitted on impact */
-	public abstract boolean hasInstantEffect();
-	
-	/** Determines if the tossed entity should ever return an empty bottle */
-	public abstract boolean canReturnBottle();
+	public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items)
+	{
+		if(this.isInGroup(group))
+			for(Vial.Builder vial : Vial.VIALS_THROWABLE)
+				items.add(ItemVial.addVialToItemStack(new ItemStack(this), vial));
+	}
 }

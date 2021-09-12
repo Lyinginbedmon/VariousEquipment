@@ -60,7 +60,6 @@
 	"item.vareqp.golden_holy_symbol": "Golden Holy Symbol",
 	"item.vareqp.diamond_holy_symbol": "Diamond Holy Symbol",
 	"item.vareqp.silversheen": "Silversheen",
-	"item.vareqp.vial_holy": "Holy Water",
 	"item.vareqp.stone_salve": "Stone Salve",
 	"item.vareqp.stone_salve.tooltip": "Cures petrification when applied to self or others.",
 	"item.vareqp.needle_bone": "Bone Needle",
@@ -89,6 +88,12 @@
 	"item.vareqp.warped_wheel": "Warped Wheel",
 	"item.vareqp.blowpipe": "Blowpipe",
 	"item.vareqp.needle_iron": "Iron Needle",
+	
+	"vial.vareqp.holy_water": "Holy Water",
+	"vial.vareqp.antitoxin": "Antitoxin",
+	"vial.vareqp.alchemist_fire": "Alchemist Fire",
+	"vial.vareqp.tanglefoot_bag": "Tanglefoot Bag",
+	"vial.vareqp.thunderstone": "Thunderstone",
 	
 	"entity.vareqp.wagon": "Wagon",
 	

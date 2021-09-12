@@ -2,7 +2,9 @@ package com.lying.variousequipment.entity;
 
 import com.lying.variousequipment.init.VEEntities;
 import com.lying.variousequipment.init.VEItems;
+import com.lying.variousequipment.item.ItemVial;
 import com.lying.variousequipment.item.ItemVialThrowable;
+import com.lying.variousequipment.item.vial.Vial;
 
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.IRendersAsItem;
@@ -48,7 +50,7 @@ public class EntityTossedVial extends ProjectileItemEntity implements IRendersAs
 		return super.getName();
 	}
 	
-	protected Item getDefaultItem(){ return VEItems.HOLY_WATER; }
+	protected Item getDefaultItem(){ return VEItems.VIAL_THROWABLE; }
 	
 	protected float getGravityVelocity(){ return 0.05F; }
 	
@@ -59,8 +61,8 @@ public class EntityTossedVial extends ProjectileItemEntity implements IRendersAs
 		{
 			if(getItem().getItem() instanceof ItemVialThrowable)
 			{
-				ItemVialThrowable vial = (ItemVialThrowable)getItem().getItem();
-				vial.applyEffect(this, getEntityWorld(), result);
+				Vial vial = ItemVial.getVialFromItem(getItem());
+				vial.onSplash(this, getEntityWorld(), result);
 				this.getEntityWorld().playEvent(2002, this.getPosition(), vial.getColor());
 				
 				if(vial.canReturnBottle() && this.rand.nextInt(7) == 0)

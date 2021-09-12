@@ -3,7 +3,7 @@ package com.lying.variousequipment.client.renderer;
 import com.lying.variousequipment.block.BlockScreen;
 import com.lying.variousequipment.init.VEBlocks;
 import com.lying.variousequipment.init.VEItems;
-import com.lying.variousequipment.item.ItemVialThrowable;
+import com.lying.variousequipment.item.ItemVial;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -41,7 +41,7 @@ public class ColorHandler
 		for(Item item : VEItems.DYEABLES)
 			registryItems.register((stack, val) -> { return val == 0 ? ((IDyeableArmorItem)stack.getItem()).getColor(stack) : -1; }, item);
 		
-		registryItems.register((stack, val) -> { return val == 0 ? ((ItemVialThrowable)stack.getItem()).getColor() : -1; }, VEItems.HOLY_WATER);
+		registryItems.register((stack, val) -> { return val == 0 ? ((ItemVial)stack.getItem()).getColor(stack) : -1; }, VEItems.VIAL_THROWABLE, VEItems.VIAL_DRINKABLE);
 		registryItems.register((stack, val) -> { return BlockScreen.getColor(Block.getBlockFromItem(stack.getItem()).getDefaultState(), null, BlockPos.ZERO, 0); }, 
 				VEBlocks.SCREEN_WHITE, 
 				VEBlocks.SCREEN_BLACK, 

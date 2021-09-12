@@ -18,9 +18,9 @@ public class ItemShortbow extends BowItem
 {
 	public ItemShortbow(Properties builder)
 	{
-		super(builder);
+		super(builder.maxDamage(384));
 	}
-
+	
 	/**
 	 * Called when the player stops using an Item (stops holding the right mouse button).
 	 */
