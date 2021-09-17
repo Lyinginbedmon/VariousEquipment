@@ -88,6 +88,7 @@
 	"item.vareqp.warped_wheel": "Warped Wheel",
 	"item.vareqp.blowpipe": "Blowpipe",
 	"item.vareqp.needle_iron": "Iron Needle",
+	"item.vareqp.vial_solution": "%s Solution",
 	
 	"vial.vareqp.holy_water": "Holy Water",
 	"vial.vareqp.antitoxin": "Antitoxin",
@@ -123,6 +124,8 @@
 	"block.vareqp.dark_oak_wagon_chassis": "Dark Oak Wagon Chassis",
 	"block.vareqp.crimson_wagon_chassis": "Crimson Wagon Chassis",
 	"block.vareqp.warped_wagon_chassis": "Warped Wagon Chassis",
+	"block.vareqp.centrifuge": "Alchemical Centrifuge",
+	"block.vareqp.mixer": "Alchemical Mixer",
 	
 	"enchantment.vareqp.silversheen": "Silversheen"
 }

@@ -3,6 +3,7 @@
 	"package": "com.lying.variousequipment.mixin",
 	"mixins":
 	[
+		"AccessorRecipeManager",
 		"EntityMixin",
 		"LivingEntityMixin",
 		"MobEntityMixin",

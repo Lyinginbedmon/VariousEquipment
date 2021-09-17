@@ -61,6 +61,8 @@ public abstract class Vial
 	
 	public final int maxStackSize(){ return this.maxStackSize; }
 	
+	public boolean usesDefaultItem(){ return true; }
+	
 	public boolean isThrowable(){ return this.type == VialType.THROWABLE; }
 	
 	public boolean isDrinkable(){ return this.type == VialType.DRINKABLE; }

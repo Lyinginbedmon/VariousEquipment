@@ -3,13 +3,6 @@ package com.lying.variousequipment.init;
 import java.util.List;
 
 import com.google.common.collect.Lists;
-import com.lying.variousequipment.data.recipes.AntennaRecipe;
-import com.lying.variousequipment.data.recipes.CoatItemRecipe;
-import com.lying.variousequipment.data.recipes.CostumeRecipe;
-import com.lying.variousequipment.data.recipes.HolyWaterRecipe;
-import com.lying.variousequipment.data.recipes.KitsuneTailRecipe;
-import com.lying.variousequipment.data.recipes.RepeatingCrossbowRecipe;
-import com.lying.variousequipment.data.recipes.ScreenRecipe;
 import com.lying.variousequipment.item.IEventListenerItem;
 import com.lying.variousequipment.item.ItemBlowpipe;
 import com.lying.variousequipment.item.ItemCaltrop;
@@ -29,7 +22,9 @@ import com.lying.variousequipment.item.ItemNeedleBone;
 import com.lying.variousequipment.item.ItemSalveStone;
 import com.lying.variousequipment.item.ItemShortbow;
 import com.lying.variousequipment.item.ItemSymbol;
+import com.lying.variousequipment.item.ItemVial;
 import com.lying.variousequipment.item.ItemVialDrinkable;
+import com.lying.variousequipment.item.ItemVialSolution;
 import com.lying.variousequipment.item.ItemVialThrowable;
 import com.lying.variousequipment.item.ItemWheel;
 import com.lying.variousequipment.item.VEItemGroup;
@@ -41,6 +36,9 @@ import com.lying.variousequipment.item.bauble.ItemRing;
 import com.lying.variousequipment.item.bauble.ItemScarabGolem;
 import com.lying.variousequipment.item.bauble.ItemTails;
 import com.lying.variousequipment.item.bauble.ItemThirdEye;
+import com.lying.variousequipment.item.vial.Vial;
+import com.lying.variousequipment.item.vial.VialTanglefoot;
+import com.lying.variousequipment.item.vial.VialThunderstone;
 import com.lying.variousequipment.reference.Reference;
 import com.lying.variousoddities.init.VOEnchantments;
 import com.lying.variousoddities.item.VOItemGroup;
@@ -52,7 +50,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemModelsProperties;
 import net.minecraft.item.ItemTier;
-import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -119,6 +116,7 @@ public class VEItems
 	public static final Item SYMBOL_DIAMOND	= register("diamond_holy_symbol", new ItemSymbol(ItemTier.DIAMOND, new Item.Properties().group(VEItemGroup.GEAR)));
 	public static final Item VIAL_THROWABLE		= register("vial_throwable", new ItemVialThrowable(new Item.Properties().group(VEItemGroup.GEAR)));
 	public static final Item VIAL_DRINKABLE		= register("vial_drinkable", new ItemVialDrinkable(new Item.Properties().group(VEItemGroup.GEAR)));
+	public static final Item VIAL_SOLUTION		= register("vial_solution", new ItemVialSolution(new Item.Properties().group(VEItemGroup.GEAR)));
 	public static final Item NEEDLE_BONE	= register("needle_bone", new ItemNeedleBone(new Item.Properties().group(VEItemGroup.GEAR)));
 	public static final Item NEEDLE_IRON	= register("needle_iron", new ItemNeedle(new Item.Properties().group(VEItemGroup.GEAR)));
 	public static final Item CALTROP		= register("caltrop", new ItemCaltrop(new Item.Properties()));
@@ -178,6 +176,8 @@ public class VEItems
 	public static final BlockItem CHASSIS_DARK_OAK		= registerBlock("dark_oak_wagon_chassis", new ItemChassis(VEBlocks.WAGON_CHASSIS_DARK_OAK, new Item.Properties()));
 	public static final BlockItem CHASSIS_CRIMSON		= registerBlock("crimson_wagon_chassis", new ItemChassis(VEBlocks.WAGON_CHASSIS_CRIMSON, new Item.Properties()));
 	public static final BlockItem CHASSIS_WARPED		= registerBlock("warped_wagon_chassis", new ItemChassis(VEBlocks.WAGON_CHASSIS_WARPED, new Item.Properties()));
+	public static final BlockItem CENTRIFUGE		= registerBlock("centrifuge", VEBlocks.CENTRIFUGE, VOItemGroup.BLOCKS);
+	public static final BlockItem MIXER				= registerBlock("mixer", VEBlocks.MIXER, VOItemGroup.BLOCKS);
 	
 	public static Item register(String nameIn, Item itemIn)
 	{
@@ -227,17 +227,10 @@ public class VEItems
     	ItemModelsProperties.registerProperty(REPEATING_CROSSBOW, new ResourceLocation(Reference.ModInfo.MOD_ID, "ammo"), (stack, world, entity) -> { return ItemCrossbowRepeating.hasAmmo(stack) ? (ItemCrossbowRepeating.isNextShotFirework(stack) ? 2 : 1) : 0; });
     	ItemModelsProperties.registerProperty(SHORTBOW, new ResourceLocation("pull"), (stack, world, entity) -> { return entity == null ? 0F : entity.getActiveItemStack() != stack ? 0.0F : (float)(stack.getUseDuration() - entity.getItemInUseCount()) / 10.0F; });
 	 	ItemModelsProperties.registerProperty(SHORTBOW, new ResourceLocation("pulling"), (stack, world, entity) -> { return entity != null && entity.isHandActive() && entity.getActiveItemStack() == stack ? 1.0F : 0.0F; });
-    }
-    
-    public static void onRecipeSerializerRegistry(final RegistryEvent.Register<IRecipeSerializer<?>> event)
-    {
-    	IForgeRegistry<IRecipeSerializer<?>> registry = event.getRegistry();
-    	registry.register(CoatItemRecipe.SERIALIZER.setRegistryName(new ResourceLocation(Reference.ModInfo.MOD_ID, "coat_item")));
-    	registry.register(HolyWaterRecipe.SERIALIZER.setRegistryName(new ResourceLocation(Reference.ModInfo.MOD_ID, "holy_water")));
-    	registry.register(KitsuneTailRecipe.SERIALIZER.setRegistryName(new ResourceLocation(Reference.ModInfo.MOD_ID, "kitsune_tail")));
-    	registry.register(AntennaRecipe.SERIALIZER.setRegistryName(new ResourceLocation(Reference.ModInfo.MOD_ID, "antennae")));
-    	registry.register(CostumeRecipe.SERIALIZER.setRegistryName(new ResourceLocation(Reference.ModInfo.MOD_ID, "costume")));
-    	registry.register(ScreenRecipe.SERIALIZER.setRegistryName(new ResourceLocation(Reference.ModInfo.MOD_ID, "screens")));
-    	registry.register(RepeatingCrossbowRecipe.SERIALIZER.setRegistryName(new ResourceLocation(Reference.ModInfo.MOD_ID, "reload_repeating_crossbow")));
+	 	ItemModelsProperties.registerProperty(VIAL_THROWABLE, new ResourceLocation(Reference.ModInfo.MOD_ID, "type"), (stack, world, entity) -> 
+	 		{
+	 			Vial vial = ItemVial.getVialFromItem(stack);
+	 			return vial != null ? (vial.getRegistryName() == VialThunderstone.REGISTRY_NAME ? 1F : vial.getRegistryName() == VialTanglefoot.REGISTRY_NAME ? 2F : 0F) : 0F; 
+	 		});
     }
 }

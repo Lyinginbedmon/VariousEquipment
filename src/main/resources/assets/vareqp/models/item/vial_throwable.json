@@ -1,3 +1,23 @@
 {
-    "parent": "vareqp:item/vial"
+    "parent": "vareqp:item/vial",
+    "overrides": [
+        {
+            "predicate": {
+                "vareqp:type": 0
+            },
+            "model": "vareqp:item/vial"
+        },
+        {
+            "predicate": {
+                "vareqp:type": 1
+            },
+            "model": "vareqp:item/vial_stone"
+        },
+        {
+            "predicate": {
+                "vareqp:type": 2
+            },
+            "model": "vareqp:item/vial_bag"
+        }
+    ]
 }

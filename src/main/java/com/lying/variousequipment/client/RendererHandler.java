@@ -1,11 +1,15 @@
 package com.lying.variousequipment.client;
 
 import com.lying.variousequipment.VariousEquipment;
+import com.lying.variousequipment.client.renderer.tileentity.*;
 import com.lying.variousequipment.config.ConfigVE;
+import com.lying.variousequipment.init.VETileEntities;
+import com.lying.variousequipment.tileentity.*;
 
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.ModelRegistryEvent;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 
 @OnlyIn(Dist.CLIENT)
 public class RendererHandler
@@ -20,6 +24,7 @@ public class RendererHandler
 		if(!registered)
 			registered = true;
 		
-//		ClientRegistry.bindTileEntityRenderer(VOTileEntities.TABLE_DRAFTING, TileEntityDraftingTableRenderer::new);
+		ClientRegistry.bindTileEntityRenderer(VETileEntities.CENTRIFUGE, TileEntitySpinnyRenderer<TileEntityCentrifuge>::new);
+		ClientRegistry.bindTileEntityRenderer(VETileEntities.MIXER, TileEntityMixerRenderer::new);
 	}
 }

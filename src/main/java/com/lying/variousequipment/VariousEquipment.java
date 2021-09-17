@@ -9,6 +9,7 @@ import com.lying.variousequipment.data.VEDataGenerators;
 import com.lying.variousequipment.init.VEEntities;
 import com.lying.variousequipment.init.VEItems;
 import com.lying.variousequipment.init.VELootTables;
+import com.lying.variousequipment.init.VERecipeTypes;
 import com.lying.variousequipment.init.VERegistryHandler;
 import com.lying.variousequipment.network.PacketHandler;
 import com.lying.variousequipment.proxy.ClientProxy;
@@ -58,7 +59,7 @@ public class VariousEquipment
         bus.addListener(VEEntities::registerAttributes);
         
         bus.addGenericListener(Item.class, VEItems::onItemsRegistry);
-        bus.addGenericListener(IRecipeSerializer.class, VEItems::onRecipeSerializerRegistry);
+        bus.addGenericListener(IRecipeSerializer.class, VERecipeTypes::onRecipeSerializerRegistry);
         
         bus.register(registries = new VERegistryHandler());
         MinecraftForge.EVENT_BUS.register(registries);

@@ -3,8 +3,7 @@ package com.lying.variousequipment.init;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.lying.variousequipment.block.BlockMissing;
-import com.lying.variousequipment.block.BlockScreen;
+import com.lying.variousequipment.block.*;
 import com.lying.variousequipment.reference.Reference;
 
 import net.minecraft.block.AbstractBlock;
@@ -22,6 +21,7 @@ public class VEBlocks
 {
 	private static final List<Block> BLOCKS = new ArrayList<>();
 	
+	/* Imaginary blocks, used for special models only */
 	public static final Block WAGON_CHASSIS_OAK		= register("oak_wagon_chassis", new Block(AbstractBlock.Properties.create(Material.WOOD)));
 	public static final Block WAGON_CHASSIS_SPRUCE	= register("spruce_wagon_chassis", new Block(AbstractBlock.Properties.create(Material.WOOD)));
 	public static final Block WAGON_CHASSIS_BIRCH	= register("birch_wagon_chassis", new Block(AbstractBlock.Properties.create(Material.WOOD)));
@@ -30,7 +30,9 @@ public class VEBlocks
 	public static final Block WAGON_CHASSIS_DARK_OAK	= register("dark_oak_wagon_chassis", new Block(AbstractBlock.Properties.create(Material.WOOD)));
 	public static final Block WAGON_CHASSIS_CRIMSON		= register("crimson_wagon_chassis", new Block(AbstractBlock.Properties.create(Material.NETHER_WOOD)));
 	public static final Block WAGON_CHASSIS_WARPED		= register("warped_wagon_chassis", new Block(AbstractBlock.Properties.create(Material.NETHER_WOOD)));
+	public static final Block SPINNY_ARMS			= register("spinny_arms", new Block(AbstractBlock.Properties.create(Material.IRON)));
 	
+	/* Blocks */
 	public static final Block MISSING_BLOCK		= register("missing_block", new BlockMissing(AbstractBlock.Properties.create(Material.ROCK, MaterialColor.PURPLE_TERRACOTTA)));
 	public static final Block SCREEN_WHITE		= register("white_screen", new BlockScreen(DyeColor.WHITE, AbstractBlock.Properties.create(Material.ROCK, DyeColor.WHITE)));
 	public static final Block SCREEN_BLACK		= register("black_screen", new BlockScreen(DyeColor.BLACK, AbstractBlock.Properties.create(Material.ROCK, DyeColor.BLACK)));
@@ -48,6 +50,8 @@ public class VEBlocks
 	public static final Block SCREEN_PURPLE		= register("purple_screen", new BlockScreen(DyeColor.PURPLE, AbstractBlock.Properties.create(Material.ROCK, DyeColor.PURPLE)));
 	public static final Block SCREEN_RED		= register("red_screen", new BlockScreen(DyeColor.RED, AbstractBlock.Properties.create(Material.ROCK, DyeColor.RED)));
 	public static final Block SCREEN_YELLOW		= register("yellow_screen", new BlockScreen(DyeColor.YELLOW, AbstractBlock.Properties.create(Material.ROCK, DyeColor.YELLOW)));
+	public static final Block CENTRIFUGE		= register("centrifuge", new BlockCentrifuge(AbstractBlock.Properties.create(Material.IRON)));
+	public static final Block MIXER				= register("mixer", new BlockMixer(AbstractBlock.Properties.create(Material.IRON)));
 	
 	public static Block register(String nameIn, Block blockIn)
 	{

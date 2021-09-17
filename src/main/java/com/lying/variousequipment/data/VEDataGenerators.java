@@ -1,5 +1,6 @@
 package com.lying.variousequipment.data;
 
+import com.lying.variousequipment.data.recipes.MixerRecipeProvider;
 import com.lying.variousequipment.data.recipes.VERecipeProvider;
 
 import net.minecraft.data.DataGenerator;
@@ -17,6 +18,7 @@ public class VEDataGenerators
 			generator.addProvider(new VEItemTags(generator, existingFileHelper));
 			generator.addProvider(new VERecipeProvider(generator));
 			generator.addProvider(new VELootProvider(generator, existingFileHelper));
+			generator.addProvider(new MixerRecipeProvider(generator));
 		}
 		if(event.includeClient())
 		{
