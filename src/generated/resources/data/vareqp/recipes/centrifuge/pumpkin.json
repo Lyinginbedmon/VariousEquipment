@@ -1,0 +1,12 @@
+{
+  "type": "vareqp:centrifuge",
+  "input": {
+    "ingredient": {
+      "item": "minecraft:pumpkin"
+    }
+  },
+  "output": {
+    "item": "minecraft:pumpkin_seeds",
+    "count": 4
+  }
+}

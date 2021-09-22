@@ -7,7 +7,9 @@
 		"EntityMixin",
 		"LivingEntityMixin",
 		"MobEntityMixin",
-		"AbstractHorseEntityMixin"
+		"AbstractHorseEntityMixin",
+		"RecipeManagerMixin",
+		"ItemEntityMixin"
 	],
 	"client":
 	[

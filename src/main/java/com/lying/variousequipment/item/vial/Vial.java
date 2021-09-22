@@ -1,6 +1,7 @@
 package com.lying.variousequipment.item.vial;
 
 import java.util.List;
+import java.util.Random;
 
 import javax.annotation.Nonnull;
 
@@ -10,7 +11,9 @@ import com.lying.variousoddities.config.ConfigVO;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
@@ -29,16 +32,25 @@ public abstract class Vial
 	public static final Vial.Builder ALCHEMIST_FIRE	= register(new VialAlchemistFire.Builder());
 	public static final Vial.Builder TANGLEFOOT_BAG	= register(new VialTanglefoot.Builder());
 	public static final Vial.Builder THUNDERSTONE	= register(new VialThunderstone.Builder());
+	public static final Vial.Builder HEALER_BALM	= register(new VialHealerBalm.Builder());
+	public static final Vial.Builder LAVA_STONE	= register(new VialLavaStone.Builder());
 	
 	private final VialType type;
+	private final VialShape shape;
 	private final int maxStackSize;
 	private final int color;
 	
-	protected Vial(VialType typeIn, int stackSize, int colorIn)
+	protected Vial(VialType typeIn, VialShape shapeIn, int stackSize, int colorIn)
 	{
 		this.type = typeIn;
+		this.shape = shapeIn;
 		this.maxStackSize = stackSize;
 		this.color = colorIn;
+	}
+	
+	protected Vial(VialType typeIn, int stackSize, int colorIn)
+	{
+		this(typeIn, VialShape.BOTTLE, stackSize, colorIn);
 	}
 	
 	public static Vial.Builder register(Vial.Builder vialIn)
@@ -63,24 +75,49 @@ public abstract class Vial
 	
 	public boolean usesDefaultItem(){ return true; }
 	
+	public VialShape getShape(){ return this.shape; }
+	
 	public boolean isThrowable(){ return this.type == VialType.THROWABLE; }
 	
 	public boolean isDrinkable(){ return this.type == VialType.DRINKABLE; }
 	
-	public abstract boolean canReturnBottle();
+	public boolean canUse(PlayerEntity player, World world){ return true; }
+	
+	public abstract boolean canDropItem();
+	
+	public ItemStack getDroppedItem(ItemStack stack, Random rand, World world){ return rand.nextInt(7) == 0 ? new ItemStack(Items.GLASS_BOTTLE) : ItemStack.EMPTY; }
 	
 	public int getBurnTime(){ return -1; }
 	
 	/** Applies results of this vial being thrown and striking an object. */
-	public void onSplash(Entity entityIn, World worldIn, RayTraceResult resultIn){ }
+	public boolean onSplash(Entity entityIn, World worldIn, RayTraceResult resultIn){ return true; }
 	
 	/** Applies results of this vial being consumed by an entity. */
 	public void onDrink(ItemStack stack, World worldIn, LivingEntity entityLiving){ }
+	
+	/** Applies effects of this vial on a live thrown object */
+	public void onTick(Entity entityIn, World worldIn){ }
 	
 	public static enum VialType
 	{
 		THROWABLE,
 		DRINKABLE;
+	}
+	
+	public static enum VialShape
+	{
+		BOTTLE(0F),
+		BAG(1F),
+		ROCK(2F);
+		
+		private final float modelNum;
+		
+		private VialShape(float modelIn)
+		{
+			this.modelNum = modelIn;
+		}
+		
+		public float modelNumber(){ return this.modelNum; }
 	}
 	
 	public static abstract class Builder extends ForgeRegistryEntry<Vial.Builder>

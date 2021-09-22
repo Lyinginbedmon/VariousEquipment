@@ -1,0 +1,11 @@
+{
+  "type": "vareqp:centrifuge",
+  "input": {
+    "ingredient": {
+      "tag": "forge:gravel"
+    }
+  },
+  "output": {
+    "table": "minecraft:blocks/gravel"
+  }
+}

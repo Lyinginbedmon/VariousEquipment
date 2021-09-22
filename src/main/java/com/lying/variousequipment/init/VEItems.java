@@ -37,20 +37,41 @@ import com.lying.variousequipment.item.bauble.ItemScarabGolem;
 import com.lying.variousequipment.item.bauble.ItemTails;
 import com.lying.variousequipment.item.bauble.ItemThirdEye;
 import com.lying.variousequipment.item.vial.Vial;
-import com.lying.variousequipment.item.vial.VialTanglefoot;
-import com.lying.variousequipment.item.vial.VialThunderstone;
+import com.lying.variousequipment.item.vial.Vial.VialShape;
 import com.lying.variousequipment.reference.Reference;
 import com.lying.variousoddities.init.VOEnchantments;
 import com.lying.variousoddities.item.VOItemGroup;
 
+import net.minecraft.block.BeehiveBlock;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.CauldronBlock;
+import net.minecraft.block.DispenserBlock;
+import net.minecraft.dispenser.DefaultDispenseItemBehavior;
+import net.minecraft.dispenser.IBlockSource;
+import net.minecraft.dispenser.IDispenseItemBehavior;
+import net.minecraft.dispenser.OptionalDispenseBehavior;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItem;
+import net.minecraft.item.BucketItem;
 import net.minecraft.item.IDyeableArmorItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemModelsProperties;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTier;
+import net.minecraft.item.Items;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.potion.PotionUtils;
+import net.minecraft.potion.Potions;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.FluidTags;
+import net.minecraft.tileentity.BeehiveTileEntity;
+import net.minecraft.tileentity.DispenserTileEntity;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
@@ -143,6 +164,8 @@ public class VEItems
 	public static final Item WHEEL_CRIMSON	= register("crimson_wheel", new ItemWheel(ItemTier.WOOD, new Item.Properties()));
 	public static final Item WHEEL_WARPED	= register("warped_wheel", new ItemWheel(ItemTier.WOOD, new Item.Properties()));
 	public static final Item BLOWPIPE		= register("blowpipe", new ItemBlowpipe(new Item.Properties()));
+	public static final Item MILKFAT		= register("milkfat", new Item(new Item.Properties().group(VEItemGroup.GEAR)));
+	public static final Item SALTPETER		= register("saltpeter", new Item(new Item.Properties().group(VEItemGroup.GEAR)));
 	
 	public static final Item SCARAB_GOLEM	= register("scarab_golem", new ItemScarabGolem(new Item.Properties().group(VOItemGroup.LOOT)));
 	public static final Item STONE_LUCK		= register("luckstone", new ItemLuckstone(new Item.Properties().group(VOItemGroup.LOOT)));
@@ -178,6 +201,92 @@ public class VEItems
 	public static final BlockItem CHASSIS_WARPED		= registerBlock("warped_wagon_chassis", new ItemChassis(VEBlocks.WAGON_CHASSIS_WARPED, new Item.Properties()));
 	public static final BlockItem CENTRIFUGE		= registerBlock("centrifuge", VEBlocks.CENTRIFUGE, VOItemGroup.BLOCKS);
 	public static final BlockItem MIXER				= registerBlock("mixer", VEBlocks.MIXER, VOItemGroup.BLOCKS);
+	public static final BlockItem GUANO				= registerBlock("bat_guano", VEBlocks.GUANO, VOItemGroup.BLOCKS);
+	
+	/** Allows dispensers to empty water buckets into cauldrons */
+	public static final IDispenseItemBehavior DISPENSE_BUCKETS = new OptionalDispenseBehavior()
+    {
+		private final DefaultDispenseItemBehavior defaultBehaviour = new DefaultDispenseItemBehavior();
+		
+        public ItemStack dispenseStack(IBlockSource source, ItemStack stack)
+        {
+    		CompoundNBT stackData = stack.getOrCreateTag();
+    		ItemStack result = new ItemStack(Items.BUCKET);
+    		result.setTag(stackData);
+    		
+        	World world = source.getWorld();
+        	BlockPos pos = source.getBlockPos().offset(source.getBlockState().get(DispenserBlock.FACING));
+        	if(world.getBlockState(pos).getBlock() == Blocks.CAULDRON)
+        	{
+        		this.setSuccessful(true);
+        		world.setBlockState(pos, Blocks.CAULDRON.getDefaultState().with(CauldronBlock.LEVEL, 3));
+        		return result;
+        	}
+        	
+    		BucketItem item = (BucketItem)stack.getItem();
+    		if(item.tryPlaceContainedLiquid(null, world, pos, null))
+    		{
+        		this.setSuccessful(true);
+    			item.onLiquidPlaced(world, stack, pos);
+    			return result;
+    		}
+    		return defaultBehaviour.dispense(source, stack);
+        }
+    };
+	
+	/** Allows dispensers to empty water bottles into cauldrons */
+	public static final IDispenseItemBehavior DISPENSE_BOTTLES = new OptionalDispenseBehavior()
+    {
+		private final DefaultDispenseItemBehavior defaultBehaviour = new DefaultDispenseItemBehavior();
+		
+        public ItemStack dispenseStack(IBlockSource source, ItemStack stack)
+        {
+        	World world = source.getWorld();
+        	BlockPos pos = source.getBlockPos().offset(source.getBlockState().get(DispenserBlock.FACING));
+    		BlockState state = world.getBlockState(pos);
+        	if(PotionUtils.getPotionTypeFromNBT(stack.getOrCreateTag()) == Potions.WATER)
+        	{
+	        	if(world.getBlockState(pos).getBlock() == Blocks.CAULDRON)
+	        	{
+	        		setSuccessful(true);
+	        		world.setBlockState(pos, state.with(CauldronBlock.LEVEL, Math.min(3, state.get(CauldronBlock.LEVEL) + 1)));
+	        		stack.shrink(1);
+	        		return new ItemStack(Items.GLASS_BOTTLE);
+	        	}
+        	}
+        	else if(PotionUtils.getPotionTypeFromNBT(stack.getOrCreateTag()) == Potions.EMPTY)
+        		if(world.getBlockState(pos).getBlock() == Blocks.CAULDRON && state.get(CauldronBlock.LEVEL) > 0)
+        		{
+        			this.setSuccessful(true);
+        			world.setBlockState(pos, state.with(CauldronBlock.LEVEL, Math.max(0, state.get(CauldronBlock.LEVEL) - 1)));
+	    			return glassBottleFill(source, stack, PotionUtils.addPotionToItemStack(new ItemStack(Items.POTION), Potions.WATER));
+        		}
+        		else if(state.isInAndMatches(BlockTags.BEEHIVES, (blockstate) -> { return blockstate.hasProperty(BeehiveBlock.HONEY_LEVEL); }) && state.get(BeehiveBlock.HONEY_LEVEL) >= 5)
+	    		{
+	    			this.setSuccessful(true);
+	    			((BeehiveBlock)state.getBlock()).takeHoney(world, state, pos, (PlayerEntity)null, BeehiveTileEntity.State.BEE_RELEASED);
+	    			return glassBottleFill(source, stack, new ItemStack(Items.HONEY_BOTTLE));
+	    		}
+	    		else if(world.getFluidState(pos).isTagged(FluidTags.WATER))
+	    		{
+	    			this.setSuccessful(true);
+	    			return glassBottleFill(source, stack, PotionUtils.addPotionToItemStack(new ItemStack(Items.POTION), Potions.WATER));
+	    		}
+            return super.dispenseStack(source, stack);
+        }
+        
+		private ItemStack glassBottleFill(IBlockSource source, ItemStack empty, ItemStack filled)
+		{
+			empty.shrink(1);
+			if(empty.isEmpty())
+				return filled.copy();
+			
+			if(source.<DispenserTileEntity>getBlockTileEntity().addItemStack(filled.copy()) < 0)
+				this.defaultBehaviour.dispense(source, filled.copy());
+			
+			return empty;
+		}
+    };
 	
 	public static Item register(String nameIn, Item itemIn)
 	{
@@ -209,6 +318,9 @@ public class VEItems
 	
     public static void onItemsRegistry(final RegistryEvent.Register<Item> itemRegistryEvent)
     {
+    	DispenserBlock.registerDispenseBehavior(Items.WATER_BUCKET, DISPENSE_BUCKETS);
+    	DispenserBlock.registerDispenseBehavior(Items.POTION, DISPENSE_BOTTLES);
+    	
     	IForgeRegistry<Item> registry = itemRegistryEvent.getRegistry();
     	registry.registerAll(ITEMS.toArray(new Item[0]));
     	registry.registerAll(BLOCK_ITEMS.toArray(new Item[0]));
@@ -230,7 +342,12 @@ public class VEItems
 	 	ItemModelsProperties.registerProperty(VIAL_THROWABLE, new ResourceLocation(Reference.ModInfo.MOD_ID, "type"), (stack, world, entity) -> 
 	 		{
 	 			Vial vial = ItemVial.getVialFromItem(stack);
-	 			return vial != null ? (vial.getRegistryName() == VialThunderstone.REGISTRY_NAME ? 1F : vial.getRegistryName() == VialTanglefoot.REGISTRY_NAME ? 2F : 0F) : 0F; 
+	 			return vial != null ? (float)vial.getShape().modelNumber() : VialShape.BOTTLE.modelNumber();
+	 		});
+	 	ItemModelsProperties.registerProperty(VIAL_SOLUTION, new ResourceLocation(Reference.ModInfo.MOD_ID, "type"), (stack, world, entity) -> 
+	 		{
+	 			Vial vial = ItemVial.getVialFromItem(stack);
+	 			return vial != null ? (float)vial.getShape().modelNumber() : VialShape.BOTTLE.modelNumber(); 
 	 		});
     }
 }

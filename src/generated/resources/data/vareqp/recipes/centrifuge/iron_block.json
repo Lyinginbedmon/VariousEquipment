@@ -1,0 +1,12 @@
+{
+  "type": "vareqp:centrifuge",
+  "input": {
+    "ingredient": {
+      "tag": "forge:storage_blocks/iron"
+    }
+  },
+  "output": {
+    "item": "minecraft:iron_ingot",
+    "count": 9
+  }
+}

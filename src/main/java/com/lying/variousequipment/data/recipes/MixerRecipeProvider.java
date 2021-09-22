@@ -15,9 +15,7 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.data.IFinishedRecipe;
 import net.minecraft.data.RecipeProvider;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.item.crafting.IRecipeSerializer;
-import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.INBT;
 import net.minecraft.nbt.NBTDynamicOps;
@@ -42,13 +40,13 @@ public class MixerRecipeProvider extends RecipeProvider
 			{
 				ItemStack input = new ItemStack(VEItems.VIAL_SOLUTION);
 				input.setDamage(damage + 1);
-				ItemVial.addVialToItemStack(input, vial);
+				ItemVial.addVialToItemStack(input, builder);
 				
-				ItemStack output = new ItemStack(damage == 0 ? (vial.isThrowable() ? VEItems.VIAL_THROWABLE : VEItems.VIAL_DRINKABLE) : VEItems.VIAL_SOLUTION);
+				ItemStack output = new ItemStack(VEItems.VIAL_SOLUTION);
 				output.setDamage(damage);
-				ItemVial.addVialToItemStack(output, vial);
+				ItemVial.addVialToItemStack(output, builder);
 				
-				consumer.accept(new FinishedRecipe(id(prefix+"_"+damage), prefix, output, Ingredient.fromStacks(input)));
+				consumer.accept(new FinishedRecipe(id(prefix+"_"+damage), prefix, output, input));
 			}
 		}
 	}
@@ -58,11 +56,11 @@ public class MixerRecipeProvider extends RecipeProvider
 	public static class FinishedRecipe implements IFinishedRecipe
 	{
 		private final ResourceLocation id;
-		private final Ingredient input;
+		private final ItemStack input;
 		private final ItemStack output;
 		private final String group;
 		
-		public FinishedRecipe(ResourceLocation idIn, String groupIn, ItemStack outputIn, Ingredient inputIn)
+		public FinishedRecipe(ResourceLocation idIn, String groupIn, ItemStack outputIn, ItemStack inputIn)
 		{
 			this.id = idIn;
 			this.input = inputIn;
@@ -72,7 +70,7 @@ public class MixerRecipeProvider extends RecipeProvider
 		
 		public void serialize(JsonObject json)
 		{
-			json.add("input", input.serialize());
+			json.add("input", serializeStack(input));
 			json.add("output", serializeStack(output));
 			if(!group.isEmpty())
 				json.addProperty("group", group);

@@ -3,6 +3,7 @@ package com.lying.variousequipment.item.vial;
 import com.lying.variousequipment.reference.Reference;
 
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.ResourceLocation;
@@ -19,7 +20,12 @@ public class VialAntitoxin extends Vial
 	
 	public ResourceLocation getRegistryName(){ return REGISTRY_NAME; }
 	
-	public boolean canReturnBottle(){ return true; }
+	public boolean canDropItem(){ return true; }
+	
+	public boolean canUse(PlayerEntity player, World world)
+	{
+		return player.isPotionActive(Effects.POISON) || player.isPotionActive(Effects.WITHER);
+	}
 	
 	public void onDrink(ItemStack stack, World worldIn, LivingEntity entityLiving)
 	{

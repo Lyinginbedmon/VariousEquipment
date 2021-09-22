@@ -1,0 +1,12 @@
+{
+  "type": "vareqp:centrifuge",
+  "input": {
+    "ingredient": {
+      "tag": "forge:storage_blocks/redstone"
+    }
+  },
+  "output": {
+    "item": "minecraft:redstone",
+    "count": 9
+  }
+}

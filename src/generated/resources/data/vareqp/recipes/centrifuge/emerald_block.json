@@ -1,0 +1,12 @@
+{
+  "type": "vareqp:centrifuge",
+  "input": {
+    "ingredient": {
+      "tag": "forge:storage_blocks/emerald"
+    }
+  },
+  "output": {
+    "item": "minecraft:emerald",
+    "count": 9
+  }
+}

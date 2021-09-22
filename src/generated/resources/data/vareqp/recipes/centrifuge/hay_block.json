@@ -1,0 +1,12 @@
+{
+  "type": "vareqp:centrifuge",
+  "input": {
+    "ingredient": {
+      "item": "minecraft:hay_block"
+    }
+  },
+  "output": {
+    "item": "minecraft:wheat",
+    "count": 9
+  }
+}

@@ -8,16 +8,22 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 import com.google.common.base.Preconditions;
+import com.lying.variousequipment.block.BlockGuano;
+import com.lying.variousequipment.init.VEBlocks;
 import com.lying.variousequipment.init.VEItems;
 import com.lying.variousequipment.init.VELootTables;
 import com.lying.variousequipment.reference.Reference;
 import com.mojang.datafixers.util.Pair;
 
+import net.minecraft.advancements.criterion.StatePropertiesPredicate;
+import net.minecraft.block.Block;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.LootTableProvider;
 import net.minecraft.item.Item;
+import net.minecraft.loot.AlternativesLootEntry;
 import net.minecraft.loot.ConstantRange;
 import net.minecraft.loot.ItemLootEntry;
+import net.minecraft.loot.LootContext;
 import net.minecraft.loot.LootEntry;
 import net.minecraft.loot.LootParameterSet;
 import net.minecraft.loot.LootParameterSets;
@@ -28,12 +34,16 @@ import net.minecraft.loot.RandomValueRange;
 import net.minecraft.loot.StandaloneLootEntry;
 import net.minecraft.loot.TableLootEntry;
 import net.minecraft.loot.ValidationTracker;
+import net.minecraft.loot.conditions.BlockStateProperty;
+import net.minecraft.loot.conditions.EntityHasProperty;
 import net.minecraft.loot.conditions.KilledByPlayer;
 import net.minecraft.loot.conditions.RandomChance;
 import net.minecraft.loot.functions.SetCount;
 import net.minecraft.loot.functions.SetNBT;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.resources.ResourcePackType;
+import net.minecraft.state.IntegerProperty;
+import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Util;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -61,6 +71,7 @@ public class VELootProvider extends LootTableProvider
         tables.clear();
         addMagicItemTables();
         addEntityLootTables();
+        addBlockLootTables();
         addChestLootTables();
         return tables;
     }
@@ -111,6 +122,10 @@ public class VELootProvider extends LootTableProvider
         			.addEntry(itemEntry(VEItems.EARS_PIGLIN, 5))
         			.addEntry(itemEntry(VEItems.NOSE_PIG, 5))
         			.addEntry(itemEntry(VEItems.NOSE_VILLAGER, 5))));
+    }
+    
+    private void addBlockLootTables()
+    {
     }
     
     private void addEntityLootTables()
@@ -494,8 +509,18 @@ public class VELootProvider extends LootTableProvider
         return ItemLootEntry.builder(item).weight(weight);
     }
     
+    private static <T extends Comparable<T> & IStringSerializable> BlockStateProperty.Builder dropWhenValInt(Block block, IntegerProperty property, Integer value)
+    {
+    	return BlockStateProperty.builder(block).fromProperties(StatePropertiesPredicate.Builder.newBuilder().withIntProp(property, value));
+    }
+    
     private void addChestLootTable(String location, LootTable.Builder lootTable) {
         addLootTable(location, lootTable, LootParameterSets.CHEST);
+    }
+    
+    private void addBlockLootTable(Block block, LootTable.Builder lootTable)
+    {
+        addLootTable(block.getLootTable().getPath().toString(), lootTable, LootParameterSets.BLOCK);
     }
     
     private void addEntityLootTable(String location, LootTable.Builder lootTable)

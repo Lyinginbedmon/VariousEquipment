@@ -3,7 +3,12 @@ package com.lying.variousequipment.init;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.lying.variousequipment.block.*;
+import com.lying.variousequipment.block.BlockCentrifuge;
+import com.lying.variousequipment.block.BlockGuano;
+import com.lying.variousequipment.block.BlockLavaStone;
+import com.lying.variousequipment.block.BlockMissing;
+import com.lying.variousequipment.block.BlockMixer;
+import com.lying.variousequipment.block.BlockScreen;
 import com.lying.variousequipment.reference.Reference;
 
 import net.minecraft.block.AbstractBlock;
@@ -52,6 +57,8 @@ public class VEBlocks
 	public static final Block SCREEN_YELLOW		= register("yellow_screen", new BlockScreen(DyeColor.YELLOW, AbstractBlock.Properties.create(Material.ROCK, DyeColor.YELLOW)));
 	public static final Block CENTRIFUGE		= register("centrifuge", new BlockCentrifuge(AbstractBlock.Properties.create(Material.IRON)));
 	public static final Block MIXER				= register("mixer", new BlockMixer(AbstractBlock.Properties.create(Material.IRON)));
+	public static final Block LAVA_STONE		= register("lava_stone", new BlockLavaStone(AbstractBlock.Properties.create(Material.ROCK)));
+	public static final Block GUANO				= register("bat_guano", new BlockGuano(AbstractBlock.Properties.create(Material.MISCELLANEOUS, MaterialColor.BROWN)));
 	
 	public static Block register(String nameIn, Block blockIn)
 	{

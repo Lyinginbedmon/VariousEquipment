@@ -7,19 +7,17 @@ import com.lying.variousequipment.item.ItemVialThrowable;
 import com.lying.variousequipment.item.vial.Vial;
 
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.IRendersAsItem;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.projectile.ProjectileItemEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.network.IPacket;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
 
-public class EntityTossedVial extends ProjectileItemEntity implements IRendersAsItem
+public class EntityTossedVial extends ProjectileItemEntity
 {
 	public EntityTossedVial(EntityType<? extends EntityTossedVial> typeIn, World worldIn)
 	{
@@ -54,6 +52,20 @@ public class EntityTossedVial extends ProjectileItemEntity implements IRendersAs
 	
 	protected float getGravityVelocity(){ return 0.05F; }
 	
+	@SuppressWarnings("deprecation")
+	public void tick()
+	{
+		if(getItem().getItem() instanceof ItemVialThrowable)
+		{
+			Vial vial = ItemVial.getVialFromItem(getItem());
+			if(vial != null)
+				vial.onTick(this, getEntityWorld());
+		}
+		
+		if(!this.removed)
+			super.tick();
+	}
+	
 	protected void onImpact(RayTraceResult result)
 	{
 		super.onImpact(result);
@@ -62,11 +74,11 @@ public class EntityTossedVial extends ProjectileItemEntity implements IRendersAs
 			if(getItem().getItem() instanceof ItemVialThrowable)
 			{
 				Vial vial = ItemVial.getVialFromItem(getItem());
-				vial.onSplash(this, getEntityWorld(), result);
-				this.getEntityWorld().playEvent(2002, this.getPosition(), vial.getColor());
+				if(vial.onSplash(this, getEntityWorld(), result))
+					this.getEntityWorld().playEvent(2002, this.getPosition(), vial.getColor());
 				
-				if(vial.canReturnBottle() && this.rand.nextInt(7) == 0)
-					this.entityDropItem(new ItemStack(Items.GLASS_BOTTLE));
+				if(vial.canDropItem())
+					this.entityDropItem(vial.getDroppedItem(this.getItem(), this.rand, this.getEntityWorld()));
 			}
 			this.remove();
 		}

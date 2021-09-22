@@ -15,14 +15,14 @@ public class VialThunderstone extends Vial
 	
 	public VialThunderstone()
 	{
-		super(VialType.THROWABLE, 8, 13421772);
+		super(VialType.THROWABLE, VialShape.ROCK, 8, 13421772);
 	}
 	
 	public ResourceLocation getRegistryName(){ return REGISTRY_NAME; }
 	
-	public boolean canReturnBottle(){ return false; }
+	public boolean canDropItem(){ return false; }
 	
-	public void onSplash(Entity entityIn, World worldIn, RayTraceResult resultIn)
+	public boolean onSplash(Entity entityIn, World worldIn, RayTraceResult resultIn)
 	{
 //		if(!worldIn.isRemote) PacketHandler.sendToNearby(new PacketVialSonic(entityIn.posX, entityIn.posY, entityIn.posZ), worldIn, entityIn);
 		
@@ -30,6 +30,7 @@ public class VialThunderstone extends Vial
 		double maxDist = 4;
 		for(LivingEntity entity : worldIn.getEntitiesWithinAABB(LivingEntity.class, entityIn.getBoundingBox().grow(maxDist)))
 			entity.attackEntityFrom(VODamageSource.SONIC, (float)Math.ceil(damage * (1F - entity.getDistance(entityIn) / maxDist)));
+		return super.onSplash(entityIn, worldIn, resultIn);
 	}
 	
 	public static class Builder extends Vial.Builder

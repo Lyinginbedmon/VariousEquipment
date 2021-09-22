@@ -19,6 +19,8 @@ public class ItemVialSolution extends Item
 	
 	public int getColor(ItemStack stack){ return ItemVial.getVialFromItem(stack).getColor(); }
 	
+	public boolean hasEffect(ItemStack stack){ return !stack.isDamaged() || super.hasEffect(stack); }
+	
 	public ITextComponent getDisplayName(ItemStack stack)
 	{
 		return new TranslationTextComponent("item.vareqp.vial_solution", new TranslationTextComponent("vial."+Reference.ModInfo.MOD_ID+"."+ItemVial.getVialFromItem(stack).getRegistryName().getPath()));

@@ -89,12 +89,16 @@
 	"item.vareqp.blowpipe": "Blowpipe",
 	"item.vareqp.needle_iron": "Iron Needle",
 	"item.vareqp.vial_solution": "%s Solution",
+	"item.vareqp.milkfat": "Milkfat",
+	"item.vareqp.saltpeter": "Saltpeter",
 	
 	"vial.vareqp.holy_water": "Holy Water",
 	"vial.vareqp.antitoxin": "Antitoxin",
 	"vial.vareqp.alchemist_fire": "Alchemist Fire",
 	"vial.vareqp.tanglefoot_bag": "Tanglefoot Bag",
 	"vial.vareqp.thunderstone": "Thunderstone",
+	"vial.vareqp.healer_balm": "Healer's Balm",
+	"vial.vareqp.lava_stone": "Lava Stone",
 	
 	"entity.vareqp.wagon": "Wagon",
 	
@@ -126,6 +130,8 @@
 	"block.vareqp.warped_wagon_chassis": "Warped Wagon Chassis",
 	"block.vareqp.centrifuge": "Alchemical Centrifuge",
 	"block.vareqp.mixer": "Alchemical Mixer",
+	"block.vareqp.lava_stone": "Lava Stone",
+	"block.vareqp.bat_guano": "Bat Guano",
 	
 	"enchantment.vareqp.silversheen": "Silversheen"
 }

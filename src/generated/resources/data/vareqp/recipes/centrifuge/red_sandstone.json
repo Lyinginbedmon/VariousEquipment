@@ -1,0 +1,12 @@
+{
+  "type": "vareqp:centrifuge",
+  "input": {
+    "ingredient": {
+      "item": "minecraft:red_sandstone"
+    }
+  },
+  "output": {
+    "item": "minecraft:red_sand",
+    "count": 4
+  }
+}

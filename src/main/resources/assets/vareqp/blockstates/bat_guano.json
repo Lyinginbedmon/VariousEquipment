@@ -1,0 +1,29 @@
+{
+  "variants":
+  {
+    "layers=1": {
+      "model": "vareqp:block/guano_height2"
+    },
+    "layers=2": {
+      "model": "vareqp:block/guano_height4"
+    },
+    "layers=3": {
+      "model": "vareqp:block/guano_height6"
+    },
+    "layers=4": {
+      "model": "vareqp:block/guano_height8"
+    },
+    "layers=5": {
+      "model": "vareqp:block/guano_height10"
+    },
+    "layers=6": {
+      "model": "vareqp:block/guano_height12"
+    },
+    "layers=7": {
+      "model": "vareqp:block/guano_height14"
+    },
+    "layers=8": {
+      "model": "vareqp:block/guano_block"
+    }
+  }
+}

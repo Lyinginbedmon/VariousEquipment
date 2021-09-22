@@ -1,0 +1,18 @@
+{
+  "type": "vareqp:mixer",
+  "input": {
+    "nbt": {
+      "Damage": 1,
+      "Vial": "vareqp:tanglefoot_bag"
+    },
+    "item": "vareqp:vial_solution"
+  },
+  "output": {
+    "nbt": {
+      "Damage": 0,
+      "Vial": "vareqp:tanglefoot_bag"
+    },
+    "item": "vareqp:vial_solution"
+  },
+  "group": "tanglefoot_bag"
+}

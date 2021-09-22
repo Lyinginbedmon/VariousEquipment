@@ -1,0 +1,12 @@
+{
+  "type": "vareqp:centrifuge",
+  "input": {
+    "ingredient": {
+      "tag": "forge:storage_blocks/gold"
+    }
+  },
+  "output": {
+    "item": "minecraft:gold_ingot",
+    "count": 9
+  }
+}

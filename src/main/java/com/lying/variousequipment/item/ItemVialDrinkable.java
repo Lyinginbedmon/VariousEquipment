@@ -30,7 +30,11 @@ public class ItemVialDrinkable extends ItemVial
 	
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn)
 	{
-		return DrinkHelper.startDrinking(worldIn, playerIn, handIn);
+		Vial vial = ItemVial.getVialFromItem(playerIn.getHeldItem(handIn));
+		if(vial != null && vial.canUse(playerIn, worldIn))
+			return DrinkHelper.startDrinking(worldIn, playerIn, handIn);
+		else
+			return super.onItemRightClick(worldIn, playerIn, handIn);
 	}
 	
 	public ItemStack onItemUseFinish(ItemStack stack, World worldIn, LivingEntity entityLiving)

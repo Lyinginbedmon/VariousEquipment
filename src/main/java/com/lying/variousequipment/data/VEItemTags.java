@@ -9,9 +9,11 @@ import net.minecraft.data.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.ItemTagsProvider;
 import net.minecraft.item.Item;
+import net.minecraft.item.Items;
 import net.minecraft.tags.ITag;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.InterModComms;
@@ -35,6 +37,10 @@ public class VEItemTags extends ItemTagsProvider
     public static final ITag.INamedTag<Item> CHARM = ItemTags.createOptional(new ResourceLocation(CuriosApi.MODID, "charm"));
     
     public static final ITag.INamedTag<Item> HOLY_SYMBOL = ItemTags.createOptional(new ResourceLocation(Reference.ModInfo.MOD_ID, "holy_symbol"));
+    public static final ITag.INamedTag<Item> FIXATIVES = ItemTags.createOptional(new ResourceLocation(Reference.ModInfo.MOD_ID, "fixatives"));
+    public static final ITag.INamedTag<Item> EXPLOSIVES = ItemTags.createOptional(new ResourceLocation(Reference.ModInfo.MOD_ID, "explosives"));
+    
+    public static final ITag.INamedTag<Item> SHAKEABLES = ItemTags.createOptional(new ResourceLocation(Reference.ModInfo.MOD_ID, "shakeables"));
     
 	public VEItemTags(DataGenerator dataGenerator, @Nullable ExistingFileHelper existingFileHelper)
 	{
@@ -99,6 +105,15 @@ public class VEItemTags extends ItemTagsProvider
 				VEItems.SYMBOL_WOOD
 				);
 		
+		getOrCreateBuilder(FIXATIVES).add(
+				VEItems.MILKFAT, 
+				Items.HONEY_BOTTLE
+				).addTag(Tags.Items.SLIMEBALLS);
+		
+		getOrCreateBuilder(EXPLOSIVES).add(
+				VEItems.SALTPETER
+				).addTag(Tags.Items.GUNPOWDER);
+		
 		getOrCreateBuilder(COSMETIC).add(
 				VEItems.COSTUME,
 				VEItems.EARS_WOLF,
@@ -136,7 +151,7 @@ public class VEItemTags extends ItemTagsProvider
 				VEItems.THIRD_EYE
 				);
 		
-		
+		getOrCreateBuilder(SHAKEABLES).add(VEItems.VIAL_SOLUTION);
 	}
 	
 	@SubscribeEvent

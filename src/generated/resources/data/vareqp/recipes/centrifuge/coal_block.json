@@ -1,0 +1,12 @@
+{
+  "type": "vareqp:centrifuge",
+  "input": {
+    "ingredient": {
+      "tag": "forge:storage_blocks/coal"
+    }
+  },
+  "output": {
+    "item": "minecraft:coal",
+    "count": 9
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "type": "vareqp:centrifuge",
+  "input": {
+    "ingredient": {
+      "tag": "forge:storage_blocks/quartz"
+    }
+  },
+  "output": {
+    "item": "minecraft:quartz",
+    "count": 4
+  }
+}

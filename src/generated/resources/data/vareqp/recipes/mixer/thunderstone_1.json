@@ -1,0 +1,18 @@
+{
+  "type": "vareqp:mixer",
+  "input": {
+    "nbt": {
+      "Damage": 2,
+      "Vial": "vareqp:thunderstone"
+    },
+    "item": "vareqp:vial_solution"
+  },
+  "output": {
+    "nbt": {
+      "Damage": 1,
+      "Vial": "vareqp:thunderstone"
+    },
+    "item": "vareqp:vial_solution"
+  },
+  "group": "thunderstone"
+}

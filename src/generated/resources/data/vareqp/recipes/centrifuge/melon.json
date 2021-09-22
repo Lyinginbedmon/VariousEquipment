@@ -1,0 +1,11 @@
+{
+  "type": "vareqp:centrifuge",
+  "input": {
+    "ingredient": {
+      "item": "minecraft:melon"
+    }
+  },
+  "output": {
+    "table": "minecraft:blocks/melon"
+  }
+}

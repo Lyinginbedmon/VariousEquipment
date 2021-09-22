@@ -1,0 +1,12 @@
+{
+  "type": "vareqp:centrifuge",
+  "input": {
+    "ingredient": {
+      "tag": "forge:storage_blocks/diamond"
+    }
+  },
+  "output": {
+    "item": "minecraft:diamond",
+    "count": 9
+  }
+}

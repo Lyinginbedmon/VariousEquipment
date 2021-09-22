@@ -2,15 +2,8 @@ package com.lying.variousequipment.init;
 
 import java.util.Map;
 
-import com.lying.variousequipment.data.recipes.AntennaRecipe;
-import com.lying.variousequipment.data.recipes.CoatItemRecipe;
-import com.lying.variousequipment.data.recipes.CostumeRecipe;
-import com.lying.variousequipment.data.recipes.HolyWaterRecipe;
-import com.lying.variousequipment.data.recipes.KitsuneTailRecipe;
-import com.lying.variousequipment.data.recipes.RepeatingCrossbowRecipe;
-import com.lying.variousequipment.data.recipes.ScreenRecipe;
-import com.lying.variousequipment.item.crafting.IMixerRecipe;
-import com.lying.variousequipment.item.crafting.RecipeMixer;
+import com.lying.variousequipment.data.recipes.*;
+import com.lying.variousequipment.item.crafting.*;
 import com.lying.variousequipment.mixin.AccessorRecipeManager;
 import com.lying.variousequipment.reference.Reference;
 
@@ -29,12 +22,26 @@ public class VERecipeTypes
 	public static final IRecipeType<IMixerRecipe> MIXER_TYPE = new RecipeType<>();
 	public static final IRecipeSerializer<RecipeMixer> MIXER_SERIALIZER = new RecipeMixer.Serializer();
 	
+	public static final IRecipeType<ICentrifugeRecipe> CENTRIFUGE_TYPE = new RecipeType<>();
+	public static final IRecipeSerializer<RecipeCentrifuge> CENTRIFUGE_SERIALIZER = new RecipeCentrifuge.Serializer();
+	
+	public static final IRecipeType<IAdvFurnaceRecipe> FURNACE_TYPE = new RecipeType<>();
+	public static final IRecipeSerializer<RecipeAdvFurnace> FURNACE_SERIALIZER = new RecipeAdvFurnace.Serializer();
+	
 	public static void onRecipeSerializerRegistry(RegistryEvent.Register<IRecipeSerializer<?>> event)
 	{
     	IForgeRegistry<IRecipeSerializer<?>> registry = event.getRegistry();
-		ResourceLocation id = new ResourceLocation(Reference.ModInfo.MOD_ID, "mixer");
-		Registry.register(Registry.RECIPE_TYPE, id, MIXER_TYPE);
-		registry.register(MIXER_SERIALIZER.setRegistryName(id));
+		ResourceLocation mixerId = new ResourceLocation(Reference.ModInfo.MOD_ID, "mixer");
+		Registry.register(Registry.RECIPE_TYPE, mixerId, MIXER_TYPE);
+		registry.register(MIXER_SERIALIZER.setRegistryName(mixerId));
+		
+		ResourceLocation centrifugeId = new ResourceLocation(Reference.ModInfo.MOD_ID, "centrifuge");
+		Registry.register(Registry.RECIPE_TYPE, centrifugeId, CENTRIFUGE_TYPE);
+		registry.register(CENTRIFUGE_SERIALIZER.setRegistryName(centrifugeId));
+		
+		ResourceLocation furnaceId = new ResourceLocation(Reference.ModInfo.MOD_ID, "adv_smelting");
+		Registry.register(Registry.RECIPE_TYPE, furnaceId, FURNACE_TYPE);
+		registry.register(FURNACE_SERIALIZER.setRegistryName(furnaceId));
 		
     	registry.register(CoatItemRecipe.SERIALIZER.setRegistryName(new ResourceLocation(Reference.ModInfo.MOD_ID, "coat_item")));
     	registry.register(HolyWaterRecipe.SERIALIZER.setRegistryName(new ResourceLocation(Reference.ModInfo.MOD_ID, "holy_water")));

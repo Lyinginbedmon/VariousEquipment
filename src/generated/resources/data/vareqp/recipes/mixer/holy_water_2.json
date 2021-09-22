@@ -1,0 +1,18 @@
+{
+  "type": "vareqp:mixer",
+  "input": {
+    "nbt": {
+      "Damage": 3,
+      "Vial": "vareqp:holy_water"
+    },
+    "item": "vareqp:vial_solution"
+  },
+  "output": {
+    "nbt": {
+      "Damage": 2,
+      "Vial": "vareqp:holy_water"
+    },
+    "item": "vareqp:vial_solution"
+  },
+  "group": "holy_water"
+}

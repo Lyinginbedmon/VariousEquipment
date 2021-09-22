@@ -26,9 +26,9 @@ public class VialHolyWater extends Vial
 	
 	public ResourceLocation getRegistryName(){ return REGISTRY_NAME; }
 	
-	public boolean canReturnBottle(){ return true; }
+	public boolean canDropItem(){ return true; }
 	
-	public void onSplash(Entity entityIn, World worldIn, RayTraceResult resultIn)
+	public boolean onSplash(Entity entityIn, World worldIn, RayTraceResult resultIn)
 	{
 		AxisAlignedBB boundingBox = entityIn.getBoundingBox().grow(4, 2, 4);
 		List<LivingEntity> affected = worldIn.getEntitiesWithinAABB(LivingEntity.class, boundingBox);
@@ -50,6 +50,7 @@ public class VialHolyWater extends Vial
 						living.addPotionEffect(new EffectInstance(Effects.STRENGTH, Reference.Values.TICKS_PER_SECOND * 10, 0));
 					}
 				});
+		return super.onSplash(entityIn, worldIn, resultIn);
 	}
 	
 	public static class Builder extends Vial.Builder

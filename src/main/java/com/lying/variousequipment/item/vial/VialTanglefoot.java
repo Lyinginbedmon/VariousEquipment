@@ -17,14 +17,14 @@ public class VialTanglefoot extends Vial
 	
 	public VialTanglefoot()
 	{
-		super(VialType.THROWABLE, 4, 9953313);
+		super(VialType.THROWABLE, VialShape.BAG, 4, 9953313);
 	}
 	
 	public ResourceLocation getRegistryName(){ return REGISTRY_NAME; }
 	
-	public boolean canReturnBottle(){ return true; }
+	public boolean canDropItem(){ return true; }
 	
-	public void onSplash(Entity entityIn, World worldIn, RayTraceResult resultIn)
+	public boolean onSplash(Entity entityIn, World worldIn, RayTraceResult resultIn)
 	{
 		for(LivingEntity ent : worldIn.getEntitiesWithinAABB(LivingEntity.class, entityIn.getBoundingBox().grow(RADIUS, 1, RADIUS)))
 		{
@@ -33,6 +33,7 @@ public class VialTanglefoot extends Vial
 			int duration = (ent.getRNG().nextInt(4) + 1) + (ent.getRNG().nextInt(4) + 1);
 			ent.addPotionEffect(new EffectInstance(VOPotions.ENTANGLED, Reference.Values.TICKS_PER_SECOND * duration));
 		}
+		return super.onSplash(entityIn, worldIn, resultIn);
 	}
 	
 	public static class Builder extends Vial.Builder

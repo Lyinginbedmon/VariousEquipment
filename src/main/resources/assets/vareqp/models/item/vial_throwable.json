@@ -11,13 +11,13 @@
             "predicate": {
                 "vareqp:type": 1
             },
-            "model": "vareqp:item/vial_stone"
+            "model": "vareqp:item/vial_bag"
         },
         {
             "predicate": {
                 "vareqp:type": 2
             },
-            "model": "vareqp:item/vial_bag"
+            "model": "vareqp:item/vial_stone"
         }
     ]
 }

@@ -1,0 +1,12 @@
+{
+  "type": "vareqp:centrifuge",
+  "input": {
+    "ingredient": {
+      "item": "minecraft:honey_block"
+    }
+  },
+  "output": {
+    "item": "minecraft:honey_bottle",
+    "count": 4
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "type": "vareqp:centrifuge",
+  "input": {
+    "ingredient": {
+      "tag": "forge:storage_blocks/lapis"
+    }
+  },
+  "output": {
+    "item": "minecraft:lapis_lazuli",
+    "count": 9
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "type": "vareqp:centrifuge",
+  "input": {
+    "ingredient": {
+      "tag": "forge:storage_blocks/netherite"
+    }
+  },
+  "output": {
+    "item": "minecraft:netherite_ingot",
+    "count": 9
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "type": "vareqp:mixer",
+  "input": {
+    "nbt": {
+      "Damage": 1,
+      "Vial": "vareqp:lava_stone"
+    },
+    "item": "vareqp:vial_solution"
+  },
+  "output": {
+    "nbt": {
+      "Damage": 0,
+      "Vial": "vareqp:lava_stone"
+    },
+    "item": "vareqp:vial_solution"
+  },
+  "group": "lava_stone"
+}

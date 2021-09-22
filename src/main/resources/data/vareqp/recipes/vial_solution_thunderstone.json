@@ -1,0 +1,19 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients":
+    [
+        { "tag": "vareqp:explosives" },
+        { "tag": "vareqp:explosives" },
+        { "tag": "vareqp:fixatives" },
+        { "tag": "forge:gravel" },
+        { "tag": "forge:nuggets/iron" }
+    ],
+    "result": {
+	    "nbt": {
+	      "Vial": "vareqp:thunderstone"
+	    },
+        "item": "vareqp:vial_solution",
+        "count": 1
+    },
+    "group": "thunderstone"
+}

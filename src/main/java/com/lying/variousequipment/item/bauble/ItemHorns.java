@@ -1,19 +1,6 @@
 package com.lying.variousequipment.item.bauble;
 
-import com.lying.variousequipment.client.model.bauble.ModelAntenna;
-import com.lying.variousequipment.client.model.bauble.ModelEarsCat;
-import com.lying.variousequipment.client.model.bauble.ModelEarsElf;
-import com.lying.variousequipment.client.model.bauble.ModelEarsGoblin;
-import com.lying.variousequipment.client.model.bauble.ModelEarsPiglin;
-import com.lying.variousequipment.client.model.bauble.ModelEarsRabbit;
-import com.lying.variousequipment.client.model.bauble.ModelEarsWolf;
-import com.lying.variousequipment.client.model.bauble.ModelGillsAxolotl;
-import com.lying.variousequipment.client.model.bauble.ModelHorns;
-import com.lying.variousequipment.client.model.bauble.ModelHornsDeer;
-import com.lying.variousequipment.client.model.bauble.ModelHornsHartebeest;
-import com.lying.variousequipment.client.model.bauble.ModelHornsRam;
-import com.lying.variousequipment.client.model.bauble.ModelNosePig;
-import com.lying.variousequipment.client.model.bauble.ModelNoseVillager;
+import com.lying.variousequipment.client.model.bauble.*;
 import com.lying.variousequipment.init.VEItems;
 import com.lying.variousequipment.item.VEItemGroup;
 import com.lying.variousequipment.reference.Reference;
@@ -62,6 +49,7 @@ public abstract class ItemHorns extends ItemCosmetic implements IDyeableArmorIte
 	@OnlyIn(Dist.CLIENT)
 	public abstract ResourceLocation getTexture(ItemStack stack);
 	
+	@OnlyIn(Dist.CLIENT)
 	@SuppressWarnings("unchecked")
 	public void render(String identifier, int index, MatrixStack matrixStackIn, IRenderTypeBuffer renderTypeBuffer,
 			int light, LivingEntity living, float limbSwing, float limbSwingAmount, float partialTicks,
@@ -90,6 +78,7 @@ public abstract class ItemHorns extends ItemCosmetic implements IDyeableArmorIte
 			super(properties);
 		}
 		
+		@OnlyIn(Dist.CLIENT)
 		@SuppressWarnings("unchecked")
 		public void render(String identifier, int index, MatrixStack matrixStackIn, IRenderTypeBuffer renderTypeBuffer,
 				int light, LivingEntity living, float limbSwing, float limbSwingAmount, float partialTicks,
@@ -200,6 +189,7 @@ public abstract class ItemHorns extends ItemCosmetic implements IDyeableArmorIte
 		
 		protected int getDefaultColor(){ return DyeColor.CYAN.getColorValue(); }
 		
+		@OnlyIn(Dist.CLIENT)
 		@SuppressWarnings({ "unchecked", "deprecation" })
 		public void render(String identifier, int index, MatrixStack matrixStackIn, IRenderTypeBuffer renderTypeBuffer,
 				int light, LivingEntity living, float limbSwing, float limbSwingAmount, float partialTicks,
@@ -344,6 +334,7 @@ public abstract class ItemHorns extends ItemCosmetic implements IDyeableArmorIte
 			stack.setTag(stackData);
 		}
 		
+		@OnlyIn(Dist.CLIENT)
 		@SuppressWarnings("unchecked")
 		public void render(String identifier, int index, MatrixStack matrixStackIn, IRenderTypeBuffer renderTypeBuffer,
 				int light, LivingEntity living, float limbSwing, float limbSwingAmount, float partialTicks,
@@ -427,8 +418,8 @@ public abstract class ItemHorns extends ItemCosmetic implements IDyeableArmorIte
 		{
 			super(properties);
 		}
-
-		@Override
+		
+		@OnlyIn(Dist.CLIENT)
 		public ModelHorns<LivingEntity> getModel(){ return new ModelEarsPiglin<LivingEntity>(); }
 
 		@Override
@@ -446,7 +437,7 @@ public abstract class ItemHorns extends ItemCosmetic implements IDyeableArmorIte
 			super(properties);
 		}
 		
-		@Override
+		@OnlyIn(Dist.CLIENT)
 		public ModelHorns<LivingEntity> getModel(){ return new ModelNoseVillager<LivingEntity>(); }
 		
 		@Override
@@ -464,7 +455,7 @@ public abstract class ItemHorns extends ItemCosmetic implements IDyeableArmorIte
 			super(properties);
 		}
 		
-		@Override
+		@OnlyIn(Dist.CLIENT)
 		public ModelHorns<LivingEntity> getModel(){ return new ModelNoseVillager.Witch<LivingEntity>(); }
 		
 		@Override
@@ -480,6 +471,7 @@ public abstract class ItemHorns extends ItemCosmetic implements IDyeableArmorIte
 			super(properties);
 		}
 		
+		@OnlyIn(Dist.CLIENT)
 		public ModelHorns<LivingEntity> getModel(){ return new ModelEarsElf<LivingEntity>(); }
 		
 		public ResourceLocation getTexture(ItemStack stack){ return TEXTURE; }
@@ -496,6 +488,7 @@ public abstract class ItemHorns extends ItemCosmetic implements IDyeableArmorIte
 			super(properties);
 		}
 		
+		@OnlyIn(Dist.CLIENT)
 		public ModelHorns<LivingEntity> getModel(){ return new ModelEarsGoblin<LivingEntity>(); }
 		
 		public ResourceLocation getTexture(ItemStack stack){ return TEXTURE; }

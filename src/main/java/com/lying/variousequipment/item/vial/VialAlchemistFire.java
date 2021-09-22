@@ -21,11 +21,11 @@ public class VialAlchemistFire extends Vial
 	
 	public ResourceLocation getRegistryName(){ return REGISTRY_NAME; }
 	
-	public boolean canReturnBottle(){ return false; }
+	public boolean canDropItem(){ return false; }
 	
 	public int getBurnTime(){ return 16 * Reference.Values.TICKS_PER_SECOND * 10; }
 	
-	public void onSplash(Entity entityIn, World worldIn, RayTraceResult resultIn)
+	public boolean onSplash(Entity entityIn, World worldIn, RayTraceResult resultIn)
 	{
 		for(int x = -RADIUS; x<=RADIUS; x++)
 			for(int y = -(RADIUS / 2); y<=(RADIUS / 2); y++)
@@ -34,6 +34,7 @@ public class VialAlchemistFire extends Vial
 					BlockPos pos = new BlockPos(entityIn.getPosX() + x, entityIn.getPosY() + y, entityIn.getPosZ() + z);
 					if(worldIn.isAirBlock(pos) && worldIn.rand.nextInt(3) == 0) worldIn.setBlockState(pos, Blocks.FIRE.getDefaultState());
 				}
+		return super.onSplash(entityIn, worldIn, resultIn);
 	}
 	
 	public static class Builder extends Vial.Builder

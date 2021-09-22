@@ -21,6 +21,8 @@ public class VELootTables
 	public static final ResourceLocation MAGIC_ITEM_MEDIUM	= new ResourceLocation(Reference.ModInfo.MOD_ID, "magic_item_medium");
 	public static final ResourceLocation MAGIC_ITEM_MAJOR	= new ResourceLocation(Reference.ModInfo.MOD_ID, "magic_item_major");
 	
+	public static final ResourceLocation BLOCK_BAT_GUANO	= new ResourceLocation(Reference.ModInfo.MOD_ID, "blocks/bat_guano");
+	
 	public static void onLootLoadEvent(LootTableLoadEvent event)
 	{
 		if(event.getName().getNamespace().equals("minecraft"))

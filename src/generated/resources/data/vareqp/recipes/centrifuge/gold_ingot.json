@@ -1,0 +1,12 @@
+{
+  "type": "vareqp:centrifuge",
+  "input": {
+    "ingredient": {
+      "tag": "forge:ingots/gold"
+    }
+  },
+  "output": {
+    "item": "minecraft:gold_nugget",
+    "count": 9
+  }
+}
