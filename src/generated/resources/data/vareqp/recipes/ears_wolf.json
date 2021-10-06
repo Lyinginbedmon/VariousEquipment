@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "ears_wolf",
+  "ingredients": [
+    {
+      "item": "vareqp:ears_cat"
+    }
+  ],
+  "result": {
+    "item": "vareqp:ears_wolf"
+  }
+}

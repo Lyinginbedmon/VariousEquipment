@@ -1,0 +1,11 @@
+{
+  "type": "vareqp:centrifuge",
+  "input": {
+    "ingredient": {
+      "item": "minecraft:milk_bucket"
+    }
+  },
+  "output": {
+    "table": "vareqp:centrifuge/fat_from_milk"
+  }
+}

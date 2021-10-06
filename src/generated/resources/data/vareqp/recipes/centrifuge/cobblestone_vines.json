@@ -1,0 +1,11 @@
+{
+  "type": "vareqp:centrifuge",
+  "input": {
+    "ingredient": {
+      "item": "minecraft:mossy_cobblestone"
+    }
+  },
+  "output": {
+    "table": "vareqp:centrifuge/cobblestone_vines"
+  }
+}

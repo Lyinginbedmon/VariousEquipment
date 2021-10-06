@@ -1,0 +1,13 @@
+{
+  "type": "vareqp:alembic",
+  "input": {
+    "ingredients": [
+      {
+        "item": "vareqp:bat_guano"
+      }
+    ]
+  },
+  "output": {
+    "item": "vareqp:saltpeter"
+  }
+}

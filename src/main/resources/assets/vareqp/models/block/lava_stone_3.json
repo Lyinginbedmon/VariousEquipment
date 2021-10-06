@@ -1,0 +1,6 @@
+{
+  "parent": "vareqp:block/lava_stone",
+  "textures": {
+    "rock": "vareqp:blocks/lava_stone_3"
+  }
+}

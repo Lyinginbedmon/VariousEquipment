@@ -4,11 +4,11 @@
 	"mixins":
 	[
 		"AccessorRecipeManager",
+		"RecipeManagerMixin",
 		"EntityMixin",
 		"LivingEntityMixin",
 		"MobEntityMixin",
 		"AbstractHorseEntityMixin",
-		"RecipeManagerMixin",
 		"ItemEntityMixin"
 	],
 	"client":

@@ -1,0 +1,22 @@
+{
+    "parent": "vareqp:item/sun_stone",
+    "overrides":
+    [
+        { "predicate": { "side": 0.0, "moonlight": 0.00 }, "model": "vareqp:item/sun_stone" },
+        { "predicate": { "side": 0.0, "moonlight": 0.03 }, "model": "vareqp:item/sun_stone_1" },
+        { "predicate": { "side": 0.0, "moonlight": 0.06 }, "model": "vareqp:item/sun_stone_2" },
+        { "predicate": { "side": 0.0, "moonlight": 0.20 }, "model": "vareqp:item/moon_stone_full" },
+        { "predicate": { "side": 0.0, "moonlight": 0.30 }, "model": "vareqp:item/moon_stone_waning_gibbous" },
+        { "predicate": { "side": 0.0, "moonlight": 0.40 }, "model": "vareqp:item/moon_stone_third_quarter" },
+        { "predicate": { "side": 0.0, "moonlight": 0.50 }, "model": "vareqp:item/moon_stone_waxing_crescent" },
+        { "predicate": { "side": 0.0, "moonlight": 0.60 }, "model": "vareqp:item/moon_stone_new" },
+        { "predicate": { "side": 0.0, "moonlight": 0.70 }, "model": "vareqp:item/moon_stone_waning_crescent" },
+        { "predicate": { "side": 0.0, "moonlight": 0.80 }, "model": "vareqp:item/moon_stone_first_quarter" },
+        { "predicate": { "side": 0.0, "moonlight": 0.90 }, "model": "vareqp:item/moon_stone_waxing_gibbous" },
+        { "predicate": { "side": 1.0, "sunlight": 0.00 }, "model": "vareqp:item/sun_stone" },
+        { "predicate": { "side": 1.0, "sunlight": 0.25 }, "model": "vareqp:item/sun_stone_1" },
+        { "predicate": { "side": 1.0, "sunlight": 0.50 }, "model": "vareqp:item/sun_stone_2" },
+        { "predicate": { "side": 1.0, "sunlight": 0.75 }, "model": "vareqp:item/sun_stone_3" },
+        { "predicate": { "side": 1.0, "sunlight": 1.00 }, "model": "vareqp:item/sun_stone_4" }
+    ]
+}

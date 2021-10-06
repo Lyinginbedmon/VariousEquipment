@@ -1,0 +1,44 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "name": "vines",
+      "rolls": {
+        "min": 0.0,
+        "max": 1.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 1.0,
+                "max": 2.0,
+                "type": "minecraft:uniform"
+              }
+            }
+          ],
+          "name": "minecraft:vine"
+        }
+      ]
+    },
+    {
+      "name": "cobblestone",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:cobblestone"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 2,
+          "name": "minecraft:mossy_cobblestone"
+        }
+      ]
+    }
+  ]
+}

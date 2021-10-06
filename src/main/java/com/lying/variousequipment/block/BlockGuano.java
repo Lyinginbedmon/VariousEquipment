@@ -37,7 +37,7 @@ public class BlockGuano extends Block
 	
 	public BlockGuano(Properties properties)
 	{
-		super(properties.hardnessAndResistance(0.1F).setRequiresTool().sound(SoundType.SAND));
+		super(properties.hardnessAndResistance(0.1F).sound(SoundType.SAND));
 		this.setDefaultState(this.stateContainer.getBaseState().with(LAYERS, Integer.valueOf(1)));
 	}
 	
@@ -64,6 +64,10 @@ public class BlockGuano extends Block
 	public boolean isTransparent(BlockState state){ return state.get(LAYERS) < 8; }
 	
 	public boolean isToolEffective(BlockState state, ToolType tool){ return tool == ToolType.SHOVEL; }
+	
+	public ToolType getHarvestTool(BlockState state){ return ToolType.SHOVEL; }
+	
+	public int getHarvestLevel(BlockState state){ return 0; }
 	
 	public boolean isReplaceable(BlockState state, BlockItemUseContext useContext)
 	{

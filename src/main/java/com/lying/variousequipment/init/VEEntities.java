@@ -4,15 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.google.common.collect.Lists;
-import com.lying.variousequipment.entity.EntityCaltrop;
-import com.lying.variousequipment.entity.EntityNeedle;
-import com.lying.variousequipment.entity.EntityTossedVial;
-import com.lying.variousequipment.entity.EntityWagon;
+import com.lying.variousequipment.entity.*;
 import com.lying.variousequipment.reference.Reference;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -31,6 +29,7 @@ public class VEEntities
     public static final RegistryObject<EntityType<EntityNeedle>> NEEDLE				= registerType("needle", EntityNeedle::new, EntityClassification.MISC, 0.3125F, 0.3125F, 4);
     
     public static final RegistryObject<EntityType<EntityWagon>> WAGON				= registerType("wagon", EntityWagon::new, EntityClassification.MISC, 3.5F, 0.75F, 16);
+    public static final RegistryObject<EntityType<EntityScarecrow>> SCARECROW		= registerType("scarecrow", EntityScarecrow::new, EntityClassification.MISC, 0.5F, 1.975F, 10);
     
 	private static <T extends Entity> RegistryObject<EntityType<T>> registerType(String name, EntityType.IFactory<T> factory, EntityClassification type, float width, float height, int trackingRange)
 	{
@@ -70,5 +69,6 @@ public class VEEntities
     public static void registerAttributes(EntityAttributeCreationEvent event)
     {
     	event.put(WAGON.get(), EntityWagon.getAttributes().create());
+    	event.put(SCARECROW.get(), LivingEntity.registerAttributes().create());
     }
 }

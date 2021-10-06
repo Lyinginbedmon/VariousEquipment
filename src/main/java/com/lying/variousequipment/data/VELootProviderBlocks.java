@@ -28,6 +28,7 @@ import net.minecraft.item.Item;
 import net.minecraft.loot.AlternativesLootEntry;
 import net.minecraft.loot.ConstantRange;
 import net.minecraft.loot.ItemLootEntry;
+import net.minecraft.loot.LootContext;
 import net.minecraft.loot.LootEntry;
 import net.minecraft.loot.LootParameterSets;
 import net.minecraft.loot.LootPool;
@@ -35,6 +36,7 @@ import net.minecraft.loot.LootTable;
 import net.minecraft.loot.LootTableManager;
 import net.minecraft.loot.StandaloneLootEntry;
 import net.minecraft.loot.conditions.BlockStateProperty;
+import net.minecraft.loot.conditions.EntityHasProperty;
 import net.minecraft.loot.conditions.ILootCondition;
 import net.minecraft.loot.conditions.MatchTool;
 import net.minecraft.loot.conditions.SurvivesExplosion;
@@ -70,8 +72,6 @@ public class VELootProviderBlocks implements IDataProvider
 			
 			if(b instanceof SlabBlock)
 				functionTable.put(b, VELootProviderBlocks::genSlab);
-			else
-				functionTable.put(b, VELootProviderBlocks::genRegular);
 		}
 		
 		// Empty
@@ -84,10 +84,27 @@ public class VELootProviderBlocks implements IDataProvider
 		functionTable.put(VEBlocks.WAGON_CHASSIS_SPRUCE, VELootProviderBlocks::empty);
 		functionTable.put(VEBlocks.WAGON_CHASSIS_WARPED, VELootProviderBlocks::empty);
 		functionTable.put(VEBlocks.SPINNY_ARMS, VELootProviderBlocks::empty);
+		functionTable.put(VEBlocks.NIGHT_POWDER_VIS, VELootProviderBlocks::empty);
 		functionTable.put(VEBlocks.LAVA_STONE, VELootProviderBlocks::empty);
 		
 		// Special
-		functionTable.put(VEBlocks.GUANO, VELootProviderBlocks::genLayers);
+		functionTable.put(VEBlocks.GUANO, (block) -> 
+			{
+				LootEntry.Builder<?> entry = AlternativesLootEntry.builder(
+		    			itemEntry(block).acceptCondition(dropWhenValInt(block, BlockGuano.LAYERS, Integer.valueOf(1))),
+		    			itemEntry(block).acceptCondition(dropWhenValInt(block, BlockGuano.LAYERS, Integer.valueOf(2))).acceptFunction(SetCount.builder(ConstantRange.of(2))),
+		    			itemEntry(block).acceptCondition(dropWhenValInt(block, BlockGuano.LAYERS, Integer.valueOf(3))).acceptFunction(SetCount.builder(ConstantRange.of(3))),
+		    			itemEntry(block).acceptCondition(dropWhenValInt(block, BlockGuano.LAYERS, Integer.valueOf(4))).acceptFunction(SetCount.builder(ConstantRange.of(4))),
+		    			itemEntry(block).acceptCondition(dropWhenValInt(block, BlockGuano.LAYERS, Integer.valueOf(5))).acceptFunction(SetCount.builder(ConstantRange.of(5))),
+		    			itemEntry(block).acceptCondition(dropWhenValInt(block, BlockGuano.LAYERS, Integer.valueOf(6))).acceptFunction(SetCount.builder(ConstantRange.of(6))),
+		    			itemEntry(block).acceptCondition(dropWhenValInt(block, BlockGuano.LAYERS, Integer.valueOf(7))).acceptFunction(SetCount.builder(ConstantRange.of(7))),
+		    			itemEntry(block).acceptFunction(SetCount.builder(ConstantRange.of(8)))
+		    			);
+				LootPool.Builder pool = LootPool.builder().name("main").rolls(ConstantRange.of(1)).addEntry(entry)
+						.acceptCondition(EntityHasProperty.builder(LootContext.EntityTarget.THIS))
+						.acceptCondition(SurvivesExplosion.builder());
+				return LootTable.builder().addLootPool(pool);
+			});
 	}
 	
 	@SuppressWarnings("deprecation")
@@ -95,23 +112,25 @@ public class VELootProviderBlocks implements IDataProvider
 	public void act(DirectoryCache cache) throws IOException
 	{
 		Map<ResourceLocation, LootTable.Builder> tables = new HashMap<>();
-
-		for (Block b : Registry.BLOCK) {
+		for (Block b : Registry.BLOCK)
+		{
 			ResourceLocation id = Registry.BLOCK.getKey(b);
-			if (!Reference.ModInfo.MOD_ID.equals(id.getNamespace())) {
+			if (!Reference.ModInfo.MOD_ID.equals(id.getNamespace()))
 				continue;
-			}
+			
 			Function<Block, LootTable.Builder> func = functionTable.getOrDefault(b, VELootProviderBlocks::genRegular);
 			tables.put(id, func.apply(b));
 		}
 
-		for (Map.Entry<ResourceLocation, LootTable.Builder> e : tables.entrySet()) {
+		for (Map.Entry<ResourceLocation, LootTable.Builder> e : tables.entrySet())
+		{
 			Path path = getPath(generator.getOutputFolder(), e.getKey());
 			IDataProvider.save(GSON, cache, LootTableManager.toJson(e.getValue().setParameterSet(LootParameterSets.BLOCK).build()), path);
 		}
 	}
 	
-	protected static Path getPath(Path root, ResourceLocation id) {
+	protected static Path getPath(Path root, ResourceLocation id)
+	{
 		return root.resolve("data/" + id.getNamespace() + "/loot_tables/blocks/" + id.getPath() + ".json");
 	}
 	
@@ -158,37 +177,15 @@ public class VELootProviderBlocks implements IDataProvider
 				.acceptCondition(SurvivesExplosion.builder());
 		return LootTable.builder().addLootPool(pool);
 	}
-
-	protected static LootTable.Builder genLayers(Block b)
+	
+	private static StandaloneLootEntry.Builder<?> itemEntry(Block item)
 	{
-		return genLayers(b, b.asItem());
+		return itemEntry(item.asItem());
 	}
 	
-	protected static LootTable.Builder genLayers(Block b, Item i)
+	private static StandaloneLootEntry.Builder<?> itemEntry(Item item)
 	{
-		LootEntry.Builder<?> entry = AlternativesLootEntry.builder(
-    			(itemEntry(i, 1, 1).acceptCondition(dropWhenValInt(b, BlockGuano.LAYERS, Integer.valueOf(1)))),
-    			(itemEntry(i, 1, 2).acceptCondition(dropWhenValInt(b, BlockGuano.LAYERS, Integer.valueOf(2)))),
-    			(itemEntry(i, 1, 3).acceptCondition(dropWhenValInt(b, BlockGuano.LAYERS, Integer.valueOf(3)))),
-    			(itemEntry(i, 1, 4).acceptCondition(dropWhenValInt(b, BlockGuano.LAYERS, Integer.valueOf(4)))),
-    			(itemEntry(i, 1, 5).acceptCondition(dropWhenValInt(b, BlockGuano.LAYERS, Integer.valueOf(5)))),
-    			(itemEntry(i, 1, 6).acceptCondition(dropWhenValInt(b, BlockGuano.LAYERS, Integer.valueOf(6)))),
-    			(itemEntry(i, 1, 7).acceptCondition(dropWhenValInt(b, BlockGuano.LAYERS, Integer.valueOf(7)))),
-    			(itemEntry(i, 1, 8).acceptCondition(dropWhenValInt(b, BlockGuano.LAYERS, Integer.valueOf(8))))
-    			);
-		LootPool.Builder pool = LootPool.builder().name("main").rolls(ConstantRange.of(1)).addEntry(entry)
-				.acceptCondition(SurvivesExplosion.builder());
-		return LootTable.builder().addLootPool(pool);
-	}
-	
-	private static StandaloneLootEntry.Builder<?> itemEntry(Item item, int weight, int count)
-	{
-		return itemEntry(item, weight).acceptFunction(SetCount.builder(ConstantRange.of(count)));
-	}
-	
-	private static StandaloneLootEntry.Builder<?> itemEntry(Item item, int weight)
-	{
-		return ItemLootEntry.builder(item).weight(weight);
+		return ItemLootEntry.builder(item);
 	}
     
     private static <T extends Comparable<T> & IStringSerializable> BlockStateProperty.Builder dropWhenValInt(Block block, IntegerProperty property, Integer value)

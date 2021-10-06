@@ -4,9 +4,10 @@ import com.lying.variousequipment.tileentity.TileEntitySpinny;
 
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.ITileEntityProvider;
+import net.minecraft.block.ContainerBlock;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemStack;
@@ -23,14 +24,18 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 
-@SuppressWarnings("deprecation")
-public abstract class BlockSpinny extends Block implements ITileEntityProvider
+public abstract class BlockSpinny extends ContainerBlock
 {
 	protected static final VoxelShape SHAPE = VoxelShapes.or(Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 13D, 14.0D), Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 5.0D, 16.0D));
 	
 	public BlockSpinny(AbstractBlock.Properties propertiesIn)
 	{
 		super(propertiesIn.hardnessAndResistance(2F, 5F).notSolid());
+	}
+	
+	public BlockRenderType getRenderType(BlockState state)
+	{
+		return BlockRenderType.MODEL;
 	}
 	
 	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context)

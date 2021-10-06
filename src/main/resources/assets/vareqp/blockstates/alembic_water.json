@@ -1,0 +1,9 @@
+{
+    "variants":
+    {
+    	"facing=north": { "model": "vareqp:block/alembic_water" },
+    	"facing=south": { "model": "vareqp:block/alembic_water", "y": 180 },
+    	"facing=east": { "model": "vareqp:block/alembic_water", "y": 90 },
+    	"facing=west": { "model": "vareqp:block/alembic_water", "y": 270 }
+    }
+}

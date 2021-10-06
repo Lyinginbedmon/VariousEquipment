@@ -1,16 +1,16 @@
 {
   "variants": {
     "age=0": {
-      "model": "minecraft:block/frosted_ice_0"
+      "model": "vareqp:block/lava_stone_0"
     },
     "age=1": {
-      "model": "minecraft:block/frosted_ice_1"
+      "model": "vareqp:block/lava_stone_1"
     },
     "age=2": {
-      "model": "minecraft:block/frosted_ice_2"
+      "model": "vareqp:block/lava_stone_2"
     },
     "age=3": {
-      "model": "minecraft:block/frosted_ice_3"
+      "model": "vareqp:block/lava_stone_3"
     }
   }
 }

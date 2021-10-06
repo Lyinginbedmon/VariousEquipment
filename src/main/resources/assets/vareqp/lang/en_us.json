@@ -91,6 +91,11 @@
 	"item.vareqp.vial_solution": "%s Solution",
 	"item.vareqp.milkfat": "Milkfat",
 	"item.vareqp.saltpeter": "Saltpeter",
+	"item.vareqp.salt": "Salt",
+	"item.vareqp.brimstone": "Brimstone",
+	"item.vareqp.firmament_stone": "Firmament Stone",
+	"item.vareqp.scarecrow": "Scarecrow",
+	"item.vareqp.notepad": "Notepad",
 	
 	"vial.vareqp.holy_water": "Holy Water",
 	"vial.vareqp.antitoxin": "Antitoxin",
@@ -101,6 +106,7 @@
 	"vial.vareqp.lava_stone": "Lava Stone",
 	
 	"entity.vareqp.wagon": "Wagon",
+	"entity.vareqp.scarecrow": "Scarecrow",
 	
 	"block.vareqp.white_screen": "White Screen",
 	"block.vareqp.black_screen": "Black Screen",
@@ -132,6 +138,17 @@
 	"block.vareqp.mixer": "Alchemical Mixer",
 	"block.vareqp.lava_stone": "Lava Stone",
 	"block.vareqp.bat_guano": "Bat Guano",
+	"block.vareqp.darkvision_powder": "Darkvision Powder",
+	"block.vareqp.alembic": "Alchemical Alembic",
 	
-	"enchantment.vareqp.silversheen": "Silversheen"
+	"enchantment.vareqp.silversheen": "Silversheen",
+	
+	"enum.vareqp.icon.tick": "Complete",
+	"enum.vareqp.icon.question": "Incomplete",
+	"enum.vareqp.icon.cross": "Failed",
+	
+	"gui.vareqp.notepad.current_page": "Current page:",
+	"gui.vareqp.notepad.next_task": "Next task:",
+	"gui.vareqp.notepad.tally_entry": "%s / %s %s",
+	"gui.vareqp.notepad.page_count": "Page %s / %s"
 }

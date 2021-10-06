@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "gunpowder",
+  "ingredients": [
+    {
+      "item": "vareqp:brimstone"
+    },
+    {
+      "item": "vareqp:saltpeter"
+    },
+    {
+      "item": "minecraft:charcoal"
+    }
+  ],
+  "result": {
+    "item": "minecraft:gunpowder",
+    "count": 4
+  }
+}

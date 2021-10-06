@@ -1,0 +1,12 @@
+{
+  "type": "vareqp:centrifuge",
+  "input": {
+    "ingredient": {
+      "tag": "forge:netherrack"
+    }
+  },
+  "output": {
+    "item": "vareqp:brimstone",
+    "count": 3
+  }
+}

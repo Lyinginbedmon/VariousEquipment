@@ -4,7 +4,7 @@ import com.lying.variousequipment.VariousEquipment;
 import com.lying.variousequipment.client.renderer.tileentity.*;
 import com.lying.variousequipment.config.ConfigVE;
 import com.lying.variousequipment.init.VETileEntities;
-import com.lying.variousequipment.tileentity.*;
+import com.lying.variousequipment.tileentity.TileEntityCentrifuge;
 
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -26,5 +26,7 @@ public class RendererHandler
 		
 		ClientRegistry.bindTileEntityRenderer(VETileEntities.CENTRIFUGE, TileEntitySpinnyRenderer<TileEntityCentrifuge>::new);
 		ClientRegistry.bindTileEntityRenderer(VETileEntities.MIXER, TileEntityMixerRenderer::new);
+		ClientRegistry.bindTileEntityRenderer(VETileEntities.NIGHT_POWDER, TileEntityNightPowderRenderer::new);
+		ClientRegistry.bindTileEntityRenderer(VETileEntities.ALEMBIC, TileEntityAlembicRenderer::new);
 	}
 }

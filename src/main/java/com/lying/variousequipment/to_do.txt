@@ -1,7 +1,6 @@
-Textures for lava stone
+Darkvision powder needs item texture
 Implement basic alchemy
-	Alembic
-	Mixer
+	Alchemical products
 		Vial of Acid
 		Acid neutralizer (says on the tin)
 		Quicksilver (shorter duration than Silversheen, same effect)
@@ -9,12 +8,10 @@ Implement basic alchemy
 		Trollbane (temp enchantment that prevents Regeneration, only lasts 1 attack)
 		Flash Pellet (flashbang, blinds and dazzles temporarily)
 		Lockslip grease (makes locks easier to pick)
-		Firmament stone (displays if day or night (exclusive))
 		Ghostwall shellac (prevents phasing creatures from passing through block for 4-24 hours)
 		Signal torches (coloured torches)
-		Darkvision powder (placeable dust that only renders for creatures with Darkvision)
 Shuriken (pain snowballs, 50% chance to drop on impact with a surface for recollection)
-Tindertwig (how distinct from fire charge?)
+Notepad
 Horse-drawn cart
 	Control horse from wagon seat
 	Damage transferred to components

@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "tail_lizard_barbed",
+  "ingredients": [
+    {
+      "item": "vareqp:tail_lizard"
+    },
+    {
+      "item": "minecraft:quartz"
+    }
+  ],
+  "result": {
+    "item": "vareqp:tail_lizard_barbed"
+  }
+}

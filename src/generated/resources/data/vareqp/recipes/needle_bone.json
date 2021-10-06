@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "needle",
+  "ingredients": [
+    {
+      "item": "minecraft:bone"
+    },
+    {
+      "item": "minecraft:flint"
+    }
+  ],
+  "result": {
+    "item": "vareqp:needle_bone",
+    "count": 8
+  }
+}

@@ -25,6 +25,9 @@ public class VERecipeTypes
 	public static final IRecipeType<ICentrifugeRecipe> CENTRIFUGE_TYPE = new RecipeType<>();
 	public static final IRecipeSerializer<RecipeCentrifuge> CENTRIFUGE_SERIALIZER = new RecipeCentrifuge.Serializer();
 	
+	public static final IRecipeType<IAlembicRecipe> ALEMBIC_TYPE = new RecipeType<>();
+	public static final IRecipeSerializer<RecipeAlembic> ALEMBIC_SERIALIZER = new RecipeAlembic.Serializer();
+	
 	public static final IRecipeType<IAdvFurnaceRecipe> FURNACE_TYPE = new RecipeType<>();
 	public static final IRecipeSerializer<RecipeAdvFurnace> FURNACE_SERIALIZER = new RecipeAdvFurnace.Serializer();
 	
@@ -39,6 +42,10 @@ public class VERecipeTypes
 		Registry.register(Registry.RECIPE_TYPE, centrifugeId, CENTRIFUGE_TYPE);
 		registry.register(CENTRIFUGE_SERIALIZER.setRegistryName(centrifugeId));
 		
+		ResourceLocation alembicId = new ResourceLocation(Reference.ModInfo.MOD_ID, "alembic");
+		Registry.register(Registry.RECIPE_TYPE, alembicId, ALEMBIC_TYPE);
+		registry.register(ALEMBIC_SERIALIZER.setRegistryName(alembicId));
+		
 		ResourceLocation furnaceId = new ResourceLocation(Reference.ModInfo.MOD_ID, "adv_smelting");
 		Registry.register(Registry.RECIPE_TYPE, furnaceId, FURNACE_TYPE);
 		registry.register(FURNACE_SERIALIZER.setRegistryName(furnaceId));
@@ -48,7 +55,6 @@ public class VERecipeTypes
     	registry.register(KitsuneTailRecipe.SERIALIZER.setRegistryName(new ResourceLocation(Reference.ModInfo.MOD_ID, "kitsune_tail")));
     	registry.register(AntennaRecipe.SERIALIZER.setRegistryName(new ResourceLocation(Reference.ModInfo.MOD_ID, "antennae")));
     	registry.register(CostumeRecipe.SERIALIZER.setRegistryName(new ResourceLocation(Reference.ModInfo.MOD_ID, "costume")));
-    	registry.register(ScreenRecipe.SERIALIZER.setRegistryName(new ResourceLocation(Reference.ModInfo.MOD_ID, "screens")));
     	registry.register(RepeatingCrossbowRecipe.SERIALIZER.setRegistryName(new ResourceLocation(Reference.ModInfo.MOD_ID, "reload_repeating_crossbow")));
 	}
 	

@@ -1,0 +1,35 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "name": "bucket",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:bucket"
+        }
+      ]
+    },
+    {
+      "name": "fat",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 1.0,
+                "max": 3.0,
+                "type": "minecraft:uniform"
+              }
+            }
+          ],
+          "name": "vareqp:milkfat"
+        }
+      ]
+    }
+  ]
+}

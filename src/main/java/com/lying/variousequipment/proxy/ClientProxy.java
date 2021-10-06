@@ -2,6 +2,7 @@ package com.lying.variousequipment.proxy;
 
 import com.lying.variousequipment.client.RendererHandler;
 import com.lying.variousequipment.client.renderer.ColorHandler;
+import com.lying.variousequipment.client.renderer.EntityRenderRegistry;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.PlayerEntity;
@@ -19,6 +20,7 @@ public class ClientProxy extends CommonProxy
 	public void onLoadComplete(FMLLoadCompleteEvent event)
 	{
 		event.enqueueWork(() -> {ColorHandler.registerColorHandlers();});
+		EntityRenderRegistry.appendRenderers(Minecraft.getInstance().getRenderManager());
 	}
 	
 	public PlayerEntity getPlayerEntity(NetworkEvent.Context ctx)

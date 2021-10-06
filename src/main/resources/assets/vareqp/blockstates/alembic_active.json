@@ -1,0 +1,9 @@
+{
+    "variants":
+    {
+    	"facing=north": { "model": "vareqp:block/alembic_active" },
+    	"facing=south": { "model": "vareqp:block/alembic_active", "y": 180 },
+    	"facing=east": { "model": "vareqp:block/alembic_active", "y": 90 },
+    	"facing=west": { "model": "vareqp:block/alembic_active", "y": 270 }
+    }
+}

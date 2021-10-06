@@ -1,0 +1,12 @@
+{
+  "type": "vareqp:centrifuge",
+  "input": {
+    "nbt": {
+      "Potion": "minecraft:water"
+    },
+    "item": "minecraft:potion"
+  },
+  "output": {
+    "table": "vareqp:centrifuge/salt_from_water"
+  }
+}

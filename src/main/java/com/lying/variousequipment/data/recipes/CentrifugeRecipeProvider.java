@@ -3,22 +3,37 @@ package com.lying.variousequipment.data.recipes;
 import java.util.function.Consumer;
 
 import com.google.gson.JsonObject;
+import com.lying.variousequipment.data.VELootProvider;
+import com.lying.variousequipment.init.VEItems;
 import com.lying.variousequipment.init.VERecipeTypes;
 import com.lying.variousequipment.reference.Reference;
 import com.mojang.serialization.Dynamic;
 import com.mojang.serialization.JsonOps;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.IFinishedRecipe;
 import net.minecraft.data.RecipeProvider;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.loot.ConstantRange;
+import net.minecraft.loot.IRandomRange;
+import net.minecraft.loot.ItemLootEntry;
+import net.minecraft.loot.LootParameterSets;
+import net.minecraft.loot.LootPool;
+import net.minecraft.loot.LootTable;
+import net.minecraft.loot.RandomValueRange;
+import net.minecraft.loot.StandaloneLootEntry;
+import net.minecraft.loot.functions.SetCount;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.INBT;
 import net.minecraft.nbt.NBTDynamicOps;
+import net.minecraft.potion.PotionUtils;
+import net.minecraft.potion.Potions;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.Tags;
 
@@ -30,6 +45,10 @@ public class CentrifugeRecipeProvider extends RecipeProvider
 	}
 	
 	public String getName(){ return Reference.ModInfo.MOD_NAME+" centrifuge recipes"; }
+	
+	private static final ResourceLocation TABLE_VINES = new ResourceLocation(Reference.ModInfo.MOD_ID, "centrifuge/cobblestone_vines");
+	private static final ResourceLocation TABLE_SALT = new ResourceLocation(Reference.ModInfo.MOD_ID, "centrifuge/salt_from_water");
+	private static final ResourceLocation TABLE_MILK = new ResourceLocation(Reference.ModInfo.MOD_ID, "centrifuge/fat_from_milk");
 	
 	protected void registerRecipes(Consumer<IFinishedRecipe> consumer)
 	{
@@ -52,7 +71,49 @@ public class CentrifugeRecipeProvider extends RecipeProvider
 		consumer.accept(new FinishedRecipe(id("lapis_block"), "", new ItemStack(Items.LAPIS_LAZULI, 9), Ingredient.fromTag(Tags.Items.STORAGE_BLOCKS_LAPIS)));
 		consumer.accept(new FinishedRecipe(id("redstone_block"), "", new ItemStack(Items.REDSTONE, 9), Ingredient.fromTag(Tags.Items.STORAGE_BLOCKS_REDSTONE)));
 		consumer.accept(new FinishedRecipe(id("netherite_block"), "", new ItemStack(Items.NETHERITE_INGOT, 9), Ingredient.fromTag(Tags.Items.STORAGE_BLOCKS_NETHERITE)));
+		consumer.accept(new FinishedRecipe(id("brimstone"), "", new ItemStack(VEItems.BRIMSTONE, 3), Ingredient.fromTag(Tags.Items.NETHERRACK)));
+		consumer.accept(new FinishedRecipe(id("cobblestone_vines"), "", TABLE_VINES, Ingredient.fromItems(Blocks.MOSSY_COBBLESTONE)));
+		consumer.accept(new FinishedRecipe(id("fat_from_milk"), "", TABLE_MILK, Ingredient.fromItems(Items.MILK_BUCKET)));
+		consumer.accept(new FinishedRecipe(id("salt_from_water"), "", TABLE_SALT, PotionUtils.addPotionToItemStack(new ItemStack(Items.POTION), Potions.WATER)));
 	}
+	
+	public static void generateCentrifugeTables(VELootProvider lootProvider)
+	{
+		lootProvider.addLootTable(TABLE_VINES.getPath(), LootTable.builder().addLootPool(LootPool.builder().name("vines")
+                .rolls(RandomValueRange.of(0, 1))
+                .addEntry(itemEntry(Blocks.VINE, 1).acceptFunction(SetCount.builder(RandomValueRange.of(1, 2))))).addLootPool(LootPool.builder().name("cobblestone")
+                .rolls(ConstantRange.of(1))
+                .addEntry(itemEntry(Blocks.COBBLESTONE, 1))
+                .addEntry(itemEntry(Blocks.MOSSY_COBBLESTONE, 2))), LootParameterSets.CHEST);
+		
+		lootProvider.addLootTable(TABLE_SALT.getPath(), LootTable.builder()
+				.addLootPool(singleItemPool("bottle", Items.GLASS_BOTTLE))
+				.addLootPool(singleItemPool("salt", VEItems.SALT, RandomValueRange.of(1, 2))), LootParameterSets.CHEST);
+		
+		lootProvider.addLootTable(TABLE_MILK.getPath(), LootTable.builder()
+				.addLootPool(singleItemPool("bucket", Items.BUCKET))
+				.addLootPool(singleItemPool("fat", VEItems.MILKFAT, RandomValueRange.of(1, 3))), LootParameterSets.CHEST);
+	}
+	
+	private static LootPool.Builder singleItemPool(String nameIn, Item itemIn)
+	{
+		return LootPool.builder().name(nameIn).rolls(ConstantRange.of(1)).addEntry(itemEntry(itemIn, 1));
+	}
+	
+	private static LootPool.Builder singleItemPool(String nameIn, Item itemIn, IRandomRange countIn)
+	{
+		return LootPool.builder().name(nameIn).rolls(ConstantRange.of(1)).addEntry(itemEntry(itemIn, 1).acceptFunction(SetCount.builder(countIn)));
+	}
+	
+	private static StandaloneLootEntry.Builder<?> itemEntry(Block item, int weight)
+    {
+        return itemEntry(item.asItem(), weight);
+    }
+	
+	private static StandaloneLootEntry.Builder<?> itemEntry(Item item, int weight)
+    {
+        return ItemLootEntry.builder(item).weight(weight);
+    }
 	
 	protected ResourceLocation id(String s){ return new ResourceLocation(Reference.ModInfo.MOD_PREFIX+"centrifuge/" + s); }
 	

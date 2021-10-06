@@ -6,6 +6,7 @@ import org.apache.logging.log4j.Logger;
 import com.lying.variousequipment.client.renderer.EntityRenderRegistry;
 import com.lying.variousequipment.config.ConfigVE;
 import com.lying.variousequipment.data.VEDataGenerators;
+import com.lying.variousequipment.init.VEBlocks;
 import com.lying.variousequipment.init.VEEntities;
 import com.lying.variousequipment.init.VEItems;
 import com.lying.variousequipment.init.VELootTables;
@@ -19,6 +20,8 @@ import com.lying.variousequipment.reference.Reference;
 import com.lying.variousequipment.utility.bus.BusClient;
 import com.lying.variousequipment.utility.bus.BusServer;
 
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.item.Item;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraftforge.api.distmarker.Dist;
@@ -83,6 +86,10 @@ public class VariousEquipment
     {
         EntityRenderRegistry.registerEntityRenderers();
         event.enqueueWork(VEItems::registerProperties);
+        RenderTypeLookup.setRenderLayer(VEBlocks.LAVA_STONE, RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(VEBlocks.NIGHT_POWDER, RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(VEBlocks.NIGHT_POWDER_VIS, RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(VEBlocks.ALEMBIC, RenderType.getCutout());
         
         MinecraftForge.EVENT_BUS.register(BusClient.class);
     }

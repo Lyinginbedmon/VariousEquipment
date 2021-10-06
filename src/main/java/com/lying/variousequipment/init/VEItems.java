@@ -4,38 +4,9 @@ import java.util.List;
 
 import com.google.common.collect.Lists;
 import com.lying.variousequipment.item.IEventListenerItem;
-import com.lying.variousequipment.item.ItemBlowpipe;
-import com.lying.variousequipment.item.ItemCaltrop;
-import com.lying.variousequipment.item.ItemChassis;
-import com.lying.variousequipment.item.ItemCoating;
-import com.lying.variousequipment.item.ItemCrossbowRepeating;
-import com.lying.variousequipment.item.ItemCrowbar;
-import com.lying.variousequipment.item.ItemDagger;
-import com.lying.variousequipment.item.ItemFoodSpoon;
-import com.lying.variousequipment.item.ItemGlaive;
-import com.lying.variousequipment.item.ItemHatArchfey;
-import com.lying.variousequipment.item.ItemHatFeyMask;
-import com.lying.variousequipment.item.ItemHatHood;
-import com.lying.variousequipment.item.ItemHatWitch;
-import com.lying.variousequipment.item.ItemNeedle;
-import com.lying.variousequipment.item.ItemNeedleBone;
-import com.lying.variousequipment.item.ItemSalveStone;
-import com.lying.variousequipment.item.ItemShortbow;
-import com.lying.variousequipment.item.ItemSymbol;
-import com.lying.variousequipment.item.ItemVial;
-import com.lying.variousequipment.item.ItemVialDrinkable;
-import com.lying.variousequipment.item.ItemVialSolution;
-import com.lying.variousequipment.item.ItemVialThrowable;
-import com.lying.variousequipment.item.ItemWheel;
+import com.lying.variousequipment.item.*;
 import com.lying.variousequipment.item.VEItemGroup;
-import com.lying.variousequipment.item.bauble.ItemBlindfold;
-import com.lying.variousequipment.item.bauble.ItemCostume;
-import com.lying.variousequipment.item.bauble.ItemHorns;
-import com.lying.variousequipment.item.bauble.ItemLuckstone;
-import com.lying.variousequipment.item.bauble.ItemRing;
-import com.lying.variousequipment.item.bauble.ItemScarabGolem;
-import com.lying.variousequipment.item.bauble.ItemTails;
-import com.lying.variousequipment.item.bauble.ItemThirdEye;
+import com.lying.variousequipment.item.bauble.*;
 import com.lying.variousequipment.item.vial.Vial;
 import com.lying.variousequipment.item.vial.Vial.VialShape;
 import com.lying.variousequipment.reference.Reference;
@@ -48,10 +19,12 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.CauldronBlock;
 import net.minecraft.block.DispenserBlock;
+import net.minecraft.client.world.ClientWorld;
 import net.minecraft.dispenser.DefaultDispenseItemBehavior;
 import net.minecraft.dispenser.IBlockSource;
 import net.minecraft.dispenser.IDispenseItemBehavior;
 import net.minecraft.dispenser.OptionalDispenseBehavior;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.BucketItem;
@@ -71,6 +44,8 @@ import net.minecraft.tileentity.BeehiveTileEntity;
 import net.minecraft.tileentity.DispenserTileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.LightType;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -166,6 +141,11 @@ public class VEItems
 	public static final Item BLOWPIPE		= register("blowpipe", new ItemBlowpipe(new Item.Properties()));
 	public static final Item MILKFAT		= register("milkfat", new Item(new Item.Properties().group(VEItemGroup.GEAR)));
 	public static final Item SALTPETER		= register("saltpeter", new Item(new Item.Properties().group(VEItemGroup.GEAR)));
+	public static final Item SALT			= register("salt", new Item(new Item.Properties().group(VEItemGroup.GEAR)));
+	public static final Item BRIMSTONE		= register("brimstone", new Item(new Item.Properties().group(VEItemGroup.GEAR)));
+	public static final Item SUN_STONE		= register("firmament_stone", new Item(new Item.Properties().group(VEItemGroup.GEAR).maxStackSize(1)));
+	public static final Item SCARECROW		= register("scarecrow", new ItemScarecrow(new Item.Properties().group(VOItemGroup.BLOCKS).maxStackSize(16)));
+	public static final Item NOTEPAD		= register("notepad", new ItemNotepad(new Item.Properties().group(VEItemGroup.GEAR)));
 	
 	public static final Item SCARAB_GOLEM	= register("scarab_golem", new ItemScarabGolem(new Item.Properties().group(VOItemGroup.LOOT)));
 	public static final Item STONE_LUCK		= register("luckstone", new ItemLuckstone(new Item.Properties().group(VOItemGroup.LOOT)));
@@ -202,6 +182,8 @@ public class VEItems
 	public static final BlockItem CENTRIFUGE		= registerBlock("centrifuge", VEBlocks.CENTRIFUGE, VOItemGroup.BLOCKS);
 	public static final BlockItem MIXER				= registerBlock("mixer", VEBlocks.MIXER, VOItemGroup.BLOCKS);
 	public static final BlockItem GUANO				= registerBlock("bat_guano", VEBlocks.GUANO, VOItemGroup.BLOCKS);
+	public static final BlockItem NIGHT_POWDER		= registerBlock("darkvision_powder", VEBlocks.NIGHT_POWDER, VEItemGroup.GEAR);
+	public static final BlockItem ALEMBIC			= registerBlock("alembic", VEBlocks.ALEMBIC, VOItemGroup.BLOCKS);
 	
 	/** Allows dispensers to empty water buckets into cauldrons */
 	public static final IDispenseItemBehavior DISPENSE_BUCKETS = new OptionalDispenseBehavior()
@@ -349,5 +331,68 @@ public class VEItems
 	 			Vial vial = ItemVial.getVialFromItem(stack);
 	 			return vial != null ? (float)vial.getShape().modelNumber() : VialShape.BOTTLE.modelNumber(); 
 	 		});
+	 	ItemModelsProperties.registerProperty(SUN_STONE, new ResourceLocation("side"), (stack, world, entity) ->
+	 	{
+	 		CompoundNBT stackData = stack.getOrCreateTag();
+	 		return stackData.contains("Side", 8) ? (stackData.getString("Side").equalsIgnoreCase("Moon") ? 0F : 1F) : 1F;
+	 	});
+	 	ItemModelsProperties.registerProperty(SUN_STONE, new ResourceLocation("sunlight"), (stack, world, entity) -> 
+	 	{
+	 		Entity ent = (Entity)(entity != null ? entity : stack.getAttachedEntity());
+	 		if(ent == null)
+	 			return 0F;
+	 		else
+	 		{
+	 			if(world == null && ent.getEntityWorld() instanceof ClientWorld)
+	 				world = (ClientWorld)ent.getEntityWorld();
+	 			
+	 			if(world == null)
+	 				return 0F;
+	 			else if(world.getDimensionType().isNatural())
+ 				{
+	 				BlockPos pos = ent.getPosition();
+	 				pos = new BlockPos(pos.getX(), 255, pos.getZ());
+	 				
+	 				int sunAtPos = world.getLightFor(LightType.SKY, pos) - world.getSkylightSubtracted();
+ 					float sunAngle = world.getCelestialAngleRadians(1.0F);
+ 					float f1 = sunAngle < (float)Math.PI ? 0.0F : ((float)Math.PI * 2F);
+ 					sunAngle = sunAngle + (f1 - sunAngle) * 0.2F;
+ 					sunAtPos = Math.round((float)sunAtPos * MathHelper.cos(sunAngle));
+ 					
+ 					int skyLight = MathHelper.clamp(sunAtPos, 4, 8) - 4;
+ 					return (float)skyLight / 4F;
+ 				}
+ 				else
+ 					return (float)Math.random();
+	 		}
+	 	});
+	 	ItemModelsProperties.registerProperty(SUN_STONE, new ResourceLocation("moonlight"), (stack, world, entity) -> 
+	 	{
+	 		Entity ent = (Entity)(entity != null ? entity : stack.getAttachedEntity());
+	 		if(ent == null)
+	 			return 0F;
+	 		else
+	 		{
+	 			if(world == null && ent.getEntityWorld() instanceof ClientWorld)
+	 				world = (ClientWorld)ent.getEntityWorld();
+	 			
+	 			if(world == null)
+	 				return 0F;
+	 			else if(world.getDimensionType().isNatural())
+ 				{
+ 					float sunAngle = world.func_242415_f(1.0F) * 360F;
+ 					if(sunAngle < 100 && sunAngle > 80)
+ 						return 0.1F - (100-sunAngle)/20 * 0.1F;
+ 					else if(sunAngle > 260 && sunAngle < 280)
+ 						return 0.1F - (sunAngle-260)/20 * 0.1F;
+ 					else if(sunAngle <= 260 && sunAngle >= 100)
+ 						return 0.2F+((float)world.getMoonPhase()/8F)*0.8F;
+ 					
+ 					return 0F;
+ 				}
+ 				else
+ 					return (float)Math.random();
+	 		}
+	 	});
     }
 }

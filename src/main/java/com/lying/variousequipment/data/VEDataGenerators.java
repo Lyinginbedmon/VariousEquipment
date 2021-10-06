@@ -1,8 +1,6 @@
 package com.lying.variousequipment.data;
 
-import com.lying.variousequipment.data.recipes.AdvFurnaceRecipeProvider;
-import com.lying.variousequipment.data.recipes.CentrifugeRecipeProvider;
-import com.lying.variousequipment.data.recipes.MixerRecipeProvider;
+import com.lying.variousequipment.data.recipes.*;
 import com.lying.variousequipment.data.recipes.VERecipeProvider;
 
 import net.minecraft.data.DataGenerator;
@@ -23,6 +21,7 @@ public class VEDataGenerators
 			generator.addProvider(new VELootProviderBlocks(generator));
 			generator.addProvider(new MixerRecipeProvider(generator));
 			generator.addProvider(new CentrifugeRecipeProvider(generator));
+			generator.addProvider(new AlembicRecipeProvider(generator));
 			generator.addProvider(new AdvFurnaceRecipeProvider(generator));
 		}
 		if(event.includeClient())

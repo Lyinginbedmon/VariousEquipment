@@ -32,6 +32,7 @@ public class PacketHandler
 		int id = 0;
 		HANDLER.registerMessage(id++, PacketWagonReins.class, PacketWagonReins::encode, PacketWagonReins::decode, PacketWagonReins::handle);
 		HANDLER.registerMessage(id++, PacketItemShake.class, PacketItemShake::encode, PacketItemShake::decode, PacketItemShake::handle);
+		HANDLER.registerMessage(id++, PacketNotepadUpdate.class, PacketNotepadUpdate::encode, PacketNotepadUpdate::decode, PacketNotepadUpdate::handle);
 	}
 	
 	/**

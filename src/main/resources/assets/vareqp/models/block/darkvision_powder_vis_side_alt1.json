@@ -1,0 +1,6 @@
+{
+    "parent": "block/redstone_dust_side_alt",
+    "textures": {
+        "line": "vareqp:blocks/darkvision_powder_vis_line1"
+    }
+}

@@ -3,6 +3,7 @@ package com.lying.variousequipment.data.recipes;
 import java.util.function.Consumer;
 
 import com.google.gson.JsonObject;
+import com.lying.variousequipment.data.VELootProvider;
 import com.lying.variousequipment.init.VEItems;
 import com.lying.variousequipment.init.VERecipeTypes;
 import com.lying.variousequipment.item.ItemVial;
@@ -49,6 +50,11 @@ public class MixerRecipeProvider extends RecipeProvider
 				consumer.accept(new FinishedRecipe(id(prefix+"_"+damage), prefix, output, input));
 			}
 		}
+	}
+	
+	public static void generateMixerTables(VELootProvider lootProvider)
+	{
+		
 	}
 	
 	protected ResourceLocation id(String s){ return new ResourceLocation(Reference.ModInfo.MOD_PREFIX+"mixer/" + s); }
