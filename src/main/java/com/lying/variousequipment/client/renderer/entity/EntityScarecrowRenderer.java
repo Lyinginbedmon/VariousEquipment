@@ -14,6 +14,7 @@ import net.minecraftforge.fml.client.registry.IRenderFactory;
 public class EntityScarecrowRenderer extends LivingRenderer<EntityScarecrow, ModelScarecrow>
 {
 	public static final ResourceLocation TEXTURE = new ResourceLocation(Reference.ModInfo.MOD_ID, "textures/entity/scarecrow.png");
+	public static final ResourceLocation TEXTURE_BURNT = new ResourceLocation(Reference.ModInfo.MOD_ID, "textures/entity/burnt_scarecrow.png");
 	
 	public EntityScarecrowRenderer(EntityRendererManager rendererManager)
 	{
@@ -24,7 +25,7 @@ public class EntityScarecrowRenderer extends LivingRenderer<EntityScarecrow, Mod
 	
 	public ResourceLocation getEntityTexture(EntityScarecrow entity)
 	{
-		return TEXTURE;
+		return entity.isBurnt() ? TEXTURE_BURNT : TEXTURE;
 	}
 	
 	protected boolean canRenderName(EntityScarecrow entity)

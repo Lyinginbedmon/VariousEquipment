@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shapeless",
-  "group": "missing_block",
   "ingredients": [
     {
       "item": "vareqp:magenta_screen"

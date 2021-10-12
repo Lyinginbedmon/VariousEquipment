@@ -61,13 +61,11 @@ public class ModelScarecrow extends BipedModel<EntityScarecrow>
 		
 		bipedRightArm = ModelUtils.freshRenderer(this);
 		bipedRightArm.setRotationPoint(-5F, 3F, 0F);
-		bipedRightArm.rotateAngleZ = ModelUtils.toRadians(64D);
 		bipedRightArm.setTextureOffset(44, 16).addBox(-1F, -4F, -1F, 2, 12, 2);
 		bipedRightArm.setTextureOffset(52, 16).addBox(-1F, -4F, -1F, 2, 12, 2, 0.5F);
 		
 		bipedLeftArm = ModelUtils.freshRenderer(this);
 		bipedLeftArm.setRotationPoint(5F, 3F, 0F);
-		bipedLeftArm.rotateAngleZ = ModelUtils.toRadians(-64D);
 		bipedLeftArm.mirror = true;
 		bipedLeftArm.setTextureOffset(44, 16).addBox(-1F, -4F, -1F, 2, 12, 2);
 		bipedLeftArm.setTextureOffset(52, 16).addBox(-1F, -4F, -1F, 2, 12, 2, 0.5F);
@@ -81,7 +79,19 @@ public class ModelScarecrow extends BipedModel<EntityScarecrow>
 	public void setRotationAngles(EntityScarecrow entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch)
 	{
     	Random rand = new Random(entityIn.getUniqueID().getMostSignificantBits());
-    	bipedHead.rotateAngleX = ModelUtils.toRadians(4D) * (rand.nextBoolean() ? 1F : -1F);
-    	bipedHead.rotateAngleZ = ModelUtils.toRadians(4D) * (rand.nextBoolean() ? 1F : -1F);
+    	float vol = ModelUtils.toRadians(entityIn.isBurnt() ? 12D : 4D);
+    	bipedHead.rotateAngleX = vol * (rand.nextBoolean() ? 1F : -1F);
+    	bipedHead.rotateAngleZ = vol * (rand.nextBoolean() ? 1F : -1F);
+    	
+    	if(entityIn.isBurnt())
+    	{
+    		bipedRightArm.rotateAngleZ = ModelUtils.toRadians(48D + rand.nextDouble() * 32D);
+    		bipedLeftArm.rotateAngleZ = -ModelUtils.toRadians(48D + rand.nextDouble() * 32D);
+    	}
+    	else
+    	{
+    		bipedRightArm.rotateAngleZ = ModelUtils.toRadians(64D);
+    		bipedLeftArm.rotateAngleZ = ModelUtils.toRadians(-64D);
+    	}
 	}
 }

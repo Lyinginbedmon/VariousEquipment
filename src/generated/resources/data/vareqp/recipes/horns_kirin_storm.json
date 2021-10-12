@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shapeless",
-  "group": "horns_kirin_storm",
   "ingredients": [
     {
       "item": "vareqp:horns_kirin"

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "needles",
+  "pattern": [
+    " B",
+    "B "
+  ],
+  "key": {
+    "B": {
+      "tag": "forge:nuggets/iron"
+    }
+  },
+  "result": {
+    "item": "vareqp:needle_iron",
+    "count": 3
+  }
+}

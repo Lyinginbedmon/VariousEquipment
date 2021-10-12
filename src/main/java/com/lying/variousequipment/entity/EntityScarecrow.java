@@ -5,6 +5,8 @@ import java.util.function.Predicate;
 
 import com.google.common.collect.Lists;
 import com.lying.variousequipment.init.VEItems;
+import com.lying.variousequipment.init.VELootTables;
+import com.lying.variousequipment.reference.Reference;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -20,12 +22,16 @@ import net.minecraft.item.DyeColor;
 import net.minecraft.item.DyeItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.loot.LootParameterSets;
+import net.minecraft.loot.LootTable;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.particles.BlockParticleData;
 import net.minecraft.particles.ParticleTypes;
+import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.Effects;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.Hand;
@@ -44,6 +50,7 @@ public class EntityScarecrow extends LivingEntity
 	};
 	
     protected static final DataParameter<Byte> COLOR = EntityDataManager.<Byte>createKey(EntityScarecrow.class, DataSerializers.BYTE);
+    protected static final DataParameter<Boolean> BURNT = EntityDataManager.<Boolean>createKey(EntityScarecrow.class, DataSerializers.BOOLEAN);
 	
 	public long punchCooldown;
 	
@@ -56,6 +63,7 @@ public class EntityScarecrow extends LivingEntity
 	{
 		super.registerData();
 		getDataManager().register(COLOR, Byte.valueOf((byte)DyeColor.CYAN.getId()));
+		getDataManager().register(BURNT, false);
 	}
 	
     @OnlyIn(Dist.CLIENT)
@@ -91,16 +99,21 @@ public class EntityScarecrow extends LivingEntity
 	
 	public boolean canDespawn(double distanceToClosestPlayer){ return false; }
 	
+	public boolean isBurnt(){ return getDataManager().get(BURNT).booleanValue(); }
+	
 	public void writeAdditional(CompoundNBT compound)
 	{
 		super.writeAdditional(compound);
 		compound.putByte("Color", (byte)this.getColor().getId());
+		if(isBurnt())
+			compound.putBoolean("Burnt", true);
 	}
 	
 	public void readAdditional(CompoundNBT compound)
 	{
 		super.readAdditional(compound);
 		this.setColor(DyeColor.byId(compound.getByte("Color")));
+		getDataManager().set(BURNT, compound.getBoolean("Burnt"));
 	}
 	
 	public ActionResultType applyPlayerInteraction(PlayerEntity player, Vector3d vec, Hand hand)
@@ -134,20 +147,22 @@ public class EntityScarecrow extends LivingEntity
 	{
 		if(!this.world.isRemote && !this.removed)
 		{
-			if (DamageSource.OUT_OF_WORLD.equals(source))
+			if(DamageSource.OUT_OF_WORLD.equals(source))
 			{
 				this.remove();
 				return false;
 			}
+			else if(source.isFireDamage() && this.isPotionActive(Effects.FIRE_RESISTANCE))
+				return false;
 			else if(!this.isInvulnerableTo(source))
 			{
-				if (source.isExplosion())
+				if(source.isExplosion())
 				{
 					this.onBrokenBy(source);
 					this.remove();
 					return false;
 				}
-				else if (DamageSource.IN_FIRE.equals(source))
+				else if(DamageSource.IN_FIRE.equals(source))
 				{
 					if(this.isBurning())
 						this.damageScarecrow(source, 0.15F);
@@ -191,13 +206,13 @@ public class EntityScarecrow extends LivingEntity
 							this.playParticles();
 							this.remove();
 						}
-					
+						
 						return true;
 					}
 				}
-			} else {
-			return false;
 			}
+			else
+				return false;
 		}
 		else
 			return false;
@@ -214,10 +229,17 @@ public class EntityScarecrow extends LivingEntity
 	
 	public boolean attackable(){ return false; }
 	
-	public void func_241841_a(ServerWorld world, LightningBoltEntity bolt){ }
+	public void func_241841_a(ServerWorld world, LightningBoltEntity bolt)
+	{
+		getDataManager().set(BURNT, true);
+		addPotionEffect(new EffectInstance(Effects.FIRE_RESISTANCE, Reference.Values.TICKS_PER_MINUTE));
+	}
 	
 	private void damageScarecrow(DamageSource source, float amount)
 	{
+		if(source == DamageSource.LIGHTNING_BOLT)
+			return;
+		
 		float health = getHealth();
 		health -= amount;
 		if(health <= 0.5F)
@@ -248,8 +270,23 @@ public class EntityScarecrow extends LivingEntity
 	
 	private void breakScarecrow(DamageSource source)
 	{
-		Block.spawnAsEntity(this.world, getPosition(), new ItemStack(VEItems.SCARECROW));
+		if(isBurnt())
+		{
+			LootTable table = this.world.getServer().getLootTableManager().getLootTableFromLocation(VELootTables.BURNT_SCARECROW);
+			table.generate(getLootContextBuilder(false, DamageSource.LIGHTNING_BOLT).build(LootParameterSets.ENTITY)).forEach(this::entityDropItem);
+		}
+		else
+			Block.spawnAsEntity(this.world, getPosition(), new ItemStack(VEItems.SCARECROW));
 		onBrokenBy(source);
+	}
+	
+	public void livingTick()
+	{
+		if(isBurnt() && getRNG().nextInt(20) == 0)
+			for(int i = 0; i < 2; ++i)
+				this.world.addParticle(ParticleTypes.SMOKE, this.getPosXRandom(0.5D), this.getPosYRandom(), this.getPosZRandom(0.5D), 0.0D, 0.0D, 0.0D);
+		
+		super.livingTick();
 	}
 	
 	@OnlyIn(Dist.CLIENT)

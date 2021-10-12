@@ -6,7 +6,7 @@
     ]
   },
   "criteria": {
-    "has_item": {
+    "has_ears_cat": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
@@ -25,7 +25,7 @@
   },
   "requirements": [
     [
-      "has_item",
+      "has_ears_cat",
       "has_the_recipe"
     ]
   ]

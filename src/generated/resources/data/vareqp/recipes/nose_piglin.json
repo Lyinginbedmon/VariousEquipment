@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shapeless",
-  "group": "nose_piglin",
   "ingredients": [
     {
       "item": "vareqp:nose_pig"

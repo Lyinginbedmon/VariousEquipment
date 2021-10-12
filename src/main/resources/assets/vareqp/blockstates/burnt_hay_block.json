@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "vareqp:block/burnt_hay_block_horizontal",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "vareqp:block/burnt_hay_block"
+    },
+    "axis=z": {
+      "model": "vareqp:block/burnt_hay_block_horizontal",
+      "x": 90
+    }
+  }
+}

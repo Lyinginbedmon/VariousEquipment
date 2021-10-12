@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "N N",
+    " N ",
+    "N N"
+  ],
+  "key": {
+    "N": {
+      "tag": "forge:nuggets/iron"
+    }
+  },
+  "result": {
+    "item": "vareqp:caltrop",
+    "count": 2
+  }
+}

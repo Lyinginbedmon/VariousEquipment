@@ -272,6 +272,12 @@ public class VELootProvider extends LootTableProvider
     					.acceptCondition(KilledByPlayer.builder())
     					.addEntry(itemEntry(VEItems.HORNS_RAM, 1))));
     	
+    	addEntityLootTable("entities/burnt_scarecrow", LootTable.builder().addLootPool(
+    			LootPool.builder()
+    					.name("main")
+    					.rolls(RandomValueRange.of(1, 2))
+    					.addEntry(itemEntry(VEItems.BURNT_HAY, 1))));
+    	
 //    	addEntityLootTable("inject/entities/kobold", LootTable.builder().addLootPool(
 //    			LootPool.builder()
 //    					.name("main")

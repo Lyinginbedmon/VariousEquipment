@@ -19,6 +19,7 @@ public class VEDataGenerators
 			generator.addProvider(new VERecipeProvider(generator));
 			generator.addProvider(new VELootProvider(generator, existingFileHelper));
 			generator.addProvider(new VELootProviderBlocks(generator));
+			generator.addProvider(new VELootProviderEntities(generator));
 			generator.addProvider(new MixerRecipeProvider(generator));
 			generator.addProvider(new CentrifugeRecipeProvider(generator));
 			generator.addProvider(new AlembicRecipeProvider(generator));

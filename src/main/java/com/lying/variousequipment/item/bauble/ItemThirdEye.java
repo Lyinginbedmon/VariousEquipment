@@ -43,6 +43,7 @@ public class ItemThirdEye extends ItemCosmetic implements IDyeableArmorItem
 	
 	public boolean canRender(String identifier, int index, LivingEntity living, ItemStack stack){ return true; }
 	
+	// TODO Fix eye rendering through terrain
 	@SuppressWarnings("deprecation")
 	@OnlyIn(Dist.CLIENT)
 	public void render(String identifier, int index, MatrixStack matrixStackIn, IRenderTypeBuffer renderTypeBuffer,

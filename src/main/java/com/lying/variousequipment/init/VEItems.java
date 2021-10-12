@@ -184,6 +184,7 @@ public class VEItems
 	public static final BlockItem GUANO				= registerBlock("bat_guano", VEBlocks.GUANO, VOItemGroup.BLOCKS);
 	public static final BlockItem NIGHT_POWDER		= registerBlock("darkvision_powder", VEBlocks.NIGHT_POWDER, VEItemGroup.GEAR);
 	public static final BlockItem ALEMBIC			= registerBlock("alembic", VEBlocks.ALEMBIC, VOItemGroup.BLOCKS);
+	public static final BlockItem BURNT_HAY			= registerBlock("burnt_hay_block", VEBlocks.BURNT_HAY, VOItemGroup.BLOCKS);
 	
 	/** Allows dispensers to empty water buckets into cauldrons */
 	public static final IDispenseItemBehavior DISPENSE_BUCKETS = new OptionalDispenseBehavior()

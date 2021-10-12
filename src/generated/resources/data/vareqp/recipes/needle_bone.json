@@ -1,6 +1,6 @@
 {
   "type": "minecraft:crafting_shapeless",
-  "group": "needle",
+  "group": "needles",
   "ingredients": [
     {
       "item": "minecraft:bone"

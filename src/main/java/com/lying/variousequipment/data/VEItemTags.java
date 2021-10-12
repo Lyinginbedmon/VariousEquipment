@@ -10,10 +10,10 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.data.ItemTagsProvider;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
-import net.minecraft.tags.ITag;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.Tags;
+import net.minecraftforge.common.Tags.IOptionalNamedTag;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.InterModComms;
@@ -26,21 +26,23 @@ import top.theillusivec4.curios.api.SlotTypePreset;
 @Mod.EventBusSubscriber(modid = Reference.ModInfo.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class VEItemTags extends ItemTagsProvider
 {
-    public static final ITag.INamedTag<Item> COSMETIC = ItemTags.createOptional(new ResourceLocation(CuriosApi.MODID, "cosmetic"));
+    public static final IOptionalNamedTag<Item> COSMETIC = ItemTags.createOptional(new ResourceLocation(CuriosApi.MODID, "cosmetic"));
     
-    public static final ITag.INamedTag<Item> BACK = ItemTags.createOptional(new ResourceLocation(CuriosApi.MODID, "back"));
-    public static final ITag.INamedTag<Item> BELT = ItemTags.createOptional(new ResourceLocation(CuriosApi.MODID, "belt"));
-    public static final ITag.INamedTag<Item> BRACELET = ItemTags.createOptional(new ResourceLocation(CuriosApi.MODID, "bracelet"));
-    public static final ITag.INamedTag<Item> HANDS = ItemTags.createOptional(new ResourceLocation(CuriosApi.MODID, "hands"));
-    public static final ITag.INamedTag<Item> HEAD = ItemTags.createOptional(new ResourceLocation(CuriosApi.MODID, "head"));
-    public static final ITag.INamedTag<Item> NECKLACE = ItemTags.createOptional(new ResourceLocation(CuriosApi.MODID, "necklace"));
-    public static final ITag.INamedTag<Item> CHARM = ItemTags.createOptional(new ResourceLocation(CuriosApi.MODID, "charm"));
+    public static final IOptionalNamedTag<Item> BACK = ItemTags.createOptional(new ResourceLocation(CuriosApi.MODID, "back"));
+    public static final IOptionalNamedTag<Item> BELT = ItemTags.createOptional(new ResourceLocation(CuriosApi.MODID, "belt"));
+    public static final IOptionalNamedTag<Item> BRACELET = ItemTags.createOptional(new ResourceLocation(CuriosApi.MODID, "bracelet"));
+    public static final IOptionalNamedTag<Item> HANDS = ItemTags.createOptional(new ResourceLocation(CuriosApi.MODID, "hands"));
+    public static final IOptionalNamedTag<Item> HEAD = ItemTags.createOptional(new ResourceLocation(CuriosApi.MODID, "head"));
+    public static final IOptionalNamedTag<Item> NECKLACE = ItemTags.createOptional(new ResourceLocation(CuriosApi.MODID, "necklace"));
+    public static final IOptionalNamedTag<Item> CHARM = ItemTags.createOptional(new ResourceLocation(CuriosApi.MODID, "charm"));
+    public static final IOptionalNamedTag<Item> RING = ItemTags.createOptional(new ResourceLocation(CuriosApi.MODID, "ring"));
     
-    public static final ITag.INamedTag<Item> HOLY_SYMBOL = ItemTags.createOptional(new ResourceLocation(Reference.ModInfo.MOD_ID, "holy_symbol"));
-    public static final ITag.INamedTag<Item> FIXATIVES = ItemTags.createOptional(new ResourceLocation(Reference.ModInfo.MOD_ID, "fixatives"));
-    public static final ITag.INamedTag<Item> EXPLOSIVES = ItemTags.createOptional(new ResourceLocation(Reference.ModInfo.MOD_ID, "explosives"));
+    public static final IOptionalNamedTag<Item> HOLY_SYMBOL = ItemTags.createOptional(new ResourceLocation(Reference.ModInfo.MOD_ID, "holy_symbol"));
+    public static final IOptionalNamedTag<Item> FIXATIVES = ItemTags.createOptional(new ResourceLocation(Reference.ModInfo.MOD_ID, "fixatives"));
+    public static final IOptionalNamedTag<Item> EXPLOSIVES = ItemTags.createOptional(new ResourceLocation(Reference.ModInfo.MOD_ID, "explosives"));
     
-    public static final ITag.INamedTag<Item> SHAKEABLES = ItemTags.createOptional(new ResourceLocation(Reference.ModInfo.MOD_ID, "shakeables"));
+    public static final IOptionalNamedTag<Item> SHAKEABLES = ItemTags.createOptional(new ResourceLocation(Reference.ModInfo.MOD_ID, "shakeables"));
+    public static final IOptionalNamedTag<Item> CARPETS = ItemTags.createOptional(new ResourceLocation(Reference.ModInfo.MOD_ID, "carpets"));
     
 	public VEItemTags(DataGenerator dataGenerator, @Nullable ExistingFileHelper existingFileHelper)
 	{
@@ -79,6 +81,10 @@ public class VEItemTags extends ItemTagsProvider
 				);
 		getOrCreateBuilder(NECKLACE).add(VEItems.SCARAB_GOLEM);
 		getOrCreateBuilder(CHARM).add(VEItems.STONE_LUCK);
+		getOrCreateBuilder(RING).add(
+				VEItems.RING_GOLD,
+				VEItems.RING_IRON
+				);
 		getOrCreateBuilder(BACK).add(
 				VEItems.TAIL_KOBOLD,
 				VEItems.TAIL_KIRIN,
@@ -152,6 +158,23 @@ public class VEItemTags extends ItemTagsProvider
 				);
 		
 		getOrCreateBuilder(SHAKEABLES).add(VEItems.VIAL_SOLUTION);
+		getOrCreateBuilder(CARPETS).add(
+				Items.BLACK_CARPET,
+				Items.BLUE_CARPET,
+				Items.BROWN_CARPET,
+				Items.CYAN_CARPET,
+				Items.GRAY_CARPET,
+				Items.GREEN_CARPET,
+				Items.LIGHT_BLUE_CARPET,
+				Items.LIGHT_GRAY_CARPET,
+				Items.LIME_CARPET,
+				Items.MAGENTA_CARPET,
+				Items.ORANGE_CARPET,
+				Items.PINK_CARPET,
+				Items.PURPLE_CARPET,
+				Items.RED_CARPET,
+				Items.WHITE_CARPET,
+				Items.YELLOW_CARPET);
 	}
 	
 	@SubscribeEvent

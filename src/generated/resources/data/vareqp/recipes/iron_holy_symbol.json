@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "holy_symbols",
+  "pattern": [
+    "III",
+    " L ",
+    "s  "
+  ],
+  "key": {
+    "L": {
+      "tag": "forge:leather"
+    },
+    "s": {
+      "tag": "forge:rods/wooden"
+    },
+    "I": {
+      "tag": "forge:ingots/iron"
+    }
+  },
+  "result": {
+    "item": "vareqp:iron_holy_symbol"
+  }
+}

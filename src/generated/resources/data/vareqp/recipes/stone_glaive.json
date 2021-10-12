@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "glaives",
+  "pattern": [
+    "  X",
+    " s ",
+    "s  "
+  ],
+  "key": {
+    "s": {
+      "tag": "forge:rods/wooden"
+    },
+    "X": {
+      "tag": "forge:cobblestone"
+    }
+  },
+  "result": {
+    "item": "vareqp:stone_glaive"
+  }
+}

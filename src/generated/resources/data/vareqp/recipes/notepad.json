@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "I F",
+    "PPP",
+    " S "
+  ],
+  "key": {
+    "I": {
+      "tag": "forge:dyes/black"
+    },
+    "F": {
+      "tag": "forge:feathers"
+    },
+    "P": {
+      "item": "minecraft:paper"
+    },
+    "S": {
+      "tag": "minecraft:wooden_slabs"
+    }
+  },
+  "result": {
+    "item": "vareqp:notepad"
+  }
+}
