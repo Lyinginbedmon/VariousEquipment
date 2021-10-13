@@ -18,6 +18,7 @@ import com.mojang.datafixers.util.Pair;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.LootTableProvider;
 import net.minecraft.item.Item;
+import net.minecraft.item.Items;
 import net.minecraft.loot.ConstantRange;
 import net.minecraft.loot.ItemLootEntry;
 import net.minecraft.loot.LootEntry;
@@ -38,6 +39,8 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.resources.ResourcePackType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Util;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
 public class VELootProvider extends LootTableProvider
@@ -276,7 +279,20 @@ public class VELootProvider extends LootTableProvider
     			LootPool.builder()
     					.name("main")
     					.rolls(RandomValueRange.of(1, 2))
-    					.addEntry(itemEntry(VEItems.BURNT_HAY, 1))));
+    					.addEntry(itemEntry(VEItems.BURNT_HAY, 1)))
+    			.addLootPool(
+    				LootPool.builder()
+    					.name("bonus")
+    					.rolls(ConstantRange.of(1))
+    					.acceptCondition(RandomChance.builder(0.07F))
+    					.addEntry(itemEntry(Items.BREAD, 1).acceptFunction(SetNBT.builder(Util.make(new CompoundNBT(), (nbt) -> 
+    						{
+    							nbt.put("display", Util.make(new CompoundNBT(), (nbt2) -> 
+    							{
+    								StringTextComponent name = new StringTextComponent(String.valueOf('"') + "Bread" + String.valueOf('"'));
+    								nbt2.putString("Name", ITextComponent.Serializer.toJson(name));
+    							}));
+    						}))))));
     	
 //    	addEntityLootTable("inject/entities/kobold", LootTable.builder().addLootPool(
 //    			LootPool.builder()
@@ -285,7 +301,7 @@ public class VELootProvider extends LootTableProvider
 //    					.acceptCondition(RandomChance.builder(0.05F))
 //    					.acceptCondition(KilledByPlayer.builder())
 //    					.addEntry(itemEntry(VEItems.TAIL_KOBOLD, 1))));
-//    	addEntityLootTable("inject/entities/kobold", LootTable.builder().addLootPool(
+//    	addEntityLootTable("inject/entities/goblin", LootTable.builder().addLootPool(
 //    			LootPool.builder()
 //    					.name("main")
 //    					.rolls(RandomValueRange.of(1, 2))

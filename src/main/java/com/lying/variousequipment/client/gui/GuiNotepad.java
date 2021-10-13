@@ -39,6 +39,7 @@ public class GuiNotepad extends Screen
 	private final FontRenderer font;
 	private TextFieldWidget header;
 	private TextFieldWidget[] lines = new TextFieldWidget[9];
+	private TextFieldWidget currentField = null;
 	private final List<TextFieldWidget> textFields = Lists.newArrayList();
 	
 	private Button nextPage;
@@ -61,7 +62,7 @@ public class GuiNotepad extends Screen
 	
 	protected void init()
 	{
-		Minecraft.getInstance().keyboardListener.enableRepeatEvents(true);
+		this.minecraft.keyboardListener.enableRepeatEvents(true);
 		this.currentPage = getCurrentPage();
 		
 		initFields();
@@ -90,17 +91,20 @@ public class GuiNotepad extends Screen
 		
 		int yPos = 20;
 		int midX = this.width / 2;
-		header = new TextFieldWidget(font, midX - 50, yPos, 100, 15, new StringTextComponent(""));
+		header = new TextFieldWidget(font, midX - 50, yPos, 100, 15, new StringTextComponent("Header"));
 		header.setMaxStringLength(20);
+		this.currentField = header;
+		this.children.add(header);
 		addField(header);
 		setFocusedDefault(header);
 		
 		yPos += 20;
 		for(int i=0; i<lines.length; i++)
 		{
-			TextFieldWidget textField = new TextFieldWidget(font, midX - 40, yPos + 17 * i, 90, 15, new StringTextComponent(""));
+			TextFieldWidget textField = new TextFieldWidget(font, midX - 40, yPos + 17 * i, 90, 15, new StringTextComponent("Line "+i));
 			textField.setMaxStringLength(20);
 			lines[i] = addField(textField);
+			this.children.add(textField);
 		}
 	}
 	
@@ -117,7 +121,7 @@ public class GuiNotepad extends Screen
 	{
 //		textField.setEnableBackgroundDrawing(false);
 		textField.setTextColor(TEXT_COLOR);
-		this.children.add(textField);
+		textField.setEnabled(true);
 		this.textFields.add(textField);
 		return textField;
 	}
@@ -188,7 +192,6 @@ public class GuiNotepad extends Screen
 		
 		this.pageIndex = MathHelper.clamp(index, 0, pages.size());
 		this.currentPage = getCurrentPage();
-		init();
 	}
 	
 	private void generatePagesFromPad(CompoundNBT compound)
@@ -196,7 +199,6 @@ public class GuiNotepad extends Screen
 		pages.clear();
 		pages.addAll(ItemNotepad.getPagesFromNBT(compound));
 		this.currentPage = getCurrentPage();
-		init();
 	}
 	
 	private CompoundNBT writePagesToNBT(CompoundNBT compound)
@@ -235,19 +237,30 @@ public class GuiNotepad extends Screen
 	
 	public boolean keyPressed(int keyCode, int scanCode, int modifiers)
 	{
-		if(keyCode == 256)
-			Minecraft.getInstance().player.closeScreen();
+		if(super.keyPressed(keyCode, scanCode, modifiers))
+			return true;
+		else if(keyCode == 256)
+		{
+			this.minecraft.player.closeScreen();
+			return true;
+		}
 		
-		for(TextFieldWidget textField : this.textFields)
-			if(textField.keyPressed(keyCode, scanCode, modifiers) || textField.canWrite())
-				return true;
+		if(this.currentField != null)
+			this.currentField.keyPressed(keyCode, scanCode, modifiers);
 		
-		return super.keyPressed(keyCode, scanCode, modifiers);
+		return this.currentField != null;
 	}
 	
-	public void resize(Minecraft minecraft, int width, int height)
+	public boolean mouseClicked(double mouseX, double mouseY, int button)
 	{
-		super.resize(minecraft, width, height);
-		this.init();
+		this.currentField = null;
+		for(TextFieldWidget field : this.textFields)
+		{
+			boolean isOver = field.isMouseOver(mouseX, mouseY);
+			if(isOver)
+				this.currentField = field;
+			field.setFocused2(isOver);
+		}
+		return super.mouseClicked(mouseX, mouseY, button);
 	}
 }

@@ -15,7 +15,7 @@ public class ModelScarecrow extends BipedModel<EntityScarecrow>
 	{
 		super(1F);
 		
-		textureHeight = 128;
+		textureHeight = 64;
 		textureWidth = 64;
 		
 		bipedHead = ModelUtils.freshRenderer(this);

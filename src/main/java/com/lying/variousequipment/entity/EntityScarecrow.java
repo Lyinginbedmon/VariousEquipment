@@ -7,8 +7,10 @@ import com.google.common.collect.Lists;
 import com.lying.variousequipment.init.VEItems;
 import com.lying.variousequipment.init.VELootTables;
 import com.lying.variousequipment.reference.Reference;
+import com.lying.variousequipment.utility.world.ManagerScarecrows;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -37,6 +39,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.Hand;
 import net.minecraft.util.HandSide;
 import net.minecraft.util.SoundEvents;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
@@ -287,6 +290,38 @@ public class EntityScarecrow extends LivingEntity
 				this.world.addParticle(ParticleTypes.SMOKE, this.getPosXRandom(0.5D), this.getPosYRandom(), this.getPosZRandom(0.5D), 0.0D, 0.0D, 0.0D);
 		
 		super.livingTick();
+	}
+	
+	/**
+	 * Adds growable positions near this scarecrow to the given list.
+	 * @param list
+	 * @return True if any position was added successfully.
+	 */
+	public boolean addCropsToList(List<BlockPos> list)
+	{
+		if(isBurnt() || getEntityWorld().isRemote) return false;
+		
+		boolean success = false;
+    	BlockPos pos = getPosition();
+    	int range = 8;
+    	for(int x=-range; x<range; x++)
+    	{
+    		for(int z=-range; z<range; z++)
+    		{
+    			for(int y=-2; y<1; y++)
+    			{
+    				BlockPos targetPos = pos.add(x, y, z);
+    				BlockState stateAtPos = getEntityWorld().getBlockState(targetPos);
+    				if(ManagerScarecrows.isGrowable(stateAtPos, pos, (ServerWorld)getEntityWorld()))
+    				{
+        				if(!list.contains(targetPos))
+        					list.add(targetPos);
+    					success = true;
+    				}
+    			}
+    		}
+    	}
+    	return success;
 	}
 	
 	@OnlyIn(Dist.CLIENT)

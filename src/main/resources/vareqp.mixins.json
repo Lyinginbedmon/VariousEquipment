@@ -9,7 +9,8 @@
 		"LivingEntityMixin",
 		"MobEntityMixin",
 		"AbstractHorseEntityMixin",
-		"ItemEntityMixin"
+		"ItemEntityMixin",
+		"ServerWorldMixin"
 	],
 	"client":
 	[
