@@ -289,7 +289,7 @@ public class VELootProvider extends LootTableProvider
     						{
     							nbt.put("display", Util.make(new CompoundNBT(), (nbt2) -> 
     							{
-    								StringTextComponent name = new StringTextComponent(String.valueOf('"') + "Bread" + String.valueOf('"'));
+    								StringTextComponent name = new StringTextComponent(String.valueOf('"') + "bread" + String.valueOf('"'));
     								nbt2.putString("Name", ITextComponent.Serializer.toJson(name));
     							}));
     						}))))));

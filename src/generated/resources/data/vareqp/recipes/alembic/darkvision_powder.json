@@ -1,0 +1,19 @@
+{
+  "type": "vareqp:alembic",
+  "input": {
+    "ingredients": [
+      {
+        "item": "minecraft:ender_eye"
+      },
+      {
+        "item": "vareqp:salt"
+      },
+      {
+        "item": "minecraft:glowstone_dust"
+      }
+    ]
+  },
+  "output": {
+    "item": "vareqp:darkvision_powder"
+  }
+}

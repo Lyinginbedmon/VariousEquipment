@@ -17,6 +17,7 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.data.IFinishedRecipe;
 import net.minecraft.data.RecipeProvider;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.CompoundNBT;
@@ -37,6 +38,7 @@ public class AlembicRecipeProvider extends RecipeProvider
 	protected void registerRecipes(Consumer<IFinishedRecipe> consumer)
 	{
 		consumer.accept(new FinishedRecipe(id("saltpeter"), "", new ItemStack(VEItems.SALTPETER), Ingredient.fromItems(VEBlocks.GUANO)));
+		consumer.accept(new FinishedRecipe(id("darkvision_powder"), "", new ItemStack(VEItems.NIGHT_POWDER), Ingredient.fromItems(Items.ENDER_EYE), Ingredient.fromItems(VEItems.SALT), Ingredient.fromItems(Items.GLOWSTONE_DUST)));
 	}
 	
 	protected ResourceLocation id(String s){ return new ResourceLocation(Reference.ModInfo.MOD_PREFIX+"alembic/" + s); }

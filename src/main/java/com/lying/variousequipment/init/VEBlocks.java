@@ -5,20 +5,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.lying.variousequipment.block.BlockAlembic;
-import com.lying.variousequipment.block.BlockCentrifuge;
-import com.lying.variousequipment.block.BlockGuano;
-import com.lying.variousequipment.block.BlockLavaStone;
-import com.lying.variousequipment.block.BlockMissing;
-import com.lying.variousequipment.block.BlockMixer;
-import com.lying.variousequipment.block.BlockNightPowder;
-import com.lying.variousequipment.block.BlockScreen;
+import com.lying.variousequipment.block.*;
 import com.lying.variousequipment.reference.Reference;
 
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.RotatedPillarBlock;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
@@ -71,7 +63,7 @@ public class VEBlocks
 	public static final Block GUANO				= register("bat_guano", new BlockGuano(AbstractBlock.Properties.create(Material.MISCELLANEOUS, MaterialColor.BROWN)));
 	public static final Block NIGHT_POWDER		= register("darkvision_powder", new BlockNightPowder(AbstractBlock.Properties.create(Material.MISCELLANEOUS)));
 	public static final Block ALEMBIC			= register("alembic", new BlockAlembic(AbstractBlock.Properties.create(Material.GLASS)));
-	public static final Block BURNT_HAY			= register("burnt_hay_block", new RotatedPillarBlock(AbstractBlock.Properties.create(Material.ORGANIC, MaterialColor.YELLOW).hardnessAndResistance(0.5F).sound(SoundType.PLANT)));
+	public static final Block BURNT_HAY			= register("burnt_hay_block", new BurntHayBlock(AbstractBlock.Properties.create(Material.ORGANIC, MaterialColor.YELLOW).hardnessAndResistance(0.5F).sound(SoundType.PLANT)));
 	
 	public static final Map<Block, Block> CONCRETE_TO_SCREEN = new HashMap<>();
 	

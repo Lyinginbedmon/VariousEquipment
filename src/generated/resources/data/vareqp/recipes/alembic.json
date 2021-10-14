@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "Gi ",
+    "C W",
+    "   "
+  ],
+  "key": {
+    "G": {
+      "item": "minecraft:potion"
+    },
+    "C": {
+      "item": "minecraft:coal"
+    },
+    "i": {
+      "tag": "forge:ingots/iron"
+    },
+    "W": {
+      "item": "minecraft:glass_bottle"
+    }
+  },
+  "result": {
+    "item": "vareqp:alembic"
+  }
+}

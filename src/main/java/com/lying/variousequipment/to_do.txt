@@ -1,4 +1,4 @@
-Darkvision powder needs item texture
+Hang during world creation or loading of new worlds
 Implement basic alchemy
 	Alchemical products
 		Vial of Acid

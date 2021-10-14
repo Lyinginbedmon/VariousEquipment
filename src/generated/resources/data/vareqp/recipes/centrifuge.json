@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " S ",
+    "BSB",
+    "III"
+  ],
+  "key": {
+    "S": {
+      "tag": "forge:rods/wooden"
+    },
+    "B": {
+      "item": "minecraft:glass_bottle"
+    },
+    "I": {
+      "tag": "forge:ingots/gold"
+    }
+  },
+  "result": {
+    "item": "vareqp:centrifuge"
+  }
+}

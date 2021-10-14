@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:block/cube_column",
   "textures": {
-    "end": "vareqp:block/burnt_hay_block_top",
-    "side": "vareqp:block/burnt_hay_block"
+    "end": "vareqp:blocks/burnt_hay_block_top",
+    "side": "vareqp:blocks/burnt_hay_block_side"
   }
 }

@@ -1,6 +1,7 @@
 package com.lying.variousequipment.tileentity;
 
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 import javax.annotation.Nonnull;
@@ -24,6 +25,7 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
@@ -155,18 +157,6 @@ public class TileEntityAlembic extends TileEntity implements ITickableTileEntity
 	{
 		EnumRegion region = EnumRegion.regionFromSlot(slot);
 		return region != null && region.isValid.apply(stack);
-//		switch(slot)
-//		{
-//			case 0:
-//				return ((IForgeItemStack)stack).getBurnTime() > 0;
-//			case 1:
-//			case 2:
-//			case 3:
-//				return BrewingRecipeRegistry.isValidIngredient(stack);
-//			case 4:	// Cannot put items in the product slot
-//			default:
-//				return false;
-//		}
 	}
 	
 	public boolean isUsableByPlayer(PlayerEntity player)
@@ -287,7 +277,7 @@ public class TileEntityAlembic extends TileEntity implements ITickableTileEntity
 		
 		if(burnTime == 0)
 		{
-			if(hasValidRecipe())
+			if(hasValidRecipe() && hasWater())
 			{
 				ItemStack fuel = getStackInSlot(0);
 				if(!fuel.isEmpty())
@@ -300,12 +290,40 @@ public class TileEntityAlembic extends TileEntity implements ITickableTileEntity
 		}
 		else if(setBurnTime(burnTime - 1) > 0)
 		{
-			// Do flame particles
-			
-			if(hasWater())
+			Direction facing = getBlockState().get(BlockAlembic.FACING);
+			double x = (double)getPos().getX();
+			double y = (double)getPos().getY();
+			double z = (double)getPos().getZ();
+			switch(facing)
 			{
-				// Do bubble particles
+				case EAST:
+					x += 0.6D;
+					z += 0.3D;
+					break;
+				case SOUTH:
+					z += 0.6D;
+					x += 0.7D;
+					break;
+				case WEST:
+					x += 0.4D;
+					z += 0.7D;
+					break;
+				case NORTH:
+				default:
+					z += 0.4D;
+					x += 0.3D;
+					break;
 			}
+			Random rand = getWorld().rand;
+			
+			// Do flame particles
+			if(getWorld().isRemote && rand.nextInt(8) == 0)
+				getWorld().addOptionalParticle(ParticleTypes.FLAME, x, y + 0.2D, z, 0D, 0D, 0D);
+			
+			// Do bubble particles
+			if(hasWater())
+				if(getWorld().isRemote && rand.nextInt(8) == 0)
+					getWorld().addOptionalParticle(ParticleTypes.BUBBLE, x + rand.nextDouble() * 0.15D * (rand.nextBoolean() ? -1 : 1), y + 0.6D, z + rand.nextDouble() * 0.15D * (rand.nextBoolean() ? -1 : 1), 0D, 0D, 0D);
 		}
 		
 		if(hasWater() && burnTime > 0 && hasValidRecipe())
@@ -345,7 +363,6 @@ public class TileEntityAlembic extends TileEntity implements ITickableTileEntity
 			{
 				stack.shrink(1);
 				setInventorySlotContents(slot, stack);
-				break;
 			}
 		}
 	}

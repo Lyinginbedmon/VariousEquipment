@@ -24,7 +24,7 @@
           "functions": [
             {
               "function": "minecraft:set_nbt",
-              "tag": "{display:{Name:'{\"text\":\"\\\\\"Bread\\\\\"\"}'}}"
+              "tag": "{display:{Name:'{\"text\":\"\\\\\"bread\\\\\"\"}'}}"
             }
           ],
           "name": "minecraft:bread"

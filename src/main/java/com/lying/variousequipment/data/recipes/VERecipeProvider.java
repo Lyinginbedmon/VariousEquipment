@@ -85,7 +85,19 @@ public class VERecipeProvider extends RecipeProvider
 			.addCriterion("has_tail_lizard", hasItem(VEItems.TAIL_LIZARD)).build(consumer);
 		registerSwapRecipe(VEItems.EARS_CAT, VEItems.EARS_WOLF, "has_ears_cat", "has_ears_wolf", consumer);
 		registerSwapRecipe(VEItems.TAIL_CAT, VEItems.TAIL_WOLF, "has_tail_cat", "has_tail_wolf", consumer);
+		ShapelessRecipeBuilder.shapelessRecipe(Items.WHEAT, 7)
+			.addIngredient(VEItems.BURNT_HAY)
+			.addCriterion("has_burnt_hay", hasItem(VEItems.BURNT_HAY)).build(consumer);
 		
+		ShapedRecipeBuilder.shapedRecipe(VEItems.ALEMBIC)
+			.patternLine("Gi ")
+			.patternLine("C W")
+			.patternLine("   ")
+			.key('G', Items.POTION)
+			.key('C', Items.COAL)
+			.key('i', Tags.Items.INGOTS_IRON)
+			.key('W', Items.GLASS_BOTTLE)
+			.addCriterion("has_glass_bottle", hasItem(Items.GLASS_BOTTLE)).build(consumer);
 		ShapedRecipeBuilder.shapedRecipe(VEItems.BLINDFOLD)
 			.patternLine(" S ")
 			.patternLine("L L")
@@ -104,6 +116,14 @@ public class VERecipeProvider extends RecipeProvider
 			.patternLine("N N")
 			.key('N', Tags.Items.NUGGETS_IRON)
 			.addCriterion("has_iron_nugget", hasItem(Items.IRON_NUGGET)).build(consumer);
+		ShapedRecipeBuilder.shapedRecipe(VEItems.CENTRIFUGE)
+			.patternLine(" S ")
+			.patternLine("BSB")
+			.patternLine("III")
+			.key('S', Tags.Items.RODS_WOODEN)
+			.key('B', Items.GLASS_BOTTLE)
+			.key('I', Tags.Items.INGOTS_GOLD)
+			.addCriterion("has_glass_bottle", hasItem(Items.GLASS_BOTTLE)).build(consumer);
 		ShapedRecipeBuilder.shapedRecipe(VEItems.CROWBAR)
 			.patternLine("iI ")
 			.patternLine(" L ")
@@ -124,6 +144,14 @@ public class VERecipeProvider extends RecipeProvider
 			.patternLine("LLL")
 			.key('L', Tags.Items.LEATHER)
 			.addCriterion("has_leather", hasItem(Items.LEATHER)).build(consumer);
+		ShapedRecipeBuilder.shapedRecipe(VEItems.MIXER)
+			.patternLine(" S ")
+			.patternLine("BSB")
+			.patternLine("III")
+			.key('S', Tags.Items.RODS_WOODEN)
+			.key('B', Items.GLASS_BOTTLE)
+			.key('I', Tags.Items.INGOTS_IRON)
+			.addCriterion("has_glass_bottle", hasItem(Items.GLASS_BOTTLE)).build(consumer);
 		ShapedRecipeBuilder.shapedRecipe(VEItems.NEEDLE_IRON, 3).setGroup("needles")
 			.patternLine(" B")
 			.patternLine("B ")

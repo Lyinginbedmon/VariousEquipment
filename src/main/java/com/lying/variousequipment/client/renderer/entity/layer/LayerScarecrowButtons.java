@@ -14,7 +14,7 @@ import net.minecraft.util.ResourceLocation;
 
 public class LayerScarecrowButtons extends LayerRenderer<EntityScarecrow, ModelScarecrow>
 {
-	public static final ResourceLocation TEXTURE = new ResourceLocation(Reference.ModInfo.MOD_ID, "textures/entity/scarecrow_buttons.png");
+	public static final ResourceLocation TEXTURE = new ResourceLocation(Reference.ModInfo.MOD_ID, "textures/entities/scarecrow_buttons.png");
 	private static final ModelScarecrow sheepModel = new ModelScarecrow(1F);
 	
 	public LayerScarecrowButtons(IEntityRenderer<EntityScarecrow, ModelScarecrow> entityRendererIn)

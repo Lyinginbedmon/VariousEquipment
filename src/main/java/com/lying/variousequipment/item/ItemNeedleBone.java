@@ -18,7 +18,7 @@ import net.minecraft.world.World;
 
 public class ItemNeedleBone extends ItemNeedle
 {
-	public static final ResourceLocation TEXTURE = new ResourceLocation(Reference.ModInfo.MOD_ID, "textures/entity/projectiles/needle_bone.png");
+	public static final ResourceLocation TEXTURE = new ResourceLocation(Reference.ModInfo.MOD_ID, "textures/entities/projectiles/needle_bone.png");
 	
 	public ItemNeedleBone(Item.Properties builder)
 	{
