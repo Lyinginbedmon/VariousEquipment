@@ -22,8 +22,10 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.text.IFormattableTextComponent;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
@@ -60,27 +62,25 @@ public class ItemNotepad extends Item
 			PadPage currentPage = pages.get(stackData.getInt("Page"));
 			if(!currentPage.title().isEmpty())
 			{
-				tooltip.add(new TranslationTextComponent("gui."+Reference.ModInfo.MOD_ID+".notepad.current_page"));
+				tooltip.add(new TranslationTextComponent("gui."+Reference.ModInfo.MOD_ID+".notepad.current_page").modifyStyle((style) -> { return style.setBold(true).setFormatting(TextFormatting.GRAY); }));
 				tooltip.add(new StringTextComponent("   "+currentPage.title()));
 				showingPage = true;
 			}
 			
 			Map<Icon, Integer> iconTally = new HashMap<>();
-			int markedLines = 0;
 			String currentTask = "";
 			for(int i=0; i<9; i++)
 			{
-				PadLine line = currentPage.getLine(i);
-				if(line.icon().showInTooltip)
+				String text = currentPage.getLine(i);
+				Icon icon = currentPage.getIcon(i);
+				if(icon.showInTooltip)
 				{
 					showingPage = true;
 					
 					if(currentTask.isEmpty())
-						currentTask = line.text();
+						currentTask = text;
 					
-					Icon icon = line.icon();
-					iconTally.put(icon, iconTally.get(icon) + 1);
-					markedLines++;
+					iconTally.put(icon, iconTally.getOrDefault(icon, 0) + 1);
 				}
 			}
 			
@@ -89,14 +89,14 @@ public class ItemNotepad extends Item
 			{
 				showingPage = true;
 				
-				tooltip.add(new TranslationTextComponent("gui."+Reference.ModInfo.MOD_ID+".notepad.next_task"));
+				tooltip.add(new TranslationTextComponent("gui."+Reference.ModInfo.MOD_ID+".notepad.next_task").modifyStyle((style) -> { return style.setBold(true).setFormatting(TextFormatting.GRAY); }));
 				tooltip.add(new StringTextComponent("   "+currentTask));
 			}
 			
 			// Display breakdown of current task progress by icon type
 			for(Icon icon : Icon.DISPLAY_ORDER)
 				if(iconTally.containsKey(icon))
-					tooltip.add(new StringTextComponent(" ").append(new TranslationTextComponent("gui."+Reference.ModInfo.MOD_ID+".notepad.tally_entry", iconTally.get(icon), markedLines, icon.translated())));
+					tooltip.add(new StringTextComponent(" ").append(icon.format(new TranslationTextComponent("gui."+Reference.ModInfo.MOD_ID+".notepad.tally_entry", iconTally.get(icon), icon.translated()))));
 			
 			// Display page index in total
 			if(pages.size() > 1)
@@ -112,35 +112,63 @@ public class ItemNotepad extends Item
 	{
 		List<PadPage> pages = Lists.newArrayList();
 		if(compound.isEmpty())
-			pages.add(new PadPage(new CompoundNBT()));
+			return Lists.newArrayList(new PadPage(new CompoundNBT()));
 		else if(compound.contains("Pages", 9))
 		{
-			ListNBT pageList = compound.getList("Pages", 11);
+			ListNBT pageList = compound.getList("Pages", 10);
 			for(int i=0; i<pageList.size(); i++)
 				pages.add(new PadPage(pageList.getCompound(i)));
 		}
 		return pages;
 	}
 	
+	public static CompoundNBT writePagesToNBT(List<PadPage> pages, CompoundNBT compound)
+	{
+		if(!pages.isEmpty())
+		{
+			ListNBT pageList = new ListNBT();
+			pages.forEach((page) -> { pageList.add(page.writeToNBT(new CompoundNBT())); });
+			compound.put("Pages", pageList);
+		}
+		
+		return compound;
+	}
+	
 	public static enum Icon implements IStringSerializable
 	{
-		BLANK(false),
-		QUESTION(true),
-		TICK(true),
-		CROSS(true);
+		BLANK(),
+		QUESTION(TextFormatting.WHITE, 0),
+		TICK(TextFormatting.GREEN, 1),
+		CROSS(TextFormatting.RED, 2);
 		
 		public static final EnumSet<Icon> DISPLAY_ORDER = EnumSet.<Icon>of(QUESTION, TICK, CROSS);
 		
 		private final boolean showInTooltip;
+		private final TextFormatting displayColor;
+		private final int textureIndex;
 		
-		private Icon(boolean display)
+		private Icon()
 		{
-			this.showInTooltip = display;
+			this.showInTooltip = false;
+			this.displayColor = TextFormatting.GRAY;
+			this.textureIndex = 0;
+		}
+		private Icon(TextFormatting color, int index)
+		{
+			this.showInTooltip = true;
+			this.displayColor = color;
+			this.textureIndex = index;
 		}
 		
 		public String getString(){ return name().toLowerCase(); }
 		
 		public ITextComponent translated(){ return new TranslationTextComponent("enum."+Reference.ModInfo.MOD_ID+".icon."+getString()); }
+		public IFormattableTextComponent format(IFormattableTextComponent textComponent)
+		{
+			return textComponent.modifyStyle((style) -> { return style.applyFormatting(displayColor); });
+		}
+		
+		public int textureIndex(){ return this.textureIndex; }
 		
 		public boolean isDisplayed()
 		{
@@ -159,23 +187,27 @@ public class ItemNotepad extends Item
 	public static class PadPage
 	{
 		private String headerText = "";
-		private final NonNullList<PadLine> lines;
+		
+		private final NonNullList<String> strings;
+		private final NonNullList<Icon> icons;
 		
 		public PadPage(CompoundNBT pageData)
 		{
 			if(pageData.contains("Title", 8))
 				headerText = pageData.getString("Title");
 			
-			lines = NonNullList.<PadLine>withSize(9, new PadLine(new CompoundNBT()));
+			strings = NonNullList.<String>withSize(9, "");
+			icons = NonNullList.<Icon>withSize(9, Icon.BLANK);
 			
 			if(pageData.contains("Lines", 9))
 			{
-				ListNBT lineList = pageData.getList("Lines", 11);
+				ListNBT lineList = pageData.getList("Lines", 10);
 				for(int i=0; i<lineList.size(); i++)
 				{
 					CompoundNBT lineData = lineList.getCompound(i);
 					int lineInd = lineData.getInt("Index");
-					lines.set(lineInd, new PadLine(lineData));
+					strings.set(lineInd, lineData.contains("Text", 8) ? lineData.getString("Text") : "");
+					icons.set(lineInd, lineData.contains("Icon", 8) ? Icon.fromString(lineData.getString("Icon")) : Icon.BLANK);
 				}
 			}
 		}
@@ -188,12 +220,18 @@ public class ItemNotepad extends Item
 					compound.putString("Title", headerText);
 				
 				ListNBT list = new ListNBT();
-				int index = 0;
-				for(PadLine line : lines)
+				for(int index=0; index<9; index++)
 				{
-					if(line.isBlank()) continue;
-					CompoundNBT lineData = line.writeToNBT(new CompoundNBT());
-					lineData.putInt("Index", index++);
+					if(isLineBlank(index)) continue;
+					String text = strings.get(index);
+					Icon icon = icons.get(index);
+					
+					CompoundNBT lineData = new CompoundNBT();
+					if(!text.isEmpty())
+						lineData.putString("Text", text);
+					if(icon != Icon.BLANK)
+						lineData.putString("Icon", icon.getString());
+					lineData.putInt("Index", index);
 					list.add(lineData);
 				}
 				if(list.size() > 0)
@@ -208,56 +246,32 @@ public class ItemNotepad extends Item
 			if(!headerText.isEmpty())
 				return false;
 			
-			for(PadLine line : lines)
-				if(!line.isBlank())
+			for(int i=0; i<strings.size(); i++)
+				if(!isLineBlank(i))
 					return false;
 			
 			return true;
 		}
 		
-		public PadLine getLine(int i){ return this.lines.get(i); }
-		
 		public String title(){ return this.headerText; }
 		public void setTitle(String par1String){ this.headerText = par1String; }
-	}
-	
-	public static class PadLine
-	{
-		private Icon icon = Icon.BLANK;
-		private String text = "";
 		
-		public PadLine(CompoundNBT compound)
+		public boolean isLineBlank(int index){ return this.strings.get(index).isEmpty(); }
+		
+		public String getLine(int index){ return this.strings.get(index); }
+		public void setLine(int index, String text)
 		{
-			if(compound.contains("Text", 8))
-				text = compound.getString("Text");
-			
-			if(compound.contains("Box", 8))
-				icon = Icon.fromString(compound.getString("Icon"));
+			this.strings.set(index, text);
 		}
 		
-		public CompoundNBT writeToNBT(CompoundNBT compound)
-		{
-			if(!text.isEmpty())
-				compound.putString("Text", text);
-			if(icon != Icon.BLANK)
-				compound.putString("Icon", icon.getString());
-			return compound;
-		}
+		public Icon getIcon(int index){ return this.icons.get(index); }
+		public void setIcon(int index, Icon iconIn){ this.icons.set(index, iconIn); }
 		
-		public boolean isBlank()
+		public void nextIcon(int index)
 		{
-			return text.isEmpty() && icon == Icon.BLANK;
-		}
-		
-		public String text(){ return this.text; }
-		public void setText(String par1String){ this.text = par1String; }
-		
-		public Icon icon(){ return this.icon; }
-		public void setIcon(Icon iconIn){ this.icon = iconIn; }
-		public void nextIcon()
-		{
-			int ordinal = this.icon.ordinal() + 1;
-			this.icon = Icon.values()[ordinal % Icon.values().length];
+			Icon icon = this.getIcon(index);
+			int ordinal = icon.ordinal() + 1;
+			setIcon(index, Icon.values()[ordinal % Icon.values().length]);
 		}
 	}
 }

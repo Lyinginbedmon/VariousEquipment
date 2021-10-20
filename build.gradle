@@ -19,7 +19,7 @@ apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 apply plugin: 'org.spongepowered.mixin'
 
-version = '1.16.5_001o3'
+version = '1.16.5_001q6'
 group = 'com.lying.variousequipment' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'vareqp'
 
@@ -166,11 +166,12 @@ dependencies {
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
     // compileOnly files('libs/varodd-1.16_001o_sources.jar')
-    compileOnly 'curse.maven:varodd-290043:3320800'
-    runtimeOnly 'curse.maven:varodd-290043:3320797'
+    compileOnly 'curse.maven:varodd-290043:3472162'	// Sources
+    runtimeOnly 'curse.maven:varodd-290043:3472161'	// Compiled
+    // compileOnly 'curse.maven:varodd-290043:3349396'
+    // runtimeOnly 'curse.maven:varodd-290043:3349395'
     compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.16.5-4.0.4.0:api")
     runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.16.5-4.0.4.0")
-	
 }
 
 // Example for how to get properties into the manifest for reading by the runtime..
@@ -179,7 +180,7 @@ jar {
         attributes([
             "Specification-Title": "VariousEquipment",
             "Specification-Vendor": "lyinginbedmon",
-            "Specification-Version": "1.16.5_001o3",
+            "Specification-Version": "1.16.5_001q6",
             "Implementation-Title": project.name,
             "Implementation-Version": "${version}",
             "Implementation-Vendor" :"lyinginbedmon",

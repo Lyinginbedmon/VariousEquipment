@@ -18,12 +18,16 @@ public class ConfigVE
 		
 		private final ForgeConfigSpec.BooleanValue verboseLog;
 		
+		private final ForgeConfigSpec.BooleanValue batsPoop;
+		
 		private boolean verbose = false;
+		private boolean guano = true;
 		
 		public General(ForgeConfigSpec.Builder builder)
 		{
 			builder.push("general");
 				verboseLog = builder.define("verboseLog", false);
+				batsPoop = builder.define("bat_guano", true);
 			builder.pop();
 		}
 		
@@ -34,6 +38,9 @@ public class ConfigVE
 			if(verboseLog != null)
 				verbose = verboseLog.get();
 			
+			if(batsPoop != null)
+				guano = batsPoop.get();
+			
 			dirty = false;
 		}
 		
@@ -41,6 +48,12 @@ public class ConfigVE
 		{
 			checkDirty();
 			return verbose;
+		}
+		
+		public boolean shouldBatsPoop()
+		{
+			checkDirty();
+			return guano;
 		}
 	}
 	

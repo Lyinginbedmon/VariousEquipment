@@ -6,6 +6,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import com.lying.variousequipment.api.IShieldBreakItem;
+import com.lying.variousequipment.config.ConfigVE;
 import com.lying.variousequipment.init.VEBlocks;
 
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -26,7 +27,7 @@ public class MobEntityMixin extends LivingEntityMixin
 	@Inject(method = "livingTick()V", at = @At("RETURN"), cancellable = false)
 	public void livingTick(final CallbackInfo ci)
 	{
-		if(getType() != EntityType.BAT) return;
+		if(getType() != EntityType.BAT || !ConfigVE.GENERAL.shouldBatsPoop()) return;
 		
 		BatEntity bat = (BatEntity)(Object)this;
 		World world = bat.getEntityWorld();

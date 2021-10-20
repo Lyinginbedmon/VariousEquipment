@@ -9,9 +9,7 @@ Implement basic alchemy
 		Flash Pellet (flashbang, blinds and dazzles temporarily)
 		Lockslip grease (makes locks easier to pick)
 		Ghostwall shellac (prevents phasing creatures from passing through block for 4-24 hours)
-		Signal torches (coloured torches)
 Shuriken (pain snowballs, 50% chance to drop on impact with a surface for recollection)
-Notepad
 Horse-drawn cart
 	Control horse from wagon seat
 	Damage transferred to components

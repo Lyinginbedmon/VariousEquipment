@@ -150,6 +150,6 @@
 	
 	"gui.vareqp.notepad.current_page": "Current page:",
 	"gui.vareqp.notepad.next_task": "Next task:",
-	"gui.vareqp.notepad.tally_entry": "%s / %s %s",
+	"gui.vareqp.notepad.tally_entry": "%s %s",
 	"gui.vareqp.notepad.page_count": "Page %s / %s"
 }

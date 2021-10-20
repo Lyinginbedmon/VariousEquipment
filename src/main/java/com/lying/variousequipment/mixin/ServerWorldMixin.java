@@ -28,8 +28,8 @@ public class ServerWorldMixin
 		}
 	}
 	
-	@Inject(method = "removeEntityComplete(Lnet/minecraft/entity/Entity;Z)V", at = @At("HEAD"))
-	public void removeEntityComplete(Entity entityIn, boolean keepData, final CallbackInfo ci)
+	@Inject(method = "removeEntity(Lnet/minecraft/entity/Entity;)V", at = @At("HEAD"))
+	public void removeEntity(Entity entityIn, final CallbackInfo ci)
 	{
 		if(entityIn.getType() == VEEntities.SCARECROW.get())
 		{
