@@ -71,6 +71,20 @@ public class RecipeAlembic implements IAlembicRecipe
 		return VERecipeTypes.ALEMBIC_SERIALIZER;
 	}
 	
+	public NonNullList<Ingredient> getIngredients(){ return this.ingredients; }
+	public NonNullList<ItemStack> getOutputSlotContents()
+	{
+		if(this.outputStack.isEmpty() && this.outputIngredient != null)
+		{
+			ItemStack[] matching = this.outputIngredient.getMatchingStacks();
+			return NonNullList.from(matching[0], matching);
+		}
+		else if(this.outputIngredient == null && !this.outputStack.isEmpty())
+			return NonNullList.withSize(1, this.outputStack);
+		else
+			return NonNullList.create();
+	}
+	
 	@Override
 	public ItemStack getRecipeOutput()
 	{

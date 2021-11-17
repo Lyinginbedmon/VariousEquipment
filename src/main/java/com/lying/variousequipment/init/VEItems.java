@@ -96,6 +96,15 @@ public class VEItems
 	public static final Item EARS_ELF		= register("ears_pointy", new ItemHorns.EarsElf(new Item.Properties()));
 	public static final Item EARS_GOBLIN	= register("ears_goblin", new ItemHorns.EarsGoblin(new Item.Properties()));
 	public static final Item THIRD_EYE		= register("third_eye", new ItemThirdEye(new Item.Properties()));
+	public static final Item LEGS_SATYR		= register("legs_satyr", new ItemLegs.Satyr(new Item.Properties()));
+	public static final Item LEGS_KOBOLD	= register("legs_kobold", new ItemLegs.Kobold(new Item.Properties()));
+	public static final Item LEGS_DRAGON	= register("legs_dragon", new ItemLegs.Dragon(new Item.Properties()));
+	public static final Item LEGS_NAGA		= register("legs_naga", new ItemLegs.Naga(new Item.Properties()));
+	public static final Item LEGS_PEG_WOODEN	= register("legs_peg_wooden", new ItemLegs.Peg(6437920, new Item.Properties()));
+	public static final Item LEGS_PEG_IRON		= register("legs_peg_iron", new ItemLegs.Peg(-1, new Item.Properties()));
+	public static final Item LEGS_PEG_GOLDEN	= register("legs_peg_golden", new ItemLegs.Peg(16773210, new Item.Properties()));
+	public static final Item LEGS_PEG_NETHERITE	= register("legs_peg_netherite", new ItemLegs.Peg(4141115, new Item.Properties()));
+	public static final Item LEGS_SPIDER	= register("legs_spider", new ItemLegs.Spider(new Item.Properties()));
 	public static final Item COSTUME		= register("costume", new ItemCostume(new Item.Properties()));
 	
 	public static final Item HAT_WITCH		= register("hat_witch", new ItemHatWitch(new Item.Properties().group(VEItemGroup.GEAR)));

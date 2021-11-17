@@ -15,6 +15,7 @@
 	"client":
 	[
 		"FirstPersonRendererMixin",
-		"PlayerRendererMixin"
+		"PlayerRendererMixin",
+		"BipedArmorLayerMixin"
 	]
 }

@@ -29,6 +29,11 @@ public abstract class ItemVial extends Item
 		return new TranslationTextComponent("vial."+Reference.ModInfo.MOD_ID+"."+getVialFromItem(stack).getRegistryName().getPath());
 	}
 	
+	public static String getSubtype(ItemStack stack)
+	{
+		return stack.hasTag() && stack.getTag().contains("Vial", 8) ? stack.getTag().getString("Vial") : "none";
+	}
+	
 	public static Vial getVialFromItem(ItemStack stack)
 	{
 		CompoundNBT tag = stack.getTag();

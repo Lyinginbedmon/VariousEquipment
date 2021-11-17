@@ -34,6 +34,9 @@ public interface ICentrifugeRecipe extends IRecipe<IInventory>
 	public default boolean isDynamic(){ return true; }
 	
 	public NonNullList<ItemStack> getRecipeOutput(Random rand, World world);
+	public ItemStack getAnticipatedOutput();
+	
+	public NonNullList<ItemStack> getIngredientStacks();
 	
 	public default IRecipeType<?> getType()
 	{

@@ -6,6 +6,9 @@
     }
   },
   "output": {
-    "table": "vareqp:centrifuge/cobblestone_vines"
+    "table": "vareqp:centrifuge/cobblestone_vines",
+    "item": {
+      "item": "minecraft:vine"
+    }
   }
 }

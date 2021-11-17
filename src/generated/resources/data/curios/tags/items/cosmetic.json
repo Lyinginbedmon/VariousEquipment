@@ -34,6 +34,15 @@
     "vareqp:nose_witch",
     "vareqp:ears_pointy",
     "vareqp:ears_goblin",
-    "vareqp:third_eye"
+    "vareqp:third_eye",
+    "vareqp:legs_satyr",
+    "vareqp:legs_kobold",
+    "vareqp:legs_dragon",
+    "vareqp:legs_naga",
+    "vareqp:legs_peg_wooden",
+    "vareqp:legs_peg_iron",
+    "vareqp:legs_peg_golden",
+    "vareqp:legs_peg_netherite",
+    "vareqp:legs_spider"
   ]
 }

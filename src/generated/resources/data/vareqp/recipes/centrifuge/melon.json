@@ -6,6 +6,9 @@
     }
   },
   "output": {
-    "table": "minecraft:blocks/melon"
+    "table": "minecraft:blocks/melon",
+    "item": {
+      "item": "minecraft:melon_slice"
+    }
   }
 }

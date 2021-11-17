@@ -154,7 +154,16 @@ public class VEItemTags extends ItemTagsProvider
 				VEItems.NOSE_WITCH,
 				VEItems.EARS_ELF,
 				VEItems.EARS_GOBLIN,
-				VEItems.THIRD_EYE
+				VEItems.THIRD_EYE,
+				VEItems.LEGS_SATYR,
+				VEItems.LEGS_KOBOLD,
+				VEItems.LEGS_DRAGON,
+				VEItems.LEGS_NAGA,
+				VEItems.LEGS_PEG_WOODEN,
+				VEItems.LEGS_PEG_IRON,
+				VEItems.LEGS_PEG_GOLDEN,
+				VEItems.LEGS_PEG_NETHERITE,
+				VEItems.LEGS_SPIDER
 				);
 		
 		getOrCreateBuilder(SHAKEABLES).add(VEItems.VIAL_SOLUTION);

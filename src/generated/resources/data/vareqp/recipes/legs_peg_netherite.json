@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "S",
+    "R"
+  ],
+  "key": {
+    "S": {
+      "tag": "forge:ingots/netherite"
+    },
+    "R": {
+      "tag": "forge:rods/wooden"
+    }
+  },
+  "result": {
+    "item": "vareqp:legs_peg_netherite"
+  }
+}

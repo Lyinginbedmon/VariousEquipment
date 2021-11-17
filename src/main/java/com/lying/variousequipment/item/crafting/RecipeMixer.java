@@ -23,7 +23,7 @@ public class RecipeMixer extends RecipeStackOrIngredient implements IMixerRecipe
 	
 	public RecipeMixer(ResourceLocation idIn, @Nullable String groupIn, ItemStack outputIn, ItemStack inputIn)
 	{
-		super(inputIn, null);
+		super(inputIn);
 		this.id = idIn;
 		this.output = outputIn;
 		this.group = groupIn;
@@ -31,7 +31,7 @@ public class RecipeMixer extends RecipeStackOrIngredient implements IMixerRecipe
 	
 	public RecipeMixer(ResourceLocation idIn, @Nullable String groupIn, ItemStack outputIn, Ingredient inputIn)
 	{
-		super(null, inputIn);
+		super(inputIn);
 		this.id = idIn;
 		this.output = outputIn;
 		this.group = groupIn;

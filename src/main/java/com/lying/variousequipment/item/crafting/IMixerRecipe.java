@@ -8,6 +8,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.IRecipeType;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
@@ -38,6 +39,8 @@ public interface IMixerRecipe extends IRecipe<IInventory>
 	{
 		return getRecipeOutput().copy();
 	}
+	
+	public NonNullList<ItemStack> getIngredientStacks();
 	
 	public default IRecipeType<?> getType()
 	{

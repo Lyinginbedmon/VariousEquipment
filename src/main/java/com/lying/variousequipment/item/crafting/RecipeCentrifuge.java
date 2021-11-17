@@ -31,42 +31,47 @@ public class RecipeCentrifuge extends RecipeStackOrIngredient implements ICentri
 	
 	private final ItemStack outputStack;
 	private final ResourceLocation outputTable;
+	private final ItemStack anticipatedStack;
 	
 	private final String group;
 	
 	public RecipeCentrifuge(ResourceLocation idIn, @Nullable String groupIn, ItemStack outputIn, ItemStack inputIn)
 	{
-		super(inputIn, null);
+		super(inputIn);
 		this.id = idIn;
 		this.outputStack = outputIn;
 		this.outputTable = null;
+		this.anticipatedStack = ItemStack.EMPTY;
 		this.group = groupIn;
 	}
 	
-	public RecipeCentrifuge(ResourceLocation idIn, @Nullable String groupIn, ResourceLocation outputIn, ItemStack inputIn)
+	public RecipeCentrifuge(ResourceLocation idIn, @Nullable String groupIn, ResourceLocation outputIn, ItemStack anticipatedStackIn, ItemStack inputIn)
 	{
-		super(inputIn, null);
+		super(inputIn);
 		this.id = idIn;
 		this.outputStack = null;
 		this.outputTable = outputIn;
+		this.anticipatedStack = anticipatedStackIn;
 		this.group = groupIn;
 	}
 	
 	public RecipeCentrifuge(ResourceLocation idIn, @Nullable String groupIn, ItemStack outputIn, Ingredient inputIn)
 	{
-		super(null, inputIn);
+		super(inputIn);
 		this.id = idIn;
 		this.outputStack = outputIn;
 		this.outputTable = null;
+		this.anticipatedStack = ItemStack.EMPTY;
 		this.group = groupIn;
 	}
 	
-	public RecipeCentrifuge(ResourceLocation idIn, @Nullable String groupIn, ResourceLocation outputIn, Ingredient inputIn)
+	public RecipeCentrifuge(ResourceLocation idIn, @Nullable String groupIn, ResourceLocation outputIn, ItemStack anticipatedStackIn, Ingredient inputIn)
 	{
-		super(null, inputIn);
+		super(inputIn);
 		this.id = idIn;
 		this.outputStack = null;
 		this.outputTable = outputIn;
+		this.anticipatedStack = anticipatedStackIn;
 		this.group = groupIn;
 	}
 	
@@ -82,15 +87,12 @@ public class RecipeCentrifuge extends RecipeStackOrIngredient implements ICentri
 	
 	public ItemStack getRecipeOutput()
 	{
-		return outputStack == null ? ItemStack.EMPTY : outputStack;
+		return outputStack == null ? anticipatedStack : outputStack;
 	}
 	
 	@Override
 	public NonNullList<ItemStack> getRecipeOutput(Random rand, World world)
 	{
-		if(this.outputStack != null)
-			return NonNullList.withSize(1, outputStack);
-		
 		if(this.outputTable != null)
 		{
 			MinecraftServer server = world.getServer();
@@ -101,8 +103,13 @@ public class RecipeCentrifuge extends RecipeStackOrIngredient implements ICentri
 			List<ItemStack> loot = table.generate(context.build(LootParameterSets.EMPTY));
 			return NonNullList.from(ItemStack.EMPTY, loot.toArray(new ItemStack[0]));
 		}
+		else if(this.outputStack != null)
+			return NonNullList.withSize(1, outputStack);
+		
 		return NonNullList.withSize(1, ItemStack.EMPTY);
 	}
+	
+	public ItemStack getAnticipatedOutput(){ return this.outputTable == null ? this.outputStack : this.anticipatedStack; }
 	
 	public String getGroup(){ return group; }
 	
@@ -123,10 +130,11 @@ public class RecipeCentrifuge extends RecipeStackOrIngredient implements ICentri
 			if(output.has("table"))
 			{
 				ResourceLocation table = new ResourceLocation(JSONUtils.getString(output, "table"));
+				ItemStack anticipatedStack = ShapedRecipe.deserializeItem(output.get("item").getAsJsonObject());
 				if(usesIngredient)
-					return new RecipeCentrifuge(recipeId, group, table, inputIngredient);
+					return new RecipeCentrifuge(recipeId, group, table, anticipatedStack, inputIngredient);
 				else
-					return new RecipeCentrifuge(recipeId, group, table, inputStack);
+					return new RecipeCentrifuge(recipeId, group, table, anticipatedStack, inputStack);
 			}
 			else
 			{
@@ -148,10 +156,11 @@ public class RecipeCentrifuge extends RecipeStackOrIngredient implements ICentri
 			if(buffer.readBoolean())
 			{
 				ResourceLocation table = new ResourceLocation(buffer.readString());
+				ItemStack anticipatedStack = buffer.readItemStack();
 				if(usesIngredient)
-					return new RecipeCentrifuge(recipeId, group, table, inputIngredient);
+					return new RecipeCentrifuge(recipeId, group, table, anticipatedStack, inputIngredient);
 				else
-					return new RecipeCentrifuge(recipeId, group, table, inputStack);
+					return new RecipeCentrifuge(recipeId, group, table, anticipatedStack, inputStack);
 			}
 			else
 			{
@@ -174,10 +183,13 @@ public class RecipeCentrifuge extends RecipeStackOrIngredient implements ICentri
 			buffer.writeString(recipe.getGroup());
 			
 			buffer.writeBoolean(recipe.outputTable != null);
-			if(recipe.outputStack != null)
-				buffer.writeItemStack(recipe.getRecipeOutput(), false);
-			else if(recipe.outputTable != null)
+			if(recipe.outputTable != null)
+			{
 				buffer.writeString(recipe.outputTable.toString());
+				buffer.writeItemStack(recipe.anticipatedStack);
+			}
+			else if(recipe.outputStack != null)
+				buffer.writeItemStack(recipe.getRecipeOutput(), false);
 		}
 	}
 }

@@ -6,6 +6,9 @@
     }
   },
   "output": {
-    "table": "vareqp:centrifuge/fat_from_milk"
+    "table": "vareqp:centrifuge/fat_from_milk",
+    "item": {
+      "item": "vareqp:milkfat"
+    }
   }
 }

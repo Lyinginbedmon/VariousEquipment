@@ -44,6 +44,15 @@
 	"item.vareqp.nose_villager": "Villager Nose",
 	"item.vareqp.nose_witch": "Witch Nose",
 	"item.vareqp.third_eye": "Third Eye (WIP)",
+	"item.vareqp.legs_satyr": "Satyr Legs",
+	"item.vareqp.legs_kobold": "Kobold Legs",
+	"item.vareqp.legs_dragon": "Dragon Legs",
+	"item.vareqp.legs_naga": "Naga Tail",
+	"item.vareqp.legs_spider": "Drider Body",
+	"item.vareqp.legs_peg_wooden": "Wooden Peg Leg (%s)",
+	"item.vareqp.legs_peg_iron": "Iron Peg Leg (%s)",
+	"item.vareqp.legs_peg_golden": "Golden Peg Leg (%s)",
+	"item.vareqp.legs_peg_netherite": "Netherite Peg Leg (%s)",
 	"item.vareqp.costume": "Costume",
 	"item.vareqp.blindfold": "Blindfold",
 	"item.vareqp.cosmetic_blindfold": "Cosmetic Blindfold",
@@ -147,9 +156,16 @@
 	"enum.vareqp.icon.tick": "Complete",
 	"enum.vareqp.icon.question": "Incomplete",
 	"enum.vareqp.icon.cross": "Failed",
+	"enum.vareqp.leg.left": "Left",
+	"enum.vareqp.leg.right": "Right",
 	
 	"gui.vareqp.notepad.current_page": "Current page:",
 	"gui.vareqp.notepad.next_task": "Next task:",
 	"gui.vareqp.notepad.tally_entry": "%s %s",
-	"gui.vareqp.notepad.page_count": "Page %s / %s"
+	"gui.vareqp.notepad.page_count": "Page %s / %s",
+	
+	"vareqp.jei.alembic": "Alchemical Alembic",
+	"vareqp.jei.mixer": "Alchemical Mixer",
+	"vareqp.jei.centrifuge": "Alchemical Centrifuge",
+	"vareqp.jei.adv_smelting": "Smelting Alchemy"
 }

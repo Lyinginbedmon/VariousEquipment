@@ -1,5 +1,6 @@
 package com.lying.variousequipment.client.model.armor;
 
+import com.google.common.collect.ImmutableList;
 import com.lying.variousequipment.client.model.ModelUtils;
 
 import net.minecraft.client.renderer.entity.model.BipedModel;
@@ -22,12 +23,15 @@ public class ModelHatMask extends BipedModel<LivingEntity>
         horn.setTextureOffset(4, 6).addBox(-1F, -8.5F, 1F, 2, 2, 2);
         horn.setTextureOffset(0, 6).addBox(-0.5F, -12F, 1.5F, 1, 4, 1);
         	this.bipedHead.addChild(horn);
-        
-        this.bipedHeadwear = ModelUtils.freshRenderer(this);
-        this.bipedBody = ModelUtils.freshRenderer(this);
-        this.bipedRightArm = ModelUtils.freshRenderer(this);
-        this.bipedLeftArm = ModelUtils.freshRenderer(this);
-        this.bipedRightLeg = ModelUtils.freshRenderer(this);
-        this.bipedLeftLeg = ModelUtils.freshRenderer(this);
+	}
+	
+	protected Iterable<ModelRenderer> getHeadParts()
+	{
+		return ImmutableList.of(this.bipedHead);
+	}
+	
+	protected Iterable<ModelRenderer> getBodyParts()
+	{
+		return ImmutableList.of();
 	}
 }

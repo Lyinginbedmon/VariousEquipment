@@ -1,5 +1,7 @@
 package com.lying.variousequipment.item.bauble;
 
+import javax.annotation.Nullable;
+
 import com.lying.variousequipment.client.model.bauble.ModelTailAnt;
 import com.lying.variousequipment.client.model.bauble.ModelTailCat;
 import com.lying.variousequipment.client.model.bauble.ModelTailCat2;
@@ -38,6 +40,7 @@ import top.theillusivec4.curios.api.type.capability.ICurio;
 
 public abstract class ItemTails extends ItemCosmetic implements IDyeableArmorItem
 {
+	@Nullable
 	protected Object model = null;
 	
 	public ItemTails(Properties properties)
@@ -45,10 +48,14 @@ public abstract class ItemTails extends ItemCosmetic implements IDyeableArmorIte
 		super(properties.maxStackSize(1).maxDamage(0).group(VEItemGroup.PROPS));
 	}
 	
+	public boolean hasColor(ItemStack stack)
+	{
+		return stack.getChildTag("display") != null && stack.getChildTag("display").contains("color", 99);
+	}
+	
 	public int getColor(ItemStack stack)
 	{
-		CompoundNBT stackData = stack.getChildTag("display");
-		return stackData != null && stackData.contains("color", 99) ? stackData.getInt("color") : getDefaultColor();
+		return hasColor(stack) ? stack.getChildTag("display").getInt("color") : getDefaultColor();
 	}
 	
 	public int getDefaultColor(){ return DyeColor.WHITE.getColorValue(); }
@@ -57,7 +64,7 @@ public abstract class ItemTails extends ItemCosmetic implements IDyeableArmorIte
 	public abstract BipedModel<LivingEntity> getModel();
 	
 	@OnlyIn(Dist.CLIENT)
-	public abstract ResourceLocation getTexture();
+	public abstract ResourceLocation getTexture(ItemStack stack);
 	
 	@SuppressWarnings("unchecked")
 	public void render(String identifier, int index, MatrixStack matrixStackIn, IRenderTypeBuffer renderTypeBuffer,
@@ -67,10 +74,14 @@ public abstract class ItemTails extends ItemCosmetic implements IDyeableArmorIte
 		if(this.model == null)
 			this.model = getModel();
 		
+		if(this.model == null)
+			return;
+		
 		BipedModel<LivingEntity> tail = ((BipedModel<LivingEntity>)this.model); 
-		ICurio.RenderHelper.followBodyRotations(living, new BipedModel[]{tail});
+		ICurio.RenderHelper.followBodyRotations(living, tail);
+		tail.setLivingAnimations(living, limbSwing, limbSwingAmount, partialTicks);
 		tail.setRotationAngles(living, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
-		IVertexBuilder vertexBuilder = ItemRenderer.getBuffer(renderTypeBuffer, tail.getRenderType(getTexture()), false, stack.hasEffect());
+		IVertexBuilder vertexBuilder = ItemRenderer.getBuffer(renderTypeBuffer, tail.getRenderType(getTexture(stack)), false, stack.hasEffect());
 		
         int i = getColor(stack);
         float r = (float)(i >> 16 & 255) / 255.0F;
@@ -96,12 +107,12 @@ public abstract class ItemTails extends ItemCosmetic implements IDyeableArmorIte
 				this.model = getModel();
 			BipedModel<LivingEntity> tail = ((BipedModel<LivingEntity>)this.model);
 			super.render(identifier, index, matrixStackIn, renderTypeBuffer, light, living, limbSwing, limbSwingAmount, partialTicks, ageInTicks, netHeadYaw, headPitch, stack);
-			IVertexBuilder vertexBuilder = ItemRenderer.getBuffer(renderTypeBuffer, tail.getRenderType(getOverlayTexture()), false, stack.hasEffect());
+			IVertexBuilder vertexBuilder = ItemRenderer.getBuffer(renderTypeBuffer, tail.getRenderType(getOverlayTexture(stack)), false, stack.hasEffect());
 			tail.render(matrixStackIn, vertexBuilder, light, OverlayTexture.NO_OVERLAY, 1F, 1F, 1F, 1F);
 		}
 		
 		@OnlyIn(Dist.CLIENT)
-		public abstract ResourceLocation getOverlayTexture();
+		public abstract ResourceLocation getOverlayTexture(ItemStack stack);
 	}
 	
 	public static class Kobold extends ItemTails
@@ -117,9 +128,9 @@ public abstract class ItemTails extends ItemCosmetic implements IDyeableArmorIte
 		public BipedModel<LivingEntity> getModel(){ return new ModelTailKobold(); }
 		
 		@OnlyIn(Dist.CLIENT)
-		public ResourceLocation getTexture(){ return TEXTURE; }
+		public ResourceLocation getTexture(ItemStack stack){ return TEXTURE; }
 		
-		public int getDefaultColor(){ return 15369498; }
+		public int getDefaultColor(){ return 15037452; }
 	}
 	
 	public static class Kirin extends ItemTails
@@ -135,7 +146,7 @@ public abstract class ItemTails extends ItemCosmetic implements IDyeableArmorIte
 		public BipedModel<LivingEntity> getModel(){ return new ModelTailKirin(); }
 		
 		@OnlyIn(Dist.CLIENT)
-		public ResourceLocation getTexture(){ return TEXTURE; }
+		public ResourceLocation getTexture(ItemStack stack){ return TEXTURE; }
 		
 		public int getDefaultColor(){ return 16105086; }
 	}
@@ -153,7 +164,7 @@ public abstract class ItemTails extends ItemCosmetic implements IDyeableArmorIte
 		public BipedModel<LivingEntity> getModel(){ return new ModelTailWolf(); }
 		
 		@OnlyIn(Dist.CLIENT)
-		public ResourceLocation getTexture(){ return TEXTURE; }
+		public ResourceLocation getTexture(ItemStack stack){ return TEXTURE; }
 	}
 	
 	public static class Cat extends ItemTails
@@ -169,7 +180,7 @@ public abstract class ItemTails extends ItemCosmetic implements IDyeableArmorIte
 		public BipedModel<LivingEntity> getModel(){ return new ModelTailCat(); }
 		
 		@OnlyIn(Dist.CLIENT)
-		public ResourceLocation getTexture(){ return TEXTURE; }
+		public ResourceLocation getTexture(ItemStack stack){ return TEXTURE; }
 		
 		public int getDefaultColor(){ return 16768372; }
 	}
@@ -206,10 +217,10 @@ public abstract class ItemTails extends ItemCosmetic implements IDyeableArmorIte
 		public BipedModel<LivingEntity> getModel(){ return new ModelTailFox(); }
 		
 		@OnlyIn(Dist.CLIENT)
-		public ResourceLocation getTexture(){ return TEXTURE; }
+		public ResourceLocation getTexture(ItemStack stack){ return TEXTURE; }
 		
 		@OnlyIn(Dist.CLIENT)
-		public ResourceLocation getOverlayTexture(){ return TEXTURE_OVERLAY; }
+		public ResourceLocation getOverlayTexture(ItemStack stack){ return TEXTURE_OVERLAY; }
 		
 		public int getDefaultColor(){ return 14842913; }
 		
@@ -253,10 +264,10 @@ public abstract class ItemTails extends ItemCosmetic implements IDyeableArmorIte
 		}
 
 		@OnlyIn(Dist.CLIENT)
-		public ResourceLocation getTexture(){ return TEXTURE; }
+		public ResourceLocation getTexture(ItemStack stack){ return TEXTURE; }
 
 		@OnlyIn(Dist.CLIENT)
-		public ResourceLocation getOverlayTexture(){ return TEXTURE_OVERLAY; }
+		public ResourceLocation getOverlayTexture(ItemStack stack){ return TEXTURE_OVERLAY; }
 
 		@OnlyIn(Dist.CLIENT)
 		public BipedModel<LivingEntity> getModel(){ return new ModelTailRat(); }
@@ -272,7 +283,7 @@ public abstract class ItemTails extends ItemCosmetic implements IDyeableArmorIte
 		}
 		
 		@OnlyIn(Dist.CLIENT)
-		public ResourceLocation getTexture(){ return TEXTURE; }
+		public ResourceLocation getTexture(ItemStack stack){ return TEXTURE; }
 		
 		@OnlyIn(Dist.CLIENT)
 		public BipedModel<LivingEntity> getModel(){ return new ModelTailDragon(); }
@@ -290,7 +301,7 @@ public abstract class ItemTails extends ItemCosmetic implements IDyeableArmorIte
 		}
 		
 		@OnlyIn(Dist.CLIENT)
-		public ResourceLocation getTexture(){ return TEXTURE; }
+		public ResourceLocation getTexture(ItemStack stack){ return TEXTURE; }
 		
 		@OnlyIn(Dist.CLIENT)
 		public BipedModel<LivingEntity> getModel(){ return new ModelTailDevil(); }
@@ -308,7 +319,7 @@ public abstract class ItemTails extends ItemCosmetic implements IDyeableArmorIte
 		}
 		
 		@OnlyIn(Dist.CLIENT)
-		public ResourceLocation getTexture(){ return TEXTURE; }
+		public ResourceLocation getTexture(ItemStack stack){ return TEXTURE; }
 		
 		@OnlyIn(Dist.CLIENT)
 		public BipedModel<LivingEntity> getModel(){ return new ModelTailRabbit(); }
@@ -326,7 +337,7 @@ public abstract class ItemTails extends ItemCosmetic implements IDyeableArmorIte
 		}
 		
 		@OnlyIn(Dist.CLIENT)
-		public ResourceLocation getTexture(){ return TEXTURE; }
+		public ResourceLocation getTexture(ItemStack stack){ return TEXTURE; }
 		
 		@OnlyIn(Dist.CLIENT)
 		public BipedModel<LivingEntity> getModel(){ return new ModelTailHorse(); }
@@ -347,7 +358,7 @@ public abstract class ItemTails extends ItemCosmetic implements IDyeableArmorIte
 		public BipedModel<LivingEntity> getModel(){ return new ModelTailDragonfly(); }
 		
 		@OnlyIn(Dist.CLIENT)
-		public ResourceLocation getTexture(){ return TEXTURE; }
+		public ResourceLocation getTexture(ItemStack stack){ return TEXTURE; }
 		
 		public int getDefaultColor(){ return 6919449; }
 	}
@@ -366,10 +377,10 @@ public abstract class ItemTails extends ItemCosmetic implements IDyeableArmorIte
 		public BipedModel<LivingEntity> getModel(){ return new ModelTailAnt(); }
 		
 		@OnlyIn(Dist.CLIENT)
-		public ResourceLocation getTexture(){ return TEXTURE; }
+		public ResourceLocation getTexture(ItemStack stack){ return TEXTURE; }
 		
 		@OnlyIn(Dist.CLIENT)
-		public ResourceLocation getOverlayTexture(){ return TEXTURE_OVERLAY; }
+		public ResourceLocation getOverlayTexture(ItemStack stack){ return TEXTURE_OVERLAY; }
 		
 		public int getDefaultColor(){ return 11612230; }
 	}
@@ -387,7 +398,7 @@ public abstract class ItemTails extends ItemCosmetic implements IDyeableArmorIte
 		public BipedModel<LivingEntity> getModel(){ return new ModelTailLizard(); }
 		
 		@OnlyIn(Dist.CLIENT)
-		public ResourceLocation getTexture(){ return TEXTURE; }
+		public ResourceLocation getTexture(ItemStack stack){ return TEXTURE; }
 		
 		public int getDefaultColor(){ return 6919449; }
 	}
@@ -402,7 +413,7 @@ public abstract class ItemTails extends ItemCosmetic implements IDyeableArmorIte
 		}
 		
 		@OnlyIn(Dist.CLIENT)
-		public ResourceLocation getTexture(){ return TEXTURE; }
+		public ResourceLocation getTexture(ItemStack stack){ return TEXTURE; }
 		
 		public int getDefaultColor(){ return 15132410; }
 	}

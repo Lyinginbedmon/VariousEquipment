@@ -8,6 +8,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.IRecipeType;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
@@ -30,6 +31,9 @@ public interface IAlembicRecipe extends IRecipe<IInventory>
 	}
 	
 	public default boolean matches(IInventory inv, World world){ return false; }
+	
+	public NonNullList<Ingredient> getIngredients();
+	public NonNullList<ItemStack> getOutputSlotContents();
 	
 	public default boolean isDynamic(){ return true; }
 	

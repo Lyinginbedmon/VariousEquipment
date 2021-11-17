@@ -6,6 +6,9 @@
     }
   },
   "output": {
-    "table": "minecraft:blocks/gravel"
+    "table": "minecraft:blocks/gravel",
+    "item": {
+      "item": "minecraft:flint"
+    }
   }
 }

@@ -52,8 +52,8 @@ public class CentrifugeRecipeProvider extends RecipeProvider
 	
 	protected void registerRecipes(Consumer<IFinishedRecipe> consumer)
 	{
-		consumer.accept(new FinishedRecipe(id("gravel"), "", new ResourceLocation("blocks/gravel"), Ingredient.fromTag(Tags.Items.GRAVEL)));
-		consumer.accept(new FinishedRecipe(id("melon"), "", new ResourceLocation("blocks/melon"), Ingredient.fromItems(Blocks.MELON)));
+		consumer.accept(new FinishedRecipe(id("gravel"), "", new ResourceLocation("blocks/gravel"), new ItemStack(Items.FLINT), Ingredient.fromTag(Tags.Items.GRAVEL)));
+		consumer.accept(new FinishedRecipe(id("melon"), "", new ResourceLocation("blocks/melon"), new ItemStack(Items.MELON_SLICE), Ingredient.fromItems(Blocks.MELON)));
 		consumer.accept(new FinishedRecipe(id("pumpkin"), "", new ItemStack(Items.PUMPKIN_SEEDS, 4), Ingredient.fromItems(Blocks.PUMPKIN)));
 		consumer.accept(new FinishedRecipe(id("hay_block"), "", new ItemStack(Items.WHEAT, 9), Ingredient.fromItems(Blocks.HAY_BLOCK)));
 		consumer.accept(new FinishedRecipe(id("slime_block"), "", new ItemStack(Items.SLIME_BALL, 9), Ingredient.fromItems(Blocks.SLIME_BLOCK)));
@@ -72,9 +72,9 @@ public class CentrifugeRecipeProvider extends RecipeProvider
 		consumer.accept(new FinishedRecipe(id("redstone_block"), "", new ItemStack(Items.REDSTONE, 9), Ingredient.fromTag(Tags.Items.STORAGE_BLOCKS_REDSTONE)));
 		consumer.accept(new FinishedRecipe(id("netherite_block"), "", new ItemStack(Items.NETHERITE_INGOT, 9), Ingredient.fromTag(Tags.Items.STORAGE_BLOCKS_NETHERITE)));
 		consumer.accept(new FinishedRecipe(id("brimstone"), "", new ItemStack(VEItems.BRIMSTONE, 3), Ingredient.fromTag(Tags.Items.NETHERRACK)));
-		consumer.accept(new FinishedRecipe(id("cobblestone_vines"), "", TABLE_VINES, Ingredient.fromItems(Blocks.MOSSY_COBBLESTONE)));
-		consumer.accept(new FinishedRecipe(id("fat_from_milk"), "", TABLE_MILK, Ingredient.fromItems(Items.MILK_BUCKET)));
-		consumer.accept(new FinishedRecipe(id("salt_from_water"), "", TABLE_SALT, PotionUtils.addPotionToItemStack(new ItemStack(Items.POTION), Potions.WATER)));
+		consumer.accept(new FinishedRecipe(id("cobblestone_vines"), "", TABLE_VINES, new ItemStack(Items.VINE), Ingredient.fromItems(Blocks.MOSSY_COBBLESTONE)));
+		consumer.accept(new FinishedRecipe(id("fat_from_milk"), "", TABLE_MILK, new ItemStack(VEItems.MILKFAT), Ingredient.fromItems(Items.MILK_BUCKET)));
+		consumer.accept(new FinishedRecipe(id("salt_from_water"), "", TABLE_SALT, new ItemStack(VEItems.SALT), PotionUtils.addPotionToItemStack(new ItemStack(Items.POTION), Potions.WATER)));
 	}
 	
 	public static void generateCentrifugeTables(VELootProvider lootProvider)
@@ -139,12 +139,12 @@ public class CentrifugeRecipeProvider extends RecipeProvider
 			this.group = groupIn;
 		}
 		
-		public FinishedRecipe(ResourceLocation idIn, String groupIn, ResourceLocation outputIn, ItemStack inputIn)
+		public FinishedRecipe(ResourceLocation idIn, String groupIn, ResourceLocation outputIn, ItemStack anticipatedIn, ItemStack inputIn)
 		{
 			this.id = idIn;
 			this.inputStack = inputIn;
 			this.inputIngredient = null;
-			this.outputStack = null;
+			this.outputStack = anticipatedIn;
 			this.outputTable = outputIn;
 			this.group = groupIn;
 		}
@@ -159,12 +159,12 @@ public class CentrifugeRecipeProvider extends RecipeProvider
 			this.group = groupIn;
 		}
 		
-		public FinishedRecipe(ResourceLocation idIn, String groupIn, ResourceLocation outputIn, Ingredient inputIn)
+		public FinishedRecipe(ResourceLocation idIn, String groupIn, ResourceLocation outputIn, ItemStack anticipatedIn, Ingredient inputIn)
 		{
 			this.id = idIn;
 			this.inputStack = null;
 			this.inputIngredient = inputIn;
-			this.outputStack = null;
+			this.outputStack = anticipatedIn;
 			this.outputTable = outputIn;
 			this.group = groupIn;
 		}
@@ -182,7 +182,11 @@ public class CentrifugeRecipeProvider extends RecipeProvider
 			
 			JsonObject output = new JsonObject();
 			if(outputTable != null)
+			{
 				output.addProperty("table", outputTable.toString());
+				JsonObject stack = serializeStack(outputStack);
+				output.add("item", stack);
+			}
 			else if(output != null)
 				output = serializeStack(outputStack);
 			json.add("output", output);

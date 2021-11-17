@@ -42,6 +42,7 @@ public class VERecipeProvider extends RecipeProvider
 		registerSpecialRecipe(consumer, HolyWaterRecipe.SERIALIZER);
 		registerSpecialRecipe(consumer, KitsuneTailRecipe.SERIALIZER);
 		registerSpecialRecipe(consumer, AntennaRecipe.SERIALIZER);
+		registerSpecialRecipe(consumer, PegLegRecipe.SERIALIZER);
 		registerSpecialRecipe(consumer, CostumeRecipe.SERIALIZER);
 		registerSpecialRecipe(consumer, RepeatingCrossbowRecipe.SERIALIZER);
 		
@@ -188,6 +189,30 @@ public class VERecipeProvider extends RecipeProvider
 			.key('N', Tags.Items.RODS_WOODEN)
 			.key('S', Tags.Items.STRING)
 			.addCriterion("has_string", hasItem(Items.STRING)).build(consumer);
+		ShapedRecipeBuilder.shapedRecipe(VEItems.LEGS_PEG_WOODEN)
+			.patternLine("S")
+			.patternLine("R")
+			.key('S', ItemTags.WOODEN_SLABS)
+			.key('R', Tags.Items.RODS_WOODEN)
+			.addCriterion("has_stick", hasItem(Items.STICK)).build(consumer);
+		ShapedRecipeBuilder.shapedRecipe(VEItems.LEGS_PEG_IRON)
+			.patternLine("S")
+			.patternLine("R")
+			.key('S', Tags.Items.INGOTS_IRON)
+			.key('R', Tags.Items.RODS_WOODEN)
+			.addCriterion("has_stick", hasItem(Items.STICK)).build(consumer);
+		ShapedRecipeBuilder.shapedRecipe(VEItems.LEGS_PEG_GOLDEN)
+			.patternLine("S")
+			.patternLine("R")
+			.key('S', Tags.Items.INGOTS_GOLD)
+			.key('R', Tags.Items.RODS_WOODEN)
+			.addCriterion("has_stick", hasItem(Items.STICK)).build(consumer);
+		ShapedRecipeBuilder.shapedRecipe(VEItems.LEGS_PEG_NETHERITE)
+			.patternLine("S")
+			.patternLine("R")
+			.key('S', Tags.Items.INGOTS_NETHERITE)
+			.key('R', Tags.Items.RODS_WOODEN)
+			.addCriterion("has_stick", hasItem(Items.STICK)).build(consumer);
 		
 		// Daggers
 		ShapedRecipeBuilder.shapedRecipe(VEItems.DIAMOND_DAGGER).setGroup("daggers")

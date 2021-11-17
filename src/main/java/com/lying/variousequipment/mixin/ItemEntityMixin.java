@@ -36,40 +36,43 @@ public class ItemEntityMixin extends EntityMixin
 	@Inject(method = "tick", at = @At("HEAD"), cancellable = true)
 	public void tick(final CallbackInfo ci)
 	{
-		if(cannotPickup() || !isOnGround())
-			this.convertToGuanoTimer = Reference.Values.TICKS_PER_SECOND * 5;
+		World world = getEntityWorld();
+		if(world == null || world.isRemote)
+			return;
 		
 		ItemStack item = getItem();
 		if(item == null || item.isEmpty())
 			return;
 		
-		if(item.getItem() == VEItems.GUANO  && --this.convertToGuanoTimer <= 0)
+		if(item.getItem() == VEItems.GUANO)
 		{
-			BlockPos pos = getPosition();
-			World world = getEntityWorld();
-			if(world == null || world.isRemote) return;
-			
-			BlockState state = world.getBlockState(pos);
-			if(state.getBlock() == Blocks.AIR && VEBlocks.GUANO.isValidPosition(state, world, pos))
-			{
-				world.setBlockState(pos, VEBlocks.GUANO.getDefaultState());
-				item.shrink(1);
+			if(cannotPickup() || !isOnGround())
 				this.convertToGuanoTimer = Reference.Values.TICKS_PER_SECOND * 5;
-			}
-			else if(state.getBlock() == VEBlocks.GUANO && state.get(BlockGuano.LAYERS) < 8)
+			else if(--this.convertToGuanoTimer <= 0)
 			{
-				world.setBlockState(pos, state.with(BlockGuano.LAYERS, Math.min(8, state.get(BlockGuano.LAYERS) + 1)));
-				item.shrink(1);
-				this.convertToGuanoTimer = Reference.Values.TICKS_PER_SECOND * 5;
+				BlockPos pos = getPosition();
+				BlockState state = world.getBlockState(pos);
+				if(state.getBlock() == Blocks.AIR && VEBlocks.GUANO.isValidPosition(state, world, pos))
+				{
+					world.setBlockState(pos, VEBlocks.GUANO.getDefaultState());
+					item.shrink(1);
+					this.convertToGuanoTimer = Reference.Values.TICKS_PER_SECOND * 5;
+				}
+				else if(state.getBlock() == VEBlocks.GUANO && state.get(BlockGuano.LAYERS) < 8)
+				{
+					world.setBlockState(pos, state.with(BlockGuano.LAYERS, Math.min(8, state.get(BlockGuano.LAYERS) + 1)));
+					item.shrink(1);
+					this.convertToGuanoTimer = Reference.Values.TICKS_PER_SECOND * 5;
+				}
+				
+				if(item.isEmpty())
+				{
+					setDead();
+					ci.cancel();
+				}
+				else
+					setItem(item);
 			}
-			
-			if(item.isEmpty())
-			{
-				setDead();
-				ci.cancel();
-			}
-			else
-				setItem(item);
 		}
 	}
 }
