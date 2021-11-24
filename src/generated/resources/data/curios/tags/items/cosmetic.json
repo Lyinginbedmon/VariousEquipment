@@ -43,6 +43,14 @@
     "vareqp:legs_peg_iron",
     "vareqp:legs_peg_golden",
     "vareqp:legs_peg_netherite",
-    "vareqp:legs_spider"
+    "vareqp:legs_spider",
+    "vareqp:oak_wheelchair",
+    "vareqp:spruce_wheelchair",
+    "vareqp:birch_wheelchair",
+    "vareqp:acacia_wheelchair",
+    "vareqp:jungle_wheelchair",
+    "vareqp:dark_oak_wheelchair",
+    "vareqp:crimson_wheelchair",
+    "vareqp:warped_wheelchair"
   ]
 }

@@ -1,6 +1,6 @@
 package com.lying.variousequipment.data.recipes;
 
-import com.lying.variousequipment.item.bauble.ItemLegs;
+import com.lying.variousequipment.item.bauble.ItemPegLeg;
 
 import net.minecraft.inventory.CraftingInventory;
 import net.minecraft.item.ItemStack;
@@ -27,7 +27,7 @@ public class PegLegRecipe extends SpecialRecipe
 			ItemStack stack = inv.getStackInSlot(i);
 			if(!stack.isEmpty())
 			{
-				if(stack.getItem() instanceof ItemLegs.Peg)
+				if(stack.getItem() instanceof ItemPegLeg)
 				{
 					if(pegLeg.isEmpty())
 						pegLeg = stack;
@@ -49,7 +49,7 @@ public class PegLegRecipe extends SpecialRecipe
 			ItemStack stack = inv.getStackInSlot(i);
 			if(!stack.isEmpty())
 			{
-				if(stack.getItem() instanceof ItemLegs.Peg)
+				if(stack.getItem() instanceof ItemPegLeg)
 				{
 					if(pegLeg.isEmpty())
 						pegLeg = stack;
@@ -61,10 +61,10 @@ public class PegLegRecipe extends SpecialRecipe
 			}
 		}
 		
-		switch(ItemLegs.Peg.getLegFromStack(pegLeg))
+		switch(ItemPegLeg.getLegFromStack(pegLeg))
 		{
-			case LEFT:	return ItemLegs.Peg.setLeg(pegLeg.copy(), ItemLegs.Peg.Leg.RIGHT);
-			case RIGHT:	return ItemLegs.Peg.setLeg(pegLeg.copy(), ItemLegs.Peg.Leg.LEFT);
+			case LEFT:	return ItemPegLeg.setLeg(pegLeg.copy(), ItemPegLeg.Leg.RIGHT);
+			case RIGHT:	return ItemPegLeg.setLeg(pegLeg.copy(), ItemPegLeg.Leg.LEFT);
 		}
 		return ItemStack.EMPTY;
 	}

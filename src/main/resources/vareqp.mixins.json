@@ -16,6 +16,8 @@
 	[
 		"FirstPersonRendererMixin",
 		"PlayerRendererMixin",
-		"BipedArmorLayerMixin"
+		"BipedArmorLayerMixin",
+		"BipedModelMixin",
+		"EntityModelMixin"
 	]
 }

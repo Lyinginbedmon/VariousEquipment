@@ -3,7 +3,7 @@ package com.lying.variousequipment.client.model.bauble;
 import java.util.function.Function;
 
 import com.google.common.collect.ImmutableList;
-import com.lying.variousequipment.item.bauble.ItemLegs.Peg.Leg;
+import com.lying.variousequipment.item.bauble.ItemPegLeg.Leg;
 
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.model.BipedModel;

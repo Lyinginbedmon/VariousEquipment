@@ -1,7 +1,6 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "vareqp:items/legs_peg_golden",
-        "layer1": "vareqp:items/legs_overlay"
+        "layer0": "vareqp:items/legs_peg_golden"
     }
 }

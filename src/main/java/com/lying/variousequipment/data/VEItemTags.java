@@ -163,7 +163,15 @@ public class VEItemTags extends ItemTagsProvider
 				VEItems.LEGS_PEG_IRON,
 				VEItems.LEGS_PEG_GOLDEN,
 				VEItems.LEGS_PEG_NETHERITE,
-				VEItems.LEGS_SPIDER
+				VEItems.LEGS_SPIDER,
+				VEItems.OAK_WHEELCHAIR,
+				VEItems.SPRUCE_WHEELCHAIR,
+				VEItems.BIRCH_WHEELCHAIR,
+				VEItems.ACACIA_WHEELCHAIR,
+				VEItems.JUNGLE_WHEELCHAIR,
+				VEItems.DARK_OAK_WHEELCHAIR,
+				VEItems.CRIMSON_WHEELCHAIR,
+				VEItems.WARPED_WHEELCHAIR
 				);
 		
 		getOrCreateBuilder(SHAKEABLES).add(VEItems.VIAL_SOLUTION);
