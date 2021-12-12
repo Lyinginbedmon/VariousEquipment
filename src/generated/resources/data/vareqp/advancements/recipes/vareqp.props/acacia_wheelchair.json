@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "vareqp:acacia_wheelchair"
+    ]
+  },
+  "criteria": {
+    "has_acacia_wheel": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "vareqp:acacia_wheel"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "vareqp:acacia_wheelchair"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_acacia_wheel",
+      "has_the_recipe"
+    ]
+  ]
+}

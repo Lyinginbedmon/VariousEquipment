@@ -28,5 +28,6 @@ public class RendererHandler
 		ClientRegistry.bindTileEntityRenderer(VETileEntities.MIXER, TileEntityMixerRenderer::new);
 		ClientRegistry.bindTileEntityRenderer(VETileEntities.NIGHT_POWDER, TileEntityNightPowderRenderer::new);
 		ClientRegistry.bindTileEntityRenderer(VETileEntities.ALEMBIC, TileEntityAlembicRenderer::new);
+		ClientRegistry.bindTileEntityRenderer(VETileEntities.WHEELCHAIR, TileEntityWheelchairRenderer::new);
 	}
 }

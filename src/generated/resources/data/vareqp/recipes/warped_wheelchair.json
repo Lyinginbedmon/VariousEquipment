@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "wheelchairs",
+  "pattern": [
+    " W ",
+    "EsE"
+  ],
+  "key": {
+    "W": {
+      "item": "minecraft:red_wool"
+    },
+    "E": {
+      "item": "vareqp:warped_wheel"
+    },
+    "s": {
+      "item": "minecraft:warped_slab"
+    }
+  },
+  "result": {
+    "item": "vareqp:warped_wheelchair"
+  }
+}

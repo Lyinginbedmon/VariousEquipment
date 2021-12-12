@@ -1,11 +1,15 @@
 package com.lying.variousequipment.data.recipes;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.function.Consumer;
 
 import com.lying.variousequipment.data.VEItemTags;
 import com.lying.variousequipment.init.VEBlocks;
 import com.lying.variousequipment.init.VEItems;
+import com.lying.variousequipment.item.bauble.ItemWheelchair;
 import com.lying.variousequipment.reference.Reference;
+import com.mojang.datafixers.util.Pair;
 
 import net.minecraft.advancements.criterion.InventoryChangeTrigger;
 import net.minecraft.advancements.criterion.ItemPredicate;
@@ -19,9 +23,11 @@ import net.minecraft.data.ShapedRecipeBuilder;
 import net.minecraft.data.ShapelessRecipeBuilder;
 import net.minecraft.data.SmithingRecipeBuilder;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.item.crafting.SpecialRecipeSerializer;
+import net.minecraft.tags.ITag.INamedTag;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
@@ -30,6 +36,9 @@ import net.minecraftforge.common.Tags;
 
 public class VERecipeProvider extends RecipeProvider
 {
+	private static final Map<Item, Block> WHEEL_TO_MATS = new HashMap<>();
+	private static final Map<Pair<INamedTag<Item>, String>, Pair<Item, Item>> MATS_TO_WEAPONS = new HashMap<>();
+	
 	public VERecipeProvider(DataGenerator generatorIn)
 	{
 		super(generatorIn);
@@ -43,9 +52,11 @@ public class VERecipeProvider extends RecipeProvider
 		registerSpecialRecipe(consumer, KitsuneTailRecipe.SERIALIZER);
 		registerSpecialRecipe(consumer, AntennaRecipe.SERIALIZER);
 		registerSpecialRecipe(consumer, PegLegRecipe.SERIALIZER);
+		registerSpecialRecipe(consumer, WheelchairRecipe.SERIALIZER);
 		registerSpecialRecipe(consumer, CostumeRecipe.SERIALIZER);
 		registerSpecialRecipe(consumer, RepeatingCrossbowRecipe.SERIALIZER);
 		
+		// Screens
 		for(Block concrete : VEBlocks.CONCRETE_TO_SCREEN.keySet())
 		{
 			Block screen = VEBlocks.CONCRETE_TO_SCREEN.get(concrete);
@@ -71,7 +82,7 @@ public class VERecipeProvider extends RecipeProvider
 			.addCriterion("has_screens", hasItems(VEBlocks.SCREEN_MAGENTA, VEBlocks.SCREEN_BLACK)).build(consumer);
 		ShapelessRecipeBuilder.shapelessRecipe(VEItems.NEEDLE_BONE, 8)
 			.addIngredient(Items.BONE).setGroup("needles").addIngredient(Items.FLINT)
-			.addCriterion("has_bone", hasItem(Items.BONE)).build(consumer);
+			.addCriterion("has_bone", hasItem(Tags.Items.BONES)).build(consumer);
 		ShapelessRecipeBuilder.shapelessRecipe(VEItems.NOSE_PIGLIN)
 			.addIngredient(VEItems.NOSE_PIG).addIngredient(Items.BONE)
 			.addCriterion("has_snout", hasItem(VEItems.NOSE_PIG)).build(consumer);
@@ -116,7 +127,7 @@ public class VERecipeProvider extends RecipeProvider
 			.patternLine(" N ")
 			.patternLine("N N")
 			.key('N', Tags.Items.NUGGETS_IRON)
-			.addCriterion("has_iron_nugget", hasItem(Items.IRON_NUGGET)).build(consumer);
+			.addCriterion("has_iron_nugget", hasItem(Tags.Items.NUGGETS_IRON)).build(consumer);
 		ShapedRecipeBuilder.shapedRecipe(VEItems.CENTRIFUGE)
 			.patternLine(" S ")
 			.patternLine("BSB")
@@ -132,19 +143,19 @@ public class VERecipeProvider extends RecipeProvider
 			.key('I', Tags.Items.INGOTS_IRON)
 			.key('i', Tags.Items.NUGGETS_IRON)
 			.key('L', Tags.Items.LEATHER)
-			.addCriterion("has_iron_ingot", hasItem(Items.IRON_INGOT)).build(consumer);
+			.addCriterion("has_iron_ingot", hasItem(Tags.Items.INGOTS_IRON)).build(consumer);
 		ShapedRecipeBuilder.shapedRecipe(VEItems.HAT_HOOD)
 			.patternLine(" L ")
 			.patternLine("L L")
 			.patternLine("L L")
 			.key('L', Tags.Items.LEATHER)
-			.addCriterion("has_leather", hasItem(Items.LEATHER)).build(consumer);
+			.addCriterion("has_leather", hasItem(Tags.Items.LEATHER)).build(consumer);
 		ShapedRecipeBuilder.shapedRecipe(VEItems.HAT_WITCH)
 			.patternLine("L  ")
 			.patternLine(" L ")
 			.patternLine("LLL")
 			.key('L', Tags.Items.LEATHER)
-			.addCriterion("has_leather", hasItem(Items.LEATHER)).build(consumer);
+			.addCriterion("has_leather", hasItem(Tags.Items.LEATHER)).build(consumer);
 		ShapedRecipeBuilder.shapedRecipe(VEItems.MIXER)
 			.patternLine(" S ")
 			.patternLine("BSB")
@@ -157,7 +168,7 @@ public class VERecipeProvider extends RecipeProvider
 			.patternLine(" B")
 			.patternLine("B ")
 			.key('B', Tags.Items.NUGGETS_IRON)
-			.addCriterion("has_iron_nugget", hasItem(Items.IRON_NUGGET)).build(consumer);
+			.addCriterion("has_iron_nugget", hasItem(Tags.Items.INGOTS_IRON)).build(consumer);
 		ShapedRecipeBuilder.shapedRecipe(VEItems.NOTEPAD)
 			.patternLine("I F")
 			.patternLine("PPP")
@@ -188,116 +199,110 @@ public class VERecipeProvider extends RecipeProvider
 			.patternLine("NS")
 			.key('N', Tags.Items.RODS_WOODEN)
 			.key('S', Tags.Items.STRING)
-			.addCriterion("has_string", hasItem(Items.STRING)).build(consumer);
+			.addCriterion("has_string", hasItem(Tags.Items.STRING)).build(consumer);
 		ShapedRecipeBuilder.shapedRecipe(VEItems.LEGS_PEG_WOODEN)
 			.patternLine("S")
 			.patternLine("R")
 			.key('S', ItemTags.WOODEN_SLABS)
 			.key('R', Tags.Items.RODS_WOODEN)
-			.addCriterion("has_stick", hasItem(Items.STICK)).build(consumer);
+			.addCriterion("has_stick", hasItem(Tags.Items.RODS_WOODEN)).build(consumer);
 		ShapedRecipeBuilder.shapedRecipe(VEItems.LEGS_PEG_IRON)
 			.patternLine("S")
 			.patternLine("R")
 			.key('S', Tags.Items.INGOTS_IRON)
 			.key('R', Tags.Items.RODS_WOODEN)
-			.addCriterion("has_stick", hasItem(Items.STICK)).build(consumer);
+			.addCriterion("has_stick", hasItem(Tags.Items.RODS_WOODEN)).build(consumer);
 		ShapedRecipeBuilder.shapedRecipe(VEItems.LEGS_PEG_GOLDEN)
 			.patternLine("S")
 			.patternLine("R")
 			.key('S', Tags.Items.INGOTS_GOLD)
 			.key('R', Tags.Items.RODS_WOODEN)
-			.addCriterion("has_stick", hasItem(Items.STICK)).build(consumer);
+			.addCriterion("has_stick", hasItem(Tags.Items.RODS_WOODEN)).build(consumer);
 		ShapedRecipeBuilder.shapedRecipe(VEItems.LEGS_PEG_NETHERITE)
 			.patternLine("S")
 			.patternLine("R")
 			.key('S', Tags.Items.INGOTS_NETHERITE)
 			.key('R', Tags.Items.RODS_WOODEN)
-			.addCriterion("has_stick", hasItem(Items.STICK)).build(consumer);
+			.addCriterion("has_stick", hasItem(Tags.Items.RODS_WOODEN)).build(consumer);
 		
-		// Daggers
-		ShapedRecipeBuilder.shapedRecipe(VEItems.DIAMOND_DAGGER).setGroup("daggers")
-			.patternLine("X").patternLine("s")
-			.key('s', Tags.Items.RODS_WOODEN)
-			.key('X', Tags.Items.GEMS_DIAMOND)
-			.addCriterion("has_diamond", hasItem(Items.DIAMOND)).build(consumer);
-		ShapedRecipeBuilder.shapedRecipe(VEItems.GOLDEN_DAGGER).setGroup("daggers")
-			.patternLine("X").patternLine("s")
-			.key('s', Tags.Items.RODS_WOODEN)
-			.key('X', Tags.Items.INGOTS_GOLD)
-			.addCriterion("has_gold_ingot", hasItem(Items.GOLD_INGOT)).build(consumer);
-		ShapedRecipeBuilder.shapedRecipe(VEItems.IRON_DAGGER).setGroup("daggers")
-			.patternLine("X").patternLine("s")
-			.key('s', Tags.Items.RODS_WOODEN)
-			.key('X', Tags.Items.INGOTS_IRON)
-			.addCriterion("has_iron_ingot", hasItem(Items.IRON_INGOT)).build(consumer);
-		ShapedRecipeBuilder.shapedRecipe(VEItems.STONE_DAGGER).setGroup("daggers")
-			.patternLine("X").patternLine("s")
-			.key('s', Tags.Items.RODS_WOODEN)
-			.key('X', Tags.Items.COBBLESTONE)
-			.addCriterion("has_cobblestone", hasItem(Items.COBBLESTONE)).build(consumer);
-		ShapedRecipeBuilder.shapedRecipe(VEItems.WOODEN_DAGGER).setGroup("daggers")
-			.patternLine("X").patternLine("s")
-			.key('s', Tags.Items.RODS_WOODEN)
-			.key('X', ItemTags.PLANKS)
-			.addCriterion("has_oak_planks", hasItem(Items.OAK_PLANKS)).build(consumer);
-		SmithingRecipeBuilder.smithingRecipe(Ingredient.fromItems(VEItems.DIAMOND_DAGGER), Ingredient.fromItems(Items.NETHERITE_INGOT), VEItems.NETHERITE_DAGGER)
-			.addCriterion("has_netherite_ingot", hasItem(Items.NETHERITE_INGOT)).build(consumer, "netherite_dagger__smithing");
-		
-		// Glaives
-		ShapedRecipeBuilder.shapedRecipe(VEItems.DIAMOND_GLAIVE).setGroup("glaives")
-			.patternLine("  X").patternLine(" s ").patternLine("s  ")
-			.key('s', Tags.Items.RODS_WOODEN)
-			.key('X', Tags.Items.GEMS_DIAMOND)
-			.addCriterion("has_diamond", hasItem(Items.DIAMOND)).build(consumer);
-		ShapedRecipeBuilder.shapedRecipe(VEItems.GOLDEN_GLAIVE).setGroup("glaives")
-			.patternLine("  X").patternLine(" s ").patternLine("s  ")
-			.key('s', Tags.Items.RODS_WOODEN)
-			.key('X', Tags.Items.INGOTS_GOLD)
-			.addCriterion("has_gold_ingot", hasItem(Items.GOLD_INGOT)).build(consumer);
-		ShapedRecipeBuilder.shapedRecipe(VEItems.IRON_GLAIVE).setGroup("glaives")
-			.patternLine("  X").patternLine(" s ").patternLine("s  ")
-			.key('s', Tags.Items.RODS_WOODEN)
-			.key('X', Tags.Items.INGOTS_IRON)
-			.addCriterion("has_iron_ingot", hasItem(Items.IRON_INGOT)).build(consumer);
-		ShapedRecipeBuilder.shapedRecipe(VEItems.STONE_GLAIVE).setGroup("glaives")
-			.patternLine("  X").patternLine(" s ").patternLine("s  ")
-			.key('s', Tags.Items.RODS_WOODEN)
-			.key('X', Tags.Items.COBBLESTONE)
-			.addCriterion("has_cobblestone", hasItem(Blocks.COBBLESTONE)).build(consumer);
-		ShapedRecipeBuilder.shapedRecipe(VEItems.WOODEN_GLAIVE).setGroup("glaives")
-			.patternLine("  X").patternLine(" s ").patternLine("s  ")
-			.key('s', Tags.Items.RODS_WOODEN)
-			.key('X', ItemTags.PLANKS)
-			.addCriterion("has_oak_planks", hasItem(Blocks.OAK_PLANKS)).build(consumer);
+		// Glaives & Daggers
+		for(Pair<INamedTag<Item>, String> material : MATS_TO_WEAPONS.keySet())
+		{
+			Pair<Item, Item> weapons = MATS_TO_WEAPONS.get(material);
+			Item glaiveItem = weapons.getFirst();
+			Item daggerItem = weapons.getSecond();
+			if(glaiveItem != null)
+				ShapedRecipeBuilder.shapedRecipe(glaiveItem).setGroup("glaives")
+				.patternLine("  X").patternLine(" s ").patternLine("s  ")
+				.key('s', Tags.Items.RODS_WOODEN)
+				.key('X', material.getFirst())
+				.addCriterion(material.getSecond(), hasItem(material.getFirst())).build(consumer);
+			
+			if(daggerItem != null)
+				ShapedRecipeBuilder.shapedRecipe(daggerItem).setGroup("daggers")
+					.patternLine("X").patternLine("s")
+					.key('s', Tags.Items.RODS_WOODEN)
+					.key('X', material.getFirst())
+					.addCriterion(material.getSecond(), hasItem(material.getFirst())).build(consumer);
+		}
 		SmithingRecipeBuilder.smithingRecipe(Ingredient.fromItems(VEItems.DIAMOND_GLAIVE), Ingredient.fromItems(Items.NETHERITE_INGOT), VEItems.NETHERITE_GLAIVE)
-			.addCriterion("has_netherite_ingot", hasItem(Items.NETHERITE_INGOT)).build(consumer, "netherite_glaive__smithing");
+			.addCriterion("has_netherite_ingot", hasItem(Tags.Items.INGOTS_NETHERITE)).build(consumer, "netherite_glaive__smithing");
+		SmithingRecipeBuilder.smithingRecipe(Ingredient.fromItems(VEItems.DIAMOND_DAGGER), Ingredient.fromItems(Items.NETHERITE_INGOT), VEItems.NETHERITE_DAGGER)
+			.addCriterion("has_netherite_ingot", hasItem(Items.NETHERITE_INGOT)).build(consumer, "netherite_dagger_smithing");
 		
 		// Holy Symbols
 		ShapedRecipeBuilder.shapedRecipe(VEItems.SYMBOL_DIAMOND).setGroup("holy_symbols")
 			.patternLine(" D ").patternLine(" L ").patternLine("D  ")
 			.key('D', Tags.Items.GEMS_DIAMOND)
 			.key('L', Tags.Items.LEATHER)
-			.addCriterion("has_diamond", hasItem(Items.DIAMOND)).build(consumer);
+			.addCriterion("has_diamond", hasItem(Tags.Items.GEMS_DIAMOND)).build(consumer);
 		ShapedRecipeBuilder.shapedRecipe(VEItems.SYMBOL_GOLD).setGroup("holy_symbols")
 			.patternLine("GGG").patternLine(" L ").patternLine(" G ")
 			.key('G', Tags.Items.INGOTS_GOLD)
 			.key('L', Tags.Items.LEATHER)
-			.addCriterion("has_gold_ingot", hasItem(Items.GOLD_INGOT)).build(consumer);
+			.addCriterion("has_gold_ingot", hasItem(Tags.Items.INGOTS_GOLD)).build(consumer);
 		ShapedRecipeBuilder.shapedRecipe(VEItems.SYMBOL_IRON).setGroup("holy_symbols")
 			.patternLine("III").patternLine(" L ").patternLine("s  ")
 			.key('L', Tags.Items.LEATHER)
 			.key('s', Tags.Items.RODS_WOODEN)
 			.key('I', Tags.Items.INGOTS_IRON)
-			.addCriterion("has_iron_ingot", hasItem(Items.IRON_INGOT)).build(consumer);
+			.addCriterion("has_iron_ingot", hasItem(Tags.Items.INGOTS_IRON)).build(consumer);
 		ShapedRecipeBuilder.shapedRecipe(VEItems.SYMBOL_STONE).setGroup("holy_symbols")
 			.patternLine("XX ").patternLine(" XX").patternLine("  X")
 			.key('X', Tags.Items.COBBLESTONE)
-			.addCriterion("has_cobblestone", hasItem(Blocks.COBBLESTONE)).build(consumer);
+			.addCriterion("has_cobblestone", hasItem(Tags.Items.COBBLESTONE)).build(consumer);
 		ShapedRecipeBuilder.shapedRecipe(VEItems.SYMBOL_WOOD).setGroup("holy_symbols")
 			.patternLine("XX").patternLine(" s")
 			.key('s', Tags.Items.RODS_WOODEN)
 			.key('X', ItemTags.PLANKS)
-			.addCriterion("has_oak_planks", hasItem(Blocks.OAK_PLANKS)).build(consumer);
+			.addCriterion("has_planks", hasItem(ItemTags.PLANKS)).build(consumer);
+		
+		// Wheels
+		for(Item wheel : WHEEL_TO_MATS.keySet())
+		{
+			Block slab = WHEEL_TO_MATS.get(wheel);
+			ShapedRecipeBuilder.shapedRecipe(wheel).setGroup("wheels")
+				.patternLine(" S ")
+				.patternLine("SsS")
+				.patternLine(" S ")
+				.key('S', slab)
+				.key('s', Tags.Items.RODS_WOODEN)
+				.addCriterion("has_"+slab.getRegistryName().getPath(), hasItem(slab)).build(consumer);
+		}
+		
+		// Wheelchairs (non-custom recipe)
+		for(Item chair : ItemWheelchair.WHEELCHAIRS)
+		{
+			Item wheel = ItemWheelchair.getDefaultWheelFromItem(new ItemStack(chair));
+			Block slab = WHEEL_TO_MATS.get(wheel);
+			ShapedRecipeBuilder.shapedRecipe(chair).setGroup("wheelchairs")
+				.patternLine(" W ")
+				.patternLine("EsE")
+				.key('W', Items.RED_WOOL)
+				.key('E', wheel)
+				.key('s', slab)
+				.addCriterion("has_"+wheel.getRegistryName().getPath(), hasItem(wheel)).build(consumer);
+		}
 	}
 	
 	protected static void registerSwapRecipe(Item itemA, Item itemB, String criterionA, String criterionB, Consumer<IFinishedRecipe> consumer)
@@ -330,5 +335,23 @@ public class VERecipeProvider extends RecipeProvider
 	public String getName()
 	{
 		return "Various Equipment crafting recipes";
+	}
+	
+	static
+	{
+		WHEEL_TO_MATS.put(VEItems.WHEEL_ACACIA, Blocks.ACACIA_SLAB);
+		WHEEL_TO_MATS.put(VEItems.WHEEL_BIRCH, Blocks.BIRCH_SLAB);
+		WHEEL_TO_MATS.put(VEItems.WHEEL_CRIMSON, Blocks.CRIMSON_SLAB);
+		WHEEL_TO_MATS.put(VEItems.WHEEL_DARK_OAK, Blocks.DARK_OAK_SLAB);
+		WHEEL_TO_MATS.put(VEItems.WHEEL_JUNGLE, Blocks.JUNGLE_SLAB);
+		WHEEL_TO_MATS.put(VEItems.WHEEL_OAK, Blocks.OAK_SLAB);
+		WHEEL_TO_MATS.put(VEItems.WHEEL_SPRUCE, Blocks.SPRUCE_SLAB);
+		WHEEL_TO_MATS.put(VEItems.WHEEL_WARPED, Blocks.WARPED_SLAB);
+		
+		MATS_TO_WEAPONS.put(Pair.of(Tags.Items.GEMS_DIAMOND, "has_diamond"), Pair.of(VEItems.DIAMOND_GLAIVE, VEItems.DIAMOND_DAGGER));
+		MATS_TO_WEAPONS.put(Pair.of(Tags.Items.INGOTS_GOLD, "has_gold_ingot"), Pair.of(VEItems.GOLDEN_GLAIVE, VEItems.GOLDEN_DAGGER));
+		MATS_TO_WEAPONS.put(Pair.of(Tags.Items.INGOTS_IRON, "has_iron_ingot"), Pair.of(VEItems.IRON_GLAIVE, VEItems.IRON_DAGGER));
+		MATS_TO_WEAPONS.put(Pair.of(Tags.Items.COBBLESTONE, "has_cobblestone"), Pair.of(VEItems.STONE_GLAIVE, VEItems.STONE_DAGGER));
+		MATS_TO_WEAPONS.put(Pair.of(ItemTags.PLANKS, "has_planks"), Pair.of(VEItems.WOODEN_GLAIVE, VEItems.WOODEN_DAGGER));
 	}
 }

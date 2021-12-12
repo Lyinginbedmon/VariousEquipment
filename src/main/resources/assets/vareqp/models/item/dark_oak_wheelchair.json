@@ -1,7 +1,7 @@
 {
-    "parent": "item/generated",
+    "parent": "vareqp:item/wheelchair",
     "textures":
     {
-    	"layer0": "vareqp:items/wheelchair_dark_oak"
+    	"layer1": "vareqp:items/wheelchair_dark_oak"
     }
 }

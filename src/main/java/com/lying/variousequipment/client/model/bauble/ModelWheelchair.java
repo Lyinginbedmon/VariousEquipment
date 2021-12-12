@@ -20,7 +20,7 @@ public class ModelWheelchair extends EntityModel<LivingEntity>
 		
 		this.seat = ModelUtils.freshRenderer(this);
 		this.seat.setRotationPoint(0F, 12F, 0F);
-		this.seat.setTextureOffset(0, 0).addBox(-5F, 0F, -6F, 10, 4, 8);	// seat
+		this.seat.setTextureOffset(0, 0).addBox(-5F, 1F, -6F, 10, 4, 8);	// seat
 		this.seat.setTextureOffset(0, 12).addBox(-4.5F, -5F, 2F, 9, 7, 1);	// backrest
 		this.seat.setTextureOffset(0, 21).addBox(-7F, 3.5F, -0.5F, 14, 1, 1);	// rear axle
 	}

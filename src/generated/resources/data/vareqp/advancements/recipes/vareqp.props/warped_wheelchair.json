@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "vareqp:warped_wheelchair"
+    ]
+  },
+  "criteria": {
+    "has_warped_wheel": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "vareqp:warped_wheel"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "vareqp:warped_wheelchair"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_warped_wheel",
+      "has_the_recipe"
+    ]
+  ]
+}

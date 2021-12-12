@@ -35,6 +35,7 @@ public class LivingEntityMixin extends EntityMixin
 			if(rider == null)
 				return;
 			
+			// FIXME Ensure client-server sync of horse movements
 //			System.out.println("Riding conditions of "+horse.getDisplayName().getString()+":");
 //			System.out.println("* Side: "+(horse.getEntityWorld().isRemote ? "CLIENT" : "SERVER"));
 //			System.out.println("* Forward: "+rider.moveForward);

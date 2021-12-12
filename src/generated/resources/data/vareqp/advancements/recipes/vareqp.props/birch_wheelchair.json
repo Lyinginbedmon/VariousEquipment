@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "vareqp:birch_wheelchair"
+    ]
+  },
+  "criteria": {
+    "has_birch_wheel": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "vareqp:birch_wheel"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "vareqp:birch_wheelchair"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_birch_wheel",
+      "has_the_recipe"
+    ]
+  ]
+}

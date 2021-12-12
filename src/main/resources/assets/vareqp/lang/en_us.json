@@ -54,7 +54,7 @@
 	"item.vareqp.legs_peg_golden": "Golden Peg Leg (%s)",
 	"item.vareqp.legs_peg_netherite": "Netherite Peg Leg (%s)",
 	"item.vareqp.oak_wheelchair": "Oak Wheelchair",
-	"item.vareqp.spruce_wheelchair": "Oak Wheelchair",
+	"item.vareqp.spruce_wheelchair": "Spruce Wheelchair",
 	"item.vareqp.birch_wheelchair": "Birch Wheelchair",
 	"item.vareqp.acacia_wheelchair": "Acacia Wheelchair",
 	"item.vareqp.jungle_wheelchair": "Jungle Wheelchair",
@@ -158,6 +158,7 @@
 	"block.vareqp.darkvision_powder": "Darkvision Powder",
 	"block.vareqp.alembic": "Alchemical Alembic",
 	"block.vareqp.burnt_hay_block": "Burnt Hay Bale",
+	"block.vareqp.wheelchair_block": "Wheelchair",
 	
 	"enchantment.vareqp.silversheen": "Silversheen",
 	
@@ -171,6 +172,8 @@
 	"gui.vareqp.notepad.next_task": "Next task:",
 	"gui.vareqp.notepad.tally_entry": "%s %s",
 	"gui.vareqp.notepad.page_count": "Page %s / %s",
+	"gui.vareqp.wheelchair.wheel_left": " Left: %s",
+	"gui.vareqp.wheelchair.wheel_right": " Right: %s",
 	
 	"vareqp.jei.alembic": "Alchemical Alembic",
 	"vareqp.jei.mixer": "Alchemical Mixer",

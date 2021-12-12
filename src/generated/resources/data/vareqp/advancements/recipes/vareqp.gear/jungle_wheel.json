@@ -2,16 +2,16 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "minecraft:netherite_dagger__smithing"
+      "vareqp:jungle_wheel"
     ]
   },
   "criteria": {
-    "has_netherite_ingot": {
+    "has_jungle_slab": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "minecraft:netherite_ingot"
+            "item": "minecraft:jungle_slab"
           }
         ]
       }
@@ -19,13 +19,13 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "minecraft:netherite_dagger__smithing"
+        "recipe": "vareqp:jungle_wheel"
       }
     }
   },
   "requirements": [
     [
-      "has_netherite_ingot",
+      "has_jungle_slab",
       "has_the_recipe"
     ]
   ]

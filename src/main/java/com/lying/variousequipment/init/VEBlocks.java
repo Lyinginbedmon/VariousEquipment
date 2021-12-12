@@ -64,6 +64,7 @@ public class VEBlocks
 	public static final Block NIGHT_POWDER		= register("darkvision_powder", new BlockNightPowder(AbstractBlock.Properties.create(Material.MISCELLANEOUS)));
 	public static final Block ALEMBIC			= register("alembic", new BlockAlembic(AbstractBlock.Properties.create(Material.GLASS)));
 	public static final Block BURNT_HAY			= register("burnt_hay_block", new BurntHayBlock(AbstractBlock.Properties.create(Material.ORGANIC, MaterialColor.YELLOW).hardnessAndResistance(0.5F).sound(SoundType.PLANT)));
+	public static final Block WHEELCHAIR		= register("wheelchair_block", new BlockWheelchair(AbstractBlock.Properties.create(Material.WOOD)));
 	
 	public static final Map<Block, Block> CONCRETE_TO_SCREEN = new HashMap<>();
 	

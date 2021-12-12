@@ -6,12 +6,12 @@
     ]
   },
   "criteria": {
-    "has_oak_planks": {
+    "has_planks": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "minecraft:oak_planks"
+            "tag": "minecraft:planks"
           }
         ]
       }
@@ -25,7 +25,7 @@
   },
   "requirements": [
     [
-      "has_oak_planks",
+      "has_planks",
       "has_the_recipe"
     ]
   ]

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "vareqp:dark_oak_wheelchair"
+    ]
+  },
+  "criteria": {
+    "has_dark_oak_wheel": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "vareqp:dark_oak_wheel"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "vareqp:dark_oak_wheelchair"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_dark_oak_wheel",
+      "has_the_recipe"
+    ]
+  ]
+}
