@@ -1,1 +1,3 @@
+Updated Forge version to Forge 1.16.5-36.2.22 due to Log4J exploit
+Updated Various Oddities version to 1.16_001q6
 Added screen blocks and missing texture block

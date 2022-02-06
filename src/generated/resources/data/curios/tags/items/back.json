@@ -15,6 +15,9 @@
     "vareqp:tail_dragonfly",
     "vareqp:tail_ant",
     "vareqp:tail_lizard",
-    "vareqp:tail_lizard_barbed"
+    "vareqp:tail_lizard_barbed",
+    "vareqp:wings_butterfly",
+    "vareqp:wings_dragon",
+    "vareqp:cloak"
   ]
 }

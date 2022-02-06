@@ -163,7 +163,6 @@ public class GuiNotepad extends Screen
 		this.pageIndex = MathHelper.clamp(pageIndex, 0, pages.size() - 1);
 	}
 	
-	@SuppressWarnings("deprecation")
 	public void render(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks)
 	{
 		this.renderBackground(matrixStack);
@@ -299,7 +298,6 @@ public class GuiNotepad extends Screen
 			parentScreen.currentPage.nextIcon(index);
 		}
 		
-		@SuppressWarnings("deprecation")
 		public void renderButton(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks)
 		{
 			Icon icon = parentScreen.currentPage.getIcon(index);

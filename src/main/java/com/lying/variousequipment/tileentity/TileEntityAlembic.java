@@ -282,7 +282,7 @@ public class TileEntityAlembic extends TileEntity implements ITickableTileEntity
 				ItemStack fuel = getStackInSlot(0);
 				if(!fuel.isEmpty())
 				{
-					burnTime = net.minecraftforge.common.ForgeHooks.getBurnTime(fuel);
+					burnTime = net.minecraftforge.common.ForgeHooks.getBurnTime(fuel, null);
 					fuel.shrink(1);
 					setInventorySlotContents(0, fuel);
 				}
@@ -435,7 +435,7 @@ public class TileEntityAlembic extends TileEntity implements ITickableTileEntity
 		{
 			public boolean apply(ItemStack input)
 			{
-				return net.minecraftforge.common.ForgeHooks.getBurnTime(input) > 0;
+				return net.minecraftforge.common.ForgeHooks.getBurnTime(input, null) > 0;
 			}
 		}, 0),
 		WATER(Predicates.alwaysTrue(), 1,2,3),

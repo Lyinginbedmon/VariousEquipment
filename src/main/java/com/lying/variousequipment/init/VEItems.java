@@ -114,6 +114,9 @@ public class VEItems
 	public static final Item DARK_OAK_WHEELCHAIR	= register("dark_oak_wheelchair", new ItemWheelchair(new Item.Properties(), WoodType.DARK_OAK));
 	public static final Item CRIMSON_WHEELCHAIR	= register("crimson_wheelchair", new ItemWheelchair(new Item.Properties(), WoodType.CRIMSON));
 	public static final Item WARPED_WHEELCHAIR	= register("warped_wheelchair", new ItemWheelchair(new Item.Properties(), WoodType.WARPED));
+	public static final Item WINGS_BUTTERFLY	= register("wings_butterfly", new ItemWings.Butterfly(new Item.Properties()));
+	public static final Item WINGS_DRAGON		= register("wings_dragon", new ItemWings.Dragon(new Item.Properties()));
+	public static final Item CLOAK			= register("cloak", new ItemCloak(new Item.Properties()));
 	public static final Item COSTUME		= register("costume", new ItemCostume(new Item.Properties()));
 	
 	public static final Item HAT_WITCH		= register("hat_witch", new ItemHatWitch(new Item.Properties().group(VEItemGroup.GEAR)));

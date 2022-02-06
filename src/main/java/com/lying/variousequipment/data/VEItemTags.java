@@ -100,7 +100,10 @@ public class VEItemTags extends ItemTagsProvider
 				VEItems.TAIL_DRAGONFLY,
 				VEItems.TAIL_ANT,
 				VEItems.TAIL_LIZARD,
-				VEItems.TAIL_LIZARD2
+				VEItems.TAIL_LIZARD2,
+				VEItems.WINGS_BUTTERFLY,
+				VEItems.WINGS_DRAGON,
+				VEItems.CLOAK
 				);
 		
 		getOrCreateBuilder(HOLY_SYMBOL).add(
@@ -171,7 +174,10 @@ public class VEItemTags extends ItemTagsProvider
 				VEItems.JUNGLE_WHEELCHAIR,
 				VEItems.DARK_OAK_WHEELCHAIR,
 				VEItems.CRIMSON_WHEELCHAIR,
-				VEItems.WARPED_WHEELCHAIR
+				VEItems.WARPED_WHEELCHAIR,
+				VEItems.WINGS_BUTTERFLY,
+				VEItems.WINGS_DRAGON,
+				VEItems.CLOAK
 				);
 		
 		getOrCreateBuilder(SHAKEABLES).add(VEItems.VIAL_SOLUTION);

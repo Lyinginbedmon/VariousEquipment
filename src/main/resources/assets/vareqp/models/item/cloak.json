@@ -1,0 +1,8 @@
+{
+    "parent": "item/generated",
+    "textures":
+    {
+    	"layer0": "vareqp:items/cloak",
+    	"layer1": "vareqp:items/cloak_overlay"
+    }
+}
