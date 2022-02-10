@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.google.common.collect.ImmutableList;
-import com.lying.variousequipment.client.model.Matrix4d;
 import com.lying.variousequipment.client.model.ModelUtils;
 
 import net.minecraft.client.renderer.model.ModelRenderer;
@@ -17,7 +16,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 public class ModelWingsDragon extends ModelWings<LivingEntity>
 {
 	ModelRenderer wingLeftA, wingLeftB, wingLeftC, wingLeftD;
-	ModelRenderer wingRightA, wingRightB, wingRightC, wingRightD;
+//	ModelRenderer wingRightA, wingRightB, wingRightC, wingRightD;
 	ModelRenderer fingertip;
 	
 	private final Map<ModelRenderer, ModelRenderer[]> partToParents = new HashMap<>();
@@ -39,7 +38,7 @@ public class ModelWingsDragon extends ModelWings<LivingEntity>
 			this.wingLeftB.setRotationPoint(12F, 0F, 0F);
 			this.wingLeftB.mirror = true;
 			this.wingLeftB.setTextureOffset(0, 0).addBox(0F, -0.5F, -0.5F, 12, 1, 1);
-			this.wingLeftB.rotateAngleZ = ModelUtils.toRadians(19D);
+//			this.wingLeftB.rotateAngleZ = ModelUtils.toRadians(19D);
 				partToParents.put(wingLeftB, new ModelRenderer[]{this.bipedBody, this.wingLeftA});
 				this.wingLeftA.addChild(wingLeftB);
 			
@@ -59,35 +58,36 @@ public class ModelWingsDragon extends ModelWings<LivingEntity>
 				partToParents.put(wingLeftD, new ModelRenderer[]{this.bipedBody, this.wingLeftA});
 				this.wingLeftA.addChild(wingLeftD);
 		
-		this.wingRightA = ModelUtils.freshRenderer(this);
-		this.wingRightA.setRotationPoint(-1.5F, 1.5F, 2F);
-		this.wingRightA.setTextureOffset(0, 0).addBox(0F, -0.5F, -0.5F, 12, 1, 1);
-			partToParents.put(wingRightA, new ModelRenderer[]{this.bipedBody});
-			this.bipedBody.addChild(wingRightA);
-			
-			this.wingRightB = ModelUtils.freshRenderer(this);
-			this.wingRightB.setRotationPoint(12F, 0F, 0F);
-			this.wingRightB.setTextureOffset(0, 0).addBox(0F, -0.5F, -0.5F, 12, 1, 1);
-			this.wingRightB.rotateAngleZ = ModelUtils.toRadians(19D);
-				partToParents.put(wingRightB, new ModelRenderer[]{this.bipedBody, this.wingRightA});
-				this.wingRightA.addChild(wingRightB);
-			
-			this.wingRightC = ModelUtils.freshRenderer(this);
-			this.wingRightC.setRotationPoint(12F, 0F, 0F);
-			this.wingRightC.setTextureOffset(0, 2).addBox(0F, -0.5F, -0.5F, 9, 1, 1);
-			this.wingRightC.rotateAngleZ = ModelUtils.toRadians(59D);
-				partToParents.put(wingRightC, new ModelRenderer[]{this.bipedBody, this.wingRightA});
-				this.wingRightA.addChild(wingRightC);
-			
-			this.wingRightD = ModelUtils.freshRenderer(this);
-			this.wingRightD.setRotationPoint(12F, 0F, 0F);
-			this.wingRightD.setTextureOffset(0, 2).addBox(0F, -0.5F, -0.5F, 9, 1, 1);
-			this.wingRightD.rotateAngleZ = ModelUtils.toRadians(95D);
-				partToParents.put(wingRightD, new ModelRenderer[]{this.bipedBody, this.wingRightA});
-				this.wingRightA.addChild(wingRightD);
+//		this.wingRightA = ModelUtils.freshRenderer(this);
+//		this.wingRightA.setRotationPoint(-1.5F, 1.5F, 2F);
+//		this.wingRightA.setTextureOffset(0, 0).addBox(0F, -0.5F, -0.5F, 12, 1, 1);
+//			partToParents.put(wingRightA, new ModelRenderer[]{this.bipedBody});
+//			this.bipedBody.addChild(wingRightA);
+//			
+//			this.wingRightB = ModelUtils.freshRenderer(this);
+//			this.wingRightB.setRotationPoint(12F, 0F, 0F);
+//			this.wingRightB.setTextureOffset(0, 0).addBox(0F, -0.5F, -0.5F, 12, 1, 1);
+//			this.wingRightB.rotateAngleZ = ModelUtils.toRadians(19D);
+//				partToParents.put(wingRightB, new ModelRenderer[]{this.bipedBody, this.wingRightA});
+//				this.wingRightA.addChild(wingRightB);
+//			
+//			this.wingRightC = ModelUtils.freshRenderer(this);
+//			this.wingRightC.setRotationPoint(12F, 0F, 0F);
+//			this.wingRightC.setTextureOffset(0, 2).addBox(0F, -0.5F, -0.5F, 9, 1, 1);
+//			this.wingRightC.rotateAngleZ = ModelUtils.toRadians(59D);
+//				partToParents.put(wingRightC, new ModelRenderer[]{this.bipedBody, this.wingRightA});
+//				this.wingRightA.addChild(wingRightC);
+//			
+//			this.wingRightD = ModelUtils.freshRenderer(this);
+//			this.wingRightD.setRotationPoint(12F, 0F, 0F);
+//			this.wingRightD.setTextureOffset(0, 2).addBox(0F, -0.5F, -0.5F, 9, 1, 1);
+//			this.wingRightD.rotateAngleZ = ModelUtils.toRadians(95D);
+//				partToParents.put(wingRightD, new ModelRenderer[]{this.bipedBody, this.wingRightA});
+//				this.wingRightA.addChild(wingRightD);
 		
 		this.fingertip = ModelUtils.freshRenderer(this);
-		this.fingertip.setTextureOffset(0, 0).addBox(-0.5F, -0.5F, -0.5F, 1, 1, 1, 0.5F);
+		this.fingertip.setRotationPoint(0F, 0F, 0F);
+		this.fingertip.setTextureOffset(0, 0).addBox(0F, -1F, -0.5F, 0, 2, 1);
 	}
 	
 	protected Iterable<ModelRenderer> getBodyParts()
@@ -103,6 +103,8 @@ public class ModelWingsDragon extends ModelWings<LivingEntity>
 //		this.wingLeftA.rotateAngleY = ModelUtils.toRadians(-10D) + (1F + (float)Math.sin(ageInTicks * 0.5F)) * ModelUtils.toRadians(-15D);
 //		this.wingRightA.rotateAngleY = -this.wingLeftA.rotateAngleY - ModelUtils.toRadians(180D);
 //		this.wingLeftD.rotateAngleZ = ModelUtils.toRadians(95D) + (1F + (float)Math.sin(ageInTicks * 0.5F)) * ModelUtils.toRadians(10D);
+		
+		this.wingLeftB.rotateAngleZ = ModelUtils.toRadians(19D) * (1F + (float)Math.sin(ageInTicks * 0.5F));
 		
 		// Left wing
 			// Top body join
@@ -124,23 +126,16 @@ public class ModelWingsDragon extends ModelWings<LivingEntity>
 //		this.addMembrane(45, 16, 8, 8, carpals, carpals, finger1End, finger2End, false);
 		
 		// Calculate exact world position of carpal point, respecting rotation points and angles of parent objects
-		Vector3d pos = getVectorWithKinematics(new Vector3d(4, 0, 0), this.bipedBody, this.wingLeftA, this.wingLeftB);
-		this.fingertip.rotationPointX = (float)pos.getX();
-		this.fingertip.rotationPointY = (float)pos.getY();
-		this.fingertip.rotationPointZ = (float)pos.getZ();
+		Vector3d pos = getVectorWithKinematics(new Vector3d(12, 0, 0), this.bipedBody, this.wingLeftA, this.wingLeftB);
+		this.fingertip.copyModelAngles(wingLeftB);
+		this.fingertip.rotationPointX = (float)pos.x;
+		this.fingertip.rotationPointY = (float)pos.y;
+		this.fingertip.rotationPointZ = (float)pos.z;
     }
 	
 	public Vector3d getRotatedOffset(ModelRenderer offset, ModelRenderer parent)
 	{
 		Vector3d rotatedOffset = new Vector3d(offset.rotationPointX, offset.rotationPointY, offset.rotationPointZ);
 		return rotatedOffset.rotatePitch(-parent.rotateAngleX).rotateYaw(parent.rotateAngleY).rotateRoll(parent.rotateAngleZ);
-	}
-	
-	public Vector3d getVectorWithKinematics(Vector3d local, ModelRenderer... parentedModels)
-	{
-		Matrix4d matrix = new Matrix4d();
-		for(ModelRenderer parent : parentedModels)
-			matrix = matrix.rotate(parent.rotateAngleX, parent.rotateAngleY, parent.rotateAngleZ).translate(parent.rotationPointX, parent.rotationPointY, parent.rotationPointZ);
-		return matrix.apply(local);
 	}
 }
