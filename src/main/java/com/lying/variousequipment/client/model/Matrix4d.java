@@ -10,10 +10,8 @@ public class Matrix4d
 	
 	public Matrix4d()
 	{
-		setVal(0, 0, 1D);
-		setVal(1, 1, 1D);
-		setVal(2, 2, 1D);
-		setVal(3, 3, 1D);
+		for(int i=0; i<order(); i++)
+			setVal(i, i, 1D);
 	}
 	
 	public Matrix4d(double a1In, double b1In, double c1In, double a2In, double b2In, double c2In, double a3In, double b3In, double c3In)
@@ -66,14 +64,38 @@ public class Matrix4d
 	public String toString()
 	{
 		String s = "";
-		for(int row=0; row < 4; row++)
+		for(int row=0; row < order(); row++)
 		{
 			NonNullList<Double> entries = getRow(row);
-			s += "[" + entries.get(0) + ", " + entries.get(1) + ", " + entries.get(2) + ", " + entries.get(3) + "]";
-			if(row != 3)
+			s+= "[";
+				for(int i=0; i<entries.size(); i++)
+				{
+					s += entries.get(i);
+					if(i < entries.size() - 1)
+						s += ", ";
+				}
+			s+= "]";
+			if(row < order() - 1)
 				s += ", ";
 		}
 		return s;
+	}
+	
+	public void print()
+	{
+		for(int row=0; row < order(); row++)
+		{
+			NonNullList<Double> entries = getRow(row);
+			String s = "[";
+				for(int i=0; i<entries.size(); i++)
+				{
+					s += entries.get(i);
+					if(i < entries.size() - 1)
+						s += ", ";
+				}
+			s+= "]";
+			System.out.println(s);
+		}
 	}
 	
 	public Matrix4d copy()
@@ -85,42 +107,44 @@ public class Matrix4d
 	
 	public NonNullList<Double> getRow(int index)
 	{
-		index %= 4;
-		NonNullList<Double> row = NonNullList.<Double>withSize(4, 0D);
-		if(index <= 3)
-			for(int i=0; i<4; i++)
-				row.set(i, getVal(i + (index * 4)));
+		index %= order();
+		NonNullList<Double> row = NonNullList.<Double>withSize(order(), 0D);
+		if(index < order())
+			for(int i=0; i < order(); i++)
+				row.set(i, getVal(i + (index * order())));
 		return row;
 	}
 	
 	public NonNullList<Double> getColumn(int index)
 	{
-		index %= 4;
-		NonNullList<Double> column = NonNullList.<Double>withSize(4, 0D);
-		if(index <= 3)
-			for(int i=0; i<4; i++)
-				column.set(i, this.values.get(index + (i * 4)));
+		index %= order();
+		NonNullList<Double> column = NonNullList.<Double>withSize(order(), 0D);
+		if(index < order())
+			for(int i=0; i<order(); i++)
+				column.set(i, this.values.get(index + (i * order())));
 		
 		return column;
 	}
 	
 	public double getVal(int index){ return this.values.get(index % this.values.size()); }
-	public double getVal(int row, int col){ return getVal(col + (row * 4)); }
+	public double getVal(int row, int col){ return getVal(col + (row * order())); }
 	
 	public void setVal(int index, double val){ this.values.set(index, val); }
-	public void setVal(int row, int col, double val){ setVal(col + (row * 4), val); }
+	public void setVal(int row, int col, double val){ setVal(col + (row * order()), val); }
 	
 	public Matrix4d mul(Matrix4d matrix2){ return mul(this, matrix2); }
 	public Matrix4d div(Matrix4d matrix2){ return div(this, matrix2); }
 	public Matrix4d add(Matrix4d matrix2){ return add(this, matrix2); }
+	
+	public int order(){ return (int)Math.sqrt(this.values.size()); }
 	
 	/** Returns the entire matrix with opposite polarity */
 	public Matrix4d negative()
 	{
 		Matrix4d matrix = new Matrix4d();
 		
-		for(int row=0; row<4; row++)
-			for(int col=0; col<4; col++)
+		for(int row=0; row < order(); row++)
+			for(int col=0; col < order(); col++)
 				matrix.setVal(row, col, -getRow(row).get(col));
 		
 		return matrix;
@@ -131,8 +155,8 @@ public class Matrix4d
 	{
 		Matrix4d matrix = new Matrix4d();
 		
-		for(int row=0; row<4; row++)
-			for(int col=0; col<4; col++)
+		for(int row=0; row < order(); row++)
+			for(int col=0; col < order(); col++)
 				matrix.setVal(row, col, 1D / getRow(row).get(col));
 		
 		return matrix;
@@ -151,17 +175,17 @@ public class Matrix4d
 	public static Matrix4d mul(Matrix4d matrix1, Matrix4d matrix2)
 	{
 		Matrix4d matrix3 = new Matrix4d();
-		for(int row=0; row<4; row++)
+		for(int row=0; row < matrix3.order(); row++)
 		{
 			NonNullList<Double> rowVals = matrix1.getRow(row);
-			for(int col=0; col<4; col++)
+			for(int col=0; col < matrix3.order(); col++)
 			{
 				NonNullList<Double> colVals = matrix2.getColumn(col);
 				
 				double tally = 0;
-				for(int j = 0; j < 4; j++)
+				for(int j = 0; j < matrix3.order(); j++)
 					tally += rowVals.get(j) * colVals.get(j);
-				matrix3.setVal(col + row * 4, tally);
+				matrix3.setVal(col + row * matrix3.order(), tally);
 			}
 		}
 		return matrix3;
@@ -173,45 +197,72 @@ public class Matrix4d
 	{
 		Matrix4d matrix3 = new Matrix4d();
 		
-		for(int row=0; row<4; row++)
-			for(int col=0; col<4; col++)
+		for(int row=0; row < matrix3.order(); row++)
+			for(int col=0; col < matrix3.order(); col++)
 				matrix3.setVal(row, col, matrix1.getRow(row).get(col) + matrix2.getRow(row).get(col));
 		
 		return matrix3;
 	}
 	
-	public Matrix4d rotatePitch(double vol){ return mul(pitch(vol)); }
-	public Matrix4d rotateYaw(double vol){ return mul(yaw(vol)); }
-	public Matrix4d rotateRoll(double vol){ return mul(roll(vol)); }
-	public Matrix4d rotate(Quaternion quat){ return mul(new Matrix4d(quat)); }
+	public Matrix4d rotatePitch(double vol){ return mul(pitch(vol), this); }
+	public Matrix4d rotateYaw(double vol){ return mul(yaw(vol), this); }
+	public Matrix4d rotateRoll(double vol){ return mul(roll(vol), this); }
+	public Matrix4d rotate(Quaternion quat){ return mul(new Matrix4d(quat), this); }
 	
 	public static Matrix4d pitch(double vol)
 	{
 		Matrix4d pitch = new Matrix4d();
-		pitch.setVal(1, 1, Math.cos(vol));
-		pitch.setVal(1, 2, Math.sin(vol));
-		pitch.setVal(2, 1, -Math.sin(vol));
-		pitch.setVal(2, 2, Math.cos(vol));
+		if(vol != 0)
+		{
+			/*
+			 * [1	0	0	0]
+			 * [0	c	-s	0]
+			 * [0	s	c	0]
+			 * [0	0	0	1]
+			 */
+			pitch.setVal(1, 1, Math.cos(vol));
+			pitch.setVal(1, 2, -Math.sin(vol));
+			pitch.setVal(2, 1, Math.sin(vol));
+			pitch.setVal(2, 2, Math.cos(vol));
+		}
 		return pitch;
 	}
 	
 	public static Matrix4d yaw(double vol)
 	{
 		Matrix4d yaw = new Matrix4d();
-		yaw.setVal(0, 0, Math.cos(vol));
-		yaw.setVal(0, 2, -Math.sin(vol));
-		yaw.setVal(2, 0, Math.sin(vol));
-		yaw.setVal(2, 2, Math.cos(vol));
+		if(vol != 0)
+		{
+			/*
+			 * [c	0	s	0]
+			 * [0	1	0	0]
+			 * [-s	0	c	0]
+			 * [0	0	0	1]
+			 */
+			yaw.setVal(0, 0, Math.cos(vol));
+			yaw.setVal(0, 2, Math.sin(vol));
+			yaw.setVal(2, 0, -Math.sin(vol));
+			yaw.setVal(2, 2, Math.cos(vol));
+		}
 		return yaw;
 	}
 	
 	public static Matrix4d roll(double vol)
 	{
 		Matrix4d roll = new Matrix4d();
-		roll.setVal(0, 0, Math.cos(vol));
-		roll.setVal(0, 1, -Math.sin(vol));
-		roll.setVal(1, 0, Math.sin(vol));
-		roll.setVal(1, 1, Math.cos(vol));
+		if(vol != 0)
+		{
+			/*
+			 * [c	-s	0	0]
+			 * [s	c	0	0]
+			 * [0	0	1	0]
+			 * [0	0	0	1]
+			 */
+			roll.setVal(0, 0, Math.cos(vol));
+			roll.setVal(0, 1, -Math.sin(vol));
+			roll.setVal(1, 0, Math.sin(vol));
+			roll.setVal(1, 1, Math.cos(vol));
+		}
 		return roll;
 	}
 	

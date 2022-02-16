@@ -192,7 +192,7 @@ public class ModelUtils
 				this.normal.mul(-1F, 1F, 1F);
 		}
 		
-		public static TexturedQuad texturedPlane(int texOffX, int texOffY, int texXSize, int texYSize, Vector3d posA, Vector3d posB, Vector3d posC, Vector3d posD, boolean mirrorIn, float textureWidth, float textureHeight)
+		public static TexturedQuad texturedPlane(float texOffX, float texOffY, float texXSize, float texYSize, Vector3d posA, Vector3d posB, Vector3d posC, Vector3d posD, boolean mirrorIn, float textureWidth, float textureHeight)
 		{
 	        PositionTextureVertex vertexA = new PositionTextureVertex((float)posA.x, (float)posA.y, (float)posA.z, 0.0F, 0.0F);
 	        PositionTextureVertex vertexB = new PositionTextureVertex((float)posB.x, (float)posB.y, (float)posB.z, 0.0F, 0.0F);
